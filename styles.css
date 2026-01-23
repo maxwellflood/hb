@@ -1,0 +1,858 @@
+/* Box sizing reset */
+* {
+  box-sizing: border-box;
+}
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+template {
+  display: none;
+}
+
+[hidden] {
+  display: none;
+}
+
+/* Custom Styles */
+
+/* Typefaces */
+@font-face {
+  font-family: "dorian";
+  src: url(./fonts/DorianVF.woff);
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Variables */
+
+:root {
+  /* --- color-primatives --- */
+
+  /* Blue */
+  --blu-00: #f3f8ff;
+  --blu-10: #cfe4ff;
+  --blu-20: #9fc9ff;
+  --blu-30: #6fadff;
+  --blu-40: #3f92ff;
+  --blu-50: #0f77ff;
+  --blu-60: #005ed8;
+  --blu-70: #0046a2;
+  --blu-80: #003c8a;
+  --blu-90: #002f6c;
+  --blu-100: #001736;
+
+  /* Yellow */
+  --yel-00: #fff5e1;
+  --yel-10: #ffeecc;
+  --yel-20: #ffdd99;
+  --yel-30: #ffcc66;
+  --yel-40: #ffbb33;
+  --yel-50: #ffaa00;
+  --yel-60: #e59b07;
+  --yel-70: #cc8800;
+  --yel-80: #996600;
+  --yel-90: #643a21;
+  --yel-100: #4d1c00;
+
+  /* Red */
+  --red-00: #fcdcdd;
+  --red-10: #f9c4c6;
+  --red-20: #f7a7a9;
+  --red-30: #f4898c;
+  --red-40: #f16c70;
+  --red-50: #ee4e53;
+  --red-60: #c64145;
+  --red-70: #9f3437;
+  --red-80: #77272a;
+  --red-90: #5c1e21;
+  --red-100: #471819;
+
+  /* Green */
+  --grn-00: #d1f2d9;
+  --grn-10: #b1ebbf;
+  --grn-20: #8eeba5;
+  --grn-30: #7ae595;
+  --grn-40: #62de81;
+  --grn-50: #47cd69;
+  --grn-60: #2fad4f;
+  --grn-70: #23823b;
+  --grn-80: #1d6b31;
+  --grn-90: #175627;
+  --grn-100: #0f3619;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --grey-1: #f7f7f7;
+  --grey-2: #dbdbdb;
+  --grey-3: #c0c0c0;
+  --grey-4: #a5a5a5;
+  --grey-5: #898989;
+  --grey-6: #6e6e6e;
+  --grey-7: #525252;
+  --grey-8: #373737;
+  --grey-9: #1b1b1b;
+  --grey-10: #111111;
+  --black: #070707;
+
+  /* --- Size Primatives --- */
+
+  --size-4: 0.25rem;
+  --size-8: 0.5rem;
+  --size-12: 0.75rem;
+  --size-16: 1rem;
+  --size-20: 1.25rem;
+  --size-24: 1.5rem;
+  --size-28: 1.75rem;
+  --size-32: 2rem;
+  --size-36: 2.25rem;
+  --size-40: 2.5rem;
+  --size-48: 3rem;
+  --size-56: 3.5rem;
+  --size-64: 4rem;
+  --size-72: 4.5rem;
+  --size-80: 5rem;
+
+  /* --- Surface Colors --- */
+
+  --surface-primary: var(--white);
+  --surface-secondary: var(--grey-1);
+  --surface-disabled: var(--grey-2);
+  --surface-primary-inverted: var(--grey-8);
+  --surface-secondary-inverted: var(--grey-7);
+  --surface-tertiary-inverted: var(--grey-9);
+  --surface-brand-strong: var(--blu-50);
+  --surface-brand-muted: var(--blu-00);
+  --surface-success-strong: var(--grn-50);
+  --surface-success-muted: var(--grn-00);
+  --surface-error-strong: var(--red-50);
+  --surface-error-muted: var(--red-00);
+  --surface-warning-strong: var(--yel-50);
+  --surface-warning-muted: var(--yel-00);
+
+  /* --- Border Colors --- */
+
+  --border-primary: var(--grey-2);
+  --border-secondary: var(--grey-3);
+  --border-disabled: var(--grey-5);
+  --border-highlighted: var(--grey-8);
+  --border-highlighted-brand: var(--blu-50);
+
+  /*-- Bg Colors ---*/
+  --bg-primary: var(--grey-2);
+  --bg-secondary: var(--grey-3);
+  --bg-primary-inverted: var(--black);
+  --bg-secondary-inverted: var(--grey-10);
+
+  /* --- Text Colors --- */
+
+  --text-primary: var(--grey-9);
+  --text-secondary: var(--grey-7);
+  --text-tertiary: var(--grey-5);
+  --text-disabled: var(--grey-5);
+  --text-primary-inverted: var(--grey-1);
+  --text-secondary-inverted: var(--grey-3);
+  --text-tertiary-inverted: var(--grey-5);
+  --text-brand-strong: var(--blu-50);
+  --text-brand-muted: var(--blu-30);
+  --text-error-strong: var(--red-50);
+  --text-error-muted: var(--red-10);
+  --text-warning-strong: var(--yel-50);
+  --text-warning-muted: var(--yel-10);
+  --text-success-strong: var(--grn-50);
+  --text-success-muted: var(--grn-10);
+
+  /* --- Font Sizes --- */
+
+  /* Display */
+  --display-size: clamp(2.75rem, 2.1rem + 2vw, 3.25rem);
+  /* 44px → 52px */
+
+  /* Headings */
+  --h1-size: clamp(2rem, 1.6rem + 1.4vw, 2.5rem);
+  /* 32px → 40px */
+
+  --h2-size: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  /* 24px → 32px */
+
+  --h3-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  /* 22px → 28px */
+
+  --h4-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
+  /* 18px → 22px */
+
+  /* spacing */
+
+  /* XS: very tight (labels, compact UI) */
+  --heading-gap-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+  /* 4 → 8 */
+
+  /* S: tight (cards, dense layouts) */
+  --heading-gap-s: clamp(0.375rem, 0.3rem + 0.35vw, 0.75rem);
+  /* 6 → 12 */
+
+  /* M (RG): default */
+  --heading-gap-m: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+  /* 8 → 16 */
+
+  /* L: generous (sections, marketing) */
+  --heading-gap-l: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+  /* 12 → 24 */
+
+  /* XL: very open (heroes, feature blocks) */
+  --heading-gap-xl: clamp(1rem, 0.8rem + 1vw, 2rem);
+  /* 16 → 32 */
+}
+
+/* Global Styles */
+
+body {
+  font-family: "dorian", sans-serif;
+  font-weight: 400;
+  background-color: var(--bg-primary);
+  color: var(--grey-9);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* 1) Semantic section: full width, owns background + vertical spacing */
+section {
+  width: 100%;
+  background: var(--surface-primary);
+  padding-block: var(--size-40);
+}
+
+/* 2) Container: centers content, controls page max-width + gutters */
+.container {
+  width: 100%;
+  max-width: 75rem; /* 1200px */
+  margin-inline: auto;
+  padding-inline: var(--size-40);
+}
+
+.wrapper {
+  width: 100%;
+  margin: auto;
+}
+
+/* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "dorian", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  color: var(--blu-50);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--heading-gap-s); /* fallback */
+  margin-block-end: var(--heading-gap-s); /* modern */
+}
+
+h1,
+.u-h1 {
+  font-size: var(--h1-size);
+  line-height: 1.2;
+}
+
+h2,
+.u-h2 {
+  font-size: var(--h2-size);
+  line-height: 1.2;
+}
+
+h3,
+.u-h3 {
+  font-size: var(--h3-size);
+  line-height: 1.4;
+}
+
+h4,
+.u-h4 {
+  font-size: var(--h4-size);
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+p {
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: var(--grey-9);
+  line-height: 1.5em;
+}
+
+/* --- Utility Classes --- */
+
+/* text */
+
+.txt-primary {
+  color: var(--text-primary);
+}
+
+.txt-secondary {
+  color: var(--text-secondary);
+}
+
+.txt-tertiary {
+  color: var(--text-tertiary);
+}
+
+.txt-disabled {
+  color: var(--text-disabled);
+}
+
+.txt-brand-strong {
+  color: var(--text-brand-strong);
+}
+
+.txt-brand-muted {
+  color: var(--text-brand-muted);
+}
+
+.txt-error-strong {
+  color: var(--text-error-strong);
+}
+
+.txt-error-muted {
+  color: var(--text-error-muted);
+}
+
+.txt-warning-strong {
+  color: var(--text-warning-strong);
+}
+
+.txt-warning-muted {
+  color: var(--text-warning-muted);
+}
+
+.txt-success-strong {
+  color: var(--text-success-strong);
+}
+
+.txt-success-muted {
+  color: var(--text-success-muted);
+}
+
+/* borders + spacing */
+
+.u-border-bottom-primary {
+  border-bottom: var(--border-primary) 1px solid;
+}
+.u-border-top-primary {
+  border-top: var(--border-primary) 1px solid;
+}
+
+/* padding utilities */
+
+/* padding small, 16px */
+
+.u-p-sm {
+  padding: var(--size-16);
+}
+.u-pb-sm {
+  padding-bottom: var(--size-16);
+}
+.u-pt-sm {
+  padding-top: var(--size-16);
+}
+.u-py-sm {
+  padding-block: var(--size-16);
+}
+.u-px-sm {
+  padding-inline: var(--size-16);
+}
+
+/* padding regular, 32px */
+
+.u-p-rg {
+  padding: var(--size-32);
+}
+.u-pb-rg {
+  padding-bottom: var(--size-32);
+}
+.u-pt-rg {
+  padding-top: var(--size-32);
+}
+.u-py-rg {
+  padding-block: var(--size-32);
+}
+.u-px-rg {
+  padding-inline: var(--size-32);
+}
+
+/* padding large, 48px */
+
+.u-p-lg {
+  padding: var(--size-48);
+}
+.u-pb-lg {
+  padding-bottom: var(--size-48);
+}
+.u-pt-lg {
+  padding-top: var(--size-48);
+}
+.u-py-lg {
+  padding-block: var(--size-48);
+}
+.u-px-lg {
+  padding-inline: var(--size-48);
+}
+
+/* margin utilities */
+
+/* margin small, 16px */
+
+.u-m-sm {
+  margin: var(--size-16);
+}
+.u-mb-sm {
+  margin-bottom: var(--size-16);
+}
+.u-mt-sm {
+  margin-top: var(--size-16);
+}
+.u-my-sm {
+  margin-block: var(--size-16);
+}
+.u-mx-sm {
+  margin-inline: var(--size-16);
+}
+
+/* margin regular, 32px */
+
+.u-m-rg {
+  margin: var(--size-32);
+}
+.u-mb-rg {
+  margin-bottom: var(--size-32);
+}
+.u-mt-rg {
+  margin-top: var(--size-32);
+}
+.u-my-rg {
+  margin-block: var(--size-32);
+}
+.u-mx-rg {
+  margin-inline: var(--size-32);
+}
+
+/* margin large, 48px */
+
+.u-m-lg {
+  margin: var(--size-48);
+}
+.u-mb-lg {
+  margin-bottom: var(--size-48);
+}
+.u-mt-lg {
+  margin-top: var(--size-48);
+}
+.u-my-lg {
+  margin-block: var(--size-48);
+}
+.u-mx-lg {
+  margin-inline: var(--size-48);
+}
+
+/* flexbox wrappers */
+
+.flex-v-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-16);
+  flex-wrap: wrap;
+}
+
+.flex-h-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-16);
+  align-items: top;
+  flex-wrap: wrap;
+}
+
+.border-wrapper {
+  border: var(--border-primary) 1px solid;
+  border-radius: var(--size-20);
+}
+
+/* --- Icons --- */
+
+.icon {
+  width: var(--size-24);
+  height: var(--size-24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-lg {
+  width: var(--size-28);
+  height: var(--size-28);
+}
+
+.icon-sm {
+  width: var(--size-20);
+  height: var(--size-20);
+}
+
+.icon svg {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block;
+}
+
+.icon-btn {
+  transition: background-color 0.3s ease;
+  border-radius: var(--size-12);
+  background-color: var(--black);
+  color: var(--text-primary-inverted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--size-8);
+  width: var(--size-40);
+  height: var(--size-40);
+}
+
+.icon-btn:hover {
+  background-color: var(--grey-8);
+}
+.icon-btn:active {
+  background-color: var(--grey-7);
+}
+
+.icon-btn-lg {
+  width: var(--size-48);
+  height: var(--size-48);
+}
+
+.icon-btn-sm {
+  width: var(--size-36);
+  height: var(--size-36);
+}
+
+.icon-btn-secondary {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+}
+.icon-btn-secondary:hover {
+  background-color: var(--grey-2);
+}
+.icon-btn-secondary:active {
+  background-color: var(--grey-3);
+}
+
+.icon-btn-brand-primary {
+  background-color: var(--blu-50);
+  color: var(--text-primary-inverted);
+}
+.icon-btn-brand-primary:hover {
+  background-color: var(--blu-60);
+}
+.icon-btn-brand-primary:active {
+  background-color: var(--blu-70);
+}
+
+.icon-btn-brand-secondary {
+  background-color: var(--surface-brand-muted);
+  color: var(--text-brand-strong);
+}
+.icon-btn-brand-secondary:hover {
+  background-color: var(--blu-10);
+}
+.icon-btn-brand-secondary:active {
+  background-color: var(--blu-20);
+}
+
+.icon-btn-disabled {
+  background-color: var(--surface-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+.icon-btn-disabled:hover {
+  background-color: var(--surface-disabled);
+}
+.icon-btn-disabled:active {
+  background-color: var(--surface-disabled);
+}
+
+/* --- Button Classes --- */
+
+/* Base Button */
+
+.btn {
+  transition: background-color 0.3s ease;
+  background-color: var(--black);
+  color: var(--text-primary-inverted);
+  border: none;
+  padding: var(--size-8) var(--size-12);
+  border-radius: var(--size-12);
+  font-family: "inter", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  height: fit-content;
+}
+
+.btn:hover {
+  background-color: var(--grey-8);
+}
+.btn:active {
+  background-color: var(--grey-7);
+}
+.btn-lg {
+  padding: var(--size-8) var(--size-20);
+  font-size: 1.125rem;
+}
+.btn-sm {
+  padding: var(--size-8) var(--size-12);
+  font-size: 0.875rem;
+}
+
+.btn-secondary {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+}
+.btn-secondary:hover {
+  background-color: var(--grey-2);
+}
+.btn-secondary:active {
+  background-color: var(--grey-3);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+  padding-left: 0;
+  padding-right: 0;
+}
+.btn-ghost:hover {
+  background-color: transparent;
+}
+.btn-ghost:active {
+  background-color: transparent;
+}
+
+/* Brand Buttons */
+
+.btn-primary-brand {
+  background-color: var(--blu-50);
+  color: var(--text-primary-inverted);
+}
+.btn-primary-brand:hover {
+  background-color: var(--blu-60);
+}
+.btn-primary-brand:active {
+  background-color: var(--blu-70);
+}
+
+.btn-secondary-brand {
+  background-color: var(--surface-brand-muted);
+  color: var(--text-brand-strong);
+}
+.btn-secondary-brand:hover {
+  background-color: var(--blu-10);
+}
+.btn-secondary-brand:active {
+  background-color: var(--blu-20);
+}
+
+/* Disabled Buttons */
+
+.btn-disabled {
+  background-color: var(--surface-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+  background-color: var(--surface-disabled);
+}
+
+.btn-disabled:active {
+  background-color: var(--surface-disabled);
+}
