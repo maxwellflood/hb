@@ -465,7 +465,7 @@ p {
 
 /* --- Utility Classes --- */
 
-/* text */
+/* text colors */
 
 .txt-primary {
   color: var(--text-primary);
@@ -684,6 +684,10 @@ p {
   display: block;
 }
 
+/* --- Icon Button Classes --- */
+
+/* Base Icon Button */
+
 .icon-btn {
   transition: background-color 0.3s ease;
   border-radius: var(--size-12);
@@ -697,12 +701,16 @@ p {
   height: var(--size-40);
 }
 
+/* Icon Button States */
+
 .icon-btn:hover {
   background-color: var(--grey-8);
 }
 .icon-btn:active {
   background-color: var(--grey-7);
 }
+
+/* Icon Button Sizes */
 
 .icon-btn-lg {
   width: var(--size-48);
@@ -713,6 +721,8 @@ p {
   width: var(--size-36);
   height: var(--size-36);
 }
+
+/* Icon Button Variants */
 
 .icon-btn-secondary {
   background-color: var(--surface-secondary);
@@ -725,6 +735,8 @@ p {
   background-color: var(--grey-3);
 }
 
+/* Icon Button Brand Variants */
+
 .icon-btn-brand-primary {
   background-color: var(--blu-50);
   color: var(--text-primary-inverted);
@@ -736,6 +748,8 @@ p {
   background-color: var(--blu-70);
 }
 
+/* Icon Button Brand Secondary */
+
 .icon-btn-brand-secondary {
   background-color: var(--surface-brand-muted);
   color: var(--text-brand-strong);
@@ -746,6 +760,8 @@ p {
 .icon-btn-brand-secondary:active {
   background-color: var(--blu-20);
 }
+
+/* Icon Button Disabled State */
 
 .icon-btn-disabled {
   background-color: var(--surface-disabled);
@@ -778,12 +794,17 @@ p {
   height: fit-content;
 }
 
+/* Button States */
+
 .btn:hover {
   background-color: var(--grey-8);
 }
 .btn:active {
   background-color: var(--grey-7);
 }
+
+/* Button Sizes */
+
 .btn-lg {
   padding: var(--size-8) var(--size-20);
   font-size: 1.125rem;
@@ -792,6 +813,8 @@ p {
   padding: var(--size-8) var(--size-12);
   font-size: 0.875rem;
 }
+
+/* Secondary Buttons */
 
 .btn-secondary {
   background-color: var(--surface-secondary);
