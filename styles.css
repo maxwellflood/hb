@@ -192,6 +192,7 @@ template {
   font-family: "dorian";
   src: url(./fonts/DorianVF.woff);
   font-weight: 100 900;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -433,6 +434,7 @@ h5,
 h6 {
   font-family: "dorian", sans-serif;
   font-weight: 700;
+  font-style: normal;
   margin: 0;
   padding: 0;
   color: var(--blu-50);
