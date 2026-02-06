@@ -61,7 +61,11 @@
       <!-- Button container -->
       <div class="button-container">
         <!-- icon button lg -->
-        <a class="icon-btn icon-btn-secondary icon-btn-lg" href="#">
+        <a
+          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          href="#"
+          aria-describedby="tip-help"
+        >
           <div class="icon icon-lg" aria-hidden="true">
             <!-- inline SVG -->
             <!-- Icon Help -->
@@ -87,14 +91,16 @@
                   fill="currentColor"
                 />
               </svg>
+              <span class="tooltip" role="tooltip" id="tip-help"> Help </span>
             </div>
           </div>
         </a>
 
         <!-- icon button lg - Backwards -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled"
+          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
           href="#"
+          aria-describedby="tip-back"
         >
           <!-- Icon Arrow Left -->
           <div class="icon" aria-hidden="true">
@@ -115,11 +121,16 @@
                 fill="currentColor"
               />
             </svg>
+            <span class="tooltip" role="tooltip" id="tip-next"> Back </span>
           </div>
         </a>
 
         <!-- icon button lg - Forwards -->
-        <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav" href="#">
+        <a
+          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip"
+          href="#"
+          aria-describedby="tip-next"
+        >
           <!-- Icon Arrow Right -->
           <div class="icon" aria-hidden="true">
             <!-- inline SVG -->
@@ -139,6 +150,7 @@
                 fill="currentColor"
               />
             </svg>
+            <span class="tooltip" role="tooltip" id="tip-next"> Next </span>
           </div>
         </a>
       </div>

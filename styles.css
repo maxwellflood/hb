@@ -384,7 +384,7 @@ template {
 /* Global Styles */
 
 body {
-  font-family: "dorian", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   background-color: var(--bg-primary);
   color: var(--grey-9);
@@ -964,12 +964,58 @@ section {
   transition: width 0.3s ease;
 }
 
-/*nav container for buttons*/
+/* nav container for buttons */
 
 .button-container {
   display: flex;
   gap: var(--size-8);
   flex-wrap: wrap;
+}
+
+/* Button tooltip */
+
+.has-tooltip {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  /* left: 50%; */
+  transform: translateY(-25%);
+
+  padding: var(--size-4) var(--size-8);
+  background: var(--surface-primary-inverted);
+  color: var(--text-primary-inverted);
+  border-radius: 8px;
+
+  font-size: 0.875rem;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 0;
+  height: 0;
+
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--surface-primary-inverted);
+}
+
+/* show on hover + keyboard focus */
+.has-tooltip:hover .tooltip,
+.has-tooltip:focus-visible .tooltip {
+  opacity: 1;
 }
 
 /* Responsive: screens smaller than tablet */
