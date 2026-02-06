@@ -284,10 +284,16 @@ template {
   --size-72: 4.5rem;
   --size-80: 5rem;
 
+  /* --- Spacing --- */
+
+  --space-inline-main: var(--size-24);
+  --space-block-main: var(--size-24);
+
   /* --- Surface Colors --- */
 
   --surface-primary: var(--white);
   --surface-secondary: var(--grey-1);
+  --surface-tertiary: var(--grey-2);
   --surface-disabled: var(--grey-2);
   --surface-primary-inverted: var(--grey-8);
   --surface-secondary-inverted: var(--grey-7);
@@ -385,13 +391,13 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  background-color: var(--blu-00);
 }
 
 /* 1) Semantic section: full width, owns background + vertical spacing */
 section {
   width: 100%;
   background: var(--surface-primary);
-  padding-block: var(--size-40);
 }
 
 /* 2) Container: centers content, controls page max-width + gutters */
@@ -690,7 +696,7 @@ p {
 
 .icon-btn {
   transition: background-color 0.3s ease;
-  border-radius: var(--size-12);
+  border-radius: var(--size-16);
   background-color: var(--black);
   color: var(--text-primary-inverted);
   display: inline-flex;
@@ -715,6 +721,12 @@ p {
 .icon-btn-lg {
   width: var(--size-48);
   height: var(--size-48);
+}
+
+/* primary nav button */
+.icon-btn-lg.btn-nav {
+  width: auto;
+  padding-inline: var(--size-20);
 }
 
 .icon-btn-sm {
@@ -792,6 +804,7 @@ p {
   cursor: pointer;
   text-decoration: none;
   height: fit-content;
+  width: fit-content;
 }
 
 /* Button States */
@@ -878,4 +891,99 @@ p {
 
 .btn-disabled:active {
   background-color: var(--surface-disabled);
+}
+
+/* --- Components --- */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: var(--space-block-main) var(--space-inline-main);
+}
+
+main {
+  max-width: 960px;
+  margin-inline: auto;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  min-height: calc(100svh - 96px);
+  background-color: var(--surface-primary);
+}
+
+nav {
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: var(--space-block-main) var(--space-inline-main);
+  border-top: var(--border-primary) 1px solid;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--bottom-nav-height);
+  margin-bottom: env(safe-area-inset-bottom);
+  background-color: var(--surface-primary);
+  z-index: 1000;
+}
+
+section {
+  padding: var(--space-block-main) var(--space-inline-main);
+}
+
+/* Progress Indicator */
+
+.progress-indicator {
+  max-width: 400px;
+  width: 33%;
+  display: flex;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.progress-bar {
+  width: 100%;
+  height: var(--size-4);
+  border-radius: 4px;
+  display: flex;
+  align-items: left;
+  background-color: var(--surface-tertiary);
+}
+
+.progress {
+  width: 75%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: var(--surface-brand-strong);
+  transition: width 0.3s ease;
+}
+
+/*nav container for buttons*/
+
+.button-container {
+  display: flex;
+  gap: var(--size-8);
+  flex-wrap: wrap;
+}
+
+/* Responsive: screens smaller than tablet */
+@media (max-width: 767px) {
+  /* Tighter container gutters on small screens */
+
+  /* Reduce section vertical spacing */
+  section {
+    padding-block: var(--size-32);
+  }
+
+  /* Make nav / large icon buttons fit */
+  .icon-btn-lg.btn-nav {
+    width: var(--size-48);
+    padding-inline: 0;
+  }
 }
