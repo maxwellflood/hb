@@ -284,6 +284,16 @@ template {
   --size-72: 4.5rem;
   --size-80: 5rem;
 
+  /* --- Radius --- */
+
+  --radius-xs: var(--size-4);
+  --radius-s: var(--size-8);
+  --radius-m: var(--size-12);
+  --radius-l: var(--size-16);
+  --radius-xl: var(--size-20);
+
+  --radius-wrap: var(--size-24);
+
   /* --- Spacing --- */
 
   --space-inline-main: var(--size-24);
@@ -907,7 +917,7 @@ header {
 main {
   max-width: 960px;
   margin-inline: auto;
-  border-radius: 24px 24px 0 0;
+  border-radius: var(--radius-wrap) var(--radius-wrap) 0 0;
   overflow: hidden;
   min-height: calc(100svh - 96px);
   background-color: var(--surface-primary);
@@ -1020,11 +1030,13 @@ section {
 
 /* Responsive: screens smaller than tablet */
 @media (max-width: 767px) {
-  /* Tighter container gutters on small screens */
+  :root {
+    /* --- Spacing --- */
+    --space-inline-main: var(--size-16);
+    --space-block-main: var(--size-16);
 
-  /* Reduce section vertical spacing */
-  section {
-    padding-block: var(--size-32);
+    /* Radius */
+    --radius-wrap: var(--size-16);
   }
 
   /* Make nav / large icon buttons fit */
