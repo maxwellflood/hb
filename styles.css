@@ -1042,16 +1042,6 @@ section {
   gap: var(--size-48);
 }
 
-/* Splash Screen Navigation */
-
-.splash-menu-container,
-.splash-menu {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--size-12);
-}
-
 .crown-lottie {
   position: absolute;
   transform: translate(-50%, -100%);
@@ -1066,6 +1056,16 @@ section {
   width: 200px;
   height: 32px;
   /* background: red; */
+}
+
+/* Splash Screen Navigation */
+
+.splash-menu-container,
+.splash-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--size-12);
 }
 
 /* Progress Indicator */
@@ -1144,6 +1144,20 @@ section {
   .icon-btn-lg.btn-nav {
     width: var(--size-48);
     padding-inline: 0;
+  }
+
+  /* Splash Screen */
+
+  .crown-lottie {
+    width: 80px;
+    height: 30px;
+    /* background: red; */
+  }
+
+  .underline-lottie {
+    width: 160px;
+    height: 24px;
+    /* background: red; */
   }
 
   /* hidden */
