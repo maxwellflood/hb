@@ -500,6 +500,20 @@ p {
   font-size: var(--p-size-large);
 }
 
+.text-instruction {
+  font-size: var(--p-size-semi-bold);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--grey-7);
+}
+
+.text-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  /* text-decoration-color: var(--blu-30); */
+}
+
 a {
   border: none;
   text-decoration: none;
