@@ -284,6 +284,7 @@ template {
   --size-64: 4rem;
   --size-72: 4.5rem;
   --size-80: 5rem;
+  --size-96: 6rem;
 
   /* --- Radius --- */
 
@@ -298,6 +299,7 @@ template {
   /* --- Spacing --- */
 
   --nav-top-height: var(--size-80);
+  --nav-bottom-height: var(--size-96);
 
   --space-inline-main: var(--size-24);
   --space-block-main: var(--size-24);
@@ -313,6 +315,7 @@ template {
   --surface-tertiary-inverted: var(--grey-9);
   --surface-brand-strong: var(--blu-50);
   --surface-brand-muted: var(--blu-00);
+  --surface-brand-subtle: var(--blu-20);
   --surface-success-strong: var(--grn-50);
   --surface-success-muted: var(--grn-00);
   --surface-error-strong: var(--red-50);
@@ -339,7 +342,7 @@ template {
   --text-primary: var(--grey-9);
   --text-secondary: var(--grey-7);
   --text-tertiary: var(--grey-5);
-  --text-disabled: var(--grey-5);
+  --text-disabled: var(--grey-3);
   --text-primary-inverted: var(--grey-1);
   --text-secondary-inverted: var(--grey-3);
   --text-tertiary-inverted: var(--grey-5);
@@ -372,6 +375,10 @@ template {
   /* 18px → 22px */
 
   --p-size-small: 0.875rem;
+
+  --p-size-regular: 1rem;
+
+  --p-size-large: 1.125rem;
 
   /* spacing */
 
@@ -487,6 +494,10 @@ p {
 
 .small {
   font-size: var(--p-size-small);
+}
+
+.large {
+  font-size: var(--p-size-large);
 }
 
 a {
@@ -939,7 +950,7 @@ header {
 main {
   max-width: 960px;
   margin-top: var(--nav-top-height);
-  padding-bottom: var(--nav-top-height);
+  padding-bottom: var(--nav-bottom-height);
   margin-inline: auto;
   min-height: calc(100dvh - var(--nav-top-height));
   background-color: var(--surface-primary);
@@ -1075,7 +1086,10 @@ section {
   width: 33%;
   display: flex;
   align-items: center;
+  background-color: var(--surface-secondary);
+  border-radius: 12px;
   gap: var(--size-12);
+  padding: var(--size-12) var(--size-16);
 }
 
 .progress-bar {

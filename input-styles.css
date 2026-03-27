@@ -1,0 +1,210 @@
+/* --- Fluid input tokens --- */
+
+:root {
+  --input-height: clamp(2rem, 1.85rem + 0.5vw, 2.5rem); /* 32px → 40px */
+  --input-gap: clamp(0.75rem, 0.6rem + 0.5vw, 1.25rem); /* 0.75rem → 1.25rem */
+}
+
+/* --- Page layout --- */
+
+.page {
+  padding: 0;
+}
+
+.page:first-child {
+  padding-top: 2rem;
+}
+
+.content-wrapper {
+  width: 100%;
+  padding: 1.5rem 1.5rem;
+}
+
+.content {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-gap);
+  margin: 0 auto;
+}
+
+/* --- Question Styles--- */
+
+.question {
+  font-family: "dorian", sans-serif;
+  font-weight: 700;
+  font-size: var(--p-size-large);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-brand-strong);
+}
+
+/* --- Input styles --- */
+
+/* Form field wrapper — label + input stacked */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-gap);
+  width: 100%;
+}
+
+/* Form field utility classes for different sizes */
+
+.form-field--md {
+  max-width: 360px;
+}
+
+.form-field--sm {
+  max-width: 200px;
+}
+
+/* Label */
+.form-label {
+  font-family: "dorian", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.form-label--sub {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+/* Text input */
+.text-input {
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  height: var(--input-height);
+  padding: 0 10px;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s ease;
+  appearance: none;
+}
+
+.text-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.text-input:focus {
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-highlighted-brand);
+}
+
+.text-input:disabled {
+  background-color: var(--surface-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Input wrapper */
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-row .text-input {
+  flex: 1;
+}
+
+/* input message */
+
+.input-message {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-brand-strong);
+}
+
+.input-message svg {
+  flex-shrink: 0;
+}
+
+.input-message span {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+/* Message hidden by default */
+.input-message {
+  display: none;
+}
+
+/* Invalid state — show message + highlight border */
+.form-field--invalid .input-message {
+  display: flex;
+}
+
+.form-field--invalid .text-input {
+  background-color: var(--surface-primary);
+  border-color: var(--border-highlighted-brand);
+}
+
+/* Dont know button */
+
+.dont-know-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--input-height);
+  height: var(--input-height);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.dont-know-btn:hover {
+  border-color: var(--border-highlighted-brand);
+}
+
+/* Don't know — active/selected state */
+.dont-know-btn--active {
+  background-color: var(--surface-brand-subtle);
+  border-color: var(--border-highlighted-brand);
+}
+
+/* Don't know — disabled input state */
+.form-field--dont-know .text-input {
+  background-color: var(--surface-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-field--dont-know .text-input::placeholder {
+  color: var(--text-disabled);
+}
+
+/* utility classes */
+
+.hidden {
+  display: none;
+}
