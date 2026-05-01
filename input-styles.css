@@ -28,6 +28,17 @@
   margin: 0 auto;
 }
 
+/* --- Content wrapper modifiers --- */
+
+/* Q and A are always in separate .content-wrapper divs.
+   Remove top padding on the answer wrapper so it sits tight below the question. */
+.content-wrapper--answer {
+  padding-top: 0;
+}
+
+/* Full-width answer: omit the inner .content div — answer fills the wrapper's horizontal padding.
+   Use alongside .content-wrapper--answer: class="content-wrapper content-wrapper--answer content-wrapper--full" */
+
 /* --- Question Styles--- */
 
 .question {
@@ -201,6 +212,242 @@
 
 .form-field--dont-know .text-input::placeholder {
   color: var(--text-disabled);
+}
+
+/* --- Grid buttons --- */
+
+.grid-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.grid-btn {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  padding: var(--size-8) var(--size-12);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.grid-btn:hover {
+  background-color: var(--surface-primary);
+  border-color: var(--border-highlighted-brand);
+  color: var(--text-primary);
+}
+
+.grid-btn--selected {
+  background-color: var(--surface-brand-strong);
+  border-color: var(--surface-brand-strong);
+  color: var(--text-primary-inverted);
+}
+
+.grid-btn--selected:hover {
+  background-color: var(--blu-60);
+  border-color: var(--blu-60);
+  color: var(--text-primary-inverted);
+}
+
+/* Modifier: vertical stack */
+.grid-group--col {
+  flex-direction: column;
+}
+
+.grid-group--col .grid-btn {
+  flex: none;
+  width: 100%;
+}
+
+/* Modifier: fixed width (all buttons match the widest, no full-container stretch) */
+.grid-group--fixed {
+  display: inline-flex;
+  width: auto;
+  align-self: flex-start;
+}
+
+.grid-group--fixed .grid-btn {
+  flex: 0 0 auto;
+}
+
+/* Vertical + fixed: JS equalizes widths, so buttons stay auto here */
+.grid-group--col.grid-group--fixed .grid-btn {
+  flex: none;
+  width: auto;
+}
+
+/* --- Grid field wrapper --- */
+
+.grid-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* --- Grid wrapper (buttons + don't know button) --- */
+
+.grid-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.grid-wrapper .grid-group:not(.grid-group--fixed) {
+  flex: 1;
+  width: auto;
+}
+
+.grid-wrapper.grid-wrapper--col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Vertical fixed-width: shrinks to button width so DK button matches */
+.grid-wrapper.grid-wrapper--col-fixed {
+  display: inline-flex;
+  flex-direction: column;
+  width: auto;
+  align-self: flex-start;
+}
+
+/* DK button in grid context: match grid button height and radius */
+.grid-field .dont-know-btn {
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  align-self: flex-start;
+  padding: var(--size-8) var(--size-12);
+  border-radius: var(--radius-m);
+}
+
+/* DK button stays at natural 40px size in fixed-width vertical layout */
+.grid-wrapper--col-fixed .dont-know-btn {
+  align-self: flex-start;
+}
+
+/* --- Picture grid --- */
+
+/* Image button: no padding, size driven by image, 3px border for visibility */
+.grid-btn--img {
+  flex: 0 0 auto;
+  padding: 0;
+  overflow: hidden;
+  line-height: 0;
+  border-width: 2px;
+}
+
+.grid-btn--img:hover {
+  border-color: var(--blu-20);
+}
+
+.grid-btn--img.grid-btn--selected {
+  border-width: 2px;
+}
+
+.grid-btn--img.grid-btn--selected:hover {
+  border-color: var(--blu-60);
+}
+
+.grid-btn--img img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.img-selected-icon {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-btn--selected .img-selected-icon {
+  display: flex;
+}
+
+/* DK button in image grid: restore default 40px square sizing, align to top */
+.grid-wrapper--img .dont-know-btn {
+  width: var(--input-height);
+  height: var(--input-height);
+  aspect-ratio: unset;
+  padding: 0;
+  align-self: flex-start;
+}
+
+/* Full-width image grid: 4 equal columns, images stretch to fill container */
+.grid-group--img-fw {
+  flex-wrap: wrap;
+}
+
+.grid-group--img-fw .grid-btn--img {
+  flex: 1 1 calc(25% - 6px);
+}
+
+.grid-group--img-fw .grid-btn--img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Multiselect wrap: max 4 per row, last row centred */
+.grid-group--wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.grid-group--wrap .grid-btn {
+  flex: 0 1 calc(25% - 6px);
+  min-width: 0;
+}
+
+/* --- Grid validation message --- */
+
+.grid-message {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-brand-strong);
+}
+
+.grid-message svg {
+  flex-shrink: 0;
+}
+
+.grid-message span {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.grid-field--invalid .grid-message {
+  display: flex;
 }
 
 /* utility classes */

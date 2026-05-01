@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honesty Box | Inputs</title>
+    <title>Honesty Box | Text Grids</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="input-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
@@ -46,7 +46,7 @@
           <!-- Title content -->
           <div class="content-wrapper">
             <div class="content">
-              <h3>This is a page title</h3>
+              <h3>Text Grids</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
                 mauris laoreet eget etiam risus. Nulla eget purus nulla ultrices
@@ -56,435 +56,293 @@
             </div>
           </div>
 
-          <!-- Question content -->
+          <!-- START: 1. Horizontal Full Width -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the Glastonbury festival?
-              </p>
-
-              <!-- Form field -->
-              <div class="form-field">
-                <label class="form-label" for="my-input">The line up</label>
-                <input
-                  class="text-input"
-                  type="text"
-                  id="my-input"
-                  placeholder="This year's line up is..."
-                />
-
-                <!-- message -->
-                <div class="input-message">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <span>This field is required</span>
-                </div>
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
               </div>
-              <!-- Form field END -->
             </div>
           </div>
-          <!-- Question content END-->
-
-          <!-- Question content multiple aspects-->
-          <div class="content-wrapper">
+          <div class="content-wrapper content-wrapper--answer">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form field -->
-              <div class="form-group">
-                <p class="form-label">The line-up</p>
-
-                <div class="form-field" id="field-glastonbury">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-glastonbury"
-                    >Glastonbury</label
+              <div class="box-A">
+                <div class="grid-field">
+                  <div
+                    class="grid-group"
+                    role="radiogroup"
+                    aria-label="How would you describe yourself?"
                   >
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-glastonbury"
-                    placeholder="This year's line up is..."
-                  />
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
-                    </svg>
-                    <span>This field is required</span>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
                   </div>
-                </div>
-
-                <div class="form-field" id="field-latitude">
-                  <label class="form-label form-label--sub" for="input-latitude"
-                    >Latitude</label
-                  >
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-latitude"
-                    placeholder="This year's line up is..."
-                  />
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
-                    <span>This field is required</span>
+                    <span>This question is required</span>
                   </div>
                 </div>
               </div>
-              <!-- Form field END -->
             </div>
           </div>
-          <!-- Question content END-->
+          <!-- END: 1. Horizontal Full Width -->
 
-          <!-- Question content -->
+          <!-- START: 2. Horizontal Fixed Width -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the Glastonbury festival?
-              </p>
-
-              <!-- Form field — with don't know button -->
-              <div class="form-field" id="field-lineup">
-                <label class="form-label" for="input-lineup">The line up</label>
-
-                <!-- Input row -->
-                <div class="input-row">
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-lineup"
-                    placeholder="This year's line up is..."
-                  />
-                  <button
-                    class="dont-know-btn"
-                    type="button"
-                    aria-label="Don't know"
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div
+                    class="grid-group grid-group--fixed"
+                    role="radiogroup"
+                    aria-label="How would you describe yourself?"
                   >
-                    🤷‍♂️
-                  </button>
-                </div>
-                <!-- Input row END -->
-
-                <!-- message -->
-                <div class="input-message">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <span>This field is required</span>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
                 </div>
               </div>
-              <!-- Form field END -->
             </div>
           </div>
-          <!-- Question content END-->
+          <!-- END: 2. Horizontal Fixed Width -->
 
-          <!-- Question content multiple aspects — with don't know buttons -->
+          <!-- START: 3. Vertical Full Width -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form group -->
-              <div class="form-group">
-                <p class="form-label">The line-up</p>
-
-                <div class="form-field" id="field-glastonbury-dk">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-glastonbury-dk"
-                    >Glastonbury</label
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div
+                    class="grid-group grid-group--col"
+                    role="radiogroup"
+                    aria-label="How would you describe yourself?"
                   >
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 3. Vertical Full Width -->
 
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input
-                      class="text-input"
-                      type="text"
-                      id="input-glastonbury-dk"
-                      placeholder="This year's line up is..."
-                    />
-                    <button
-                      class="dont-know-btn"
-                      type="button"
-                      aria-label="Don't know"
+          <!-- START: 4. Vertical Fixed Width -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div
+                    class="grid-group grid-group--col grid-group--fixed"
+                    role="radiogroup"
+                    aria-label="How would you describe yourself?"
+                  >
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 4. Vertical Fixed Width -->
+
+          <!-- START: 5. Horizontal Full Width + Don't Know -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-wrapper">
+                    <div
+                      class="grid-group"
+                      role="radiogroup"
+                      aria-label="How would you describe yourself?"
                     >
-                      🤷‍♂️
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                    </div>
+                    <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-1">
+                      🤷
+                      <span class="tooltip" role="tooltip" id="tip-dk-1">Don't know</span>
                     </button>
                   </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-latitude-dk">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-latitude-dk"
-                    >Latitude</label
-                  >
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input
-                      class="text-input"
-                      type="text"
-                      id="input-latitude-dk"
-                      placeholder="This year's line up is..."
-                    />
-                    <button
-                      class="dont-know-btn"
-                      type="button"
-                      aria-label="Don't know"
-                    >
-                      🤷‍♂️
-                    </button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                    <span>This field is required</span>
+                    <span>This question is required</span>
                   </div>
                 </div>
               </div>
-              <!-- Form group END -->
             </div>
           </div>
-          <!-- Question content END-->
+          <!-- END: 5. Horizontal Full Width + Don't Know -->
 
-          <!-- Question content — multi aspect, multi subject -->
+          <!-- START: 6. Horizontal Fixed Width + Don't Know -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form group — The line-up -->
-              <div class="form-group">
-                <p class="form-label">The line-up</h2>
-
-                <div class="form-field" id="field-lineup-glastonbury">
-                  <label class="form-label form-label--sub" for="input-lineup-glastonbury">Glastonbury</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-lineup-glastonbury" placeholder="The Glastonbury line-up was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-lineup-latitude">
-                  <label class="form-label form-label--sub" for="input-lineup-latitude">Latitude</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-lineup-latitude" placeholder="The Latitude line-up was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
               </div>
-              <!-- Form group END -->
-
-              <!-- Form group — The toilets -->
-              <div class="form-group">
-                <p class="form-label">The toilets</h2>
-
-                <div class="form-field" id="field-toilets-glastonbury">
-                  <label class="form-label form-label--sub" for="input-toilets-glastonbury">Glastonbury</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-toilets-glastonbury" placeholder="The Glastonbury toilets were..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-toilets-latitude">
-                  <label class="form-label form-label--sub" for="input-toilets-latitude">Latitude</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-toilets-latitude" placeholder="The Latitude toilets were..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-              </div>
-              <!-- Form group END -->
-
-              <!-- Form group — Site access -->
-              <div class="form-group">
-                <p class="form-label">Site access</p>
-
-                <div class="form-field" id="field-access-glastonbury">
-                  <label class="form-label form-label--sub" for="input-access-glastonbury">Glastonbury</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-access-glastonbury" placeholder="Site access at Glastonbury was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-access-latitude">
-                  <label class="form-label form-label--sub" for="input-access-latitude">Latitude</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-access-latitude" placeholder="Site access at Latitude was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-              </div>
-              <!-- Form group END -->
-
             </div>
           </div>
-          <!-- Question content END-->
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-wrapper">
+                    <div
+                      class="grid-group grid-group--fixed"
+                      role="radiogroup"
+                      aria-label="How would you describe yourself?"
+                    >
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                    </div>
+                    <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-2">
+                      🤷
+                      <span class="tooltip" role="tooltip" id="tip-dk-2">Don't know</span>
+                    </button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 6. Horizontal Fixed Width + Don't Know -->
+
+          <!-- START: 7. Vertical Full Width + Don't Know -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-wrapper grid-wrapper--col">
+                    <div
+                      class="grid-group grid-group--col"
+                      role="radiogroup"
+                      aria-label="How would you describe yourself?"
+                    >
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                    </div>
+                    <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-3">
+                      🤷
+                      <span class="tooltip" role="tooltip" id="tip-dk-3">Don't know</span>
+                    </button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 7. Vertical Full Width + Don't Know -->
+
+          <!-- START: 8. Vertical Fixed Width + Don't Know -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-wrapper grid-wrapper--col-fixed">
+                    <div
+                      class="grid-group grid-group--col grid-group--fixed"
+                      role="radiogroup"
+                      aria-label="How would you describe yourself?"
+                    >
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                      <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                    </div>
+                    <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-4">
+                      🤷
+                      <span class="tooltip" role="tooltip" id="tip-dk-4">Don't know</span>
+                    </button>
+                  </div>
+                  <div class="grid-message" aria-live="polite">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>This question is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 8. Vertical Fixed Width + Don't Know -->
         </section>
       </div>
     </main>
@@ -596,6 +454,6 @@
         </a>
       </div>
     </nav>
-    <script src="inputs-scripts.js"></script>
+    <script src="grids-scripts.js"></script>
   </body>
 </html>
