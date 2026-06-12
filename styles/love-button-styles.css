@@ -1,0 +1,164 @@
+/* --- Love Button Page Layout ---
+   Scoped rules that only load on this page.
+   Makes the answer wrapper fill remaining vertical space so the circle sits centred. */
+
+/* Pass flex height through the unstyled wrapper and section */
+#main > .main-surface {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#main > .main-surface > .page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+/* Answer wrapper fills remaining space after the title block and centres its content vertically. */
+.content-wrapper--answer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* .content uses margin: 0 auto globally. In a column flex container those auto inline margins
+   absorb all available horizontal space and prevent the element from having a definite width,
+   which breaks the 100% reference chain down to the circle. Explicit width: 100% fixes this. */
+.content-wrapper--answer > .content {
+  width: 100%;
+}
+
+/* --- Love Button Question Type --- */
+
+/* Answer area: circle + button stacked and centred */
+.love-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-24);
+  width: 100%;
+}
+
+/* Outer circle container.
+   overflow: hidden clips the growing fill and all rings to the circle boundary. */
+.love-circle-outer {
+  position: relative;
+  width: min(400px, 100%);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid var(--border-secondary);
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--surface-secondary);
+}
+
+/* Concentric dotted rings — each absolutely centred, sized as a % of the outer circle.
+   mix-blend-mode: multiply darkens the ring where it overlaps the blue fill. */
+.love-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dotted var(--border-primary);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.love-ring--10 { width: 10%; height: 10%; opacity: 0.10; }
+.love-ring--20 { width: 20%; height: 20%; opacity: 0.20; }
+.love-ring--30 { width: 30%; height: 30%; opacity: 0.30; }
+.love-ring--40 { width: 40%; height: 40%; opacity: 0.40; }
+.love-ring--50 { width: 50%; height: 50%; opacity: 0.50; }
+.love-ring--60 { width: 60%; height: 60%; opacity: 0.60; }
+.love-ring--70 { width: 70%; height: 70%; opacity: 0.70; }
+.love-ring--80 { width: 80%; height: 80%; opacity: 0.80; }
+.love-ring--90 { width: 90%; height: 90%; opacity: 0.90; }
+
+/* Growing fill circle — starts at 0, expands to 100% of the outer circle.
+   Percentages relative to .love-circle-outer, so it scales automatically. */
+.love-fill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: var(--blu-20);
+  pointer-events: none;
+}
+
+/* Value counter — sits above the fill via z-index */
+.love-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  min-width: 3ch;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Adjustment button group — centred beneath circle; JS equalises button widths after reveal */
+.love-btn-group {
+  display: flex;
+  gap: var(--size-8);
+}
+
+/* Icon + label inline; width set by JS to match the wider button */
+.love-adjust-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-8);
+}
+
+/* Fill colour states — toggled by JS on adjust button press/release */
+.love-fill--less {
+  background-color: var(--surface-error-muted);
+}
+
+.love-fill--more {
+  background-color: var(--surface-success-muted);
+}
+
+/* Button: darkens while being held */
+.love-btn--holding {
+  background-color: var(--blu-80);
+}
+
+.love-btn--holding:hover {
+  background-color: var(--blu-80);
+}
+
+/* Validation message — hidden by default, revealed by .love-field--invalid */
+.love-message {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-brand-strong);
+}
+
+.love-message span {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.love-field--invalid .love-message {
+  display: flex;
+}

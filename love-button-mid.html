@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honesty Box | Navigation</title>
+    <title>Honesty Box | Love Button (Mid) 💗</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/input-styles.css" />
+    <link rel="stylesheet" href="styles/love-button-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -42,8 +44,82 @@
       <div class="main-surface">
         <!-- Your page content goes here -->
         <section class="page">
-          <h1>Page title</h1>
-          <p>Content…</p>
+          <!-- Title content -->
+          <div class="content-wrapper">
+            <div class="content">
+              <h3>Love Button Middle</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
+                mauris laoreet eget etiam risus. Nulla eget purus nulla ultrices
+                faucibus vel vel libero pellentesque. Tellus ultrices arcu ut
+                accumsan lacus vulputate non ut.
+              </p>
+            </div>
+          </div>
+
+          <!-- START: 1. Horizontal Full Width -->
+          <!-- <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div> -->
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="love-field" id="loveField">
+
+                  <!-- Love circle: concentric rings + growing fill + value counter -->
+                  <div class="love-circle-outer" id="loveCircle" aria-hidden="true">
+
+                    <!-- Growing fill — width/height driven by JS -->
+                    <div class="love-fill" id="loveFill"></div>
+
+                    <!-- Concentric dotted rings at 10%–90% — sit above the fill so the user can read their position -->
+                    <span class="love-ring love-ring--10"></span>
+                    <span class="love-ring love-ring--20"></span>
+                    <span class="love-ring love-ring--30"></span>
+                    <span class="love-ring love-ring--40"></span>
+                    <span class="love-ring love-ring--50"></span>
+                    <span class="love-ring love-ring--60"></span>
+                    <span class="love-ring love-ring--70"></span>
+                    <span class="love-ring love-ring--80"></span>
+                    <span class="love-ring love-ring--90"></span>
+
+                    <!-- Live value counter: -100–100 -->
+                    <span class="love-value" id="loveValue">0</span>
+
+                  </div>
+
+                  <!-- Adjustment buttons — visible immediately; starts at midpoint (0) -->
+                  <div class="love-btn-group" id="loveBtnGroup">
+                    <button class="btn btn-secondary love-adjust-btn" id="loveBtnLess" type="button">
+                      Less
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M15.8337 9.16666C16.2939 9.16666 16.667 9.53975 16.667 9.99999C16.667 10.4602 16.2939 10.8333 15.8337 10.8333H4.16536C3.70513 10.8333 3.33203 10.4602 3.33203 9.99999C3.33203 9.53975 3.70513 9.16666 4.16536 9.16666H15.8337Z" fill="currentColor"/>
+                      </svg>
+                    </button>
+                    <button class="btn btn-secondary love-adjust-btn" id="loveBtnMore" type="button">
+                      More
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M9.16797 15.835V4.16668C9.16797 3.70644 9.54106 3.33334 10.0013 3.33334C10.4615 3.33334 10.8346 3.70644 10.8346 4.16668V15.835L10.8306 15.9204C10.7878 16.3405 10.4327 16.6683 10.0013 16.6683C9.5699 16.6683 9.21481 16.3405 9.17204 15.9204L9.16797 15.835Z" fill="currentColor"/>
+                        <path d="M15.8337 9.16833C16.2939 9.16833 16.667 9.54143 16.667 10.0017C16.667 10.4619 16.2939 10.835 15.8337 10.835H4.16536C3.70513 10.835 3.33203 10.4619 3.33203 10.0017C3.33203 9.54143 3.70513 9.16833 4.16536 9.16833H15.8337Z" fill="currentColor"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Validation message — shown by adding .love-field--invalid to .love-field -->
+                  <div class="love-message" role="alert">
+                    <span>This question is required</span>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 1. Horizontal Full Width -->
         </section>
       </div>
     </main>
@@ -55,7 +131,7 @@
         <div class="progress-bar">
           <span class="progress"></span>
         </div>
-        <p class="label">0%</p>
+        <p class="label">75%</p>
       </div>
 
       <!-- Button container -->
@@ -155,5 +231,6 @@
         </a>
       </div>
     </nav>
+    <script src="scripts/love-button-mid.js"></script>
   </body>
 </html>
