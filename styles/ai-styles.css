@@ -1,6 +1,29 @@
 /* --- AI Chat Input Component ---
-   Used in ai.html. Styles the Claude-powered chat input and its four states:
-   idle, text-active, voice-active, and multiline. */
+   Used in ai-components.html (component reference) and ai.html (live page).
+   Styles the Claude-powered chat input, message thread, platform avatar, and
+   the ai.html page-level layout. */
+
+/* === ai.html Page Layout ===
+   Uses the standard site-header + site-main + bottom-nav shell.
+   The chat input is fixed just above the bottom nav. */
+
+/* Fixed chat input dock — overlays the bottom of the scroll area, sits above bottom-nav */
+.ai-chat-dock {
+  position: fixed;
+  bottom: var(--nav-bottom-height);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: var(--size-16) var(--space-inline-main);
+}
+
+/* Extra bottom clearance so conversation content clears the fixed chat dock.
+   Overrides the default --nav-bottom-height padding already on .site-main. */
+.ai-body .site-main {
+  padding-bottom: calc(var(--nav-bottom-height) + var(--size-96));
+}
 
 /* Outer container — grey surface, 16px radius */
 .ai-chat-input {
