@@ -746,6 +746,7 @@ a {
 
 .icon-btn {
   transition: background-color 0.3s ease;
+  border: none;
   border-radius: var(--size-16);
   background-color: var(--black);
   color: var(--text-primary-inverted);

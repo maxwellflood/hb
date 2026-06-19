@@ -1,0 +1,190 @@
+/* --- AI Chat Input Component ---
+   Used in ai.html. Styles the Claude-powered chat input and its four states:
+   idle, text-active, voice-active, and multiline. */
+
+/* Outer container — grey surface, 16px radius */
+.ai-chat-input {
+  width: 100%;
+  max-width: 640px;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-l);
+  padding: var(--size-16) var(--size-16) var(--size-16) var(--size-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-8);
+}
+
+/* Focus state — matches the established --border-highlighted-brand pattern used across all inputs */
+.ai-chat-input:focus-within {
+  border-color: var(--border-highlighted-brand);
+}
+
+/* The textarea itself — transparent, no border, no resize handle.
+   field-sizing: content makes it auto-grow with typed content — no JS required. */
+.ai-chat-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  field-sizing: content;
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.ai-chat-textarea::placeholder {
+  color: var(--text-disabled);
+  font-style: normal;
+}
+
+/* Voice state — italic and tertiary colour while recording */
+.ai-chat-textarea--voice {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Action buttons row — right-aligned, sits below the textarea in the flex column */
+.ai-chat-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--size-8);
+}
+
+/* Mic button — white surface (sits on the grey input bg, so white reads correctly).
+   No existing icon-btn variant uses --surface-primary, so one new modifier is needed. */
+.ai-chat-btn--mic {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+.ai-chat-btn--mic:hover {
+  background-color: var(--surface-tertiary);
+}
+
+/* Stop button (voice recording) — modifier on top of .icon-btn.
+   No existing error-muted variant in styles.css, so this is the only new button class needed.
+   Mic uses .icon-btn.icon-btn-secondary, send uses .icon-btn.icon-btn-brand-primary. */
+.ai-chat-btn--stop {
+  background-color: var(--surface-error-muted);
+  color: var(--text-error-strong);
+}
+.ai-chat-btn--stop:hover {
+  background-color: var(--red-10);
+}
+.ai-chat-btn--stop:active {
+  background-color: var(--red-20);
+}
+
+/* --- Platform Avatar (HB Icon) ---
+   Mascot icon shown alongside AI messages. Static SVG by default;
+   add .hb-icon--thinking to swap in a Lottie animation. */
+
+/* Outer circle — yel-50 fill, 1px yel-70 border. Default size: 64px (large).
+   Apply .hb-icon--md / --sm / --xs for smaller variants. */
+.hb-icon {
+  width: var(--size-64);
+  height: var(--size-64);
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--yel-50);
+  border: 1px solid var(--yel-70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hb-icon--md { width: var(--size-48); height: var(--size-48); }
+.hb-icon--sm { width: var(--size-32); height: var(--size-32); }
+.hb-icon--xs { width: var(--size-24); height: var(--size-24); }
+
+/* Thinking state — question icon spins and pulses */
+.hb-icon--thinking svg {
+  color: var(--text-primary);
+  transform-origin: center;
+  animation: hb-thinking-spin 1.35s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes hb-thinking-spin {
+  0%   { transform: rotate(-30deg) scale(1);    }
+  50%  { transform: rotate(150deg)  scale(0.75); }
+  100% { transform: rotate(330deg)  scale(1);    }
+}
+
+/* Avatar item — icon + label stacked, used in the expression reference grid */
+.avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-8);
+}
+
+/* Standalone icon SVGs in the HB Icons reference grid */
+.avatar-item svg {
+  color: var(--text-primary);
+}
+
+/* Icon SVG inside the yellow avatar circle — scales to 75% of container, text-primary, -30° tilt */
+.hb-icon svg {
+  width: 75%;
+  height: 75%;
+  color: var(--text-primary);
+  transform-origin: center;
+  transform: rotate(-30deg);
+}
+
+/* --- Message Thread ---
+   Conversation between AI and user. AI messages sit on the left,
+   user messages on the right. */
+
+/* Scrollable conversation container */
+.message-thread {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* Base message row */
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-20);
+}
+
+/* AI response — 16px top/bottom, 24px right, 0 left */
+.message--ai {
+  align-items: flex-start;
+  padding: var(--size-16) var(--size-24) var(--size-16) 0;
+}
+
+/* User message — mirrored: 16px top/bottom, 0 right, 24px left */
+.message--user {
+  align-items: flex-end;
+  padding: var(--size-16) 0 var(--size-16) var(--size-24);
+}
+
+/* Message text — Text/Lg from Figma: Inter 18px/400, line-height 1.4, letter-spacing -0.02em */
+.message-text {
+  font-family: "Inter", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* User text sits in a brand-muted pill */
+.message--user .message-text {
+  background-color: var(--surface-brand-muted);
+  color: var(--text-brand-strong);
+  border-radius: var(--radius-l);
+  padding: var(--size-12) var(--size-16);
+}
