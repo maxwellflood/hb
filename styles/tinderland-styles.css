@@ -1,0 +1,273 @@
+/* =====================================================
+   Tinderland Components — Specific Styles
+   Styles for the Tinderland swipe-style question type.
+   Global/shared component styles (step dots, don't know button, etc.)
+   live in styles.css.
+   ===================================================== */
+
+/* =====================================================
+   Tinderland Card
+   Two variants (text, image) × four states (idle, pressed, swipe-l, swipe-r).
+   Used in the swipe-style (Tinderland) question flow.
+
+   Layer 1: .tinderland-card              — base card element (text variant by default)
+   Layer 2: .tinderland-card--image       — image + label variant modifier
+   States:  .tinderland-card--pressed     — pressed / held down
+            .tinderland-card--swipe-l     — swiping left (reject)
+            .tinderland-card--swipe-r     — swiping right (prefer)
+   ===================================================== */
+
+.tinderland-card {
+  width: 320px;
+  /* min-height reflects the design reference; adjust as needed — height is not fixed */
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-8);
+  padding: var(--size-8);
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.05));
+  cursor: grab;
+}
+
+.tinderland-card:active {
+  cursor: grabbing;
+  background-color: var(--surface-secondary);
+}
+
+/* Image variant — top-aligned layout; image fills card width, label sits below */
+.tinderland-card--image {
+  justify-content: flex-start;
+  min-height: 0;
+}
+
+/* Image — responsive, natural aspect ratio, no cropping */
+.tinderland-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Card label — shared by both variants.
+   pointer-events: none prevents text selection on drag/swipe. */
+.tinderland-card__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* State: Pressed — grey surface, border unchanged */
+.tinderland-card--pressed {
+  background-color: var(--surface-secondary);
+}
+
+/* State: Swipe-left — amber border + yellow tint background (text variant) */
+.tinderland-card--swipe-l {
+  border-color: var(--surface-warning-strong);
+  background-color: var(--yel-00);
+}
+
+/* State: Swipe-right — green border + green tint background (text variant) */
+.tinderland-card--swipe-r {
+  border-color: var(--surface-success-strong);
+  background-color: var(--grn-00);
+}
+
+/* Image variant keeps white background on swipe states — only the border changes */
+.tinderland-card--image.tinderland-card--swipe-l,
+.tinderland-card--image.tinderland-card--swipe-r {
+  background-color: var(--surface-primary);
+}
+
+/* =====================================================
+   Tosser — Swipe Arena Layout
+   Full-height swipe area that fills all remaining vertical space
+   below the question section. Contains the swipe card, side
+   direction labels, step progress dots, and the Don't Know button.
+
+   Structure:
+     .tosser-section          — flex fill wrapper (direct child of <main>)
+     └── .tosser              — the grey swipe arena, position: relative
+           ├── .tosser__side-label--left   — "No" / reject label
+           ├── .tosser__side-label--right  — "Yes" / prefer label
+           ├── .tosser__progress           — step-dot-track, top centre
+           ├── .tosser__dont-know          — dont-know-btn-wrapper, bottom centre
+           └── .tinderland-card            — swipe card, absolutely centred
+   ===================================================== */
+
+/* Section wrapper — fills remaining flex space in <main> below the Q section.
+   Provides padding around the tosser arena. */
+.tosser-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--size-20) var(--space-inline-main) var(--space-block-main);
+}
+
+/* Swipe arena — grey surface, relative positioned to anchor all absolute children */
+.tosser {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Side direction label — full-height column anchored to the left or right edge.
+   A 32px wide column places the text centre at exactly 16px from the edge.
+   The <span> inside is rotated within the flex-centred position, so the rotation
+   pivot is the visual centre of the tosser — not an offset layout-box corner.
+   aria-hidden="true" — decorative; the question text conveys the same meaning. */
+.tosser__side-label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--size-32); /* 32px → text centre at 16px from edge */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  font-size: 1.75rem; /* 28px */
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+/* Left column — reject / swipe-left side */
+.tosser__side-label--left {
+  left: 1rem;
+}
+
+/* Right column — prefer / swipe-right side */
+.tosser__side-label--right {
+  right: 1rem;
+}
+
+/* Rotate text within the centred flex context */
+.tosser__side-label span {
+  white-space: nowrap;
+}
+
+/* Reject label: reads bottom-to-top (tilt head left) */
+.tosser__side-label--left span {
+  transform: rotate(-90deg);
+}
+
+/* Prefer label: reads top-to-bottom (tilt head right) */
+.tosser__side-label--right span {
+  transform: rotate(90deg);
+}
+
+/* Step progress dots — centred horizontally, 16px from top edge */
+.tosser__progress {
+  position: absolute;
+  top: var(--size-16);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Don't Know button — centred horizontally, 16px from bottom edge */
+.tosser__dont-know {
+  position: absolute;
+  bottom: var(--size-16);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Option images — text-vs-image variant.
+   Two images fill the left and right sides of the arena; the swipe card floats on top.
+   pointer-events: none — images are decorative, not interactive. */
+.tosser__options {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--size-16);
+  pointer-events: none;
+}
+
+.tosser__option-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 225px;
+  max-height: 300px;
+}
+
+.tosser__option-img img {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Swipe card — absolutely centred in the arena.
+   Direct-child selector (>) ensures this does not apply to cards inside
+   .tosser__card-stack (the favourites multi-card variant). */
+.tosser > .tinderland-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* =====================================================
+   Tosser — Favourites (multi-card stack) variant
+   A column of cards filling the arena height, each swiped
+   as a set. Add .tinderland-card--fav to each card and
+   wrap them in .tosser__card-stack.
+
+   Structure:
+     .tosser__card-stack          — absolutely centred column wrapper
+     └── .tinderland-card         — base card
+         .tinderland-card--fav    — fav modifier: fills stack, no fixed height
+   ===================================================== */
+
+/* Stack wrapper — absolutely centred, fills arena minus space reserved for
+   the progress dots (top) and don't know button (bottom). */
+.tosser__card-stack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: calc(100% - 160px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-8);
+}
+
+/* Fav modifier — overrides fixed card dimensions so cards share the
+   available stack height equally, capped at the single-card max. */
+.tinderland-card--fav {
+  width: 100%;
+  min-height: 0;
+  flex: 1 0 0;
+  max-height: 240px;
+}

@@ -1000,6 +1000,46 @@ section {
   padding: var(--space-block-main) var(--space-inline-main);
 }
 
+/* --- Page layout primitives --- */
+
+/* .page resets the default section padding — used inside main-surface */
+.page {
+  padding: 0;
+}
+
+.page:first-child {
+  padding-top: 2rem;
+}
+
+/* Full-width padded row — wraps .content to provide consistent page gutters */
+.content-wrapper {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* Centred column — max 640px, flex column for stacking form fields and questions */
+.content {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+/* Remove top padding on answer wrappers so Q and A sit tight together */
+.content-wrapper--answer {
+  padding-top: 0;
+}
+
+/* Question text — Dorian bold, brand blue */
+.question {
+  font-family: "dorian", sans-serif;
+  font-weight: 700;
+  font-size: var(--p-size-large);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-brand-strong);
+}
+
 /* nav container for buttons */
 
 .button-container {
@@ -1156,6 +1196,188 @@ section {
 }
 .hidden-splash {
   display: none !important;
+}
+
+/* =====================================================
+   Don't Know Button — Standalone with Confirmation Menu
+   A square emoji button that opens a secondary confirmation
+   menu when activated. Used in tinderland and other question
+   types where skipping requires explicit confirmation.
+   Available in four sizes: XS (32px), SM (36px), RG (40px), LG (48px).
+   ===================================================== */
+
+/* Wrapper — position: relative anchors the absolutely-positioned
+   confirmation menu to the button */
+.dont-know-btn-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The emoji trigger button — XS (32px) is the base size */
+.dont-know-btn-wrapper .dont-know-btn {
+  width: var(--size-32);
+  height: var(--size-32);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+/* Hover — blue border signals the button is interactive */
+.dont-know-btn-wrapper .dont-know-btn:hover {
+  border-color: var(--border-highlighted-brand);
+}
+
+/* Hit / tap state — light blue fill and blue border, matching the input component's active state */
+.dont-know-btn-wrapper .dont-know-btn:active {
+  background-color: var(--surface-brand-subtle);
+  border-color: var(--border-highlighted-brand);
+}
+
+/* Active — solid brand blue; the confirmation menu is now visible */
+.dont-know-btn-wrapper .dont-know-btn--active {
+  background-color: var(--surface-brand-strong);
+  border-color: var(--surface-brand-strong);
+}
+
+/* Size variants — applied alongside .dont-know-btn on the button element */
+.dont-know-btn-wrapper .dont-know-btn--sm { width: var(--size-36); height: var(--size-36); }
+.dont-know-btn-wrapper .dont-know-btn--rg { width: var(--size-40); height: var(--size-40); }
+.dont-know-btn-wrapper .dont-know-btn--lg { width: var(--size-48); height: var(--size-48); font-size: 1rem; }
+
+/* ---- Confirmation menu ---- */
+
+/* Floating popup — absolutely positioned above the button, centred horizontally.
+   filter: drop-shadow wraps the full compound shape (pill + caret) in one shadow. */
+.dont-know-menu {
+  position: absolute;
+  bottom: calc(100% + var(--size-8));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.05));
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Outer bordered frame — the visual container for the tooltip.
+   Provides the border and background. Does not set z-index so it does not create
+   a stacking context, allowing child z-index values to compete with the caret. */
+.dont-know-menu-frame {
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  padding: var(--size-4);
+  background-color: var(--surface-primary);
+}
+
+/* Confirm and Cancel buttons row.
+   z-index: 3 ensures buttons render above the caret (z-index: 2), covering its
+   top half so only the downward tip of the caret is visible below the frame. */
+.dont-know-menu-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4);
+  background-color: var(--surface-primary);
+  position: relative;
+  z-index: 3;
+}
+
+/* Each button (Confirm / Cancel) — white background, light grey hover, darker hit state */
+.dont-know-menu-btn {
+  height: 36px;
+  padding: var(--size-8) var(--size-12);
+  background-color: var(--surface-primary);
+  border: none;
+  border-radius: var(--radius-xs);
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.dont-know-menu-btn:hover {
+  background-color: var(--surface-secondary);
+}
+
+.dont-know-menu-btn:active {
+  background-color: var(--surface-tertiary);
+}
+
+/* Downward-pointing caret — a 16px white square rotated 45° to form a diamond.
+   z-index: 2 places it above the frame (which has no z-index) — its white fill
+   covers the frame's bottom border at the join point, erasing the line where they meet.
+   border-right + border-bottom are the two sides that form the visible downward V
+   after 45° clockwise rotation.
+   The buttons (z-index: 3) sit above, covering the caret's top half. */
+.dont-know-menu-caret {
+  width: var(--size-16);
+  height: var(--size-16);
+  background-color: var(--surface-primary);
+  border-right: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+  transform: rotate(45deg);
+  margin-top: -8px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* =====================================================
+   Step Progress Dots
+   Four-layer component: idle dot → active dot → dot group → track wrapper.
+   Used to indicate the current position in a multi-step or card-swipe flow.
+
+   Layer 1: .step-dot            — single 4px circle (idle by default)
+   Layer 2: .step-dot--active    — active state variant of the dot
+   Layer 3: .step-dot-group      — row of dots, space-between, fixed 40px width
+   Layer 4: .step-dot-track      — white surface container wrapping the dot group
+   ===================================================== */
+
+/* Single dot — idle state (disabled/muted colour) */
+.step-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background-color: var(--text-disabled);
+  flex-shrink: 0;
+}
+
+/* Active state — primary dark colour */
+.step-dot--active {
+  background-color: var(--text-primary);
+}
+
+/* Dot group — row of dots spaced across a fixed 40px track */
+.step-dot-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40px;
+  height: 4px;
+}
+
+/* Track wrapper — white surface that houses the dot group.
+   8px padding all around: 8 + 4 + 8 = 20px total height, 8 + 40 + 8 = 56px total width. */
+.step-dot-track {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--surface-primary);
+  border-radius: var(--radius-s);
+  padding: var(--size-8);
 }
 
 /* Responsive: screens smaller than tablet */

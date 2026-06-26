@@ -5,51 +5,6 @@
   --input-gap: clamp(0.75rem, 0.6rem + 0.5vw, 1.25rem); /* 0.75rem → 1.25rem */
 }
 
-/* --- Page layout --- */
-
-.page {
-  padding: 0;
-}
-
-.page:first-child {
-  padding-top: 2rem;
-}
-
-.content-wrapper {
-  width: 100%;
-  padding: 1.5rem 1.5rem;
-}
-
-.content {
-  max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--input-gap);
-  margin: 0 auto;
-}
-
-/* --- Content wrapper modifiers --- */
-
-/* Q and A are always in separate .content-wrapper divs.
-   Remove top padding on the answer wrapper so it sits tight below the question. */
-.content-wrapper--answer {
-  padding-top: 0;
-}
-
-/* Full-width answer: omit the inner .content div — answer fills the wrapper's horizontal padding.
-   Use alongside .content-wrapper--answer: class="content-wrapper content-wrapper--answer content-wrapper--full" */
-
-/* --- Question Styles--- */
-
-.question {
-  font-family: "dorian", sans-serif;
-  font-weight: 700;
-  font-size: var(--p-size-large);
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: var(--text-brand-strong);
-}
-
 /* --- Input styles --- */
 
 /* Form field wrapper — label + input stacked */
