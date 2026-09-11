@@ -1,4 +1,4 @@
-// love-button.js — press-and-hold interaction for the love button question type
+// love-button.js - press-and-hold interaction for the love button question type
 
 const loveField    = document.getElementById('loveField');
 const loveCircle   = document.getElementById('loveCircle');

@@ -7,7 +7,7 @@
    Uses the standard site-header + site-main + bottom-nav shell.
    The chat input is fixed just above the bottom nav. */
 
-/* Fixed chat input dock — overlays the bottom of the scroll area, sits above bottom-nav */
+/* Fixed chat input dock - overlays the bottom of the scroll area, sits above bottom-nav */
 .ai-chat-dock {
   position: fixed;
   bottom: var(--nav-bottom-height);
@@ -25,7 +25,7 @@
   padding-bottom: calc(var(--nav-bottom-height) + var(--size-96));
 }
 
-/* Outer container — grey surface, 16px radius */
+/* Outer container - grey surface, 16px radius */
 .ai-chat-input {
   width: 100%;
   max-width: 640px;
@@ -38,13 +38,13 @@
   gap: var(--size-8);
 }
 
-/* Focus state — matches the established --border-highlighted-brand pattern used across all inputs */
+/* Focus state - matches the established --border-highlighted-brand pattern used across all inputs */
 .ai-chat-input:focus-within {
   border-color: var(--border-highlighted-brand);
 }
 
-/* The textarea itself — transparent, no border, no resize handle.
-   field-sizing: content makes it auto-grow with typed content — no JS required. */
+/* The textarea itself - transparent, no border, no resize handle.
+   field-sizing: content makes it auto-grow with typed content - no JS required. */
 .ai-chat-textarea {
   width: 100%;
   background: transparent;
@@ -67,13 +67,13 @@
   font-style: normal;
 }
 
-/* Voice state — italic and tertiary colour while recording */
+/* Voice state - italic and tertiary colour while recording */
 .ai-chat-textarea--voice {
   font-style: italic;
   color: var(--text-secondary);
 }
 
-/* Action buttons row — right-aligned, sits below the textarea in the flex column */
+/* Action buttons row - right-aligned, sits below the textarea in the flex column */
 .ai-chat-actions {
   display: flex;
   align-items: center;
@@ -81,7 +81,7 @@
   gap: var(--size-8);
 }
 
-/* Mic button — white surface (sits on the grey input bg, so white reads correctly).
+/* Mic button - white surface (sits on the grey input bg, so white reads correctly).
    No existing icon-btn variant uses --surface-primary, so one new modifier is needed. */
 .ai-chat-btn--mic {
   background-color: var(--surface-primary);
@@ -91,7 +91,7 @@
   background-color: var(--surface-tertiary);
 }
 
-/* Stop button (voice recording) — modifier on top of .icon-btn.
+/* Stop button (voice recording) - modifier on top of .icon-btn.
    No existing error-muted variant in styles.css, so this is the only new button class needed.
    Mic uses .icon-btn.icon-btn-secondary, send uses .icon-btn.icon-btn-brand-primary. */
 .ai-chat-btn--stop {
@@ -109,7 +109,7 @@
    Mascot icon shown alongside AI messages. Static SVG by default;
    add .hb-icon--thinking to swap in a Lottie animation. */
 
-/* Outer circle — yel-50 fill, 1px yel-70 border. Default size: 64px (large).
+/* Outer circle - yel-50 fill, 1px yel-70 border. Default size: 64px (large).
    Apply .hb-icon--md / --sm / --xs for smaller variants. */
 .hb-icon {
   width: var(--size-64);
@@ -128,7 +128,7 @@
 .hb-icon--sm { width: var(--size-32); height: var(--size-32); }
 .hb-icon--xs { width: var(--size-24); height: var(--size-24); }
 
-/* Thinking state — question icon spins and pulses */
+/* Thinking state - question icon spins and pulses */
 .hb-icon--thinking svg {
   color: var(--text-primary);
   transform-origin: center;
@@ -141,7 +141,7 @@
   100% { transform: rotate(330deg)  scale(1);    }
 }
 
-/* Avatar item — icon + label stacked, used in the expression reference grid */
+/* Avatar item - icon + label stacked, used in the expression reference grid */
 .avatar-item {
   display: flex;
   flex-direction: column;
@@ -154,7 +154,7 @@
   color: var(--text-primary);
 }
 
-/* Icon SVG inside the yellow avatar circle — scales to 75% of container, text-primary, -30° tilt */
+/* Icon SVG inside the yellow avatar circle - scales to 75% of container, text-primary, -30° tilt */
 .hb-icon svg {
   width: 75%;
   height: 75%;
@@ -182,19 +182,19 @@
   gap: var(--size-20);
 }
 
-/* AI response — 16px top/bottom, 24px right, 0 left */
+/* AI response - 16px top/bottom, 24px right, 0 left */
 .message--ai {
   align-items: flex-start;
   padding: var(--size-16) var(--size-24) var(--size-16) 0;
 }
 
-/* User message — mirrored: 16px top/bottom, 0 right, 24px left */
+/* User message - mirrored: 16px top/bottom, 0 right, 24px left */
 .message--user {
   align-items: flex-end;
   padding: var(--size-16) 0 var(--size-16) var(--size-24);
 }
 
-/* Message text — Text/Lg from Figma: Inter 18px/400, line-height 1.4, letter-spacing -0.02em */
+/* Message text - Text/Lg from Figma: Inter 18px/400, line-height 1.4, letter-spacing -0.02em */
 .message-text {
   font-family: "Inter", sans-serif;
   font-size: 1.125rem;

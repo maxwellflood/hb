@@ -714,6 +714,25 @@ a {
   border-radius: var(--size-20);
 }
 
+/* --- Colour Swatch ---
+   Reference-page only. Used by the Colours section in index.html to display a
+   token's value alongside its name. Not a product component - do not use in the app. */
+
+.colour-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+  width: 140px;
+}
+
+.colour-swatch__chip {
+  display: block;
+  width: 100%;
+  height: var(--size-48);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+}
+
 /* --- Icons --- */
 
 .icon {
@@ -1002,7 +1021,7 @@ section {
 
 /* --- Page layout primitives --- */
 
-/* .page resets the default section padding — used inside main-surface */
+/* .page resets the default section padding - used inside main-surface */
 .page {
   padding: 0;
 }
@@ -1011,13 +1030,13 @@ section {
   padding-top: 2rem;
 }
 
-/* Full-width padded row — wraps .content to provide consistent page gutters */
+/* Full-width padded row - wraps .content to provide consistent page gutters */
 .content-wrapper {
   width: 100%;
   padding: 1.5rem;
 }
 
-/* Centred column — max 640px, flex column for stacking form fields and questions */
+/* Centred column - max 640px, flex column for stacking form fields and questions */
 .content {
   max-width: 640px;
   display: flex;
@@ -1030,7 +1049,7 @@ section {
   padding-top: 0;
 }
 
-/* Question text — Dorian bold, brand blue */
+/* Question text - Dorian bold, brand blue */
 .question {
   font-family: "dorian", sans-serif;
   font-weight: 700;
@@ -1199,14 +1218,110 @@ section {
 }
 
 /* =====================================================
-   Don't Know Button — Standalone with Confirmation Menu
+   Answer Arena - Shared Question Layout Primitive
+   The full-height grey answer area that fills all remaining vertical
+   space below the question section. Shared by every question type that
+   needs a bounded play area rather than a simple stacked form:
+     Tosser    (tosser-*.html)          - swipe card + direction labels
+     Bingo     (bingo-*.html)           - 3×3 drag-and-drop board
+
+   position: relative anchors the furniture that each question type pins
+   to the arena edges (progress dots, Don't Know button, side labels).
+
+   Structure:
+     .answer-arena-section         - flex fill wrapper (direct child of <main>)
+     └── .answer-arena             - the grey arena surface
+           ├── .answer-arena__progress    - step-dot-track, top centre
+           ├── .answer-arena__dont-know   - dont-know-btn-wrapper, bottom centre
+           └── [question-type content]    - swipe card, bingo board, etc.
+   ===================================================== */
+
+/* Section wrapper - fills remaining flex space in <main> below the Q section.
+   Provides the page gutters around the arena itself. */
+/* Fit-to-viewport <main>.
+
+   The default <main> is min-height: it fills the viewport and then grows past
+   it if its content wants more, which lets a question run off the bottom of
+   the screen. A question-type page must never do that - the respondent has to
+   see the question and every answer at once - so an arena page pins <main> to
+   exactly the viewport and lets the arena inside it shrink instead.
+
+   border-box, so the height already accounts for the bottom nav that <main>
+   reserves with its padding-bottom. */
+.site-main--fit {
+  height: calc(100dvh - var(--nav-top-height));
+  min-height: 0;
+}
+
+.answer-arena-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--size-20) var(--space-inline-main) var(--space-block-main);
+}
+
+/* Arena surface - grey panel, relative positioned to anchor all absolute children */
+.answer-arena {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Measurable arena (.answer-arena--board)
+   Opt-in modifier for question types whose content has to scale to the arena
+   rather than to the page - the Bingo board, which has to fit whatever height
+   is left with no scrolling.
+
+   container-type: size makes the arena a query container on BOTH axes, so its
+   children can size themselves in cqw / cqh / cqmin: units that measure THIS
+   BOX, not the viewport. That distinction is the whole point. The arena is the
+   viewport minus the two fixed navs, the question and the section padding -
+   roughly 280px that never shrinks - so the arena loses height about half as
+   fast again as the window does. A vh-based inset under-responds badly at the
+   sizes that matter; a cqh-based one tracks the real space exactly.
+
+   Safe here because the arena already takes its size from its parent and clips
+   its overflow, which is what size containment assumes. It is a modifier rather
+   than a change to .answer-arena so the Tosser arena is untouched. */
+.answer-arena--board {
+  container-type: size;
+}
+
+/* Step progress dots - centred horizontally, 16px from the top edge.
+   Wraps a .step-dot-track (see Step Progress Dots below). */
+.answer-arena__progress {
+  position: absolute;
+  top: var(--size-16);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Don't Know button - centred horizontally, 16px from the bottom edge.
+   Wraps a .dont-know-btn-wrapper (see Don't Know Button below). */
+.answer-arena__dont-know {
+  position: absolute;
+  bottom: var(--size-16);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* =====================================================
+   Don't Know Button - Standalone with Confirmation Menu
    A square emoji button that opens a secondary confirmation
    menu when activated. Used in tinderland and other question
    types where skipping requires explicit confirmation.
    Available in four sizes: XS (32px), SM (36px), RG (40px), LG (48px).
    ===================================================== */
 
-/* Wrapper — position: relative anchors the absolutely-positioned
+/* Wrapper - position: relative anchors the absolutely-positioned
    confirmation menu to the button */
 .dont-know-btn-wrapper {
   position: relative;
@@ -1215,7 +1330,7 @@ section {
   justify-content: center;
 }
 
-/* The emoji trigger button — XS (32px) is the base size */
+/* The emoji trigger button - XS (32px) is the base size */
 .dont-know-btn-wrapper .dont-know-btn {
   width: var(--size-32);
   height: var(--size-32);
@@ -1231,31 +1346,31 @@ section {
   flex-shrink: 0;
 }
 
-/* Hover — blue border signals the button is interactive */
+/* Hover - blue border signals the button is interactive */
 .dont-know-btn-wrapper .dont-know-btn:hover {
   border-color: var(--border-highlighted-brand);
 }
 
-/* Hit / tap state — light blue fill and blue border, matching the input component's active state */
+/* Hit / tap state - light blue fill and blue border, matching the input component's active state */
 .dont-know-btn-wrapper .dont-know-btn:active {
   background-color: var(--surface-brand-subtle);
   border-color: var(--border-highlighted-brand);
 }
 
-/* Active — solid brand blue; the confirmation menu is now visible */
+/* Active - solid brand blue; the confirmation menu is now visible */
 .dont-know-btn-wrapper .dont-know-btn--active {
   background-color: var(--surface-brand-strong);
   border-color: var(--surface-brand-strong);
 }
 
-/* Size variants — applied alongside .dont-know-btn on the button element */
+/* Size variants - applied alongside .dont-know-btn on the button element */
 .dont-know-btn-wrapper .dont-know-btn--sm { width: var(--size-36); height: var(--size-36); }
 .dont-know-btn-wrapper .dont-know-btn--rg { width: var(--size-40); height: var(--size-40); }
 .dont-know-btn-wrapper .dont-know-btn--lg { width: var(--size-48); height: var(--size-48); font-size: 1rem; }
 
 /* ---- Confirmation menu ---- */
 
-/* Floating popup — absolutely positioned above the button, centred horizontally.
+/* Floating popup - absolutely positioned above the button, centred horizontally.
    filter: drop-shadow wraps the full compound shape (pill + caret) in one shadow. */
 .dont-know-menu {
   position: absolute;
@@ -1270,7 +1385,7 @@ section {
   z-index: 10;
 }
 
-/* Outer bordered frame — the visual container for the tooltip.
+/* Outer bordered frame - the visual container for the tooltip.
    Provides the border and background. Does not set z-index so it does not create
    a stacking context, allowing child z-index values to compete with the caret. */
 .dont-know-menu-frame {
@@ -1292,7 +1407,7 @@ section {
   z-index: 3;
 }
 
-/* Each button (Confirm / Cancel) — white background, light grey hover, darker hit state */
+/* Each button (Confirm / Cancel) - white background, light grey hover, darker hit state */
 .dont-know-menu-btn {
   height: 36px;
   padding: var(--size-8) var(--size-12);
@@ -1317,8 +1432,8 @@ section {
   background-color: var(--surface-tertiary);
 }
 
-/* Downward-pointing caret — a 16px white square rotated 45° to form a diamond.
-   z-index: 2 places it above the frame (which has no z-index) — its white fill
+/* Downward-pointing caret - a 16px white square rotated 45° to form a diamond.
+   z-index: 2 places it above the frame (which has no z-index) - its white fill
    covers the frame's bottom border at the join point, erasing the line where they meet.
    border-right + border-bottom are the two sides that form the visible downward V
    after 45° clockwise rotation.
@@ -1341,13 +1456,13 @@ section {
    Four-layer component: idle dot → active dot → dot group → track wrapper.
    Used to indicate the current position in a multi-step or card-swipe flow.
 
-   Layer 1: .step-dot            — single 4px circle (idle by default)
-   Layer 2: .step-dot--active    — active state variant of the dot
-   Layer 3: .step-dot-group      — row of dots, space-between, fixed 40px width
-   Layer 4: .step-dot-track      — white surface container wrapping the dot group
+   Layer 1: .step-dot            - single 4px circle (idle by default)
+   Layer 2: .step-dot--active    - active state variant of the dot
+   Layer 3: .step-dot-group      - row of dots, space-between, fixed 40px width
+   Layer 4: .step-dot-track      - white surface container wrapping the dot group
    ===================================================== */
 
-/* Single dot — idle state (disabled/muted colour) */
+/* Single dot - idle state (disabled/muted colour) */
 .step-dot {
   width: 4px;
   height: 4px;
@@ -1356,12 +1471,12 @@ section {
   flex-shrink: 0;
 }
 
-/* Active state — primary dark colour */
+/* Active state - primary dark colour */
 .step-dot--active {
   background-color: var(--text-primary);
 }
 
-/* Dot group — row of dots spaced across a fixed 40px track */
+/* Dot group - row of dots spaced across a fixed 40px track */
 .step-dot-group {
   display: flex;
   align-items: center;
@@ -1370,7 +1485,7 @@ section {
   height: 4px;
 }
 
-/* Track wrapper — white surface that houses the dot group.
+/* Track wrapper - white surface that houses the dot group.
    8px padding all around: 8 + 4 + 8 = 20px total height, 8 + 40 + 8 = 56px total width. */
 .step-dot-track {
   display: inline-flex;

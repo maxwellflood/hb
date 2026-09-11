@@ -1,4 +1,4 @@
-// Grid buttons — multiselect, toggle individual buttons independently
+// Grid buttons - multiselect, toggle individual buttons independently
 document.querySelectorAll(".grid-group").forEach((group) => {
   const field = group.closest(".grid-field");
 
@@ -17,7 +17,7 @@ document.querySelectorAll(".grid-group").forEach((group) => {
   });
 });
 
-// Don't know button — clears all selections in the group
+// Don't know button - clears all selections in the group
 document.querySelectorAll(".dont-know-btn").forEach((dkBtn) => {
   const field = dkBtn.closest(".grid-field");
   if (!field) return;

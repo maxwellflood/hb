@@ -1,4 +1,4 @@
-// Grid buttons — single select per group, clears don't know if active
+// Grid buttons - single select per group, clears don't know if active
 document.querySelectorAll(".grid-group").forEach((group) => {
   const field = group.closest(".grid-field");
 
@@ -21,7 +21,7 @@ document.querySelectorAll(".grid-group").forEach((group) => {
   });
 });
 
-// Don't know button — acts like any other option, clears grid selection
+// Don't know button - acts like any other option, clears grid selection
 document.querySelectorAll(".dont-know-btn").forEach((dkBtn) => {
   const field = dkBtn.closest(".grid-field");
   if (!field) return;

@@ -1,0 +1,339 @@
+/* =====================================================
+   Bingo - Specific Styles
+   Styles for the Bingo drag-and-drop question type.
+
+   Everything shared with other question types is reused, not
+   redefined here:
+     .answer-arena-section / .answer-arena  - the grey arena (styles.css)
+     .answer-arena__progress                - step dots position (styles.css)
+     .answer-arena__dont-know               - Don't Know position (styles.css)
+     .step-dot / .step-dot-track            - progress dots (styles.css)
+     .dont-know-btn-wrapper / .dont-know-btn - skip button (styles.css)
+     .content-wrapper / .content            - page gutters + column (styles.css)
+
+   Only the board, its drop zones and the draggable card are defined below.
+   ===================================================== */
+
+/* =====================================================
+   Bingo - Spacing
+   Two layers, and the split between them is the whole design:
+
+     THE BOARD WRAPPER IS FIXED. It never clamps and never scales. Its only
+     job is to reserve the arena furniture, and the furniture is a fixed size
+     pinned to the arena's own edges - the progress dot track is 20px tall at
+     16px from the top, the Don't Know button 32px at 16px from the bottom.
+     None of that shrinks with the window, so the space kept clear for it must
+     not shrink either. Any fluid value here, however carefully clamped,
+     eventually crosses under the button and puts a drop zone behind it.
+
+     THE CELLS SCALE. Their inset is interior space with nothing underneath
+     it, so it can give way freely as the arena shrinks - which is what stops
+     the zones becoming too small to read. It is a clamp(floor, fluid,
+     ceiling): 24px at full size, shrinking with the arena, never below 8px.
+
+     --bingo-board-pad-top     clearance for the progress dots     - fixed
+     --bingo-board-pad-bottom  clearance for the Don't Know button - fixed
+     --bingo-board-pad-inline  board gutter                        - fixed
+     --bingo-cell-inset        inset inside each cell, both axes   - fluid.
+                               This is what makes the drop zones read smaller
+                               than the card in the centre
+
+   The cell inset is in cq units, NOT vh / vw. Container query units measure
+   the arena - the box the board actually sits in - rather than the whole
+   window, and that distinction is what makes it work. The arena is the
+   viewport minus the two fixed navs, the question and the section padding,
+   about 280px that never shrinks: a window going from 900px to 600px tall
+   loses a third of its height but takes the arena down by half. A vh-based
+   inset therefore moves at roughly half the rate of the space it is
+   protecting and barely appears to respond at all. .answer-arena--board
+   (styles.css) is what makes the arena measurable.
+
+   cqmin specifically, because the inset sets the gap on all four sides of a
+   zone and has to answer to whichever axis is tighter - height on a wide
+   short desktop window, width on a tall narrow phone.
+
+   Declared on the board rather than :root because cq units resolve against
+   the nearest ancestor container, and :root is outside the arena. The cells
+   inherit them from here.
+   ===================================================== */
+
+/* =====================================================
+   Bingo Board - 3 × 3 Layout
+   Nine equal areas filling the arena. Eight are drop zones; the
+   centre area (cell 5) holds the card the respondent drags out.
+
+   FLEXBOX ONLY - no CSS Grid anywhere in this project. The 3 × 3 is
+   built as three .bingo-board__row rows, each holding three
+   .bingo-board__cell cells. Rows share the board height and cells share
+   the row width in equal thirds, so the nine areas stay equal at any
+   arena size.
+
+   Layer 1: .bingo-board              - board wrapper, fills the arena
+   Layer 2: .bingo-board__row         - one row of three cells
+   Layer 3: .bingo-board__cell        - one of the nine areas
+            .bingo-board__cell--card  - centre area (5), no inset
+
+   The vertical padding is the fixed clearance that keeps the board clear of
+   the arena furniture - progress dots at the top, Don't Know button at the
+   bottom, both pinned 16px from their edge. It does not scale; the cell inset
+   inside it does.
+   ===================================================== */
+
+.bingo-board {
+  /* Spacing variables - see the block above. Fixed for the wrapper, fluid for
+     the cells, which inherit --bingo-cell-inset from here. */
+  --bingo-board-pad-top: var(--size-40);
+  --bingo-board-pad-bottom: var(--size-48);
+  --bingo-board-pad-inline: var(--size-24);
+  --bingo-cell-inset: clamp(var(--size-8), 4cqmin, var(--size-24));
+
+  flex: 1;
+  align-self: stretch; /* .answer-arena centres its children - stretch to fill */
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Fixed. This is the reserve for the arena furniture, which is a fixed size
+     pinned to the arena's edges - so this cannot scale. The cells do that. */
+  padding: var(--bingo-board-pad-top) var(--bingo-board-pad-inline)
+    var(--bingo-board-pad-bottom);
+}
+
+/* Row - one third of the board height, three cells wide */
+.bingo-board__row {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+/* Cell - one ninth of the board. The inset padding is what makes the
+   eight drop zones read as smaller than the card in the centre. */
+.bingo-board__cell {
+  /* Basis is an explicit third, not flex: 1 (basis 0). A zero basis lets the
+     card image's intrinsic aspect ratio clamp the centre cell narrower than
+     the other two - an explicit percentage keeps all nine areas equal
+     whatever the content. */
+  flex: 1 1 33.3333%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fluid, equal on both axes - 24px at full size, scaling down with the
+     arena. See the spacing variables at the top of this file. */
+  padding: var(--bingo-cell-inset);
+}
+
+/* Centre cell (5) - no inset, so the card fills its area and sits
+   visibly larger than the eight surrounding drop zones. */
+.bingo-board__cell--card {
+  padding: 0;
+}
+
+/* =====================================================
+   Bingo Drop Zone
+   One of the eight answer areas the card can be dropped onto.
+
+   Marked up as a <button> so the zone is focusable and operable by
+   keyboard - a drag-and-drop-only interaction is not accessible on its
+   own, so tapping or activating a zone must place the card too.
+
+   The cell index (data-cell) is the value logged to the back end.
+
+   Layer 1: .bingo-target               - the zone
+            .bingo-target--img          - image variant, no inset
+   Layer 2: .bingo-target__label        - its text label (img_text)
+            .bingo-target__img          - its image (img_img)
+   States:  :hover / :focus-visible     - pointer or keyboard target
+            .bingo-target--drop-active  - card is being dragged over it
+            .bingo-target--filled       - a card has been placed here
+   ===================================================== */
+
+.bingo-target {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--size-8);
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* State: Hover / keyboard focus - brand border, muted blue fill */
+.bingo-target:hover,
+.bingo-target:focus-visible {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+  outline: none;
+}
+
+/* State: Drop-active - the card is currently over this zone. Same look as
+   :hover, but as a class: a touch drag never fires :hover on the zone being
+   dragged onto, so the host app applies this while a drag is in progress. */
+.bingo-target--drop-active {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+}
+
+/* State: Filled - a card has been dropped here and the answer recorded */
+.bingo-target--filled {
+  border-color: var(--surface-brand-strong);
+  background-color: var(--surface-brand-subtle);
+}
+
+/* Image variant - the zone's content is a picture rather than a word.
+
+   No inset: the image fills the zone corner to corner, the same way
+   .bingo-card__img fills the card, so the two read as the same component
+   with different content. overflow: hidden is what clips the image to the
+   zone's rounded corners, since the image itself is square-cornered.
+
+   The border still draws on top, so every zone state (:hover, --drop-active,
+   --filled) reads exactly as it does on a text zone. */
+.bingo-target--img {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Zone image - object-fit: cover, so any aspect ratio the client supplies
+   fills the zone cleanly rather than letterboxing. Matches .bingo-card__img. */
+.bingo-target__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Zone label - Inter regular, matches .tinderland-card__label */
+.bingo-target__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =====================================================
+   Bingo Card
+   The card in the centre area that the respondent drags onto one of
+   the eight drop zones. Styled apart from .bingo-target: it carries a
+   drop shadow, has no inset within its cell, and takes the grab cursor.
+
+   Pressed state matches the Tinderland card (grey surface) and adds a
+   5% shrink plus a 6° tilt, so the card reads as picked up off the board.
+   Releasing removes the state and the transform eases back to flat.
+
+   Layer 1: .bingo-card               - the card
+   Layer 2: .bingo-card__img          - image variant content (bingo-img_*)
+            .bingo-card__label        - text variant content (bingo-text_*)
+   States:  :hover                    - shadow deepens, 10% → 20%
+            :active / --pressed       - grabbed: grey, scale 0.95, rotate 6°
+   ===================================================== */
+
+.bingo-card {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-8);
+  padding: var(--size-8);
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+  cursor: grab;
+  transition:
+    transform 0.12s ease,
+    background-color 0.12s ease,
+    filter 0.12s ease;
+}
+
+/* State: Hover - the shadow alone deepens, 10% → 20%, so the card lifts off
+   the board on approach. Nothing else changes until it is grabbed.
+   .bingo-card--pressed carries the deeper shadow too: a touch drag never
+   fires :hover, so a grabbed card must not drop back to the resting shadow. */
+.bingo-card:hover,
+.bingo-card--pressed {
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+/* State: Pressed - grabbed. Grey surface, shrinks 5% and tilts 6°, so the
+   card lifts off the board as it is picked up. Both are one transform, and
+   the transition runs in reverse on release, resetting the card to flat.
+   :active covers the live press; .bingo-card--pressed is the same state
+   as a class so it can be previewed or driven by a drag handler. */
+.bingo-card:active,
+.bingo-card--pressed {
+  background-color: var(--surface-secondary);
+  transform: scale(0.95) rotate(6deg);
+  cursor: grabbing;
+}
+
+/* Image - fills the card and crops to fit (object-fit: cover), so any
+   aspect ratio the client supplies still fills the card cleanly. */
+.bingo-card__img {
+  display: block;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-xs);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Text variant label - the card's content is a word rather than a picture.
+   Identical to .tinderland-card__label, so a text card reads the same here as
+   it does on a Tosser card. No centring rule of its own: .bingo-card is already
+   a centred flex column, so a lone label sits in the middle on both axes. */
+.bingo-card__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =====================================================
+   Mobile
+   Retuned by overriding the spacing variables, not the rules that use them.
+
+   A phone is tall and narrow, which is the one shape where the cell inset
+   has to come down hard: three zones across a 390px screen leaves each one
+   about 120px wide, and a 16px inset on both sides of that is a quarter of
+   the zone gone. The board gutter is already near its floor at this width.
+   ===================================================== */
+
+@media (max-width: 767px) {
+  .bingo-board {
+    /* The gutter narrows at phone width - still fixed, just a smaller fixed */
+    --bingo-board-pad-inline: var(--size-8);
+    --bingo-cell-inset: clamp(var(--size-4), 3cqmin, var(--size-12));
+  }
+
+  .bingo-target__label,
+  .bingo-card__label {
+    font-size: var(--p-size-small);
+  }
+}

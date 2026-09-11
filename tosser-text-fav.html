@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honesty Box | Tosser — Favourites</title>
+    <title>Honesty Box | Tosser - Favourites</title>
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/input-styles.css" />
     <link rel="stylesheet" href="styles/tinderland-styles.css" />
@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <!-- Fixed top header — client logo -->
+    <!-- Fixed top header - client logo -->
     <header class="site-header" role="banner">
       <a class="brand" href="/" aria-label="Home">
         <!-- HB logo inline SVG -->
@@ -39,37 +39,40 @@
       </a>
     </header>
 
-    <!-- Primary page content — white card -->
+    <!-- Primary page content - white card -->
     <main id="main" class="site-main" role="main">
       <!-- START: Question -->
       <!-- Question text sits above the swipe arena at natural height -->
       <!-- Title content -->
       <div class="content-wrapper">
         <div class="content">
-          <h3>Tosser Text</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
-            mauris laoreet eget etiam risus laoreet eget etiam risus.
-          </p>
+          <!-- Question - title + supporting copy -->
+          <div class="box-Q">
+            <h3>Tosser Text</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
+              mauris laoreet eget etiam risus laoreet eget etiam risus.
+            </p>
+          </div>
         </div>
       </div>
       <!-- END: Question -->
 
-      <!-- START: Tosser — Swipe Arena
+      <!-- START: Tosser - Swipe Arena
            Grey surface that fills all remaining vertical space.
            Contains: direction labels, step progress dots, Don't Know button, swipe card.
 
            Idle state shown here. Swipe states are applied by adding modifier classes to .tinderland-card:
-             .tinderland-card--pressed   — card held down
-             .tinderland-card--swipe-l   — swiping left (reject)
-             .tinderland-card--swipe-r   — swiping right (prefer)
+             .tinderland-card--pressed   - card held down
+             .tinderland-card--swipe-l   - swiping left (reject)
+             .tinderland-card--swipe-r   - swiping right (prefer)
       -->
-      <div class="tosser-section">
-        <div class="tosser" role="region" aria-label="Swipe card">
-          <!-- Left direction label — reject / swipe left.
+      <div class="answer-arena-section box-A">
+        <div class="answer-arena" role="region" aria-label="Swipe card">
+          <!-- Left direction label - reject / swipe left.
                Full-height 32px column; <span> rotated -90° inside flex centre.
                Text centre sits at exactly 16px from the left edge.
-               aria-hidden: decorative — the question conveys the meaning. -->
+               aria-hidden: decorative - the question conveys the meaning. -->
           <div
             class="tosser__side-label tosser__side-label--left"
             aria-hidden="true"
@@ -77,7 +80,7 @@
             <span>Has not been proven</span>
           </div>
 
-          <!-- Right direction label — prefer / swipe right.
+          <!-- Right direction label - prefer / swipe right.
                <span> rotated 90°; text centre at 16px from the right edge. -->
           <div
             class="tosser__side-label tosser__side-label--right"
@@ -86,9 +89,9 @@
             <span>Has been proven</span>
           </div>
 
-          <!-- Step progress dots — centred at 16px from top edge -->
-          <div class="tosser__progress">
-            <!-- START: Step Progress Dots — Layer 4 (track wrapper) -->
+          <!-- Step progress dots - centred at 16px from top edge -->
+          <div class="answer-arena__progress">
+            <!-- START: Step Progress Dots - Layer 4 (track wrapper) -->
             <div class="step-dot-track">
               <div
                 class="step-dot-group"
@@ -107,9 +110,9 @@
             <!-- END: Step Progress Dots -->
           </div>
 
-          <!-- Don't Know button — centred at 16px from bottom edge -->
-          <div class="tosser__dont-know">
-            <!-- START: Don't Know Button — Idle (XS, 32px) -->
+          <!-- Don't Know button - centred at 16px from bottom edge -->
+          <div class="answer-arena__dont-know">
+            <!-- START: Don't Know Button - Idle (XS, 32px) -->
             <!-- <div class="dont-know-btn-wrapper">
               <button
                 class="dont-know-btn"
@@ -123,7 +126,7 @@
             <!-- END: Don't Know Button -->
           </div>
 
-          <!-- START: Tinderland Card Stack — Favourites variant
+          <!-- START: Tinderland Card Stack - Favourites variant
                A column of cards filling the arena height.
                Each card uses .tinderland-card--fav to override fixed dimensions
                and share the available height equally via flex.
@@ -225,7 +228,7 @@
           <span class="tooltip" role="tooltip" id="tip-help">Help</span>
         </a>
 
-        <!-- Back — disabled on first card -->
+        <!-- Back - disabled on first card -->
         <a
           class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
           href="#"

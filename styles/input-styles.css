@@ -7,7 +7,7 @@
 
 /* --- Input styles --- */
 
-/* Form field wrapper — label + input stacked */
+/* Form field wrapper - label + input stacked */
 .form-field {
   display: flex;
   flex-direction: column;
@@ -120,7 +120,7 @@
   display: none;
 }
 
-/* Invalid state — show message + highlight border */
+/* Invalid state - show message + highlight border */
 .form-field--invalid .input-message {
   display: flex;
 }
@@ -151,13 +151,13 @@
   border-color: var(--border-highlighted-brand);
 }
 
-/* Don't know — active/selected state */
+/* Don't know - active/selected state */
 .dont-know-btn--active {
   background-color: var(--surface-brand-subtle);
   border-color: var(--border-highlighted-brand);
 }
 
-/* Don't know — disabled input state */
+/* Don't know - disabled input state */
 .form-field--dont-know .text-input {
   background-color: var(--surface-disabled);
   color: var(--text-disabled);

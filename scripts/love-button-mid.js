@@ -1,5 +1,5 @@
-// love-button-mid.js — midpoint variant of the love button question type
-// Range: -100 to +100. Fill starts at 50% (midpoint). Less/More visible immediately — no press-and-hold step.
+// love-button-mid.js - midpoint variant of the love button question type
+// Range: -100 to +100. Fill starts at 50% (midpoint). Less/More visible immediately - no press-and-hold step.
 
 const loveField    = document.getElementById('loveField');
 const loveFill     = document.getElementById('loveFill');

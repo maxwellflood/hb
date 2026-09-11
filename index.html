@@ -6,6 +6,11 @@
     <title>Honesty Box</title>
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/input-styles.css" />
+    <!-- Component-specific stylesheets - loaded here so every component in this
+         reference renders correctly. In the app, only load the sheets a page needs. -->
+    <link rel="stylesheet" href="styles/love-button-styles.css" />
+    <link rel="stylesheet" href="styles/tinderland-styles.css" />
+    <link rel="stylesheet" href="styles/ai-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -160,6 +165,133 @@
           </div>
         </div>
       </div>
+
+      <!-- ============================================================
+           SECTION: Colours
+           Two tiers:
+           1. Primitives - the raw palette (--blu-50, --grey-2 …)
+           2. Semantic tokens - role-based aliases that point at a primitive
+              (--surface-brand-strong → --blu-50). ALWAYS build components
+              against the semantic tokens, never the primitives directly.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Colours</h2>
+          <p class="txt-secondary">
+            All colour is defined as CSS custom properties in <code>:root</code> in
+            <code>styles/styles.css</code>. Primitives hold the raw values; semantic tokens
+            give them a role. Components should reference semantic tokens so a palette
+            change flows through the whole system.
+          </p>
+        </div>
+
+        <!-- ---------- Primitives ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Primitives - Blue (brand)</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Colour swatches - Blue primitives -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-00);"></span><p class="small">--blu-00</p><p class="small txt-tertiary">#f3f8ff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-10);"></span><p class="small">--blu-10</p><p class="small txt-tertiary">#cfe4ff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-20);"></span><p class="small">--blu-20</p><p class="small txt-tertiary">#9fc9ff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-30);"></span><p class="small">--blu-30</p><p class="small txt-tertiary">#6fadff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-40);"></span><p class="small">--blu-40</p><p class="small txt-tertiary">#3f92ff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-50);"></span><p class="small">--blu-50</p><p class="small txt-tertiary">#0f77ff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-60);"></span><p class="small">--blu-60</p><p class="small txt-tertiary">#005ed8</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-70);"></span><p class="small">--blu-70</p><p class="small txt-tertiary">#0046a2</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-80);"></span><p class="small">--blu-80</p><p class="small txt-tertiary">#003c8a</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-90);"></span><p class="small">--blu-90</p><p class="small txt-tertiary">#002f6c</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--blu-100);"></span><p class="small">--blu-100</p><p class="small txt-tertiary">#001736</p></div>
+          <!-- END: Colour swatches - Blue primitives -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Primitives - Neutrals</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Colour swatches - Neutral primitives -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--white);"></span><p class="small">--white</p><p class="small txt-tertiary">#ffffff</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-1);"></span><p class="small">--grey-1</p><p class="small txt-tertiary">#f7f7f7</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-2);"></span><p class="small">--grey-2</p><p class="small txt-tertiary">#dbdbdb</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-3);"></span><p class="small">--grey-3</p><p class="small txt-tertiary">#c0c0c0</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-4);"></span><p class="small">--grey-4</p><p class="small txt-tertiary">#a5a5a5</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-5);"></span><p class="small">--grey-5</p><p class="small txt-tertiary">#898989</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-6);"></span><p class="small">--grey-6</p><p class="small txt-tertiary">#6e6e6e</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-7);"></span><p class="small">--grey-7</p><p class="small txt-tertiary">#525252</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-8);"></span><p class="small">--grey-8</p><p class="small txt-tertiary">#373737</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-9);"></span><p class="small">--grey-9</p><p class="small txt-tertiary">#1b1b1b</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grey-10);"></span><p class="small">--grey-10</p><p class="small txt-tertiary">#111111</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--black);"></span><p class="small">--black</p><p class="small txt-tertiary">#070707</p></div>
+          <!-- END: Colour swatches - Neutral primitives -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Primitives - Status (yellow, red, green)</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Colour swatches - Status primitives (key steps only; full 00–100 ramps exist for each) -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--yel-00);"></span><p class="small">--yel-00</p><p class="small txt-tertiary">#fff5e1</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--yel-50);"></span><p class="small">--yel-50</p><p class="small txt-tertiary">#ffaa00</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--yel-100);"></span><p class="small">--yel-100</p><p class="small txt-tertiary">#4d1c00</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--red-00);"></span><p class="small">--red-00</p><p class="small txt-tertiary">#fcdcdd</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--red-50);"></span><p class="small">--red-50</p><p class="small txt-tertiary">#ee4e53</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--red-100);"></span><p class="small">--red-100</p><p class="small txt-tertiary">#471819</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grn-00);"></span><p class="small">--grn-00</p><p class="small txt-tertiary">#d1f2d9</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grn-50);"></span><p class="small">--grn-50</p><p class="small txt-tertiary">#47cd69</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--grn-100);"></span><p class="small">--grn-100</p><p class="small txt-tertiary">#0f3619</p></div>
+          <!-- END: Colour swatches - Status primitives -->
+        </div>
+
+        <!-- ---------- Semantic tokens ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Semantic - Surface</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Colour swatches - Surface tokens -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-primary);"></span><p class="small">--surface-primary</p><p class="small txt-tertiary">--white</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-secondary);"></span><p class="small">--surface-secondary</p><p class="small txt-tertiary">--grey-1</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-tertiary);"></span><p class="small">--surface-tertiary</p><p class="small txt-tertiary">--grey-2</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-disabled);"></span><p class="small">--surface-disabled</p><p class="small txt-tertiary">--grey-2</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-brand-strong);"></span><p class="small">--surface-brand-strong</p><p class="small txt-tertiary">--blu-50</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-brand-muted);"></span><p class="small">--surface-brand-muted</p><p class="small txt-tertiary">--blu-00</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-brand-subtle);"></span><p class="small">--surface-brand-subtle</p><p class="small txt-tertiary">--blu-20</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-success-strong);"></span><p class="small">--surface-success-strong</p><p class="small txt-tertiary">--grn-50</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-error-strong);"></span><p class="small">--surface-error-strong</p><p class="small txt-tertiary">--red-50</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--surface-warning-strong);"></span><p class="small">--surface-warning-strong</p><p class="small txt-tertiary">--yel-50</p></div>
+          <!-- END: Colour swatches - Surface tokens -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Semantic - Text</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Colour swatches - Text tokens -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-primary);"></span><p class="small">--text-primary</p><p class="small txt-tertiary">--grey-9</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-secondary);"></span><p class="small">--text-secondary</p><p class="small txt-tertiary">--grey-7</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-tertiary);"></span><p class="small">--text-tertiary</p><p class="small txt-tertiary">--grey-5</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-disabled);"></span><p class="small">--text-disabled</p><p class="small txt-tertiary">--grey-3</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-brand-strong);"></span><p class="small">--text-brand-strong</p><p class="small txt-tertiary">--blu-50</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-error-strong);"></span><p class="small">--text-error-strong</p><p class="small txt-tertiary">--red-50</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--text-success-strong);"></span><p class="small">--text-success-strong</p><p class="small txt-tertiary">--grn-50</p></div>
+          <!-- END: Colour swatches - Text tokens -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Semantic - Border</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm">
+          <!-- START: Colour swatches - Border tokens -->
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--border-primary);"></span><p class="small">--border-primary</p><p class="small txt-tertiary">--grey-2</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--border-secondary);"></span><p class="small">--border-secondary</p><p class="small txt-tertiary">--grey-3</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--border-disabled);"></span><p class="small">--border-disabled</p><p class="small txt-tertiary">--grey-5</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--border-highlighted);"></span><p class="small">--border-highlighted</p><p class="small txt-tertiary">--grey-8</p></div>
+          <div class="colour-swatch"><span class="colour-swatch__chip" style="background-color: var(--border-highlighted-brand);"></span><p class="small">--border-highlighted-brand</p><p class="small txt-tertiary">--blu-50</p></div>
+          <!-- END: Colour swatches - Border tokens -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Colours -->
 
       <!-- Icons -->
       <div class="container u-mb-lg">
@@ -941,7 +1073,7 @@
           </div>
         </div>
 
-        <!-- Don't know button — idle -->
+        <!-- Don't know button - idle -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">With don't know button</h5>
         </div>
@@ -984,7 +1116,7 @@
           </div>
         </div>
 
-        <!-- Don't know button — active -->
+        <!-- Don't know button - active -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Don't know active</h5>
         </div>
@@ -1133,22 +1265,22 @@
           <h2 class="txt-secondary">Don't Know Button</h2>
           <p class="txt-secondary">
             A square emoji button that opens a secondary confirmation menu when activated.
-            Used wherever a respondent can skip a question — the menu requires them to confirm
+            Used wherever a respondent can skip a question - the menu requires them to confirm
             or cancel before progressing. Available in four sizes to suit different contexts.
           </p>
         </div>
 
-        <!-- Size variants — all sizes at idle state for comparison -->
+        <!-- Size variants - all sizes at idle state for comparison -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Sizes</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-end;">
 
-          <!-- START: Don't Know Button — Size variants
+          <!-- START: Don't Know Button - Size variants
                XS (32px, base), SM (36px), RG (40px), LG (48px).
                Size modifiers are applied to the .dont-know-btn element alongside any state modifier. -->
 
-          <!-- XS — 32px, base size, no modifier needed -->
+          <!-- XS - 32px, base size, no modifier needed -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -1156,7 +1288,7 @@
             <p class="small txt-tertiary">XS</p>
           </div>
 
-          <!-- SM — 36px -->
+          <!-- SM - 36px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--sm" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -1164,7 +1296,7 @@
             <p class="small txt-tertiary">SM</p>
           </div>
 
-          <!-- RG — 40px -->
+          <!-- RG - 40px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--rg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -1172,7 +1304,7 @@
             <p class="small txt-tertiary">RG</p>
           </div>
 
-          <!-- LG — 48px -->
+          <!-- LG - 48px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--lg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -1180,17 +1312,17 @@
             <p class="small txt-tertiary">LG</p>
           </div>
 
-          <!-- END: Don't Know Button — Size variants -->
+          <!-- END: Don't Know Button - Size variants -->
 
         </div>
 
-        <!-- States — XS size shown; states apply equally to all sizes -->
+        <!-- States - XS size shown; states apply equally to all sizes -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Idle</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
 
-          <!-- START: Don't Know Button — Idle
+          <!-- START: Don't Know Button - Idle
                Default resting state. Grey surface, grey border. Blue border on hover (CSS :hover). -->
           <div class="dont-know-btn-wrapper">
             <button
@@ -1200,22 +1332,22 @@
               aria-label="Don't know"
             >🤷</button>
           </div>
-          <!-- END: Don't Know Button — Idle -->
+          <!-- END: Don't Know Button - Idle -->
 
         </div>
 
         <div class="u-mb-rg">
-          <h5 class="txt-secondary">Active — menu open</h5>
+          <h5 class="txt-secondary">Active - menu open</h5>
         </div>
-        <!-- The inner presentation wrapper (padding-top) is reference-page only —
+        <!-- The inner presentation wrapper (padding-top) is reference-page only -
              it reserves vertical space so the absolutely-positioned menu stays
              within the demo container's borders. It is not part of the component. -->
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
           <div style="padding-top: 64px;">
 
-            <!-- START: Don't Know Button — Active
+            <!-- START: Don't Know Button - Active
                  Button turns solid blue. Confirmation menu floats above it.
-                 Menu button hover/hit states are CSS :hover and :active only — not shown statically. -->
+                 Menu button hover/hit states are CSS :hover and :active only - not shown statically. -->
             <div class="dont-know-btn-wrapper">
               <button
                 class="dont-know-btn dont-know-btn--active"
@@ -1224,23 +1356,23 @@
                 aria-label="Don't know"
               >🤷</button>
 
-              <!-- Confirmation menu — shown when aria-pressed="true" -->
+              <!-- Confirmation menu - shown when aria-pressed="true" -->
               <div class="dont-know-menu" role="dialog" aria-label="Confirm selection">
-                <!-- Outer bordered frame — provides the border (z-index: auto, lowest) -->
+                <!-- Outer bordered frame - provides the border (z-index: auto, lowest) -->
                 <div class="dont-know-menu-frame">
-                  <!-- Button row — z-index: 3, renders above the caret -->
+                  <!-- Button row - z-index: 3, renders above the caret -->
                   <div class="dont-know-menu-buttons">
                     <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
                     <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
                   </div>
                 </div>
-                <!-- Caret — z-index: 2, white fill covers frame border at join,
+                <!-- Caret - z-index: 2, white fill covers frame border at join,
                      V borders visible below. Buttons (z-index: 3) cover its top half. -->
                 <div class="dont-know-menu-caret" aria-hidden="true"></div>
               </div>
 
             </div>
-            <!-- END: Don't Know Button — Active -->
+            <!-- END: Don't Know Button - Active -->
 
           </div>
         </div>
@@ -1264,7 +1396,7 @@
 
         <div class="flex-v-wrapper border-wrapper u-p-sm">
 
-          <!-- START: Layer 1 + 2 — Idle dot and Active dot
+          <!-- START: Layer 1 + 2 - Idle dot and Active dot
                Base component. 4×4px circle. Default colour is --text-disabled (idle).
                Add .step-dot--active for the dark/current position state. -->
           <div>
@@ -1283,9 +1415,9 @@
 
             </div>
           </div>
-          <!-- END: Layer 1 + 2 — Idle dot and Active dot -->
+          <!-- END: Layer 1 + 2 - Idle dot and Active dot -->
 
-          <!-- START: Layer 3 — Dot group
+          <!-- START: Layer 3 - Dot group
                Row of dots with space-between layout inside a fixed 40px width.
                First dot is active; remaining dots are idle. -->
           <div>
@@ -1297,15 +1429,15 @@
               <div class="step-dot"></div>
             </div>
           </div>
-          <!-- END: Layer 3 — Dot group -->
+          <!-- END: Layer 3 - Dot group -->
 
-          <!-- START: Layer 4 — Track wrapper
+          <!-- START: Layer 4 - Track wrapper
                White surface container that houses the dot group.
                Shown here on a grey background to make the white surface visible.
                In production this sits on a coloured card or image. -->
           <div>
             <p class="small txt-tertiary u-mb-sm">Track wrapper</p>
-            <!-- Grey background is reference-page presentation only — not part of the component -->
+            <!-- Grey background is reference-page presentation only - not part of the component -->
             <div style="display: inline-flex; background-color: var(--surface-secondary); padding: var(--size-16); border-radius: var(--radius-s);">
               <div class="step-dot-track">
                 <div class="step-dot-group">
@@ -1317,12 +1449,1233 @@
               </div>
             </div>
           </div>
-          <!-- END: Layer 4 — Track wrapper -->
+          <!-- END: Layer 4 - Track wrapper -->
 
         </div>
 
       </div>
       <!-- SECTION END: Step Progress Dots -->
+
+      <!-- ============================================================
+           SECTION: Tooltip
+           Attached to any interactive element by adding .has-tooltip to it and
+           nesting a .tooltip span inside. The element must carry
+           aria-describedby pointing at the tooltip's id.
+           Visibility is CSS-only - :hover and :focus-visible on .has-tooltip.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Tooltip</h2>
+          <p class="txt-secondary">
+            A small label that appears above an icon button on hover or keyboard focus.
+            Used throughout the bottom navigation and anywhere an icon-only control
+            needs a visible name. No JavaScript - shown purely via CSS.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">On an icon button - hover or tab to reveal</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="padding-top: 56px;">
+
+          <!-- START: Tooltip - on icon button
+               .has-tooltip on the button, .tooltip inside it, linked by aria-describedby. -->
+          <button
+            class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+            type="button"
+            aria-label="Help"
+            aria-describedby="tip-demo-help"
+          >
+            <div class="icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none">
+                <path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/>
+                <path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/>
+                <path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="tooltip" role="tooltip" id="tip-demo-help">Help</span>
+          </button>
+          <!-- END: Tooltip - on icon button -->
+
+          <!-- START: Tooltip - on Don't Know button -->
+          <button
+            class="dont-know-btn has-tooltip"
+            type="button"
+            aria-label="Don't know"
+            aria-describedby="tip-demo-dk"
+          >
+            🤷
+            <span class="tooltip" role="tooltip" id="tip-demo-dk">Don't know</span>
+          </button>
+          <!-- END: Tooltip - on Don't Know button -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Tooltip -->
+
+      <!-- ============================================================
+           SECTION: Progress Bar
+           The linear survey-progress indicator used in the bottom navigation.
+           Distinct from Step Progress Dots (above), which track cards within a
+           single question. This tracks completion across the whole survey.
+
+           .progress-indicator  - flex row: bar + percentage label
+           .progress-bar        - the grey track
+           .progress            - the blue fill; set its inline width to the percentage
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Progress Bar</h2>
+          <p class="txt-secondary">
+            Overall survey completion. The fill width is set inline as a percentage
+            (<code>style="width: 50%"</code>) and the adjacent label repeats the value as text.
+            Sits at the top of the bottom navigation bar.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Fill states</h5>
+        </div>
+        <div class="flex-v-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Progress Bar - 0% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 0%"></span>
+            </div>
+            <p class="label">0%</p>
+          </div>
+          <!-- END: Progress Bar - 0% -->
+
+          <!-- START: Progress Bar - 25% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 25%"></span>
+            </div>
+            <p class="label">25%</p>
+          </div>
+          <!-- END: Progress Bar - 25% -->
+
+          <!-- START: Progress Bar - 50% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 50%"></span>
+            </div>
+            <p class="label">50%</p>
+          </div>
+          <!-- END: Progress Bar - 50% -->
+
+          <!-- START: Progress Bar - 100% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 100%"></span>
+            </div>
+            <p class="label">100%</p>
+          </div>
+          <!-- END: Progress Bar - 100% -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Progress Bar -->
+
+      <!-- ============================================================
+           SECTION: Question & Answer Layout
+           The structural pattern every question page is built from. Not a visual
+           component - it is the wrapper chain that centres and spaces content.
+
+             .content-wrapper            - full-bleed row, 1.5rem padding
+             └── .content                - max-width 640px, centred, column flex
+                   └── .box-Q / .box-A   - semantic labels only, no styles
+
+           The answer block repeats the same chain with .content-wrapper--answer,
+           which removes the top padding so the answer sits tight under the question.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Question &amp; Answer Layout</h2>
+          <p class="txt-secondary">
+            Questions and answers live in separate <code>.content-wrapper</code> blocks so each
+            can span the full page width while its inner <code>.content</code> stays capped at 640px
+            and centred. <code>.box-Q</code> and <code>.box-A</code> carry no styles - they exist to
+            label the two halves for anyone reading the markup.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Question block + answer block</h5>
+        </div>
+        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
+
+          <!-- START: Q &amp; A Layout - question block -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <!-- END: Q &amp; A Layout - question block -->
+
+          <!-- START: Q &amp; A Layout - answer block
+               .content-wrapper--answer removes the top padding. -->
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-group" role="radiogroup" aria-label="How would you describe yourself?">
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Q &amp; A Layout - answer block -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Question text - <code>.question</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Question text
+               Dorian 700, --p-size-large, brand blue. The only element that carries
+               question styling - always a <p>, never a heading. -->
+          <p class="question">How much do you agree with the following statement?</p>
+          <!-- END: Question text -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Question &amp; Answer Layout -->
+
+      <!-- ============================================================
+           SECTION: Grid Buttons
+           The single- and multi-select answer component.
+
+             .grid-field    - outer field; add --invalid to reveal the message
+             .grid-group    - the button row/stack; layout modifiers go here
+             .grid-btn      - one option; --selected marks the chosen one
+             .grid-message  - validation message, hidden until the field is invalid
+             .grid-wrapper  - optional row that pairs the group with a Don't Know button
+
+           Single-select uses role="radiogroup" / role="radio" / aria-checked.
+           Multi-select uses role="group" / aria-pressed on each button.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Grid Buttons</h2>
+          <p class="txt-secondary">
+            The primary answer control for choice questions. One base button
+            (<code>.grid-btn</code>) arranged by layout modifiers on the parent
+            <code>.grid-group</code>. Selection state is applied by JavaScript as
+            <code>.grid-btn--selected</code>, alongside the matching ARIA attribute.
+          </p>
+        </div>
+
+        <!-- ---------- States ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Button states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Grid Button - Idle
+               White surface, grey border. Blue border on hover (CSS :hover). -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="grid-btn" type="button" role="radio" aria-checked="false">Option</button>
+            <p class="small txt-tertiary">Idle</p>
+          </div>
+          <!-- END: Grid Button - Idle -->
+
+          <!-- START: Grid Button - Selected
+               Blue surface, white text. Set aria-checked="true" at the same time. -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="grid-btn grid-btn--selected" type="button" role="radio" aria-checked="true">Option</button>
+            <p class="small txt-tertiary">Selected</p>
+          </div>
+          <!-- END: Grid Button - Selected -->
+
+        </div>
+
+        <!-- ---------- Layout modifiers ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Horizontal, full width - <code>.grid-group</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Group - horizontal full width
+               Default. Buttons share the row equally and wrap when they run out of space. -->
+          <div class="grid-field">
+            <div class="grid-group" role="radiogroup" aria-label="Example question">
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+              <button class="grid-btn grid-btn--selected" type="button" role="radio" aria-checked="true">Female</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+            </div>
+          </div>
+          <!-- END: Grid Group - horizontal full width -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Horizontal, content width - <code>.grid-group--fixed</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Group - horizontal fixed
+               Buttons shrink to their label width instead of stretching. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--fixed" role="radiogroup" aria-label="Example question">
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+            </div>
+          </div>
+          <!-- END: Grid Group - horizontal fixed -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Vertical, full width - <code>.grid-group--col</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Group - vertical full width
+               Stacks the options; each button fills the available width. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--col" role="radiogroup" aria-label="Example question">
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Strongly agree</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Agree</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Disagree</button>
+            </div>
+          </div>
+          <!-- END: Grid Group - vertical full width -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Vertical, content width - <code>.grid-group--col.grid-group--fixed</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Group - vertical fixed
+               Stacked, but each button only as wide as its label. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--col grid-group--fixed" role="radiogroup" aria-label="Example question">
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Strongly agree</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Agree</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Disagree</button>
+            </div>
+          </div>
+          <!-- END: Grid Group - vertical fixed -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Wrapped, 4 per row - <code>.grid-group--wrap</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Group - wrap
+               Wraps at four per row and centres the final row. Used for multi-select
+               scales, so the buttons take role="button" + aria-pressed rather than radio. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--wrap" role="group" aria-label="Example question">
+              <button class="grid-btn" type="button" aria-pressed="false">1</button>
+              <button class="grid-btn" type="button" aria-pressed="false">2</button>
+              <button class="grid-btn grid-btn--selected" type="button" aria-pressed="true">3</button>
+              <button class="grid-btn" type="button" aria-pressed="false">4</button>
+              <button class="grid-btn" type="button" aria-pressed="false">5</button>
+              <button class="grid-btn" type="button" aria-pressed="false">6</button>
+            </div>
+          </div>
+          <!-- END: Grid Group - wrap -->
+        </div>
+
+        <!-- ---------- Paired with Don't Know ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">With Don't Know button - <code>.grid-wrapper</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Wrapper - horizontal
+               .grid-wrapper places the group and the Don't Know button on one row. -->
+          <div class="grid-field">
+            <div class="grid-wrapper">
+              <div class="grid-group" role="radiogroup" aria-label="Example question">
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+              </div>
+              <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-ref-1">
+                🤷
+                <span class="tooltip" role="tooltip" id="tip-dk-ref-1">Don't know</span>
+              </button>
+            </div>
+          </div>
+          <!-- END: Grid Wrapper - horizontal -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Vertical with Don't Know - <code>.grid-wrapper--col</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Grid Wrapper - vertical
+               Don't Know button drops below the stacked group. -->
+          <div class="grid-field">
+            <div class="grid-wrapper grid-wrapper--col">
+              <div class="grid-group grid-group--col" role="radiogroup" aria-label="Example question">
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Strongly agree</button>
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Agree</button>
+                <button class="grid-btn" type="button" role="radio" aria-checked="false">Disagree</button>
+              </div>
+              <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-ref-2">
+                🤷
+                <span class="tooltip" role="tooltip" id="tip-dk-ref-2">Don't know</span>
+              </button>
+            </div>
+          </div>
+          <!-- END: Grid Wrapper - vertical -->
+        </div>
+
+        <!-- ---------- Validation ---------- -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Validation - <code>.grid-field--invalid</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Grid Field - invalid
+               .grid-message is present in the markup at all times but hidden.
+               Adding --invalid to .grid-field reveals it. aria-live announces it. -->
+          <div class="grid-field grid-field--invalid">
+            <div class="grid-group" role="radiogroup" aria-label="Example question">
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+              <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+            </div>
+            <div class="grid-message" aria-live="polite">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <span>This question is required</span>
+            </div>
+          </div>
+          <!-- END: Grid Field - invalid -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Grid Buttons -->
+
+      <!-- ============================================================
+           SECTION: Image Grid Buttons
+           The image-answer variant of the grid button. Same .grid-field /
+           .grid-group / .grid-message chain as the text grid - only the button
+           changes, to .grid-btn.grid-btn--img.
+
+           Each image button contains:
+             .img-selected-icon  - tick badge, hidden until the button is selected
+             <img>               - the option image; always give it a real alt
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Image Grid Buttons</h2>
+          <p class="txt-secondary">
+            Image options for visual choice questions. The tick badge sits inside every
+            button in the markup and is revealed by <code>.grid-btn--selected</code>, so no
+            element needs to be inserted at selection time.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Button states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Image Grid Button - states
+               Both buttons sit in a .grid-group--img row. .grid-btn--img is a flex
+               item sized by its image, so it must live inside the grid group -
+               outside one it stretches past the image and exposes its background. -->
+          <div class="grid-group grid-group--img" style="align-items: flex-start;">
+
+            <!-- Idle - tick badge present in the markup but hidden -->
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 1" />
+              </button>
+              <p class="small txt-tertiary">Idle - badge hidden</p>
+            </div>
+
+            <!-- Selected - blue border and visible tick badge -->
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+              <button class="grid-btn grid-btn--img grid-btn--selected" type="button" role="radio" aria-checked="true">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 2" />
+              </button>
+              <p class="small txt-tertiary">Selected - badge shown</p>
+            </div>
+
+          </div>
+          <!-- END: Image Grid Button - states -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image grid - <code>.grid-group--img</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Image Grid - standard
+               Images sit inside the 640px .content column on a question page. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--img" role="radiogroup" aria-label="Which do you prefer?">
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 1" />
+              </button>
+              <button class="grid-btn grid-btn--img grid-btn--selected" type="button" role="radio" aria-checked="true">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 2" />
+              </button>
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 3" />
+              </button>
+            </div>
+          </div>
+          <!-- END: Image Grid - standard -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Full-width image grid - <code>.grid-group--img-fw</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Image Grid - full width
+               Four per row, breaking out of the 640px column. On a question page this
+               is paired with .content-wrapper--full so the grid spans the viewport. -->
+          <div class="grid-field">
+            <div class="grid-group grid-group--img grid-group--img-fw" role="radiogroup" aria-label="Which do you prefer?">
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 1" />
+              </button>
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 2" />
+              </button>
+              <button class="grid-btn grid-btn--img grid-btn--selected" type="button" role="radio" aria-checked="true">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 3" />
+              </button>
+              <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                <img src="images/placeholder-sm-square.png" alt="Option 4" />
+              </button>
+            </div>
+          </div>
+          <!-- END: Image Grid - full width -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">With Don't Know button - <code>.grid-wrapper--img</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Image Grid - with Don't Know -->
+          <div class="grid-field">
+            <div class="grid-wrapper grid-wrapper--img">
+              <div class="grid-group grid-group--img" role="radiogroup" aria-label="Which do you prefer?">
+                <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                  <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                  <img src="images/placeholder-sm-square.png" alt="Option 1" />
+                </button>
+                <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                  <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                  <img src="images/placeholder-sm-square.png" alt="Option 2" />
+                </button>
+              </div>
+              <button class="dont-know-btn has-tooltip" type="button" aria-label="Don't know" aria-describedby="tip-dk-ref-3">
+                🤷
+                <span class="tooltip" role="tooltip" id="tip-dk-ref-3">Don't know</span>
+              </button>
+            </div>
+          </div>
+          <!-- END: Image Grid - with Don't Know -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Image Grid Buttons -->
+
+      <!-- ============================================================
+           SECTION: Love Button
+           Press-and-hold rating question. The respondent holds the button and a
+           blue fill grows outward from the centre of the circle; releasing locks
+           the value in. Two variants share all markup and differ only in scale:
+             love-button.html      - 0 to 100
+             love-button-mid.html  - -100 to 100, fill starts at the midpoint
+
+           Structure:
+             .love-field         - column wrapper, centres everything
+             .love-circle-outer  - the circle; overflow:hidden clips fill and rings
+             .love-fill          - the growing blue disc, sized by JS
+             .love-ring--10…90   - dotted percentage guides
+             .love-value         - live numeric readout
+             .love-btn           - press-and-hold trigger
+             .love-btn-group     - Less / More fine adjustment, revealed after first hold
+             .love-message       - validation, shown by .love-field--invalid
+
+           Requires styles/love-button-styles.css and scripts/love-button.js.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Love Button</h2>
+          <p class="txt-secondary">
+            A press-and-hold rating control. The fill diameter and the value counter are
+            driven by JavaScript while the pointer is held down. After the first hold the
+            Less / More buttons appear so the respondent can fine-tune without re-holding.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Initial state - before first hold</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Love Button - initial
+               Fill at zero, value 0, adjustment buttons hidden via .hidden. -->
+          <div class="love-field" style="max-width: 320px; margin: 0 auto;">
+
+            <div class="love-circle-outer" aria-hidden="true">
+              <!-- Growing fill - width/height set by JS -->
+              <div class="love-fill" style="width: 0%; height: 0%;"></div>
+
+              <!-- Concentric dotted rings at 10%–90% -->
+              <span class="love-ring love-ring--10"></span>
+              <span class="love-ring love-ring--20"></span>
+              <span class="love-ring love-ring--30"></span>
+              <span class="love-ring love-ring--40"></span>
+              <span class="love-ring love-ring--50"></span>
+              <span class="love-ring love-ring--60"></span>
+              <span class="love-ring love-ring--70"></span>
+              <span class="love-ring love-ring--80"></span>
+              <span class="love-ring love-ring--90"></span>
+
+              <!-- Live value counter -->
+              <span class="love-value">0</span>
+            </div>
+
+            <!-- Press-and-hold trigger -->
+            <button class="btn btn-primary-brand love-btn" type="button" aria-label="Press and hold to register your love rating">
+              Press and hold
+            </button>
+
+            <!-- Adjustment buttons - .hidden until the first hold completes -->
+            <div class="love-btn-group hidden">
+              <button class="btn btn-secondary love-adjust-btn" type="button">Less</button>
+              <button class="btn btn-secondary love-adjust-btn" type="button">More</button>
+            </div>
+          </div>
+          <!-- END: Love Button - initial -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Value registered - adjustment buttons revealed</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Love Button - value set
+               Fill at 60%, .hidden removed from .love-btn-group so Less / More show. -->
+          <div class="love-field" style="max-width: 320px; margin: 0 auto;">
+
+            <div class="love-circle-outer" aria-hidden="true">
+              <div class="love-fill" style="width: 60%; height: 60%;"></div>
+              <span class="love-ring love-ring--10"></span>
+              <span class="love-ring love-ring--20"></span>
+              <span class="love-ring love-ring--30"></span>
+              <span class="love-ring love-ring--40"></span>
+              <span class="love-ring love-ring--50"></span>
+              <span class="love-ring love-ring--60"></span>
+              <span class="love-ring love-ring--70"></span>
+              <span class="love-ring love-ring--80"></span>
+              <span class="love-ring love-ring--90"></span>
+              <span class="love-value">60</span>
+            </div>
+
+            <button class="btn btn-primary-brand love-btn" type="button" aria-label="Press and hold to register your love rating">
+              Press and hold
+            </button>
+
+            <div class="love-btn-group">
+              <!-- Less - decrements the value -->
+              <button class="btn btn-secondary love-adjust-btn" type="button">
+                Less
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M15.8337 9.16666C16.2939 9.16666 16.667 9.53975 16.667 9.99999C16.667 10.4602 16.2939 10.8333 15.8337 10.8333H4.16536C3.70513 10.8333 3.33203 10.4602 3.33203 9.99999C3.33203 9.53975 3.70513 9.16666 4.16536 9.16666H15.8337Z" fill="currentColor"/>
+                </svg>
+              </button>
+              <!-- More - increments the value -->
+              <button class="btn btn-secondary love-adjust-btn" type="button">
+                More
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M9.16797 15.835V4.16668C9.16797 3.70644 9.54106 3.33334 10.0013 3.33334C10.4615 3.33334 10.8346 3.70644 10.8346 4.16668V15.835L10.8306 15.9204C10.7878 16.3405 10.4327 16.6683 10.0013 16.6683C9.5699 16.6683 9.21481 16.3405 9.17204 15.9204L9.16797 15.835Z" fill="currentColor"/>
+                  <path d="M15.8337 9.16833C16.2939 9.16833 16.667 9.54143 16.667 10.0017C16.667 10.4619 16.2939 10.835 15.8337 10.835H4.16536C3.70513 10.835 3.33203 10.4619 3.33203 10.0017C3.33203 9.54143 3.70513 9.16833 4.16536 9.16833H15.8337Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- END: Love Button - value set -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Validation - <code>.love-field--invalid</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Love Button - invalid
+               .love-message is always in the markup; --invalid on .love-field reveals it. -->
+          <div class="love-field love-field--invalid" style="max-width: 320px; margin: 0 auto;">
+            <div class="love-circle-outer" aria-hidden="true">
+              <div class="love-fill" style="width: 0%; height: 0%;"></div>
+              <span class="love-ring love-ring--10"></span>
+              <span class="love-ring love-ring--20"></span>
+              <span class="love-ring love-ring--30"></span>
+              <span class="love-ring love-ring--40"></span>
+              <span class="love-ring love-ring--50"></span>
+              <span class="love-ring love-ring--60"></span>
+              <span class="love-ring love-ring--70"></span>
+              <span class="love-ring love-ring--80"></span>
+              <span class="love-ring love-ring--90"></span>
+              <span class="love-value">0</span>
+            </div>
+
+            <button class="btn btn-primary-brand love-btn" type="button" aria-label="Press and hold to register your love rating">
+              Press and hold
+            </button>
+
+            <!-- Validation message -->
+            <div class="love-message" role="alert">
+              <span>This question is required</span>
+            </div>
+          </div>
+          <!-- END: Love Button - invalid -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Love Button -->
+
+      <!-- ============================================================
+           SECTION: Tinderland Card
+           The swipe card used in the Tinderland / Tosser question type.
+           Two variants (text, image) x four states.
+
+             .tinderland-card           - base, text-only
+             .tinderland-card--image    - image + label variant
+             .tinderland-card--fav      - compact variant used in the stacked
+                                          "favourite" layout
+           States:
+             (none)                     - idle
+             .tinderland-card--pressed  - held down
+             .tinderland-card--swipe-l  - swiping left (reject)
+             .tinderland-card--swipe-r  - swiping right (prefer)
+
+           Requires styles/tinderland-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Tinderland Card</h2>
+          <p class="txt-secondary">
+            The swipe card shown to respondents. State modifiers are applied by JavaScript
+            as the pointer moves - yellow tint while swiping left to reject, green while
+            swiping right to prefer. A full reference page of every variant and state lives
+            in <code>tinderland-components.html</code>.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text variant - four states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Tinderland Card - Text / Idle -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Idle</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Idle -->
+
+          <!-- START: Tinderland Card - Text / Pressed -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--pressed">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Pressed</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Pressed -->
+
+          <!-- START: Tinderland Card - Text / Swipe-left -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--swipe-l">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-L (reject)</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Swipe-left -->
+
+          <!-- START: Tinderland Card - Text / Swipe-right -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--swipe-r">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-R (prefer)</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Swipe-right -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image variant - four states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm">
+
+          <!-- START: Tinderland Card - Image / Idle -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Idle</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Idle -->
+
+          <!-- START: Tinderland Card - Image / Pressed -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--pressed">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Pressed</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Pressed -->
+
+          <!-- START: Tinderland Card - Image / Swipe-left -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-l">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-L (reject)</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Swipe-left -->
+
+          <!-- START: Tinderland Card - Image / Swipe-right -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-r">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-R (prefer)</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Swipe-right -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Tinderland Card -->
+
+      <!-- ============================================================
+           SECTION: Tosser Arena
+           The swipe arena that houses a Tinderland card. Fills the space below
+           the question and anchors four absolutely-positioned children around
+           a centred card.
+
+             .answer-arena-section              - flex fill wrapper, direct child of <main>
+             └── .answer-arena                  - grey arena, position: relative
+                   ├── .tosser__side-label--left    - reject label, rotated -90deg
+                   ├── .tosser__side-label--right   - prefer label, rotated 90deg
+                   ├── .answer-arena__progress      - step dots, top centre
+                   ├── .answer-arena__dont-know     - Don't Know button, bottom centre
+                   ├── .tosser__options             - optional image pair (text+image type)
+                   └── .tinderland-card             - the card, centred
+                       (or .tosser__card-stack for the stacked favourite layout)
+
+           .answer-arena-section / .answer-arena and the two furniture
+           positions are shared primitives in styles.css - the Bingo
+           question type (bingo-img_text.html) reuses the same arena.
+           Only the .tosser__* pieces are swipe-specific.
+
+           Page variants: tosser-text.html, tosser-img.html,
+           tosser-text_img.html, tosser-text-fav.html
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Tosser Arena</h2>
+          <p class="txt-secondary">
+            The container the swipe card sits in. Side labels name the two swipe directions,
+            step dots track position in the card set, and the Don't Know button sits at the
+            bottom. Side labels are <code>aria-hidden</code> - the question text already
+            conveys their meaning.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text card in arena</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Tosser Arena - text card
+               Fixed height here is reference-page only; in the app .answer-arena-section
+               flexes to fill the space left below the question. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena" role="region" aria-label="Swipe card">
+
+              <!-- Left direction label - reject -->
+              <div class="tosser__side-label tosser__side-label--left" aria-hidden="true">
+                <span>Has not been proven</span>
+              </div>
+
+              <!-- Right direction label - prefer -->
+              <div class="tosser__side-label tosser__side-label--right" aria-hidden="true">
+                <span>Has been proven</span>
+              </div>
+
+              <!-- Step progress dots - top centre -->
+              <div class="answer-arena__progress">
+                <div class="step-dot-track">
+                  <div class="step-dot-group" role="progressbar" aria-label="Card 1 of 4" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+                    <div class="step-dot step-dot--active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Don't Know button - bottom centre -->
+              <div class="answer-arena__dont-know">
+                <div class="dont-know-btn-wrapper">
+                  <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                </div>
+              </div>
+
+              <!-- The swipe card - centred -->
+              <div class="tinderland-card" role="button" tabindex="0" aria-label="Swipe card: The one I prefer">
+                <p class="tinderland-card__label">The one I prefer</p>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Tosser Arena - text card -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">With image options - <code>.tosser__options</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Tosser Arena - image options
+               A pair of images pinned to the arena edges, with a text card between them.
+               Used by tosser-text_img.html. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena" role="region" aria-label="Swipe card">
+
+              <!-- Option images - decorative, the card carries the label -->
+              <div class="tosser__options" aria-hidden="true">
+                <div class="tosser__option-img">
+                  <img src="images/ipod-white.png" alt="" />
+                </div>
+                <div class="tosser__option-img">
+                  <img src="images/ipod-black.png" alt="" />
+                </div>
+              </div>
+
+              <div class="answer-arena__progress">
+                <div class="step-dot-track">
+                  <div class="step-dot-group" role="progressbar" aria-label="Card 1 of 4" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+                    <div class="step-dot step-dot--active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="answer-arena__dont-know">
+                <div class="dont-know-btn-wrapper">
+                  <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                </div>
+              </div>
+
+              <div class="tinderland-card" role="button" tabindex="0" aria-label="Swipe card: The one I prefer">
+                <p class="tinderland-card__label">The one I prefer</p>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Tosser Arena - image options -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Stacked cards - <code>.tosser__card-stack</code> + <code>.tinderland-card--fav</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Tosser Arena - card stack
+               Several compact cards stacked vertically; the respondent picks a favourite
+               rather than swiping a single card. Used by tosser-text-fav.html. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena" role="region" aria-label="Choose your favourite">
+
+              <div class="answer-arena__progress">
+                <div class="step-dot-track">
+                  <div class="step-dot-group" role="progressbar" aria-label="Card 1 of 4" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+                    <div class="step-dot step-dot--active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="answer-arena__dont-know">
+                <div class="dont-know-btn-wrapper">
+                  <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                </div>
+              </div>
+
+              <!-- The stack - each card is a compact --fav variant -->
+              <div class="tosser__card-stack">
+                <div class="tinderland-card tinderland-card--fav" role="button" tabindex="0" aria-label="Swipe card: Option one">
+                  <p class="tinderland-card__label">Option one</p>
+                </div>
+                <div class="tinderland-card tinderland-card--fav" role="button" tabindex="0" aria-label="Swipe card: Option two">
+                  <p class="tinderland-card__label">Option two</p>
+                </div>
+                <div class="tinderland-card tinderland-card--fav" role="button" tabindex="0" aria-label="Swipe card: Option three">
+                  <p class="tinderland-card__label">Option three</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Tosser Arena - card stack -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Tosser Arena -->
+
+      <!-- ============================================================
+           SECTION: AI Chat
+           The conversational question type. A thread of alternating AI and user
+           messages with a fixed input dock above the bottom navigation.
+
+             .message-thread        - the log; role="log" + aria-live="polite"
+             .message--ai           - left-aligned, plain text, optional avatar
+             .message--user         - right-aligned pill, brand-muted background
+             .message-text          - the message copy
+             .hb-icon               - platform avatar; --sm / --xs size modifiers
+             .ai-chat-dock          - fixed input bar
+             .ai-chat-input         - bordered field; blue border on :focus-within
+             .ai-chat-textarea      - auto-growing input
+             .ai-chat-actions       - mic + send buttons
+
+           Requires styles/ai-styles.css. The page <body> takes .ai-body.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">AI Chat</h2>
+          <p class="txt-secondary">
+            Used where the survey asks follow-up questions conversationally. AI messages are
+            plain left-aligned text; user replies are right-aligned pills. The platform avatar
+            appears below an AI message when it is still the AI's turn.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Message thread</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: AI Chat - message thread -->
+          <div class="message-thread" role="log" aria-label="Conversation" aria-live="polite">
+
+            <!-- AI message - no avatar -->
+            <div class="message message--ai">
+              <p class="message-text">What would you say you prefer, between Jalapeños and tomatoes?</p>
+            </div>
+
+            <!-- User reply - right-aligned pill -->
+            <div class="message message--user">
+              <p class="message-text">I prefer the spicy flavours of Jalapeños</p>
+            </div>
+
+            <!-- AI message - avatar shown below the text -->
+            <div class="message message--ai">
+              <p class="message-text">So if you were offered a choice between the two to put in a burrito, you'd go for hot Jalapeños every time?</p>
+              <div class="hb-icon hb-icon--sm" aria-hidden="true"><svg width="48" height="48" viewBox="17 17 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.0918 29.8732C25.0919 27.4355 27.0682 25.4592 29.5059 25.4591L49.5859 25.4591C52.0236 25.4592 53.9999 27.4355 54 29.8732V49.9532C53.9999 52.3909 52.0236 54.3672 49.5859 54.3673H29.5059C27.0682 54.3672 25.0919 52.3909 25.0918 49.9532L25.0918 29.8732ZM22 49.9532C22.0001 54.0987 25.3604 57.459 29.5059 57.4591H49.5859C53.7314 57.459 57.0917 54.0987 57.0918 49.9532V29.8732C57.0917 25.7277 53.7314 22.3674 49.5859 22.3673L29.5059 22.3673C25.3604 22.3674 22.0001 25.7277 22 29.8732L22 49.9532Z" fill="currentColor"/><path d="M45.7969 35.5346C44.6584 35.5346 43.7354 34.6116 43.7354 33.4731C43.7354 32.3345 44.6584 31.4115 45.7969 31.4115C46.9355 31.4115 47.8585 32.3345 47.8585 33.4731C47.8585 34.6116 46.9355 35.5346 45.7969 35.5346Z" fill="currentColor"/><path d="M39.236 35.5356C38.0975 35.5356 37.1745 34.6127 37.1745 33.4741C37.1745 32.3356 38.0975 31.4126 39.236 31.4126C40.3746 31.4126 41.2975 32.3356 41.2975 33.4741C41.2975 34.6127 40.3746 35.5356 39.236 35.5356Z" fill="currentColor"/><path d="M36.0467 38.1127C35.5579 37.4125 34.5936 37.2411 33.8934 37.7299C33.1934 38.2186 33.022 39.1821 33.5106 39.8822C35.5009 42.7332 38.5532 43.8494 41.3748 43.9857C44.1507 44.1198 46.9429 43.3233 48.6893 42.0385C49.3771 41.5324 49.5245 40.5641 49.0184 39.8763C48.5123 39.1889 47.5449 39.0415 46.8572 39.5472C45.7772 40.342 43.7165 41.0026 41.5242 40.8968C39.3774 40.7932 37.3451 39.9723 36.0467 38.1127Z" fill="currentColor"/></svg></div>
+            </div>
+
+          </div>
+          <!-- END: AI Chat - message thread -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Platform avatar - <code>.hb-icon</code></h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-end;">
+          <!-- START: AI Chat - avatar sizes -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="hb-icon hb-icon--xs" aria-hidden="true"><svg width="48" height="48" viewBox="17 17 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.0918 29.8732C25.0919 27.4355 27.0682 25.4592 29.5059 25.4591L49.5859 25.4591C52.0236 25.4592 53.9999 27.4355 54 29.8732V49.9532C53.9999 52.3909 52.0236 54.3672 49.5859 54.3673H29.5059C27.0682 54.3672 25.0919 52.3909 25.0918 49.9532L25.0918 29.8732ZM22 49.9532C22.0001 54.0987 25.3604 57.459 29.5059 57.4591H49.5859C53.7314 57.459 57.0917 54.0987 57.0918 49.9532V29.8732C57.0917 25.7277 53.7314 22.3674 49.5859 22.3673L29.5059 22.3673C25.3604 22.3674 22.0001 25.7277 22 29.8732L22 49.9532Z" fill="currentColor"/><path d="M45.7969 35.5346C44.6584 35.5346 43.7354 34.6116 43.7354 33.4731C43.7354 32.3345 44.6584 31.4115 45.7969 31.4115C46.9355 31.4115 47.8585 32.3345 47.8585 33.4731C47.8585 34.6116 46.9355 35.5346 45.7969 35.5346Z" fill="currentColor"/><path d="M39.236 35.5356C38.0975 35.5356 37.1745 34.6127 37.1745 33.4741C37.1745 32.3356 38.0975 31.4126 39.236 31.4126C40.3746 31.4126 41.2975 32.3356 41.2975 33.4741C41.2975 34.6127 40.3746 35.5356 39.236 35.5356Z" fill="currentColor"/><path d="M36.0467 38.1127C35.5579 37.4125 34.5936 37.2411 33.8934 37.7299C33.1934 38.2186 33.022 39.1821 33.5106 39.8822C35.5009 42.7332 38.5532 43.8494 41.3748 43.9857C44.1507 44.1198 46.9429 43.3233 48.6893 42.0385C49.3771 41.5324 49.5245 40.5641 49.0184 39.8763C48.5123 39.1889 47.5449 39.0415 46.8572 39.5472C45.7772 40.342 43.7165 41.0026 41.5242 40.8968C39.3774 40.7932 37.3451 39.9723 36.0467 38.1127Z" fill="currentColor"/></svg></div>
+            <p class="small txt-tertiary">XS - 24px</p>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="hb-icon hb-icon--sm" aria-hidden="true"><svg width="48" height="48" viewBox="17 17 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.0918 29.8732C25.0919 27.4355 27.0682 25.4592 29.5059 25.4591L49.5859 25.4591C52.0236 25.4592 53.9999 27.4355 54 29.8732V49.9532C53.9999 52.3909 52.0236 54.3672 49.5859 54.3673H29.5059C27.0682 54.3672 25.0919 52.3909 25.0918 49.9532L25.0918 29.8732ZM22 49.9532C22.0001 54.0987 25.3604 57.459 29.5059 57.4591H49.5859C53.7314 57.459 57.0917 54.0987 57.0918 49.9532V29.8732C57.0917 25.7277 53.7314 22.3674 49.5859 22.3673L29.5059 22.3673C25.3604 22.3674 22.0001 25.7277 22 29.8732L22 49.9532Z" fill="currentColor"/><path d="M45.7969 35.5346C44.6584 35.5346 43.7354 34.6116 43.7354 33.4731C43.7354 32.3345 44.6584 31.4115 45.7969 31.4115C46.9355 31.4115 47.8585 32.3345 47.8585 33.4731C47.8585 34.6116 46.9355 35.5346 45.7969 35.5346Z" fill="currentColor"/><path d="M39.236 35.5356C38.0975 35.5356 37.1745 34.6127 37.1745 33.4741C37.1745 32.3356 38.0975 31.4126 39.236 31.4126C40.3746 31.4126 41.2975 32.3356 41.2975 33.4741C41.2975 34.6127 40.3746 35.5356 39.236 35.5356Z" fill="currentColor"/><path d="M36.0467 38.1127C35.5579 37.4125 34.5936 37.2411 33.8934 37.7299C33.1934 38.2186 33.022 39.1821 33.5106 39.8822C35.5009 42.7332 38.5532 43.8494 41.3748 43.9857C44.1507 44.1198 46.9429 43.3233 48.6893 42.0385C49.3771 41.5324 49.5245 40.5641 49.0184 39.8763C48.5123 39.1889 47.5449 39.0415 46.8572 39.5472C45.7772 40.342 43.7165 41.0026 41.5242 40.8968C39.3774 40.7932 37.3451 39.9723 36.0467 38.1127Z" fill="currentColor"/></svg></div>
+            <p class="small txt-tertiary">SM - 32px</p>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="hb-icon hb-icon--md" aria-hidden="true"><svg width="48" height="48" viewBox="17 17 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.0918 29.8732C25.0919 27.4355 27.0682 25.4592 29.5059 25.4591L49.5859 25.4591C52.0236 25.4592 53.9999 27.4355 54 29.8732V49.9532C53.9999 52.3909 52.0236 54.3672 49.5859 54.3673H29.5059C27.0682 54.3672 25.0919 52.3909 25.0918 49.9532L25.0918 29.8732ZM22 49.9532C22.0001 54.0987 25.3604 57.459 29.5059 57.4591H49.5859C53.7314 57.459 57.0917 54.0987 57.0918 49.9532V29.8732C57.0917 25.7277 53.7314 22.3674 49.5859 22.3673L29.5059 22.3673C25.3604 22.3674 22.0001 25.7277 22 29.8732L22 49.9532Z" fill="currentColor"/><path d="M45.7969 35.5346C44.6584 35.5346 43.7354 34.6116 43.7354 33.4731C43.7354 32.3345 44.6584 31.4115 45.7969 31.4115C46.9355 31.4115 47.8585 32.3345 47.8585 33.4731C47.8585 34.6116 46.9355 35.5346 45.7969 35.5346Z" fill="currentColor"/><path d="M39.236 35.5356C38.0975 35.5356 37.1745 34.6127 37.1745 33.4741C37.1745 32.3356 38.0975 31.4126 39.236 31.4126C40.3746 31.4126 41.2975 32.3356 41.2975 33.4741C41.2975 34.6127 40.3746 35.5356 39.236 35.5356Z" fill="currentColor"/><path d="M36.0467 38.1127C35.5579 37.4125 34.5936 37.2411 33.8934 37.7299C33.1934 38.2186 33.022 39.1821 33.5106 39.8822C35.5009 42.7332 38.5532 43.8494 41.3748 43.9857C44.1507 44.1198 46.9429 43.3233 48.6893 42.0385C49.3771 41.5324 49.5245 40.5641 49.0184 39.8763C48.5123 39.1889 47.5449 39.0415 46.8572 39.5472C45.7772 40.342 43.7165 41.0026 41.5242 40.8968C39.3774 40.7932 37.3451 39.9723 36.0467 38.1127Z" fill="currentColor"/></svg></div>
+            <p class="small txt-tertiary">MD - 48px</p>
+          </div>
+          <!-- END: AI Chat - avatar sizes -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Chat input - <code>.ai-chat-input</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: AI Chat - input
+               Shown outside .ai-chat-dock here so it sits inline on the reference page.
+               In the app, .ai-chat-input is wrapped in .ai-chat-dock, which fixes it
+               above the bottom navigation. -->
+          <div class="ai-chat-input">
+
+            <!-- Auto-growing text field -->
+            <textarea class="ai-chat-textarea" rows="1" aria-label="Write a message">Yes i think i do</textarea>
+
+            <!-- Mic + send. Send takes the brand variant once the field has content. -->
+            <div class="ai-chat-actions">
+              <button class="icon-btn ai-chat-btn--mic has-tooltip" type="button" aria-label="Start voice input" aria-describedby="tip-dictate-ref">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M16 7C16 4.79087 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11C8 13.2091 9.79087 15 12 15C14.2091 15 16 13.2091 16 11V7ZM18 11C18 14.3137 15.3137 17 12 17C8.68629 17 6 14.3137 6 11V7C6 3.6863 8.6863 1 12 1C15.3137 1 18 3.68629 18 7V11Z" fill="currentColor"/>
+                  <path d="M3 11C3 10.4477 3.44772 10 4 10C4.55228 10 5 10.4477 5 11C5 14.866 8.134 18 12 18C15.866 18 19 14.866 19 11C19 10.4477 19.4477 10 20 10C20.5523 10 21 10.4477 21 11C21 15.6325 17.4998 19.4448 13 19.9424V21H15C15.5523 21 16 21.4477 16 22C16 22.5523 15.5523 23 15 23H9C8.44772 23 8 22.5523 8 22C8 21.4477 8.44772 21 9 21H11V19.9424C6.50019 19.4448 3 15.6325 3 11Z" fill="currentColor"/>
+                </svg>
+                <span class="tooltip" role="tooltip" id="tip-dictate-ref">Dictate</span>
+              </button>
+
+              <button class="icon-btn icon-btn-brand-primary" type="button" aria-label="Send message">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M11 19V5.5C11 4.94772 11.4477 4.5 12 4.5C12.5523 4.5 13 4.94772 13 5.5V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19Z" fill="currentColor"/>
+                  <path d="M12.1767 4.00977C12.5832 4.05272 12.9514 4.23434 13.2285 4.40137C13.5726 4.60883 13.9252 4.88683 14.2666 5.18848C14.9518 5.79396 15.6857 6.58228 16.3476 7.34473C17.014 8.11219 17.6277 8.87639 18.0732 9.44727C18.2964 9.73322 18.4788 9.97201 18.6055 10.1396C18.6687 10.2233 18.718 10.2895 18.7519 10.335C18.7689 10.3577 18.782 10.3756 18.791 10.3877C18.7953 10.3935 18.7984 10.3982 18.8008 10.4014C18.8019 10.4029 18.803 10.4044 18.8037 10.4053L18.8047 10.4062V10.4072H18.8057C19.1328 10.8519 19.0373 11.4782 18.5928 11.8057C18.1481 12.1328 17.5217 12.0373 17.1943 11.5928L17.1924 11.5898C17.1905 11.5873 17.1875 11.5834 17.1836 11.5781C17.1758 11.5676 17.1641 11.5514 17.1484 11.5303C17.1169 11.4879 17.0694 11.4249 17.0088 11.3447C16.8876 11.1843 16.7118 10.9541 16.4961 10.6777C16.0637 10.1236 15.4738 9.38772 14.8379 8.65527C14.1976 7.91783 13.5303 7.20598 12.9424 6.68652C12.6473 6.42585 12.3954 6.23488 12.1953 6.11426C12.1 6.05684 12.0362 6.02741 12 6.0127C11.9638 6.02741 11.8999 6.05683 11.8047 6.11426C11.6046 6.23487 11.3526 6.42586 11.0576 6.68652C10.4697 7.20598 9.80237 7.91783 9.1621 8.65527C8.52616 9.38772 7.93631 10.1236 7.50389 10.6777C7.2882 10.9541 7.1124 11.1843 6.9912 11.3447C6.93061 11.4249 6.8831 11.4879 6.85155 11.5303C6.83584 11.5513 6.82422 11.5676 6.81639 11.5781C6.81248 11.5834 6.80946 11.5873 6.8076 11.5898L6.80565 11.5928L6.74022 11.6719C6.40008 12.0475 5.82414 12.1124 5.40721 11.8057C4.96264 11.4782 4.86714 10.8519 5.19432 10.4072H5.1953V10.4062L5.19628 10.4053C5.19693 10.4044 5.19809 10.4029 5.1992 10.4014C5.20157 10.3982 5.20469 10.3935 5.20897 10.3877C5.21794 10.3756 5.23106 10.3577 5.24803 10.335C5.28194 10.2895 5.3313 10.2233 5.39452 10.1396C5.52114 9.972 5.70358 9.73323 5.92674 9.44727C6.37225 8.87639 6.98599 8.1122 7.65233 7.34473C8.31432 6.58227 9.04813 5.79397 9.73338 5.18848C10.0748 4.88683 10.4274 4.60883 10.7715 4.40137C11.0882 4.21043 11.5239 4 12 4L12.1767 4.00977Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- END: AI Chat - input -->
+        </div>
+
+      </div>
+      <!-- SECTION END: AI Chat -->
+
+      <!-- ============================================================
+           SECTION: Bottom Navigation
+           The fixed bar at the foot of every question page. Assembles three
+           components already documented above: the progress bar, icon buttons,
+           and tooltips.
+
+             .bottom-nav          - the fixed bar itself
+             .progress-indicator  - survey progress (see Progress Bar section)
+             .button-container    - Help / Back / Next row
+             .btn-nav             - widens Back and Next to width:auto with
+                                    wider inline padding; collapses back to a
+                                    48px square on mobile
+
+           Back is disabled on the first question by adding .icon-btn-disabled.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Bottom Navigation</h2>
+          <p class="txt-secondary">
+            Fixed to the bottom of every question page. Shown here in flow rather than fixed
+            so it can be inspected inline - in the app <code>.bottom-nav</code> is
+            <code>position: fixed</code> and the page reserves
+            <code>--nav-bottom-height</code> of space for it.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Default - Back disabled (first question)</h5>
+        </div>
+        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
+          <!-- START: Bottom Navigation - first question
+               position: static here is reference-page only, to un-fix the bar. -->
+          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
+
+            <!-- Progress indicator -->
+            <div class="progress-indicator">
+              <div class="progress-bar">
+                <span class="progress" style="width: 0%"></span>
+              </div>
+              <p class="label">0%</p>
+            </div>
+
+            <!-- Nav buttons -->
+            <div class="button-container">
+
+              <!-- Help - secondary icon button -->
+              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-1">
+                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-help-1">Help</span>
+              </a>
+
+              <!-- Back - disabled on the first question -->
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-nav-back-1">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-back-1">Back</span>
+              </a>
+
+              <!-- Next -->
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-1">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-next-1">Next</span>
+              </a>
+
+            </div>
+          </nav>
+          <!-- END: Bottom Navigation - first question -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Mid-survey - Back enabled</h5>
+        </div>
+        <div class="border-wrapper" style="overflow: hidden;">
+          <!-- START: Bottom Navigation - mid survey
+               Same markup with .icon-btn-disabled removed from Back and the
+               progress fill advanced. -->
+          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
+
+            <div class="progress-indicator">
+              <div class="progress-bar">
+                <span class="progress" style="width: 50%"></span>
+              </div>
+              <p class="label">50%</p>
+            </div>
+
+            <div class="button-container">
+
+              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-2">
+                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-help-2">Help</span>
+              </a>
+
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-back-2">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-back-2">Back</span>
+              </a>
+
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-2">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-next-2">Next</span>
+              </a>
+
+            </div>
+          </nav>
+          <!-- END: Bottom Navigation - mid survey -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Bottom Navigation -->
 
     </section>
   </body>

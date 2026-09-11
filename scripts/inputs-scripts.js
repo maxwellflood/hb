@@ -1,4 +1,4 @@
-// Validation — show message if field was touched but left empty
+// Validation - show message if field was touched but left empty
 
 document.querySelectorAll(".text-input").forEach((input) => {
   input.addEventListener("blur", () => {
@@ -15,7 +15,7 @@ document.querySelectorAll(".text-input").forEach((input) => {
   });
 });
 
-// Don't know button — toggle per instance
+// Don't know button - toggle per instance
 
 document.querySelectorAll(".dont-know-btn").forEach((btn) => {
   btn.addEventListener("click", () => {

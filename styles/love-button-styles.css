@@ -55,7 +55,7 @@
   background-color: var(--surface-secondary);
 }
 
-/* Concentric dotted rings — each absolutely centred, sized as a % of the outer circle.
+/* Concentric dotted rings - each absolutely centred, sized as a % of the outer circle.
    mix-blend-mode: multiply darkens the ring where it overlaps the blue fill. */
 .love-ring {
   position: absolute;
@@ -78,7 +78,7 @@
 .love-ring--80 { width: 80%; height: 80%; opacity: 0.80; }
 .love-ring--90 { width: 90%; height: 90%; opacity: 0.90; }
 
-/* Growing fill circle — starts at 0, expands to 100% of the outer circle.
+/* Growing fill circle - starts at 0, expands to 100% of the outer circle.
    Percentages relative to .love-circle-outer, so it scales automatically. */
 .love-fill {
   position: absolute;
@@ -92,7 +92,7 @@
   pointer-events: none;
 }
 
-/* Value counter — sits above the fill via z-index */
+/* Value counter - sits above the fill via z-index */
 .love-value {
   position: absolute;
   top: 50%;
@@ -111,7 +111,7 @@
   user-select: none;
 }
 
-/* Adjustment button group — centred beneath circle; JS equalises button widths after reveal */
+/* Adjustment button group - centred beneath circle; JS equalises button widths after reveal */
 .love-btn-group {
   display: flex;
   gap: var(--size-8);
@@ -125,7 +125,7 @@
   gap: var(--size-8);
 }
 
-/* Fill colour states — toggled by JS on adjust button press/release */
+/* Fill colour states - toggled by JS on adjust button press/release */
 .love-fill--less {
   background-color: var(--surface-error-muted);
 }
@@ -143,7 +143,7 @@
   background-color: var(--blu-80);
 }
 
-/* Validation message — hidden by default, revealed by .love-field--invalid */
+/* Validation message - hidden by default, revealed by .love-field--invalid */
 .love-message {
   display: none;
   align-items: center;

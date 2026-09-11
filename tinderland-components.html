@@ -29,14 +29,14 @@
            The card is the primary interactive element in the Tinderland swipe flow.
 
            Variants:
-             .tinderland-card              — text-only card (default)
-             .tinderland-card--image       — image + label card
+             .tinderland-card              - text-only card (default)
+             .tinderland-card--image       - image + label card
 
            States (applied as modifier classes):
-             (none)                        — Idle
-             .tinderland-card--pressed     — Pressed / held
-             .tinderland-card--swipe-l     — Swiping left (reject)
-             .tinderland-card--swipe-r     — Swiping right (prefer)
+             (none)                        - Idle
+             .tinderland-card--pressed     - Pressed / held
+             .tinderland-card--swipe-l     - Swiping left (reject)
+             .tinderland-card--swipe-r     - Swiping right (prefer)
            ============================================================ -->
       <div class="container u-mb-lg">
 
@@ -44,17 +44,17 @@
           <h2 class="txt-secondary">Tinderland Card</h2>
           <p class="txt-secondary">
             The swipe card shown to respondents. Two variants: text-only and image with label.
-            Four states per variant — idle, pressed, swipe left (reject), and swipe right (prefer).
+            Four states per variant - idle, pressed, swipe left (reject), and swipe right (prefer).
           </p>
         </div>
 
-        <!-- Text variant — 4 states -->
+        <!-- Text variant - 4 states -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Text variant</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-start;">
 
-          <!-- START: Tinderland Card — Text / Idle
+          <!-- START: Tinderland Card - Text / Idle
                Default resting state. White surface, grey border. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card">
@@ -62,9 +62,9 @@
             </div>
             <p class="small txt-tertiary">Idle</p>
           </div>
-          <!-- END: Tinderland Card — Text / Idle -->
+          <!-- END: Tinderland Card - Text / Idle -->
 
-          <!-- START: Tinderland Card — Text / Pressed
+          <!-- START: Tinderland Card - Text / Pressed
                Grey surface, grey border. Applied while the card is held down. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--pressed">
@@ -72,9 +72,9 @@
             </div>
             <p class="small txt-tertiary">Pressed</p>
           </div>
-          <!-- END: Tinderland Card — Text / Pressed -->
+          <!-- END: Tinderland Card - Text / Pressed -->
 
-          <!-- START: Tinderland Card — Text / Swipe-left
+          <!-- START: Tinderland Card - Text / Swipe-left
                Yellow tint background, amber border. Signals a left/reject swipe in progress. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--swipe-l">
@@ -82,9 +82,9 @@
             </div>
             <p class="small txt-tertiary">Swipe-L</p>
           </div>
-          <!-- END: Tinderland Card — Text / Swipe-left -->
+          <!-- END: Tinderland Card - Text / Swipe-left -->
 
-          <!-- START: Tinderland Card — Text / Swipe-right
+          <!-- START: Tinderland Card - Text / Swipe-right
                Green tint background, green border. Signals a right/prefer swipe in progress. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--swipe-r">
@@ -92,17 +92,17 @@
             </div>
             <p class="small txt-tertiary">Swipe-R</p>
           </div>
-          <!-- END: Tinderland Card — Text / Swipe-right -->
+          <!-- END: Tinderland Card - Text / Swipe-right -->
 
         </div>
 
-        <!-- Image variant — 4 states -->
+        <!-- Image variant - 4 states -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Image variant</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm" style="align-items: flex-start;">
 
-          <!-- START: Tinderland Card — Image / Idle
+          <!-- START: Tinderland Card - Image / Idle
                White surface, grey border. Image fills card width at its natural aspect ratio. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--image">
@@ -111,9 +111,9 @@
             </div>
             <p class="small txt-tertiary">Idle</p>
           </div>
-          <!-- END: Tinderland Card — Image / Idle -->
+          <!-- END: Tinderland Card - Image / Idle -->
 
-          <!-- START: Tinderland Card — Image / Pressed
+          <!-- START: Tinderland Card - Image / Pressed
                Grey surface, grey border. Image and label unchanged. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--image tinderland-card--pressed">
@@ -122,9 +122,9 @@
             </div>
             <p class="small txt-tertiary">Pressed</p>
           </div>
-          <!-- END: Tinderland Card — Image / Pressed -->
+          <!-- END: Tinderland Card - Image / Pressed -->
 
-          <!-- START: Tinderland Card — Image / Swipe-left
+          <!-- START: Tinderland Card - Image / Swipe-left
                White surface (background unchanged), amber border only. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--image tinderland-card--swipe-l">
@@ -133,9 +133,9 @@
             </div>
             <p class="small txt-tertiary">Swipe-L</p>
           </div>
-          <!-- END: Tinderland Card — Image / Swipe-left -->
+          <!-- END: Tinderland Card - Image / Swipe-left -->
 
-          <!-- START: Tinderland Card — Image / Swipe-right
+          <!-- START: Tinderland Card - Image / Swipe-right
                White surface (background unchanged), green border only. -->
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div class="tinderland-card tinderland-card--image tinderland-card--swipe-r">
@@ -144,7 +144,7 @@
             </div>
             <p class="small txt-tertiary">Swipe-R</p>
           </div>
-          <!-- END: Tinderland Card — Image / Swipe-right -->
+          <!-- END: Tinderland Card - Image / Swipe-right -->
 
         </div>
 
@@ -167,7 +167,7 @@
 
         <div class="flex-v-wrapper border-wrapper u-p-sm">
 
-          <!-- START: Layer 1 + 2 — Idle dot and Active dot
+          <!-- START: Layer 1 + 2 - Idle dot and Active dot
                Base component. 4×4px circle. Default colour is --text-disabled (idle).
                Add .step-dot--active for the dark/current position state. -->
           <div>
@@ -186,9 +186,9 @@
 
             </div>
           </div>
-          <!-- END: Layer 1 + 2 — Idle dot and Active dot -->
+          <!-- END: Layer 1 + 2 - Idle dot and Active dot -->
 
-          <!-- START: Layer 3 — Dot group
+          <!-- START: Layer 3 - Dot group
                Row of dots with space-between layout inside a fixed 40px width.
                First dot is active; remaining dots are idle. -->
           <div>
@@ -200,15 +200,15 @@
               <div class="step-dot"></div>
             </div>
           </div>
-          <!-- END: Layer 3 — Dot group -->
+          <!-- END: Layer 3 - Dot group -->
 
-          <!-- START: Layer 4 — Track wrapper
+          <!-- START: Layer 4 - Track wrapper
                White surface container that houses the dot group.
                Shown here on a grey background to make the white surface visible.
                In production this sits on a coloured card or image. -->
           <div>
             <p class="small txt-tertiary u-mb-sm">Track wrapper</p>
-            <!-- Grey background is reference-page presentation only — not part of the component -->
+            <!-- Grey background is reference-page presentation only - not part of the component -->
             <div style="display: inline-flex; background-color: var(--surface-secondary); padding: var(--size-16); border-radius: var(--radius-s);">
               <div class="step-dot-track">
                 <div class="step-dot-group">
@@ -220,7 +220,7 @@
               </div>
             </div>
           </div>
-          <!-- END: Layer 4 — Track wrapper -->
+          <!-- END: Layer 4 - Track wrapper -->
 
         </div>
 
@@ -229,7 +229,7 @@
 
       <!-- ============================================================
            SECTION: Don't Know Button
-           Shared component — also documented in index.html.
+           Shared component - also documented in index.html.
            A square emoji button with a floating confirmation menu.
            ============================================================ -->
       <div class="container u-mb-lg">
@@ -238,22 +238,22 @@
           <h2 class="txt-secondary">Don't Know Button</h2>
           <p class="txt-secondary">
             A square emoji button that opens a secondary confirmation menu when activated.
-            Used wherever a respondent can skip a question — the menu requires them to confirm
+            Used wherever a respondent can skip a question - the menu requires them to confirm
             or cancel before progressing. Available in four sizes to suit different contexts.
           </p>
         </div>
 
-        <!-- Size variants — all sizes at idle state for comparison -->
+        <!-- Size variants - all sizes at idle state for comparison -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Sizes</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-end;">
 
-          <!-- START: Don't Know Button — Size variants
+          <!-- START: Don't Know Button - Size variants
                XS (32px, base), SM (36px), RG (40px), LG (48px).
                Size modifiers are applied to the .dont-know-btn element alongside any state modifier. -->
 
-          <!-- XS — 32px, base size, no modifier needed -->
+          <!-- XS - 32px, base size, no modifier needed -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -261,7 +261,7 @@
             <p class="small txt-tertiary">XS</p>
           </div>
 
-          <!-- SM — 36px -->
+          <!-- SM - 36px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--sm" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -269,7 +269,7 @@
             <p class="small txt-tertiary">SM</p>
           </div>
 
-          <!-- RG — 40px -->
+          <!-- RG - 40px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--rg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -277,7 +277,7 @@
             <p class="small txt-tertiary">RG</p>
           </div>
 
-          <!-- LG — 48px -->
+          <!-- LG - 48px -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <div class="dont-know-btn-wrapper">
               <button class="dont-know-btn dont-know-btn--lg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
@@ -285,17 +285,17 @@
             <p class="small txt-tertiary">LG</p>
           </div>
 
-          <!-- END: Don't Know Button — Size variants -->
+          <!-- END: Don't Know Button - Size variants -->
 
         </div>
 
-        <!-- States — XS size shown; states apply equally to all sizes -->
+        <!-- States - XS size shown; states apply equally to all sizes -->
         <div class="u-mb-rg">
           <h5 class="txt-secondary">Idle</h5>
         </div>
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
 
-          <!-- START: Don't Know Button — Idle
+          <!-- START: Don't Know Button - Idle
                Default resting state. Grey surface, grey border. Blue border on hover (CSS :hover). -->
           <div class="dont-know-btn-wrapper">
             <button
@@ -305,22 +305,22 @@
               aria-label="Don't know"
             >🤷</button>
           </div>
-          <!-- END: Don't Know Button — Idle -->
+          <!-- END: Don't Know Button - Idle -->
 
         </div>
 
         <div class="u-mb-rg">
-          <h5 class="txt-secondary">Active — menu open</h5>
+          <h5 class="txt-secondary">Active - menu open</h5>
         </div>
-        <!-- The inner presentation wrapper (padding-top) is reference-page only —
+        <!-- The inner presentation wrapper (padding-top) is reference-page only -
              it reserves vertical space so the absolutely-positioned menu stays
              within the demo container's borders. It is not part of the component. -->
         <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
           <div style="padding-top: 64px;">
 
-            <!-- START: Don't Know Button — Active
+            <!-- START: Don't Know Button - Active
                  Button turns solid blue. Confirmation menu floats above it.
-                 Menu button hover/hit states are CSS :hover and :active only — not shown statically. -->
+                 Menu button hover/hit states are CSS :hover and :active only - not shown statically. -->
             <div class="dont-know-btn-wrapper">
               <button
                 class="dont-know-btn dont-know-btn--active"
@@ -329,23 +329,23 @@
                 aria-label="Don't know"
               >🤷</button>
 
-              <!-- Confirmation menu — shown when aria-pressed="true" -->
+              <!-- Confirmation menu - shown when aria-pressed="true" -->
               <div class="dont-know-menu" role="dialog" aria-label="Confirm selection">
-                <!-- Outer bordered frame — provides the border (z-index: auto, lowest) -->
+                <!-- Outer bordered frame - provides the border (z-index: auto, lowest) -->
                 <div class="dont-know-menu-frame">
-                  <!-- Button row — z-index: 3, renders above the caret -->
+                  <!-- Button row - z-index: 3, renders above the caret -->
                   <div class="dont-know-menu-buttons">
                     <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
                     <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
                   </div>
                 </div>
-                <!-- Caret — z-index: 2, white fill covers frame border at join,
+                <!-- Caret - z-index: 2, white fill covers frame border at join,
                      V borders visible below. Buttons (z-index: 3) cover its top half. -->
                 <div class="dont-know-menu-caret" aria-hidden="true"></div>
               </div>
 
             </div>
-            <!-- END: Don't Know Button — Active -->
+            <!-- END: Don't Know Button - Active -->
 
           </div>
         </div>

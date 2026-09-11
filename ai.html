@@ -31,18 +31,18 @@
       </a>
     </header>
 
-    <!-- Primary page content — scrollable conversation thread -->
+    <!-- Primary page content - scrollable conversation thread -->
     <main id="main" class="site-main" role="main">
       <div class="main-surface">
         <section class="page">
 
-          <!-- Conversation thread — AI and user messages centred at 640px -->
+          <!-- Conversation thread - AI and user messages centred at 640px -->
           <div class="content-wrapper">
             <div class="content">
               <div class="message-thread" role="log" aria-label="Conversation" aria-live="polite">
 
                 <!-- START: AI message 1
-                     Opening question from the AI — no avatar, just text. -->
+                     Opening question from the AI - no avatar, just text. -->
                 <div class="message message--ai">
                   <p class="message-text">What would you say you prefer, between Jalapeños and tomatoes?</p>
                 </div>
@@ -61,7 +61,7 @@
                 <div class="message message--ai">
                   <p class="message-text">So if you were offered a choice between the two to put in a burrito, you'd go for hot Jalapeños every time?</p>
 
-                  <!-- Platform avatar — default (smiling) expression, small (32px) variant -->
+                  <!-- Platform avatar - default (smiling) expression, small (32px) variant -->
                   <div class="hb-icon hb-icon--sm" aria-hidden="true">
                     <svg width="48" height="48" viewBox="17 17 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M25.0918 29.8732C25.0919 27.4355 27.0682 25.4592 29.5059 25.4591L49.5859 25.4591C52.0236 25.4592 53.9999 27.4355 54 29.8732V49.9532C53.9999 52.3909 52.0236 54.3672 49.5859 54.3673H29.5059C27.0682 54.3672 25.0919 52.3909 25.0918 49.9532L25.0918 29.8732ZM22 49.9532C22.0001 54.0987 25.3604 57.459 29.5059 57.4591H49.5859C53.7314 57.459 57.0917 54.0987 57.0918 49.9532V29.8732C57.0917 25.7277 53.7314 22.3674 49.5859 22.3673L29.5059 22.3673C25.3604 22.3674 22.0001 25.7277 22 29.8732L22 49.9532Z" fill="currentColor"/>
@@ -84,20 +84,20 @@
       </div>
     </main>
 
-    <!-- Chat input dock — fixed above the bottom nav.
+    <!-- Chat input dock - fixed above the bottom nav.
          Always visible regardless of scroll position.
          Shows the text-active state: user has typed a response. -->
     <div class="ai-chat-dock">
       <div class="ai-chat-input">
 
-        <!-- Text area — text-active state, user is composing a reply -->
+        <!-- Text area - text-active state, user is composing a reply -->
         <textarea
           class="ai-chat-textarea"
           rows="1"
           aria-label="Write a message"
         >Yes i think i do</textarea>
 
-        <!-- Action buttons — mic + send (active, text present) -->
+        <!-- Action buttons - mic + send (active, text present) -->
         <div class="ai-chat-actions">
 
           <!-- Mic: present alongside send when text exists -->
@@ -148,7 +148,7 @@
           <span class="tooltip" role="tooltip" id="tip-help-ai">Help</span>
         </a>
 
-        <!-- Back (disabled — conversation flow is not linear) -->
+        <!-- Back (disabled - conversation flow is not linear) -->
         <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-back-ai" aria-disabled="true">
           <div class="icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +159,7 @@
           <span class="tooltip" role="tooltip" id="tip-back-ai">Back</span>
         </a>
 
-        <!-- Next (disabled — user must submit reply to continue) -->
+        <!-- Next (disabled - user must submit reply to continue) -->
         <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-next-ai" aria-disabled="true">
           <div class="icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
