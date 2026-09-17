@@ -1,0 +1,342 @@
+/* =====================================================
+   Dropper - Specific Styles
+   Styles for the Dropper drag-and-drop question type: a card the
+   respondent drags (or taps) onto one of several zones. Shared by both
+   orientations - Dropper (horizontal rows, dropper-*.html) and Dragger
+   (vertical columns, dragger-*.html) - since .dropper-top and the card
+   above the zones are identical between them; only the zone list and its
+   items differ, via the --vertical modifier below.
+
+   Everything shared with other question types is reused, not
+   redefined here:
+     .answer-arena-section / .answer-arena  - the grey arena (styles.css)
+     .step-counter                          - "current / total" progress (styles.css)
+     .dont-know-btn-wrapper / .dont-know-btn - skip button (styles.css)
+     .content-wrapper / .content            - page gutters + column (styles.css)
+
+   Structure:
+     .dropper                      - fills the arena (see below)
+       .dropper-top                 - header strip
+         .dropper-top__progress     - step counter, pinned to the left edge
+         .dropper-card              - the draggable card, centred
+         .dropper-top__dont-know    - Don't Know button, pinned to the right edge
+       .answer-dropper-area                - the list of drop zones, filling the rest
+         .horizontal-answer-drop-area (x n)         - one horizontal drop zone (Dropper)
+       .answer-dropper-area.answer-dropper-area--vertical  - same list, columns instead of rows
+         .vertical-answer-drop-area (x n)            - one vertical drop zone (Dragger)
+   ===================================================== */
+
+/* .answer-arena centres a single child by default (see styles.css) -
+   align-self: stretch fills it instead, the same way .bingo-board does. No
+   styling of its own: the grey surface, border and radius all come from
+   .answer-arena, which this sits inside. height: 100% backs up align-self:
+   stretch explicitly, so this never depends on flex cross-axis inference -
+   it is exactly the arena's height, full stop. */
+.dropper {
+  flex: 1;
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================================
+   Dropper Top
+   Header strip housing the draggable card. position: relative anchors
+   the progress counter and Don't Know button to its own left/right
+   edges, vertically centred - independent of the card's height, and
+   independent of the arena's own top/bottom furniture positions used
+   by Tosser and Bingo (this question type doesn't use those slots).
+   ===================================================== */
+
+.dropper-top {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--size-24);
+}
+
+.dropper-top__progress {
+  position: absolute;
+  top: var(--size-24);
+  left: var(--size-24);
+}
+
+.dropper-top__dont-know {
+  position: absolute;
+  top: var(--size-24);
+  right: var(--size-24);
+}
+
+/* =====================================================
+   Dropper Card
+   The draggable card. Unlike .bingo-card it does not fill a fixed cell -
+   the text variant shrinks to fit its own copy and wraps onto multiple
+   lines if that copy is long, since it is not fixed to a single word.
+   The image variant (.dropper-card--image) swaps that chip padding for a
+   tight, even inset instead - the same relationship as .bingo-card /
+   .bingo-card__img, just with the card's own padding changing too, since
+   nothing here is stretched to a fixed cell size the way Bingo's card is.
+
+   Same press/hover treatment as .bingo-card, so a card reads identically
+   whichever question type it appears in:
+     :hover / --pressed   - shadow deepens, 10% → 20%
+     :active / --pressed  - grabbed: grey, scale 0.95, rotate 6°
+   ===================================================== */
+
+.dropper-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: var(--size-8) var(--size-16);
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+  cursor: grab;
+  transition:
+    transform 0.12s ease,
+    background-color 0.12s ease,
+    filter 0.12s ease;
+}
+
+.dropper-card:hover,
+.dropper-card--pressed {
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.dropper-card:active,
+.dropper-card--pressed {
+  background-color: var(--surface-secondary);
+  transform: scale(0.95) rotate(6deg);
+  cursor: grabbing;
+}
+
+/* Image variant - tight, even inset around the picture rather than the
+   text chip's asymmetric padding. */
+.dropper-card--image {
+  padding: var(--size-4);
+}
+
+.dropper-card__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Image variant content - width follows the image's own aspect ratio
+   rather than a fixed value, so it isn't tied to this one sample image's
+   proportions. max-height is a placeholder cap pending a final spec. */
+.dropper-card__img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 106px;
+  border-radius: var(--radius-xs);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =====================================================
+   Dropper Zones
+   The list of horizontal drop zones the card can be placed on. Flush,
+   full-width rows separated only by a border-top hairline on every row
+   (including the first, which divides the list from Dropper Top) - not
+   individually boxed, so the list reads as one continuous strip against
+   the arena's own grey background, same as the Figma reference. Equal
+   height (flex, not CSS Grid): flex: 1 divides the remaining height of
+   the arena evenly between them, the same mechanism as the eight cells
+   of a Bingo board.
+
+   Every zone carries a full 1px border at all times, transparent on every
+   edge but the top at rest - so hover / drop-active / filled only ever
+   change border-color, never add a border where there wasn't one before.
+   Doing it with border-width alone (as the idle divider first shipped)
+   changes the box's content size the moment a side gains a border, and
+   the label visibly shifts as the text recentres - this keeps the box
+   model identical in every state.
+
+   No min-height floor and no scrolling: the combined height of the zones
+   must never exceed the arena's own visible height, so they compress
+   together to fit whatever space is left, however short that gets -
+   overflow: hidden is the backstop if a zone's own content ever asks for
+   more than its share.
+
+   Layer 1: .horizontal-answer-drop-area               - the zone
+   Layer 2: .horizontal-answer-drop-area__label        - its text label
+   States:  :hover / :focus-visible     - pointer or keyboard target
+            .horizontal-answer-drop-area--drop-active  - card is being dragged over it
+            .horizontal-answer-drop-area--filled       - a card has been placed here
+   ===================================================== */
+
+.answer-dropper-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.horizontal-answer-drop-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 var(--size-24);
+  background-color: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-top-color: var(--border-primary);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* The last zone sits flush against the arena's own rounded bottom corners
+   (.answer-arena has border-radius + overflow: hidden, which clips
+   everything inside it to that curve). Matching the same radius here means
+   a hover / drop-active / filled border on this row follows the arena's
+   curve instead of getting clipped off square by the mask. */
+.horizontal-answer-drop-area:last-child {
+  border-bottom-left-radius: var(--radius-m);
+  border-bottom-right-radius: var(--radius-m);
+}
+
+/* State: Hover / keyboard focus - brand border, muted blue fill. Matches
+   .bingo-target's hover treatment. Only border-color changes here - the
+   border itself is already 1px solid on every edge at rest, just
+   transparent on three of them, so nothing about the box's size moves. */
+.horizontal-answer-drop-area:hover,
+.horizontal-answer-drop-area:focus-visible {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+  outline: none;
+}
+
+/* State: Drop-active - the card is currently over this zone. Same look as
+   :hover, but as a class: a touch drag never fires :hover on the zone
+   being dragged onto, so the host app applies this while a drag is in
+   progress. */
+.horizontal-answer-drop-area--drop-active {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+}
+
+/* State: Filled - a card has been dropped here and the answer recorded */
+.horizontal-answer-drop-area--filled {
+  border-color: var(--surface-brand-strong);
+  background-color: var(--surface-brand-subtle);
+}
+
+.horizontal-answer-drop-area__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =====================================================
+   Dragger Zones (vertical orientation)
+   Same list, rotated: columns instead of rows, side by side rather than
+   stacked - flex: 1 still divides the arena evenly between them, just
+   along the row axis instead of the column axis. Used by dragger-*.html;
+   .dropper-top above it (card, progress counter, Don't Know button) is
+   unchanged between the two orientations.
+
+   Columns sit flush against each other, so a border on both the left edge
+   of one and the right edge of its neighbour would double up to 2px at
+   every seam. Only the top and right are visible at rest; left and bottom
+   are the same 1px width but transparent, so hover / drop-active / filled
+   can still just change border-color (never add a border where there
+   wasn't one, so nothing shifts) - all four sides turn brand-blue
+   together, a clean single-pixel seam between every column.
+
+   Layer 1: .vertical-answer-drop-area               - the zone
+   Layer 2: .vertical-answer-drop-area__label        - its text label
+   States:  :hover / :focus-visible     - pointer or keyboard target
+            .vertical-answer-drop-area--drop-active  - card is being dragged over it
+            .vertical-answer-drop-area--filled       - a card has been placed here
+   ===================================================== */
+
+/* Row instead of column - the only change needed on the shared wrapper. */
+.answer-dropper-area--vertical {
+  flex-direction: row;
+}
+
+.vertical-answer-drop-area {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--size-24);
+  background-color: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-top-color: var(--border-primary);
+  border-right-color: var(--border-primary);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* The first zone sits against the arena's rounded bottom-left corner, the
+   last against its bottom-right - same reasoning as the horizontal zone's
+   last-child rule, split across the two end columns instead of one. The
+   last zone's right edge also sits against the arena's own right border,
+   so it stays transparent here too - otherwise that one seam would double
+   up the same way the inter-column ones would without the rule above. */
+.vertical-answer-drop-area:first-child {
+  border-bottom-left-radius: var(--radius-m);
+}
+
+.vertical-answer-drop-area:last-child {
+  border-bottom-right-radius: var(--radius-m);
+  border-right-color: transparent;
+}
+
+.vertical-answer-drop-area:hover,
+.vertical-answer-drop-area:focus-visible {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+  outline: none;
+}
+
+.vertical-answer-drop-area--drop-active {
+  border-color: var(--border-highlighted-brand);
+  background-color: var(--surface-brand-muted);
+}
+
+.vertical-answer-drop-area--filled {
+  border-color: var(--surface-brand-strong);
+  background-color: var(--surface-brand-subtle);
+}
+
+.vertical-answer-drop-area__label {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}

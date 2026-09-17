@@ -1495,6 +1495,36 @@ section {
   padding: var(--size-8);
 }
 
+/* =====================================================
+   Step Counter
+   Text alternative to Step Progress Dots above - same job (current
+   position in a multi-step flow), read as "current / total" instead of
+   a row of dots. Shared component: not tied to any one question type's
+   layout, so it can sit wherever a progress marker is needed - centred
+   in .answer-arena__progress like the dot track, or positioned to suit
+   the question type, as in the Dropper's top bar.
+   ===================================================== */
+
+/* Single pill, sized to its text. Grey surface + border rather than
+   .step-dot-track's white, so it reads as a label rather than a button. */
+.step-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-32);
+  padding: var(--size-8);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-disabled);
+  white-space: nowrap;
+}
+
 /* Responsive: screens smaller than tablet */
 @media (max-width: 767px) {
   :root {
