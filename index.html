@@ -10,6 +10,8 @@
          reference renders correctly. In the app, only load the sheets a page needs. -->
     <link rel="stylesheet" href="styles/love-button-styles.css" />
     <link rel="stylesheet" href="styles/tinderland-styles.css" />
+    <link rel="stylesheet" href="styles/bingo-styles.css" />
+    <link rel="stylesheet" href="styles/dropper-styles.css" />
     <link rel="stylesheet" href="styles/ai-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
@@ -996,12 +998,377 @@
         </div>
       </div>
 
+      <!-- Don't Know Button -->
+      <div class="container u-mb-lg">
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Don't Know Button</h2>
+          <p class="txt-secondary">
+            A square emoji button that opens a secondary confirmation menu when activated.
+            Used wherever a respondent can skip a question - the menu requires them to confirm
+            or cancel before progressing. Available in four sizes to suit different contexts.
+          </p>
+        </div>
+
+        <!-- Size variants - all sizes at idle state for comparison -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Sizes</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-end;">
+
+          <!-- START: Don't Know Button - Size variants
+               XS (32px, base), SM (36px), RG (40px), LG (48px).
+               Size modifiers are applied to the .dont-know-btn element alongside any state modifier. -->
+
+          <!-- XS - 32px, base size, no modifier needed -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="dont-know-btn-wrapper">
+              <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+            </div>
+            <p class="small txt-tertiary">XS</p>
+          </div>
+
+          <!-- SM - 36px -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="dont-know-btn-wrapper">
+              <button class="dont-know-btn dont-know-btn--sm" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+            </div>
+            <p class="small txt-tertiary">SM</p>
+          </div>
+
+          <!-- RG - 40px -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="dont-know-btn-wrapper">
+              <button class="dont-know-btn dont-know-btn--rg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+            </div>
+            <p class="small txt-tertiary">RG</p>
+          </div>
+
+          <!-- LG - 48px -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="dont-know-btn-wrapper">
+              <button class="dont-know-btn dont-know-btn--lg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+            </div>
+            <p class="small txt-tertiary">LG</p>
+          </div>
+
+          <!-- END: Don't Know Button - Size variants -->
+
+        </div>
+
+        <!-- States - XS size shown; states apply equally to all sizes -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Idle</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Don't Know Button - Idle
+               Default resting state. Grey surface, grey border. Blue border on hover (CSS :hover). -->
+          <div class="dont-know-btn-wrapper">
+            <button
+              class="dont-know-btn"
+              type="button"
+              aria-pressed="false"
+              aria-label="Don't know"
+            >🤷</button>
+          </div>
+          <!-- END: Don't Know Button - Idle -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Active - menu open</h5>
+        </div>
+        <!-- The inner presentation wrapper (padding-top) is reference-page only -
+             it reserves vertical space so the absolutely-positioned menu stays
+             within the demo container's borders. It is not part of the component. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <div style="padding-top: 64px;">
+
+            <!-- START: Don't Know Button - Active
+                 Button turns solid blue. Confirmation menu floats above it.
+                 Menu button hover/hit states are CSS :hover and :active only - not shown statically. -->
+            <div class="dont-know-btn-wrapper">
+              <button
+                class="dont-know-btn dont-know-btn--active"
+                type="button"
+                aria-pressed="true"
+                aria-label="Don't know"
+              >🤷</button>
+
+              <!-- Confirmation menu - shown when aria-pressed="true" -->
+              <div class="dont-know-menu" role="dialog" aria-label="Confirm selection">
+                <!-- Outer bordered frame - provides the border (z-index: auto, lowest) -->
+                <div class="dont-know-menu-frame">
+                  <!-- Button row - z-index: 3, renders above the caret -->
+                  <div class="dont-know-menu-buttons">
+                    <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
+                    <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
+                  </div>
+                </div>
+                <!-- Caret - z-index: 2, white fill covers frame border at join,
+                     V borders visible below. Buttons (z-index: 3) cover its top half. -->
+                <div class="dont-know-menu-caret" aria-hidden="true"></div>
+              </div>
+
+            </div>
+            <!-- END: Don't Know Button - Active -->
+
+          </div>
+        </div>
+
+      </div>
+      <!-- Don't Know Button END -->
+
+      <!-- ============================================================
+           SECTION: Step Progress Dots
+           Four layers building on one another:
+           1. Idle dot  2. Active dot  3. Dot group  4. Track wrapper
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Step Progress Dots</h2>
+          <p class="txt-secondary">
+            Indicates the current position in a multi-step flow. Four layers: idle dot, active dot, dot group, and the white surface track wrapper.
+          </p>
+        </div>
+
+        <div class="flex-v-wrapper border-wrapper u-p-sm">
+
+          <!-- START: Layer 1 + 2 - Idle dot and Active dot
+               Base component. 4×4px circle. Default colour is --text-disabled (idle).
+               Add .step-dot--active for the dark/current position state. -->
+          <div>
+            <p class="small txt-tertiary u-mb-sm">Dots</p>
+            <div style="display: flex; align-items: center; gap: 24px;">
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <div class="step-dot"></div>
+                <p class="small txt-tertiary">Idle</p>
+              </div>
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <div class="step-dot step-dot--active"></div>
+                <p class="small txt-tertiary">Active</p>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Layer 1 + 2 - Idle dot and Active dot -->
+
+          <!-- START: Layer 3 - Dot group
+               Row of dots with space-between layout inside a fixed 40px width.
+               First dot is active; remaining dots are idle. -->
+          <div>
+            <p class="small txt-tertiary u-mb-sm">Dot group</p>
+            <div class="step-dot-group">
+              <div class="step-dot step-dot--active"></div>
+              <div class="step-dot"></div>
+              <div class="step-dot"></div>
+              <div class="step-dot"></div>
+            </div>
+          </div>
+          <!-- END: Layer 3 - Dot group -->
+
+          <!-- START: Layer 4 - Track wrapper
+               White surface container that houses the dot group.
+               Shown here on a grey background to make the white surface visible.
+               In production this sits on a coloured card or image. -->
+          <div>
+            <p class="small txt-tertiary u-mb-sm">Track wrapper</p>
+            <!-- Grey background is reference-page presentation only - not part of the component -->
+            <div style="display: inline-flex; background-color: var(--surface-secondary); padding: var(--size-16); border-radius: var(--radius-s);">
+              <div class="step-dot-track">
+                <div class="step-dot-group">
+                  <div class="step-dot step-dot--active"></div>
+                  <div class="step-dot"></div>
+                  <div class="step-dot"></div>
+                  <div class="step-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Layer 4 - Track wrapper -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Step Progress Dots -->
+
+      <!-- ============================================================
+           SECTION: Step Counter
+           Text alternative to Step Progress Dots above - same job, read as
+           "current / total" instead of a row of dots. Not tied to any one
+           question type's layout; the Dropper / Dragger question types use
+           it, pinned to their own header strip rather than the shared
+           .answer-arena__progress slot.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Step Counter</h2>
+          <p class="txt-secondary">
+            Indicates the current position in a multi-step flow, the same job as Step
+            Progress Dots above, read as a number instead of a row of dots.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="dropper-text_text.html">dropper-text_text.html</a> ·
+            <a class="doc-link" href="dragger-text_text.html">dragger-text_text.html</a>
+          </p>
+        </div>
+
+        <div class="flex-v-wrapper border-wrapper u-p-sm">
+
+          <!-- START: Step Counter - Idle
+               Single pill, sized to its text. Grey surface + border, rather than
+               .step-dot-track's white, so it reads as a label rather than a button. -->
+          <div>
+            <p class="small txt-tertiary u-mb-sm">Counter</p>
+            <div class="step-counter" role="progressbar" aria-label="Card 1 of 8" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+          </div>
+          <!-- END: Step Counter - Idle -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Step Counter -->
+
+      <!-- ============================================================
+           SECTION: Tooltip
+           Attached to any interactive element by adding .has-tooltip to it and
+           nesting a .tooltip span inside. The element must carry
+           aria-describedby pointing at the tooltip's id.
+           Visibility is CSS-only - :hover and :focus-visible on .has-tooltip.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Tooltip</h2>
+          <p class="txt-secondary">
+            A small label that appears above an icon button on hover or keyboard focus.
+            Used throughout the bottom navigation and anywhere an icon-only control
+            needs a visible name. No JavaScript - shown purely via CSS.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">On an icon button - hover or tab to reveal</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="padding-top: 56px;">
+
+          <!-- START: Tooltip - on icon button
+               .has-tooltip on the button, .tooltip inside it, linked by aria-describedby. -->
+          <button
+            class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+            type="button"
+            aria-label="Help"
+            aria-describedby="tip-demo-help"
+          >
+            <div class="icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none">
+                <path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/>
+                <path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/>
+                <path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="tooltip" role="tooltip" id="tip-demo-help">Help</span>
+          </button>
+          <!-- END: Tooltip - on icon button -->
+
+          <!-- START: Tooltip - on Don't Know button -->
+          <button
+            class="dont-know-btn has-tooltip"
+            type="button"
+            aria-label="Don't know"
+            aria-describedby="tip-demo-dk"
+          >
+            🤷
+            <span class="tooltip" role="tooltip" id="tip-demo-dk">Don't know</span>
+          </button>
+          <!-- END: Tooltip - on Don't Know button -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Tooltip -->
+
+      <!-- ============================================================
+           SECTION: Progress Bar
+           The linear survey-progress indicator used in the bottom navigation.
+           Distinct from Step Progress Dots (above), which track cards within a
+           single question. This tracks completion across the whole survey.
+
+           .progress-indicator  - flex row: bar + percentage label
+           .progress-bar        - the grey track
+           .progress            - the blue fill; set its inline width to the percentage
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Progress Bar</h2>
+          <p class="txt-secondary">
+            Overall survey completion. The fill width is set inline as a percentage
+            (<code>style="width: 50%"</code>) and the adjacent label repeats the value as text.
+            Sits at the top of the bottom navigation bar.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Fill states</h5>
+        </div>
+        <div class="flex-v-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Progress Bar - 0% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 0%"></span>
+            </div>
+            <p class="label">0%</p>
+          </div>
+          <!-- END: Progress Bar - 0% -->
+
+          <!-- START: Progress Bar - 25% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 25%"></span>
+            </div>
+            <p class="label">25%</p>
+          </div>
+          <!-- END: Progress Bar - 25% -->
+
+          <!-- START: Progress Bar - 50% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 50%"></span>
+            </div>
+            <p class="label">50%</p>
+          </div>
+          <!-- END: Progress Bar - 50% -->
+
+          <!-- START: Progress Bar - 100% -->
+          <div class="progress-indicator">
+            <div class="progress-bar">
+              <span class="progress" style="width: 100%"></span>
+            </div>
+            <p class="label">100%</p>
+          </div>
+          <!-- END: Progress Bar - 100% -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Progress Bar -->
+
       <!-- Inputs -->
       <div class="container u-mb-lg">
         <div class="u-mb-rg">
           <h2 class="txt-secondary">Inputs</h2>
           <p class="txt-secondary">
             Input field components for the Honesty Box design system.
+          </p>
+          <p class="txt-secondary">
+            In situ: <a class="doc-link" href="inputs.html">inputs.html</a>
           </p>
         </div>
 
@@ -1259,401 +1626,6 @@
       </div>
       <!-- Inputs END -->
 
-      <!-- Don't Know Button -->
-      <div class="container u-mb-lg">
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Don't Know Button</h2>
-          <p class="txt-secondary">
-            A square emoji button that opens a secondary confirmation menu when activated.
-            Used wherever a respondent can skip a question - the menu requires them to confirm
-            or cancel before progressing. Available in four sizes to suit different contexts.
-          </p>
-        </div>
-
-        <!-- Size variants - all sizes at idle state for comparison -->
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Sizes</h5>
-        </div>
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: flex-end;">
-
-          <!-- START: Don't Know Button - Size variants
-               XS (32px, base), SM (36px), RG (40px), LG (48px).
-               Size modifiers are applied to the .dont-know-btn element alongside any state modifier. -->
-
-          <!-- XS - 32px, base size, no modifier needed -->
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div class="dont-know-btn-wrapper">
-              <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
-            </div>
-            <p class="small txt-tertiary">XS</p>
-          </div>
-
-          <!-- SM - 36px -->
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div class="dont-know-btn-wrapper">
-              <button class="dont-know-btn dont-know-btn--sm" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
-            </div>
-            <p class="small txt-tertiary">SM</p>
-          </div>
-
-          <!-- RG - 40px -->
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div class="dont-know-btn-wrapper">
-              <button class="dont-know-btn dont-know-btn--rg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
-            </div>
-            <p class="small txt-tertiary">RG</p>
-          </div>
-
-          <!-- LG - 48px -->
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div class="dont-know-btn-wrapper">
-              <button class="dont-know-btn dont-know-btn--lg" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
-            </div>
-            <p class="small txt-tertiary">LG</p>
-          </div>
-
-          <!-- END: Don't Know Button - Size variants -->
-
-        </div>
-
-        <!-- States - XS size shown; states apply equally to all sizes -->
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Idle</h5>
-        </div>
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
-
-          <!-- START: Don't Know Button - Idle
-               Default resting state. Grey surface, grey border. Blue border on hover (CSS :hover). -->
-          <div class="dont-know-btn-wrapper">
-            <button
-              class="dont-know-btn"
-              type="button"
-              aria-pressed="false"
-              aria-label="Don't know"
-            >🤷</button>
-          </div>
-          <!-- END: Don't Know Button - Idle -->
-
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Active - menu open</h5>
-        </div>
-        <!-- The inner presentation wrapper (padding-top) is reference-page only -
-             it reserves vertical space so the absolutely-positioned menu stays
-             within the demo container's borders. It is not part of the component. -->
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
-          <div style="padding-top: 64px;">
-
-            <!-- START: Don't Know Button - Active
-                 Button turns solid blue. Confirmation menu floats above it.
-                 Menu button hover/hit states are CSS :hover and :active only - not shown statically. -->
-            <div class="dont-know-btn-wrapper">
-              <button
-                class="dont-know-btn dont-know-btn--active"
-                type="button"
-                aria-pressed="true"
-                aria-label="Don't know"
-              >🤷</button>
-
-              <!-- Confirmation menu - shown when aria-pressed="true" -->
-              <div class="dont-know-menu" role="dialog" aria-label="Confirm selection">
-                <!-- Outer bordered frame - provides the border (z-index: auto, lowest) -->
-                <div class="dont-know-menu-frame">
-                  <!-- Button row - z-index: 3, renders above the caret -->
-                  <div class="dont-know-menu-buttons">
-                    <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
-                    <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
-                  </div>
-                </div>
-                <!-- Caret - z-index: 2, white fill covers frame border at join,
-                     V borders visible below. Buttons (z-index: 3) cover its top half. -->
-                <div class="dont-know-menu-caret" aria-hidden="true"></div>
-              </div>
-
-            </div>
-            <!-- END: Don't Know Button - Active -->
-
-          </div>
-        </div>
-
-      </div>
-      <!-- Don't Know Button END -->
-
-      <!-- ============================================================
-           SECTION: Step Progress Dots
-           Four layers building on one another:
-           1. Idle dot  2. Active dot  3. Dot group  4. Track wrapper
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Step Progress Dots</h2>
-          <p class="txt-secondary">
-            Indicates the current position in a multi-step flow. Four layers: idle dot, active dot, dot group, and the white surface track wrapper.
-          </p>
-        </div>
-
-        <div class="flex-v-wrapper border-wrapper u-p-sm">
-
-          <!-- START: Layer 1 + 2 - Idle dot and Active dot
-               Base component. 4×4px circle. Default colour is --text-disabled (idle).
-               Add .step-dot--active for the dark/current position state. -->
-          <div>
-            <p class="small txt-tertiary u-mb-sm">Dots</p>
-            <div style="display: flex; align-items: center; gap: 24px;">
-
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                <div class="step-dot"></div>
-                <p class="small txt-tertiary">Idle</p>
-              </div>
-
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                <div class="step-dot step-dot--active"></div>
-                <p class="small txt-tertiary">Active</p>
-              </div>
-
-            </div>
-          </div>
-          <!-- END: Layer 1 + 2 - Idle dot and Active dot -->
-
-          <!-- START: Layer 3 - Dot group
-               Row of dots with space-between layout inside a fixed 40px width.
-               First dot is active; remaining dots are idle. -->
-          <div>
-            <p class="small txt-tertiary u-mb-sm">Dot group</p>
-            <div class="step-dot-group">
-              <div class="step-dot step-dot--active"></div>
-              <div class="step-dot"></div>
-              <div class="step-dot"></div>
-              <div class="step-dot"></div>
-            </div>
-          </div>
-          <!-- END: Layer 3 - Dot group -->
-
-          <!-- START: Layer 4 - Track wrapper
-               White surface container that houses the dot group.
-               Shown here on a grey background to make the white surface visible.
-               In production this sits on a coloured card or image. -->
-          <div>
-            <p class="small txt-tertiary u-mb-sm">Track wrapper</p>
-            <!-- Grey background is reference-page presentation only - not part of the component -->
-            <div style="display: inline-flex; background-color: var(--surface-secondary); padding: var(--size-16); border-radius: var(--radius-s);">
-              <div class="step-dot-track">
-                <div class="step-dot-group">
-                  <div class="step-dot step-dot--active"></div>
-                  <div class="step-dot"></div>
-                  <div class="step-dot"></div>
-                  <div class="step-dot"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END: Layer 4 - Track wrapper -->
-
-        </div>
-
-      </div>
-      <!-- SECTION END: Step Progress Dots -->
-
-      <!-- ============================================================
-           SECTION: Tooltip
-           Attached to any interactive element by adding .has-tooltip to it and
-           nesting a .tooltip span inside. The element must carry
-           aria-describedby pointing at the tooltip's id.
-           Visibility is CSS-only - :hover and :focus-visible on .has-tooltip.
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Tooltip</h2>
-          <p class="txt-secondary">
-            A small label that appears above an icon button on hover or keyboard focus.
-            Used throughout the bottom navigation and anywhere an icon-only control
-            needs a visible name. No JavaScript - shown purely via CSS.
-          </p>
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">On an icon button - hover or tab to reveal</h5>
-        </div>
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="padding-top: 56px;">
-
-          <!-- START: Tooltip - on icon button
-               .has-tooltip on the button, .tooltip inside it, linked by aria-describedby. -->
-          <button
-            class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
-            type="button"
-            aria-label="Help"
-            aria-describedby="tip-demo-help"
-          >
-            <div class="icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none">
-                <path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/>
-                <path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/>
-                <path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/>
-              </svg>
-            </div>
-            <span class="tooltip" role="tooltip" id="tip-demo-help">Help</span>
-          </button>
-          <!-- END: Tooltip - on icon button -->
-
-          <!-- START: Tooltip - on Don't Know button -->
-          <button
-            class="dont-know-btn has-tooltip"
-            type="button"
-            aria-label="Don't know"
-            aria-describedby="tip-demo-dk"
-          >
-            🤷
-            <span class="tooltip" role="tooltip" id="tip-demo-dk">Don't know</span>
-          </button>
-          <!-- END: Tooltip - on Don't Know button -->
-
-        </div>
-
-      </div>
-      <!-- SECTION END: Tooltip -->
-
-      <!-- ============================================================
-           SECTION: Progress Bar
-           The linear survey-progress indicator used in the bottom navigation.
-           Distinct from Step Progress Dots (above), which track cards within a
-           single question. This tracks completion across the whole survey.
-
-           .progress-indicator  - flex row: bar + percentage label
-           .progress-bar        - the grey track
-           .progress            - the blue fill; set its inline width to the percentage
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Progress Bar</h2>
-          <p class="txt-secondary">
-            Overall survey completion. The fill width is set inline as a percentage
-            (<code>style="width: 50%"</code>) and the adjacent label repeats the value as text.
-            Sits at the top of the bottom navigation bar.
-          </p>
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Fill states</h5>
-        </div>
-        <div class="flex-v-wrapper border-wrapper u-p-sm u-mb-rg">
-
-          <!-- START: Progress Bar - 0% -->
-          <div class="progress-indicator">
-            <div class="progress-bar">
-              <span class="progress" style="width: 0%"></span>
-            </div>
-            <p class="label">0%</p>
-          </div>
-          <!-- END: Progress Bar - 0% -->
-
-          <!-- START: Progress Bar - 25% -->
-          <div class="progress-indicator">
-            <div class="progress-bar">
-              <span class="progress" style="width: 25%"></span>
-            </div>
-            <p class="label">25%</p>
-          </div>
-          <!-- END: Progress Bar - 25% -->
-
-          <!-- START: Progress Bar - 50% -->
-          <div class="progress-indicator">
-            <div class="progress-bar">
-              <span class="progress" style="width: 50%"></span>
-            </div>
-            <p class="label">50%</p>
-          </div>
-          <!-- END: Progress Bar - 50% -->
-
-          <!-- START: Progress Bar - 100% -->
-          <div class="progress-indicator">
-            <div class="progress-bar">
-              <span class="progress" style="width: 100%"></span>
-            </div>
-            <p class="label">100%</p>
-          </div>
-          <!-- END: Progress Bar - 100% -->
-
-        </div>
-
-      </div>
-      <!-- SECTION END: Progress Bar -->
-
-      <!-- ============================================================
-           SECTION: Question & Answer Layout
-           The structural pattern every question page is built from. Not a visual
-           component - it is the wrapper chain that centres and spaces content.
-
-             .content-wrapper            - full-bleed row, 1.5rem padding
-             └── .content                - max-width 640px, centred, column flex
-                   └── .box-Q / .box-A   - semantic labels only, no styles
-
-           The answer block repeats the same chain with .content-wrapper--answer,
-           which removes the top padding so the answer sits tight under the question.
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Question &amp; Answer Layout</h2>
-          <p class="txt-secondary">
-            Questions and answers live in separate <code>.content-wrapper</code> blocks so each
-            can span the full page width while its inner <code>.content</code> stays capped at 640px
-            and centred. <code>.box-Q</code> and <code>.box-A</code> carry no styles - they exist to
-            label the two halves for anyone reading the markup.
-          </p>
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Question block + answer block</h5>
-        </div>
-        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
-
-          <!-- START: Q &amp; A Layout - question block -->
-          <div class="content-wrapper">
-            <div class="content">
-              <div class="box-Q">
-                <p class="question">How would you describe yourself?</p>
-              </div>
-            </div>
-          </div>
-          <!-- END: Q &amp; A Layout - question block -->
-
-          <!-- START: Q &amp; A Layout - answer block
-               .content-wrapper--answer removes the top padding. -->
-          <div class="content-wrapper content-wrapper--answer">
-            <div class="content">
-              <div class="box-A">
-                <div class="grid-field">
-                  <div class="grid-group" role="radiogroup" aria-label="How would you describe yourself?">
-                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
-                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
-                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END: Q &amp; A Layout - answer block -->
-
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Question text - <code>.question</code></h5>
-        </div>
-        <div class="border-wrapper u-p-sm">
-          <!-- START: Question text
-               Dorian 700, --p-size-large, brand blue. The only element that carries
-               question styling - always a <p>, never a heading. -->
-          <p class="question">How much do you agree with the following statement?</p>
-          <!-- END: Question text -->
-        </div>
-
-      </div>
-      <!-- SECTION END: Question &amp; Answer Layout -->
-
       <!-- ============================================================
            SECTION: Grid Buttons
            The single- and multi-select answer component.
@@ -1676,6 +1648,11 @@
             (<code>.grid-btn</code>) arranged by layout modifiers on the parent
             <code>.grid-group</code>. Selection state is applied by JavaScript as
             <code>.grid-btn--selected</code>, alongside the matching ARIA attribute.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="grids-basic.html">grids-basic.html</a> ·
+            <a class="doc-link" href="grids-basic-multiselect.html">grids-basic-multiselect.html</a>
           </p>
         </div>
 
@@ -1879,6 +1856,11 @@
             button in the markup and is revealed by <code>.grid-btn--selected</code>, so no
             element needs to be inserted at selection time.
           </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="grids-image.html">grids-image.html</a> ·
+            <a class="doc-link" href="grids-image-full-width.html">grids-image-full-width.html</a>
+          </p>
         </div>
 
         <div class="u-mb-rg">
@@ -2000,6 +1982,316 @@
       <!-- SECTION END: Image Grid Buttons -->
 
       <!-- ============================================================
+           SECTION: Tinderland Card
+           The swipe card used in the Tinderland / Tosser question type.
+           Two variants (text, image) x four states.
+
+             .tinderland-card           - base, text-only
+             .tinderland-card--image    - image + label variant
+             .tinderland-card--fav      - compact variant used in the stacked
+                                          "favourite" layout
+           States:
+             (none)                     - idle
+             .tinderland-card--pressed  - held down
+             .tinderland-card--swipe-l  - swiping left (reject)
+             .tinderland-card--swipe-r  - swiping right (prefer)
+
+           Requires styles/tinderland-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Tinderland Card</h2>
+          <p class="txt-secondary">
+            The swipe card shown to respondents. State modifiers are applied by JavaScript
+            as the pointer moves - yellow tint while swiping left to reject, green while
+            swiping right to prefer. A full reference page of every variant and state lives
+            in <code>tinderland-components.html</code>.
+          </p>
+          <p class="txt-secondary">
+            In situ: <a class="doc-link" href="tinderland-components.html">tinderland-components.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text variant - four states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Tinderland Card - Text / Idle -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Idle</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Idle -->
+
+          <!-- START: Tinderland Card - Text / Pressed -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--pressed">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Pressed</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Pressed -->
+
+          <!-- START: Tinderland Card - Text / Swipe-left -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--swipe-l">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-L (reject)</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Swipe-left -->
+
+          <!-- START: Tinderland Card - Text / Swipe-right -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--swipe-r">
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-R (prefer)</p>
+          </div>
+          <!-- END: Tinderland Card - Text / Swipe-right -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image variant - four states</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm">
+
+          <!-- START: Tinderland Card - Image / Idle -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Idle</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Idle -->
+
+          <!-- START: Tinderland Card - Image / Pressed -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--pressed">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Pressed</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Pressed -->
+
+          <!-- START: Tinderland Card - Image / Swipe-left -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-l">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-L (reject)</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Swipe-left -->
+
+          <!-- START: Tinderland Card - Image / Swipe-right -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-r">
+              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
+              <p class="tinderland-card__label">The one I prefer</p>
+            </div>
+            <p class="small txt-tertiary">Swipe-R (prefer)</p>
+          </div>
+          <!-- END: Tinderland Card - Image / Swipe-right -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Tinderland Card -->
+
+      <!-- ============================================================
+           SECTION: Question & Answer Layout
+           The structural pattern every question page is built from. Not a visual
+           component - it is the wrapper chain that centres and spaces content.
+
+             .content-wrapper            - full-bleed row, 1.5rem padding
+             └── .content                - max-width 640px, centred, column flex
+                   └── .box-Q / .box-A   - semantic labels only, no styles
+
+           The answer block repeats the same chain with .content-wrapper--answer,
+           which removes the top padding so the answer sits tight under the question.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Question &amp; Answer Layout</h2>
+          <p class="txt-secondary">
+            Questions and answers live in separate <code>.content-wrapper</code> blocks so each
+            can span the full page width while its inner <code>.content</code> stays capped at 640px
+            and centred. <code>.box-Q</code> and <code>.box-A</code> carry no styles - they exist to
+            label the two halves for anyone reading the markup.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Question block + answer block</h5>
+        </div>
+        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
+
+          <!-- START: Q &amp; A Layout - question block -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <!-- END: Q &amp; A Layout - question block -->
+
+          <!-- START: Q &amp; A Layout - answer block
+               .content-wrapper--answer removes the top padding. -->
+          <div class="content-wrapper content-wrapper--answer">
+            <div class="content">
+              <div class="box-A">
+                <div class="grid-field">
+                  <div class="grid-group" role="radiogroup" aria-label="How would you describe yourself?">
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Male</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Female</button>
+                    <button class="grid-btn" type="button" role="radio" aria-checked="false">Self-describe</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Q &amp; A Layout - answer block -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Question text - <code>.question</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm">
+          <!-- START: Question text
+               Dorian 700, --p-size-large, brand blue. The only element that carries
+               question styling - always a <p>, never a heading. -->
+          <p class="question">How much do you agree with the following statement?</p>
+          <!-- END: Question text -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Question &amp; Answer Layout -->
+
+      <!-- ============================================================
+           SECTION: Bottom Navigation
+           The fixed bar at the foot of every question page. Assembles three
+           components already documented above: the progress bar, icon buttons,
+           and tooltips.
+
+             .bottom-nav          - the fixed bar itself
+             .progress-indicator  - survey progress (see Progress Bar section)
+             .button-container    - Help / Back / Next row
+             .btn-nav             - widens Back and Next to width:auto with
+                                    wider inline padding; collapses back to a
+                                    48px square on mobile
+
+           Back is disabled on the first question by adding .icon-btn-disabled.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Bottom Navigation</h2>
+          <p class="txt-secondary">
+            Fixed to the bottom of every question page. Shown here in flow rather than fixed
+            so it can be inspected inline - in the app <code>.bottom-nav</code> is
+            <code>position: fixed</code> and the page reserves
+            <code>--nav-bottom-height</code> of space for it.
+          </p>
+          <p class="txt-secondary">
+            In situ: <a class="doc-link" href="navigation.html">navigation.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Default - Back disabled (first question)</h5>
+        </div>
+        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
+          <!-- START: Bottom Navigation - first question
+               position: static here is reference-page only, to un-fix the bar. -->
+          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
+
+            <!-- Progress indicator -->
+            <div class="progress-indicator">
+              <div class="progress-bar">
+                <span class="progress" style="width: 0%"></span>
+              </div>
+              <p class="label">0%</p>
+            </div>
+
+            <!-- Nav buttons -->
+            <div class="button-container">
+
+              <!-- Help - secondary icon button -->
+              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-1">
+                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-help-1">Help</span>
+              </a>
+
+              <!-- Back - disabled on the first question -->
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-nav-back-1">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-back-1">Back</span>
+              </a>
+
+              <!-- Next -->
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-1">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-next-1">Next</span>
+              </a>
+
+            </div>
+          </nav>
+          <!-- END: Bottom Navigation - first question -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Mid-survey - Back enabled</h5>
+        </div>
+        <div class="border-wrapper" style="overflow: hidden;">
+          <!-- START: Bottom Navigation - mid survey
+               Same markup with .icon-btn-disabled removed from Back and the
+               progress fill advanced. -->
+          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
+
+            <div class="progress-indicator">
+              <div class="progress-bar">
+                <span class="progress" style="width: 50%"></span>
+              </div>
+              <p class="label">50%</p>
+            </div>
+
+            <div class="button-container">
+
+              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-2">
+                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-help-2">Help</span>
+              </a>
+
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-back-2">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-back-2">Back</span>
+              </a>
+
+              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-2">
+                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
+                <span class="tooltip" role="tooltip" id="tip-nav-next-2">Next</span>
+              </a>
+
+            </div>
+          </nav>
+          <!-- END: Bottom Navigation - mid survey -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Bottom Navigation -->
+
+      <!-- ============================================================
            SECTION: Love Button
            Press-and-hold rating question. The respondent holds the button and a
            blue fill grows outward from the centre of the circle; releasing locks
@@ -2027,6 +2319,11 @@
             A press-and-hold rating control. The fill diameter and the value counter are
             driven by JavaScript while the pointer is held down. After the first hold the
             Less / More buttons appear so the respondent can fine-tune without re-holding.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="love-button.html">love-button.html</a> ·
+            <a class="doc-link" href="love-button-mid.html">love-button-mid.html</a>
           </p>
         </div>
 
@@ -2155,128 +2452,6 @@
       <!-- SECTION END: Love Button -->
 
       <!-- ============================================================
-           SECTION: Tinderland Card
-           The swipe card used in the Tinderland / Tosser question type.
-           Two variants (text, image) x four states.
-
-             .tinderland-card           - base, text-only
-             .tinderland-card--image    - image + label variant
-             .tinderland-card--fav      - compact variant used in the stacked
-                                          "favourite" layout
-           States:
-             (none)                     - idle
-             .tinderland-card--pressed  - held down
-             .tinderland-card--swipe-l  - swiping left (reject)
-             .tinderland-card--swipe-r  - swiping right (prefer)
-
-           Requires styles/tinderland-styles.css.
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Tinderland Card</h2>
-          <p class="txt-secondary">
-            The swipe card shown to respondents. State modifiers are applied by JavaScript
-            as the pointer moves - yellow tint while swiping left to reject, green while
-            swiping right to prefer. A full reference page of every variant and state lives
-            in <code>tinderland-components.html</code>.
-          </p>
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Text variant - four states</h5>
-        </div>
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
-
-          <!-- START: Tinderland Card - Text / Idle -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card">
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Idle</p>
-          </div>
-          <!-- END: Tinderland Card - Text / Idle -->
-
-          <!-- START: Tinderland Card - Text / Pressed -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--pressed">
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Pressed</p>
-          </div>
-          <!-- END: Tinderland Card - Text / Pressed -->
-
-          <!-- START: Tinderland Card - Text / Swipe-left -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--swipe-l">
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Swipe-L (reject)</p>
-          </div>
-          <!-- END: Tinderland Card - Text / Swipe-left -->
-
-          <!-- START: Tinderland Card - Text / Swipe-right -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--swipe-r">
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Swipe-R (prefer)</p>
-          </div>
-          <!-- END: Tinderland Card - Text / Swipe-right -->
-
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Image variant - four states</h5>
-        </div>
-        <div class="flex-h-wrapper border-wrapper u-p-sm">
-
-          <!-- START: Tinderland Card - Image / Idle -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--image">
-              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Idle</p>
-          </div>
-          <!-- END: Tinderland Card - Image / Idle -->
-
-          <!-- START: Tinderland Card - Image / Pressed -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--image tinderland-card--pressed">
-              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Pressed</p>
-          </div>
-          <!-- END: Tinderland Card - Image / Pressed -->
-
-          <!-- START: Tinderland Card - Image / Swipe-left -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-l">
-              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Swipe-L (reject)</p>
-          </div>
-          <!-- END: Tinderland Card - Image / Swipe-left -->
-
-          <!-- START: Tinderland Card - Image / Swipe-right -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="tinderland-card tinderland-card--image tinderland-card--swipe-r">
-              <img class="tinderland-card__img" src="images/3x4-image.png" alt="Placeholder image" />
-              <p class="tinderland-card__label">The one I prefer</p>
-            </div>
-            <p class="small txt-tertiary">Swipe-R (prefer)</p>
-          </div>
-          <!-- END: Tinderland Card - Image / Swipe-right -->
-
-        </div>
-
-      </div>
-      <!-- SECTION END: Tinderland Card -->
-
-      <!-- ============================================================
            SECTION: Tosser Arena
            The swipe arena that houses a Tinderland card. Fills the space below
            the question and anchors four absolutely-positioned children around
@@ -2309,6 +2484,13 @@
             step dots track position in the card set, and the Don't Know button sits at the
             bottom. Side labels are <code>aria-hidden</code> - the question text already
             conveys their meaning.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="tosser-text.html">tosser-text.html</a> ·
+            <a class="doc-link" href="tosser-img.html">tosser-img.html</a> ·
+            <a class="doc-link" href="tosser-text_img.html">tosser-text_img.html</a> ·
+            <a class="doc-link" href="tosser-text-fav.html">tosser-text-fav.html</a>
           </p>
         </div>
 
@@ -2456,6 +2638,361 @@
       <!-- SECTION END: Tosser Arena -->
 
       <!-- ============================================================
+           SECTION: Bingo Board
+           Drag-and-drop question type. A card in the centre of a 3 × 3 board
+           is dragged onto one of the surrounding drop zones - FLEXBOX, not
+           CSS Grid.
+
+             .answer-arena-section / .answer-arena--board  - shared arena
+                                                              (styles.css), the
+                                                              --board modifier
+                                                              makes it a
+                                                              container-type:
+                                                              size query
+                                                              container so the
+                                                              cell inset can
+                                                              scale in cqmin
+             └── .bingo-board                     - 3 × 3, three .bingo-board__row
+                   ├── .bingo-board__cell         - one of the nine areas
+                   ├── .bingo-board__cell--card   - centre area (5), no inset
+                   ├── .bingo-target              - a drop zone (<button>, role="radio")
+                   └── .bingo-card                - the draggable card, centred in cell 5
+
+           Shown here: text card, text zones, eight zones (bingo-text_text.html).
+           The other seven variants swap card content (image), zone content
+           (image), and zone count (four, in the corners) - same components,
+           different content and cell occupancy. See the in situ links below
+           for all eight.
+
+           Requires styles/bingo-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Bingo Board</h2>
+          <p class="txt-secondary">
+            The respondent drags the centre card onto one of the surrounding zones, or taps a
+            zone directly. Click and hold the card to see the grabbed state; click a zone to see
+            its hover / filled state.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="bingo-text_text.html">bingo-text_text.html</a> ·
+            <a class="doc-link" href="bingo-text_text-4-corners.html">bingo-text_text-4-corners.html</a> ·
+            <a class="doc-link" href="bingo-text_img.html">bingo-text_img.html</a> ·
+            <a class="doc-link" href="bingo-text_img-4-corners.html">bingo-text_img-4-corners.html</a> ·
+            <a class="doc-link" href="bingo-img_text.html">bingo-img_text.html</a> ·
+            <a class="doc-link" href="bingo-img_text-4-corners.html">bingo-img_text-4-corners.html</a> ·
+            <a class="doc-link" href="bingo-img_img.html">bingo-img_img.html</a> ·
+            <a class="doc-link" href="bingo-img_img-4-corners.html">bingo-img_img-4-corners.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text card, text zones, eight zones</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Bingo Board - text card, text zones
+               Fixed height here is reference-page only; in the app .answer-arena-section
+               flexes to fill the space left below the question. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena answer-arena--board">
+
+              <!-- Step progress dots - top centre -->
+              <div class="answer-arena__progress">
+                <div class="step-dot-track">
+                  <div class="step-dot-group" role="progressbar" aria-label="Card 1 of 4" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+                    <div class="step-dot step-dot--active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Don't Know button - bottom centre -->
+              <div class="answer-arena__dont-know">
+                <div class="dont-know-btn-wrapper">
+                  <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                </div>
+              </div>
+
+              <!-- The 3 × 3 board - card in cell 5, eight drop zones around it -->
+              <div class="bingo-board" role="radiogroup" aria-label="Where does this card belong?">
+                <div class="bingo-board__row" role="presentation">
+                  <div class="bingo-board__cell" data-cell="1">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">One</span></button>
+                  </div>
+                  <div class="bingo-board__cell" data-cell="2">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Two</span></button>
+                  </div>
+                  <div class="bingo-board__cell" data-cell="3">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Three</span></button>
+                  </div>
+                </div>
+                <div class="bingo-board__row" role="presentation">
+                  <div class="bingo-board__cell" data-cell="4">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Four</span></button>
+                  </div>
+                  <div class="bingo-board__cell bingo-board__cell--card" data-cell="5">
+                    <div class="bingo-card">
+                      <span class="bingo-card__label">Text</span>
+                    </div>
+                  </div>
+                  <div class="bingo-board__cell" data-cell="6">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Five</span></button>
+                  </div>
+                </div>
+                <div class="bingo-board__row" role="presentation">
+                  <div class="bingo-board__cell" data-cell="7">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Six</span></button>
+                  </div>
+                  <div class="bingo-board__cell" data-cell="8">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Seven</span></button>
+                  </div>
+                  <div class="bingo-board__cell" data-cell="9">
+                    <button class="bingo-target" type="button" role="radio" aria-checked="false"><span class="bingo-target__label">Eight</span></button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Bingo Board - text card, text zones -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Bingo Board -->
+
+      <!-- ============================================================
+           SECTION: Dropper
+           Drag-and-drop question type: a card the respondent drags (or taps)
+           onto one of several horizontal zones. Shares the same grey
+           .answer-arena as Bingo, but pins its own furniture (step counter,
+           Don't Know button) to its own header strip rather than the arena's
+           edges.
+
+             .answer-arena-section / .answer-arena  - shared arena (styles.css)
+             └── .dropper                            - fills the arena
+                   ├── .dropper-top                    - header strip
+                   │     ├── .dropper-top__progress     - step counter, left edge
+                   │     ├── .dropper-card               - the draggable card, centred
+                   │     └── .dropper-top__dont-know    - Don't Know button, right edge
+                   └── .answer-dropper-area              - the list of zones
+                         └── .horizontal-answer-drop-area (x n)  - one zone
+
+           Requires styles/dropper-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Dropper</h2>
+          <p class="txt-secondary">
+            The respondent drags the card at the top onto one of the horizontal zones below, or
+            taps a zone directly. Click and hold the card to see the grabbed state; click a zone
+            to see its hover / filled state.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="dropper-text_text.html">dropper-text_text.html</a> ·
+            <a class="doc-link" href="dropper-image_text.html">dropper-image_text.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text card</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Dropper - text card
+               Fixed height here is reference-page only; in the app .answer-arena-section
+               flexes to fill the space left below the question. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena">
+              <div class="dropper">
+                <div class="dropper-top">
+                  <div class="dropper-top__progress">
+                    <div class="step-counter" role="progressbar" aria-label="Card 1 of 8" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+                  </div>
+                  <div class="dropper-card">
+                    <span class="dropper-card__label">Text</span>
+                  </div>
+                  <div class="dropper-top__dont-know">
+                    <div class="dont-know-btn-wrapper">
+                      <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="answer-dropper-area" role="radiogroup" aria-label="Where does this belong?">
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">One</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Two</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Three</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Four</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Five</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Six</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Seven</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Eight</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Nine</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Ten</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Dropper - text card -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image card - <code>.dropper-card--image</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Dropper - image card -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena">
+              <div class="dropper">
+                <div class="dropper-top">
+                  <div class="dropper-top__progress">
+                    <div class="step-counter" role="progressbar" aria-label="Card 1 of 8" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+                  </div>
+                  <div class="dropper-card dropper-card--image">
+                    <img class="dropper-card__img" src="images/bingo_images/man.png" alt="Man in a suit standing in a covered walkway" />
+                  </div>
+                  <div class="dropper-top__dont-know">
+                    <div class="dont-know-btn-wrapper">
+                      <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="answer-dropper-area" role="radiogroup" aria-label="Where does this belong?">
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">One</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Two</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Three</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Four</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Five</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Six</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Seven</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Eight</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Nine</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Ten</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Dropper - image card -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Dropper -->
+
+      <!-- ============================================================
+           SECTION: Dragger
+           Vertical orientation of Dropper - same component, rotated: columns
+           instead of rows, side by side rather than stacked. .dropper-top
+           (card, step counter, Don't Know button) is identical between the
+           two; only the zone list and its items differ.
+
+             .answer-dropper-area.answer-dropper-area--vertical  - row instead of column
+                   └── .vertical-answer-drop-area (x n)            - one vertical zone
+
+           Requires styles/dropper-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Dragger</h2>
+          <p class="txt-secondary">
+            The vertical counterpart to Dropper above - the respondent drags the card onto one
+            of the side-by-side columns below, or taps a column directly.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="dragger-text_text.html">dragger-text_text.html</a> ·
+            <a class="doc-link" href="dragger-image_text.html">dragger-image_text.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Text card</h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Dragger - text card
+               Fixed height here is reference-page only; in the app .answer-arena-section
+               flexes to fill the space left below the question. -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena">
+              <div class="dropper">
+                <div class="dropper-top">
+                  <div class="dropper-top__progress">
+                    <div class="step-counter" role="progressbar" aria-label="Card 1 of 8" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+                  </div>
+                  <div class="dropper-card">
+                    <span class="dropper-card__label">Text</span>
+                  </div>
+                  <div class="dropper-top__dont-know">
+                    <div class="dont-know-btn-wrapper">
+                      <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="answer-dropper-area answer-dropper-area--vertical" role="radiogroup" aria-label="Where does this belong?">
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">One</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Two</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Three</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Four</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Five</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Six</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Seven</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Eight</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Nine</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Ten</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Dragger - text card -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image card - <code>.dropper-card--image</code></h5>
+        </div>
+        <div class="border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Dragger - image card -->
+          <div class="answer-arena-section" style="height: 420px; padding: 0;">
+            <div class="answer-arena">
+              <div class="dropper">
+                <div class="dropper-top">
+                  <div class="dropper-top__progress">
+                    <div class="step-counter" role="progressbar" aria-label="Card 1 of 8" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+                  </div>
+                  <div class="dropper-card dropper-card--image">
+                    <img class="dropper-card__img" src="images/bingo_images/man.png" alt="Man in a suit standing in a covered walkway" />
+                  </div>
+                  <div class="dropper-top__dont-know">
+                    <div class="dont-know-btn-wrapper">
+                      <button class="dont-know-btn" type="button" aria-pressed="false" aria-label="Don't know">🤷</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="answer-dropper-area answer-dropper-area--vertical" role="radiogroup" aria-label="Where does this belong?">
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">One</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Two</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Three</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Four</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Five</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Six</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Seven</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Eight</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Nine</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Ten</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Dragger - image card -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Dragger -->
+
+      <!-- ============================================================
            SECTION: AI Chat
            The conversational question type. A thread of alternating AI and user
            messages with a fixed input dock above the bottom navigation.
@@ -2480,6 +3017,11 @@
             Used where the survey asks follow-up questions conversationally. AI messages are
             plain left-aligned text; user replies are right-aligned pills. The platform avatar
             appears below an AI message when it is still the AI's turn.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="ai.html">ai.html</a> ·
+            <a class="doc-link" href="ai-components.html">ai-components.html</a>
           </p>
         </div>
 
@@ -2566,116 +3108,6 @@
 
       </div>
       <!-- SECTION END: AI Chat -->
-
-      <!-- ============================================================
-           SECTION: Bottom Navigation
-           The fixed bar at the foot of every question page. Assembles three
-           components already documented above: the progress bar, icon buttons,
-           and tooltips.
-
-             .bottom-nav          - the fixed bar itself
-             .progress-indicator  - survey progress (see Progress Bar section)
-             .button-container    - Help / Back / Next row
-             .btn-nav             - widens Back and Next to width:auto with
-                                    wider inline padding; collapses back to a
-                                    48px square on mobile
-
-           Back is disabled on the first question by adding .icon-btn-disabled.
-           ============================================================ -->
-      <div class="container u-mb-lg">
-
-        <div class="u-mb-rg">
-          <h2 class="txt-secondary">Bottom Navigation</h2>
-          <p class="txt-secondary">
-            Fixed to the bottom of every question page. Shown here in flow rather than fixed
-            so it can be inspected inline - in the app <code>.bottom-nav</code> is
-            <code>position: fixed</code> and the page reserves
-            <code>--nav-bottom-height</code> of space for it.
-          </p>
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Default - Back disabled (first question)</h5>
-        </div>
-        <div class="border-wrapper u-mb-rg" style="overflow: hidden;">
-          <!-- START: Bottom Navigation - first question
-               position: static here is reference-page only, to un-fix the bar. -->
-          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
-
-            <!-- Progress indicator -->
-            <div class="progress-indicator">
-              <div class="progress-bar">
-                <span class="progress" style="width: 0%"></span>
-              </div>
-              <p class="label">0%</p>
-            </div>
-
-            <!-- Nav buttons -->
-            <div class="button-container">
-
-              <!-- Help - secondary icon button -->
-              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-1">
-                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-help-1">Help</span>
-              </a>
-
-              <!-- Back - disabled on the first question -->
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-nav-back-1">
-                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-back-1">Back</span>
-              </a>
-
-              <!-- Next -->
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-1">
-                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-next-1">Next</span>
-              </a>
-
-            </div>
-          </nav>
-          <!-- END: Bottom Navigation - first question -->
-        </div>
-
-        <div class="u-mb-rg">
-          <h5 class="txt-secondary">Mid-survey - Back enabled</h5>
-        </div>
-        <div class="border-wrapper" style="overflow: hidden;">
-          <!-- START: Bottom Navigation - mid survey
-               Same markup with .icon-btn-disabled removed from Back and the
-               progress fill advanced. -->
-          <nav class="bottom-nav" aria-label="Primary" style="position: static;">
-
-            <div class="progress-indicator">
-              <div class="progress-bar">
-                <span class="progress" style="width: 50%"></span>
-              </div>
-              <p class="label">50%</p>
-            </div>
-
-            <div class="button-container">
-
-              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-2">
-                <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-help-2">Help</span>
-              </a>
-
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-back-2">
-                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-back-2">Back</span>
-              </a>
-
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-2">
-                <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
-                <span class="tooltip" role="tooltip" id="tip-nav-next-2">Next</span>
-              </a>
-
-            </div>
-          </nav>
-          <!-- END: Bottom Navigation - mid survey -->
-        </div>
-
-      </div>
-      <!-- SECTION END: Bottom Navigation -->
 
     </section>
   </body>

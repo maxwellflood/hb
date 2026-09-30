@@ -543,6 +543,15 @@ a {
   color: var(--text-brand-strong);
 }
 
+/* Reference-page navigation only - links index.html sections to the
+   standalone page(s) that show that component in situ. Not part of the
+   shipped component set. */
+.doc-link {
+  color: var(--text-brand-strong);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
 .txt-brand-muted {
   color: var(--text-brand-muted);
 }
