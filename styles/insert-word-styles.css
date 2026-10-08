@@ -1,0 +1,203 @@
+/* =====================================================
+   Insert Word
+   A fill-in-the-blank question type. A button sits inline in a
+   sentence of plain text; tapping it opens a menu of words, and
+   the chosen word replaces the button's content. Tapping it again
+   reopens the menu so the answer can be changed.
+
+   Structure:
+     .insert-word-sentence        - the <p> holding the plain text
+     └── .insert-word             - inline wrapper, anchors the menu
+         ├── .insert-word__trigger - <button>, the 40px-tall hit area
+         │   └── .insert-word__face - the visible 32px pill / circle
+         └── .insert-word-menu    - word menu, opens below the trigger
+             ├── .insert-word-menu__caret
+             └── .insert-word-menu__frame
+                 └── .insert-word-menu__options
+                     └── .insert-word-menu__option (one per word)
+
+   States (modifier classes - the host app applies these):
+     .insert-word__face--icon          - no word chosen yet; shows the add icon
+     .insert-word--open                - menu visible, face darkens
+     .insert-word-menu__option--selected - the word currently in the sentence
+
+   Everything is a <span> or <button> because the component lives
+   inside a <p>, which only allows phrasing content.
+   ===================================================== */
+
+/* The sentence - plain body text. The trigger is inline-flex, so the
+   line it sits on grows to the 40px hit area and the text either side
+   stays vertically centred on it. */
+.insert-word-sentence {
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* Inline wrapper - position: relative anchors the menu to the trigger.
+   nowrap keeps the trigger and its menu from breaking across lines. */
+.insert-word {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* ---- Trigger ---- */
+
+/* The button is the hit area: 40px tall, as wide as the face. It has no
+   fill of its own - the 4px above and below the face is invisible tap
+   space, so the face can stay 32px and sit in a line of text. */
+.insert-word__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-40);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* The visible part - a 32px brand-blue pill holding the chosen word */
+.insert-word__face {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-32);
+  padding-inline: var(--size-12);
+  border-radius: var(--radius-m);
+  background-color: var(--surface-brand-strong);
+  color: var(--text-primary-inverted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  transition: background-color 0.15s ease;
+}
+
+/* Empty - no word chosen yet. A 32px circle with the 20px add icon */
+.insert-word__face--icon {
+  width: var(--size-32);
+  padding-inline: 0;
+  border-radius: 50%;
+}
+
+/* Hover - one step darker, the same hover as every other brand button */
+.insert-word__trigger:hover .insert-word__face {
+  background-color: var(--blu-60);
+}
+
+/* Pressed / open - darkest blue while held, and for as long as the menu is open */
+.insert-word__trigger:active .insert-word__face,
+.insert-word--open .insert-word__face {
+  background-color: var(--blu-80);
+}
+
+/* Keyboard focus - ring drawn on the face, not the taller hit area */
+.insert-word__trigger:focus-visible {
+  outline: none;
+}
+
+.insert-word__trigger:focus-visible .insert-word__face {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: 2px;
+}
+
+/* ---- Word menu ---- */
+
+/* Floating menu - below the trigger, centred on it. Hidden until the
+   wrapper takes .insert-word--open. The 4px offset puts the caret's tip
+   level with the bottom of the hit area.
+   filter: drop-shadow wraps the full compound shape (frame + caret) in one shadow. */
+.insert-word-menu {
+  position: absolute;
+  top: calc(100% + var(--size-4));
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.05));
+  z-index: 10;
+}
+
+.insert-word--open .insert-word-menu {
+  display: flex;
+}
+
+/* Upward-pointing caret - a 16px white square rotated 45° to form a diamond,
+   with the top and left borders forming the visible ^.
+   Same layering as the Don't Know menu caret: z-index: 2 puts its white fill
+   over the frame's top border at the join, and the options row (z-index: 3)
+   covers its bottom half so only the tip shows above the frame. */
+.insert-word-menu__caret {
+  width: var(--size-16);
+  height: var(--size-16);
+  background-color: var(--surface-primary);
+  border-top: 1px solid var(--border-primary);
+  border-left: 1px solid var(--border-primary);
+  transform: rotate(45deg);
+  margin-bottom: -8px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Bordered frame - white surface, 1px border, 2px padding around the options.
+   No z-index, so it does not form a stacking context and the caret can sit over it. */
+.insert-word-menu__frame {
+  display: flex;
+  padding: 2px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  background-color: var(--surface-primary);
+}
+
+/* Row of word options - z-index: 3 so it covers the lower half of the caret */
+.insert-word-menu__options {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--surface-primary);
+  position: relative;
+  z-index: 3;
+}
+
+/* One word. 6px corners sit concentric inside the frame's 8px corner and
+   2px padding. White by default, grey on hover, darker grey while pressed. */
+.insert-word-menu__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-36);
+  padding-inline: var(--size-8);
+  border: none;
+  border-radius: 6px;
+  background-color: var(--surface-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.insert-word-menu__option:hover,
+.insert-word-menu__option--selected {
+  background-color: var(--surface-secondary);
+}
+
+.insert-word-menu__option:active {
+  background-color: var(--surface-tertiary);
+}
+
+.insert-word-menu__option:focus-visible {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: -2px;
+}

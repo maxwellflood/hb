@@ -40,12 +40,14 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `bingo-text_img-4-corners.html`        | Bingo board - text card, four image zones in the corners           |
 | `bingo-text_text.html`                 | Bingo board - text card, eight text drop zones                     |
 | `bingo-text_img.html`                  | Bingo board - text card, eight image drop zones                    |
+| `insert-word.html`                     | Insert Word - live demo of the inline word menu                    |
 | `styles/styles.css`                    | Global styles, reset, typography, utility classes                  |
 | `styles/input-styles.css`              | Styles specific to input components                                |
 | `styles/love-button-styles.css`        | Styles specific to the love button component                       |
 | `styles/ai-styles.css`                 | Styles specific to the AI conversation components                  |
 | `styles/tinderland-styles.css`         | Styles for the Tinderland card and Tosser arena                    |
 | `styles/bingo-styles.css`              | Styles for the Bingo board, drop zones and card                    |
+| `styles/insert-word-styles.css`        | Styles for the Insert Word trigger and word menu                   |
 | `scripts/grids-scripts.js`             | Scripts for grid demos                                             |
 | `scripts/grids-multiselect-scripts.js` | Scripts for multiselect grid demos                                 |
 | `scripts/inputs-scripts.js`            | Scripts for input demos                                            |
@@ -53,6 +55,7 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `scripts/love-button-mid.js`           | Scripts for the love button (−100–100 variant)                     |
 | `scripts/home.js`                      | Scripts for the home page                                          |
 | `scripts/ai-scripts.js`                | Scripts for the AI conversation page                               |
+| `scripts/insert-word.js`               | Demo behaviour for the Insert Word page (open, choose, change)     |
 | `fonts/`                               | Local font files                                                   |
 | `lottie/`                              | Lottie animation files                                             |
 

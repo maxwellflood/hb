@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/bingo-styles.css" />
     <link rel="stylesheet" href="styles/dropper-styles.css" />
     <link rel="stylesheet" href="styles/ai-styles.css" />
+    <link rel="stylesheet" href="styles/insert-word-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -575,6 +576,23 @@
               />
             </svg>
           </div>
+
+          <!-- Icon Stopwatch - used by the Timer component -->
+          <div class="icon" aria-hidden="true">
+            <!-- inline SVG -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -1116,12 +1134,12 @@
         </div>
 
         <div class="u-mb-rg">
-          <h5 class="txt-secondary">Active - menu open</h5>
+          <h5 class="txt-secondary">Active - menu above (default)</h5>
         </div>
         <!-- The inner presentation wrapper (padding-top) is reference-page only -
              it reserves vertical space so the absolutely-positioned menu stays
              within the demo container's borders. It is not part of the component. -->
-        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="justify-content: center; align-items: center;">
           <div style="padding-top: 64px;">
 
             <!-- START: Don't Know Button - Active
@@ -1154,6 +1172,117 @@
             <!-- END: Don't Know Button - Active -->
 
           </div>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Active - menu below</h5>
+        </div>
+        <!-- The inner presentation wrapper (padding-bottom) is reference-page only -
+             it reserves space so the menu stays within the demo container's borders.
+             It is not part of the component. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="justify-content: center; align-items: center;">
+
+          <!-- START: Don't Know Button - Active, menu below
+               Menu opens underneath the button. .dont-know-menu--below repositions the
+               menu; the caret moves before the frame in the markup and
+               .dont-know-menu-caret--below flips it to point up. -->
+          <div style="padding-bottom: 64px;">
+            <div class="dont-know-btn-wrapper">
+              <button
+                class="dont-know-btn dont-know-btn--active"
+                type="button"
+                aria-pressed="true"
+                aria-label="Don't know"
+              >🤷</button>
+
+              <div class="dont-know-menu dont-know-menu--below" role="dialog" aria-label="Confirm selection">
+                <div class="dont-know-menu-caret dont-know-menu-caret--below" aria-hidden="true"></div>
+                <div class="dont-know-menu-frame">
+                  <div class="dont-know-menu-buttons">
+                    <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
+                    <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Don't Know Button - Active, menu below -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Active - menu left</h5>
+        </div>
+        <!-- The inner presentation wrapper (padding-left) is reference-page only -
+             it reserves space so the menu stays within the demo container's borders.
+             It is not part of the component. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="justify-content: center; align-items: center;">
+
+          <!-- START: Don't Know Button - Active, menu left
+               Menu opens to the left of the button. .dont-know-menu--left repositions
+               the menu; the caret stays after the frame in the markup and
+               .dont-know-menu-caret--left flips it to point right. -->
+          <div style="padding-left: 360px;">
+            <div class="dont-know-btn-wrapper">
+              <button
+                class="dont-know-btn dont-know-btn--active"
+                type="button"
+                aria-pressed="true"
+                aria-label="Don't know"
+              >🤷</button>
+
+              <div class="dont-know-menu dont-know-menu--left" role="dialog" aria-label="Confirm selection">
+                <div class="dont-know-menu-frame">
+                  <div class="dont-know-menu-buttons">
+                    <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
+                    <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
+                  </div>
+                </div>
+                <div class="dont-know-menu-caret dont-know-menu-caret--left" aria-hidden="true"></div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Don't Know Button - Active, menu left -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Active - menu right</h5>
+        </div>
+        <!-- The inner presentation wrapper (padding-right) is reference-page only -
+             it reserves space so the menu stays within the demo container's borders.
+             It is not part of the component. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="justify-content: center; align-items: center;">
+
+          <!-- START: Don't Know Button - Active, menu right
+               Menu opens to the right of the button. .dont-know-menu--right repositions
+               the menu; the caret moves before the frame in the markup and
+               .dont-know-menu-caret--right flips it to point left. -->
+          <div style="padding-right: 360px;">
+            <div class="dont-know-btn-wrapper">
+              <button
+                class="dont-know-btn dont-know-btn--active"
+                type="button"
+                aria-pressed="true"
+                aria-label="Don't know"
+              >🤷</button>
+
+              <div class="dont-know-menu dont-know-menu--right" role="dialog" aria-label="Confirm selection">
+                <div class="dont-know-menu-caret dont-know-menu-caret--right" aria-hidden="true"></div>
+                <div class="dont-know-menu-frame">
+                  <div class="dont-know-menu-buttons">
+                    <button class="dont-know-menu-btn" type="button">Confirm don't know</button>
+                    <button class="dont-know-menu-btn" type="button">Cancel don't know</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END: Don't Know Button - Active, menu right -->
+
         </div>
 
       </div>
@@ -1399,6 +1528,208 @@
 
       </div>
       <!-- SECTION END: Progress Bar -->
+
+      <!-- ============================================================
+           SECTION: Timer
+           Time remaining on a timed question. Stopwatch icon plus a bar
+           that empties as time runs out. Max width 420px.
+
+           .timer            - grey pill wrapper (role="timer")
+           .timer__icon      - 16px stopwatch icon
+           .timer__track     - grey track, stretches to fill
+           .timer__fill      - blue fill; width = time remaining
+           .timer--running   - CSS countdown, length set by --timer-duration
+           .timer-circle     - compact circular version (see sub-section below)
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Timer</h2>
+          <p class="txt-secondary">
+            Shows the time left to answer a timed question. The blue fill shrinks
+            as time runs out. Either set the fill width inline
+            (<code>style="width: 50%"</code>) or add <code>.timer--running</code> and
+            set <code>--timer-duration</code> to have CSS run the countdown.
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Counting down - <code>.timer--running</code></h5>
+        </div>
+        <div class="flex-v-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Timer - Running
+               --timer-duration sets how long the fill takes to empty (10s here).
+               Animation ends at 0% and holds there. Reload the page to replay. -->
+          <div class="timer timer--running" role="timer" aria-label="Time remaining" style="--timer-duration: 10s;">
+            <span class="timer__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <div class="timer__track">
+              <span class="timer__fill"></span>
+            </div>
+          </div>
+          <!-- END: Timer - Running -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Time remaining - static</h5>
+        </div>
+        <div class="flex-v-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Timer - 100% (full time) -->
+          <div class="timer" role="timer" aria-label="Time remaining">
+            <span class="timer__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <div class="timer__track">
+              <span class="timer__fill" style="width: 100%"></span>
+            </div>
+          </div>
+          <!-- END: Timer - 100% (full time) -->
+
+          <!-- START: Timer - 30% (matches Figma) -->
+          <div class="timer" role="timer" aria-label="Time remaining">
+            <span class="timer__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <div class="timer__track">
+              <span class="timer__fill" style="width: 30%"></span>
+            </div>
+          </div>
+          <!-- END: Timer - 30% (matches Figma) -->
+
+          <!-- START: Timer - 0% (time up) -->
+          <div class="timer" role="timer" aria-label="Time remaining">
+            <span class="timer__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <div class="timer__track">
+              <span class="timer__fill" style="width: 0%"></span>
+            </div>
+          </div>
+          <!-- END: Timer - 0% (time up) -->
+
+        </div>
+
+        <!-- ---------- Timer Circle ----------
+             Compact version for tight spaces. Same timer, drawn as a ring
+             around the stopwatch icon.
+
+             .timer-circle            - 34px grey circle (role="timer")
+             .timer-circle__icon      - 16px stopwatch icon
+             .timer-circle__ring      - inline SVG ring over the grey border
+             .timer-circle__fill      - blue arc; --timer-remaining (0-100) sets its length
+             .timer-circle--running   - CSS countdown, length set by --timer-duration
+             .timer-circle--expired   - time up, hides the fill -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Circle, counting down - <code>.timer-circle--running</code></h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Timer Circle - Running
+               --timer-duration sets how long the ring takes to empty (10s here).
+               The ring empties clockwise from 12 o'clock. Reload the page to replay. -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="timer-circle timer-circle--running" role="timer" aria-label="Time remaining" style="--timer-duration: 10s;">
+              <span class="timer-circle__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+                <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+              </svg>
+            </div>
+            <p class="small txt-tertiary">10s</p>
+          </div>
+          <!-- END: Timer Circle - Running -->
+
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Circle, time remaining - static</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Timer Circle - 100% (full time) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="timer-circle" role="timer" aria-label="Time remaining" style="--timer-remaining: 100;">
+              <span class="timer-circle__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+                <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+              </svg>
+            </div>
+            <p class="small txt-tertiary">100%</p>
+          </div>
+          <!-- END: Timer Circle - 100% (full time) -->
+
+          <!-- START: Timer Circle - 75% (matches Figma) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="timer-circle" role="timer" aria-label="Time remaining" style="--timer-remaining: 75;">
+              <span class="timer-circle__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+                <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+              </svg>
+            </div>
+            <p class="small txt-tertiary">75%</p>
+          </div>
+          <!-- END: Timer Circle - 75% (matches Figma) -->
+
+          <!-- START: Timer Circle - 25% -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="timer-circle" role="timer" aria-label="Time remaining" style="--timer-remaining: 25;">
+              <span class="timer-circle__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+                <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+              </svg>
+            </div>
+            <p class="small txt-tertiary">25%</p>
+          </div>
+          <!-- END: Timer Circle - 25% -->
+
+          <!-- START: Timer Circle - Expired
+               .timer-circle--expired hides the fill once time is up -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div class="timer-circle timer-circle--expired" role="timer" aria-label="Time remaining" style="--timer-remaining: 0;">
+              <span class="timer-circle__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M7.99984 2.33334C9.50841 2.33334 10.8931 2.86164 11.981 3.74219L12.5285 3.19532C12.7888 2.93497 13.2108 2.93497 13.4712 3.19532C13.7315 3.45566 13.7315 3.87767 13.4712 4.13802L12.9237 4.6849C13.8046 5.77285 14.3332 7.15776 14.3332 8.66667C14.3332 12.1645 11.4976 15 7.99984 15C4.50203 15 1.6665 12.1645 1.6665 8.66667C1.6665 5.16887 4.50203 2.33334 7.99984 2.33334ZM7.99984 3.66667C5.23841 3.66667 2.99984 5.90525 2.99984 8.66667C2.99984 11.4281 5.23841 13.6667 7.99984 13.6667C10.7612 13.6667 12.9998 11.4281 12.9998 8.66667C12.9998 5.90525 10.7612 3.66667 7.99984 3.66667ZM9.86182 5.86198C10.1222 5.60163 10.5442 5.60163 10.8045 5.86198C11.0649 6.12233 11.0649 6.54434 10.8045 6.80469L8.47119 9.13802C8.21084 9.39837 7.78883 9.39837 7.52848 9.13802C7.26813 8.87767 7.26813 8.45566 7.52848 8.19532L9.86182 5.86198ZM9.6665 0.333336C10.0347 0.333336 10.3332 0.631813 10.3332 1C10.3332 1.36819 10.0347 1.66667 9.6665 1.66667H6.33317C5.96498 1.66667 5.6665 1.36819 5.6665 1C5.6665 0.631813 5.96498 0.333336 6.33317 0.333336H9.6665Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+                <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+              </svg>
+            </div>
+            <p class="small txt-tertiary">Time up</p>
+          </div>
+          <!-- END: Timer Circle - Expired -->
+
+        </div>
+
+      </div>
+      <!-- SECTION END: Timer -->
 
       <!-- Inputs -->
       <div class="container u-mb-lg">
@@ -1665,6 +1996,205 @@
         </div>
       </div>
       <!-- Inputs END -->
+
+      <!-- ============================================================
+           SECTION: Insert Word
+           Fill-in-the-blank question type. A button sits inline in a
+           sentence; tapping it opens a menu of words and the chosen word
+           replaces the button's content. Tapping it again reopens the menu
+           so the answer can be changed.
+
+             .insert-word-sentence        - the <p> of plain text
+             .insert-word                 - inline wrapper; --open shows the menu
+             .insert-word__trigger        - <button>, the 40px-tall hit area
+             .insert-word__face           - the visible 32px pill; --icon when empty
+             .insert-word-menu            - the word menu, opens below
+             .insert-word-menu__option    - one word; --selected marks the current one
+
+           The trigger carries aria-haspopup="menu" and aria-expanded.
+           The menu is role="menu"; each word is role="menuitemradio" with aria-checked.
+           Requires styles/insert-word-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Insert Word</h2>
+          <p class="txt-secondary">
+            A sentence with a word missing. The respondent taps the button to open a menu
+            of words, and the word they choose is inserted into the sentence in place of
+            the button. Tapping the word again reopens the menu so it can be changed.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="insert-word.html">insert-word.html</a>
+            (live demo of the open / choose / change behaviour)
+          </p>
+        </div>
+
+        <!-- Hit area -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Hit area</h5>
+        </div>
+        <!-- The dashed outlines are reference-page presentation only - they mark
+             the 40px-tall button around the 32px face. Not part of the component. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg" style="align-items: center; gap: var(--size-24);">
+
+          <!-- START: Insert Word - Hit area
+               The <button> is 40px tall and as wide as the face, with no fill.
+               The 4px above and below the face is invisible tap space. -->
+          <span class="insert-word">
+            <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Choose a word" style="outline: 1px dashed var(--border-secondary);">
+              <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                  <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                </svg>
+              </span>
+            </button>
+          </span>
+
+          <span class="insert-word">
+            <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" style="outline: 1px dashed var(--border-secondary);">
+              <span class="insert-word__face">very</span>
+            </button>
+          </span>
+          <!-- END: Insert Word - Hit area -->
+
+        </div>
+
+        <!-- State 1: Empty -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Empty - no word chosen</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Insert Word - Empty
+               Initial state. Face takes .insert-word__face--icon: a 32px blue circle
+               with the add icon. aria-label names the button, since it has no text. -->
+          <p class="insert-word-sentence">
+            I'd say that I am
+            <span class="insert-word">
+              <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Choose a word">
+                <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                    <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                  </svg>
+                </span>
+              </button>
+            </span>
+            socially conscious
+          </p>
+          <!-- END: Insert Word - Empty -->
+
+        </div>
+
+        <!-- State 2: Empty, menu open -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Empty - menu open</h5>
+        </div>
+        <!-- padding-bottom on the inner wrapper is reference-page only - it reserves
+             space so the absolutely-positioned menu stays inside the demo border. -->
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <div style="padding-bottom: 56px;">
+
+            <!-- START: Insert Word - Empty, menu open
+                 .insert-word--open on the wrapper shows the menu and darkens the face
+                 to --blu-80. Set aria-expanded="true" on the trigger to match.
+                 No option is --selected yet. -->
+            <p class="insert-word-sentence">
+              I'd say that I am
+              <span class="insert-word insert-word--open">
+                <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="ds-insert-word-menu-1" aria-label="Choose a word">
+                  <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                      <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                    </svg>
+                  </span>
+                </button>
+
+                <!-- Word menu - caret first in the markup so it renders above the frame -->
+                <span class="insert-word-menu" id="ds-insert-word-menu-1" role="menu" aria-label="Choose a word">
+                  <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                  <span class="insert-word-menu__frame">
+                    <span class="insert-word-menu__options">
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not at all</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not very</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">quite</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">very</button>
+                    </span>
+                  </span>
+                </span>
+              </span>
+              socially conscious
+            </p>
+            <!-- END: Insert Word - Empty, menu open -->
+
+          </div>
+        </div>
+
+        <!-- State 3: Word chosen -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Word chosen</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+
+          <!-- START: Insert Word - Word chosen
+               The chosen word replaces the icon: drop .insert-word__face--icon and put
+               the word in the face. Remove aria-label so the word itself names the button.
+               The face grows to fit the word, with 12px either side. -->
+          <p class="insert-word-sentence">
+            I'd say that I am
+            <span class="insert-word">
+              <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false">
+                <span class="insert-word__face">very</span>
+              </button>
+            </span>
+            socially conscious
+          </p>
+          <!-- END: Insert Word - Word chosen -->
+
+        </div>
+
+        <!-- State 4: Word chosen, menu open -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Word chosen - menu open to change it</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <div style="padding-bottom: 56px;">
+
+            <!-- START: Insert Word - Word chosen, menu open
+                 Same as Empty, menu open, but the current word's option takes
+                 .insert-word-menu__option--selected and aria-checked="true". -->
+            <p class="insert-word-sentence">
+              I'd say that I am
+              <span class="insert-word insert-word--open">
+                <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="ds-insert-word-menu-2">
+                  <span class="insert-word__face">very</span>
+                </button>
+
+                <span class="insert-word-menu" id="ds-insert-word-menu-2" role="menu" aria-label="Choose a word">
+                  <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                  <span class="insert-word-menu__frame">
+                    <span class="insert-word-menu__options">
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not at all</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not very</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">quite</button>
+                      <button class="insert-word-menu__option insert-word-menu__option--selected" type="button" role="menuitemradio" aria-checked="true">very</button>
+                    </span>
+                  </span>
+                </span>
+              </span>
+              socially conscious
+            </p>
+            <!-- END: Insert Word - Word chosen, menu open -->
+
+          </div>
+        </div>
+
+      </div>
+      <!-- SECTION END: Insert Word -->
 
       <!-- ============================================================
            SECTION: Grid Buttons

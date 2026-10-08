@@ -14,6 +14,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/tinderland-styles.css` | Tinderland card (variants + swipe states) and the swipe-specific Tosser furniture |
 | `styles/bingo-styles.css` | Bingo - 3 × 3 board, drop zones, draggable card |
 | `styles/ai-styles.css` | AI conversation - chat dock, input, message thread, platform avatar |
+| `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
 
 ---
 
@@ -379,6 +380,7 @@ Single-select and multi-select question type. Defined in `input-styles.css`.
 | `scripts/love-button-mid.js` | `love-button-mid.html` |
 | `scripts/home.js` | `home.html` |
 | `scripts/ai-scripts.js` | `ai.html` |
+| `scripts/insert-word.js` | `insert-word.html` (demo only - index.html shows the states statically) |
 
 ---
 
@@ -648,6 +650,55 @@ Conversational question type. Defined in `ai-styles.css`; the page `<body>` take
 
 ---
 
+## Insert Word
+
+Fill-in-the-blank question type. A button sits inline in a sentence of plain text;
+tapping it opens a menu of words, the chosen word replaces the button's content, and
+tapping the word again reopens the menu to change it. Defined in `insert-word-styles.css`.
+
+Everything is a `<span>` or `<button>` because it lives inside a `<p>`.
+
+```html
+<p class="insert-word-sentence">
+  I'd say that I am
+  <span class="insert-word">
+    <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Choose a word">
+      <span class="insert-word__face insert-word__face--icon" aria-hidden="true"><!-- add SVG, 20px --></span>
+    </button>
+    <span class="insert-word-menu" role="menu" aria-label="Choose a word">
+      <span class="insert-word-menu__caret" aria-hidden="true"></span>
+      <span class="insert-word-menu__frame">
+        <span class="insert-word-menu__options">
+          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">very</button>
+          <!-- one per word -->
+        </span>
+      </span>
+    </span>
+  </span>
+  socially conscious
+</p>
+```
+
+- `.insert-word__trigger` - the hit area: 40px tall, no fill. The 4px above and below
+  the face is invisible tap space, so the visible part can stay 32px in a line of text
+- `.insert-word__face` - the visible 32px brand-blue pill holding the chosen word
+- `.insert-word__face--icon` - empty state: 32px circle with the add icon. Remove it,
+  put the word in the face and drop the trigger's `aria-label` once a word is chosen
+- `.insert-word-menu` - opens below the trigger, centred, caret pointing up. Same
+  caret layering as the Don't Know menu
+
+**States:**
+
+| Modifier | Meaning |
+|---|---|
+| `.insert-word__face--icon` | No word chosen yet |
+| `.insert-word--open` (wrapper) | Menu visible, face darkens to `--blu-80`. Pair with `aria-expanded="true"` |
+| `.insert-word-menu__option--selected` | The word currently in the sentence. Pair with `aria-checked="true"` |
+
+Hover on the face is `--blu-60`; pressed (`:active`) is `--blu-80`, the same as open.
+
+---
+
 ## Tooltip
 
 ```html
@@ -676,6 +727,49 @@ Step Progress Dots, which track cards within a single question.
 ```
 
 Set the fill percentage inline on `.progress` and repeat it as text in `.label`.
+
+---
+
+## Timer
+
+Time left on a timed question. Defined in `styles.css`. Max width 420px; the track
+stretches to fill.
+
+```html
+<div class="timer timer--running" role="timer" aria-label="Time remaining" style="--timer-duration: 30s;">
+  <span class="timer__icon" aria-hidden="true"><!-- stopwatch SVG, 16px --></span>
+  <div class="timer__track">
+    <span class="timer__fill"></span>
+  </div>
+</div>
+```
+
+- **Static:** leave off `.timer--running` and set the fill's inline width to the time
+  remaining (`style="width: 30%"`)
+- **Counting down:** `.timer--running` runs the fill from 100% to 0% over
+  `--timer-duration` in CSS, with no JavaScript. Set `animation-play-state: paused` on
+  `.timer__fill` to pause it
+
+### Timer Circle
+
+Compact version: the stopwatch in a 34px circle, with a blue ring over the grey border
+that empties clockwise from 12 o'clock.
+
+```html
+<div class="timer-circle timer-circle--running" role="timer" aria-label="Time remaining" style="--timer-duration: 30s;">
+  <span class="timer-circle__icon" aria-hidden="true"><!-- stopwatch SVG, 16px --></span>
+  <svg class="timer-circle__ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle class="timer-circle__fill" cx="17" cy="17" r="16" pathLength="100" />
+  </svg>
+</div>
+```
+
+- **Static:** leave off `--running` and set `--timer-remaining` (0-100) on `.timer-circle`
+- **Counting down:** `.timer-circle--running` with `--timer-duration`, same as the bar
+- **Time up:** `.timer-circle--expired` hides the fill. The ring has round ends, so at
+  zero it would otherwise leave a dot at 12 o'clock
+- `pathLength="100"` on the `<circle>` is what lets the dash values read as percentages;
+  keep it
 
 ---
 

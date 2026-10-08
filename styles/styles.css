@@ -1192,6 +1192,153 @@ section {
   transition: width 0.3s ease;
 }
 
+/* =====================================================
+   Timer
+   Stopwatch icon plus a thin bar that empties as time runs out.
+   The track stretches to fill the component, capped at 420px.
+
+   .timer           - grey pill wrapper
+   .timer__icon     - 16px stopwatch icon
+   .timer__track    - grey track
+   .timer__fill     - blue remaining-time fill
+
+   Static: set the fill's inline width to the time remaining
+   (style="width: 50%").
+   Counting down: add .timer--running and set --timer-duration on
+   .timer (style="--timer-duration: 30s"). The fill runs 100% to 0%
+   in CSS, no JavaScript needed. Pause by setting animation-play-state:
+   paused on the fill.
+   ===================================================== */
+
+.timer {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px var(--size-12) 6px var(--size-8);
+  background-color: var(--surface-secondary);
+  border-radius: var(--radius-s);
+}
+
+.timer__icon {
+  width: var(--size-16);
+  height: var(--size-16);
+  flex-shrink: 0;
+  color: var(--text-primary);
+}
+
+.timer__icon svg {
+  display: block;
+}
+
+.timer__track {
+  position: relative;
+  flex: 1;
+  height: var(--size-4);
+  background-color: var(--surface-disabled);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.timer__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--surface-brand-strong);
+  border-radius: 2px;
+}
+
+.timer--running .timer__fill {
+  animation: timer-countdown var(--timer-duration, 30s) linear forwards;
+}
+
+@keyframes timer-countdown {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+/* =====================================================
+   Timer Circle
+   Compact version of the Timer: stopwatch icon in a 34px circle,
+   with a blue ring that empties clockwise from 12 o'clock as time
+   runs out. The ring sits over the circle's grey border.
+
+   .timer-circle          - 34px grey circle with grey border
+   .timer-circle__icon    - 16px stopwatch icon, centred
+   .timer-circle__ring    - inline SVG, overlays the border
+   .timer-circle__fill    - the blue <circle>; pathLength="100" so its
+                            dash values read as percentages
+
+   Static: set --timer-remaining (0-100) on .timer-circle
+   (style="--timer-remaining: 75").
+   Counting down: add .timer-circle--running and set --timer-duration,
+   the same as .timer--running.
+   Time up: add .timer-circle--expired to hide the fill. Without it a
+   round line cap leaves a dot at 12 o'clock when the ring reaches zero.
+   ===================================================== */
+
+.timer-circle {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: var(--surface-secondary);
+  border: 2px solid var(--border-primary);
+  border-radius: 999px;
+}
+
+.timer-circle__icon {
+  width: var(--size-16);
+  height: var(--size-16);
+  color: var(--text-primary);
+}
+
+.timer-circle__icon svg {
+  display: block;
+}
+
+/* -2px pulls the ring out over the 2px border. Rotated so the
+   circle's stroke starts at 12 o'clock instead of 3 o'clock. */
+.timer-circle__ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  display: block;
+  transform: rotate(-90deg);
+}
+
+/* Visible arc runs from the elapsed point to 12 o'clock:
+   dash length = time remaining, shifted along by the time elapsed. */
+.timer-circle__fill {
+  fill: none;
+  stroke: var(--surface-brand-strong);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: var(--timer-remaining, 100) 100;
+  stroke-dashoffset: calc(var(--timer-remaining, 100) - 100);
+}
+
+.timer-circle--running .timer-circle__fill {
+  animation: timer-circle-countdown var(--timer-duration, 30s) linear forwards;
+}
+
+.timer-circle--expired .timer-circle__fill {
+  visibility: hidden;
+}
+
+/* The final step hides the fill so the round cap does not leave a dot */
+@keyframes timer-circle-countdown {
+  0%     { stroke-dasharray: 100 100; stroke-dashoffset: 0; visibility: visible; }
+  99.99% { visibility: visible; }
+  100%   { stroke-dasharray: 0 100; stroke-dashoffset: -100; visibility: hidden; }
+}
+
 /* Loader overlay */
 
 .loader-overlay {
@@ -1458,6 +1605,70 @@ section {
   flex-shrink: 0;
   position: relative;
   z-index: 2;
+}
+
+/* ---- Direction modifiers ----
+   Default (no modifier, above) anchors the menu above the button with a
+   downward caret, as built above. Each modifier below moves the menu to a
+   different side of the button; pair it with the matching
+   .dont-know-menu-caret--* modifier, which swaps the caret's border sides to
+   point back at the button and swaps the overlapping margin to the new seam.
+   The caret's position in the markup (before or after the frame) is what
+   puts it on the correct side - the modifiers only change its direction. */
+
+/* Below - menu opens underneath the button. Caret goes before the frame in
+   the markup so it renders at the top of the menu, pointing up. */
+.dont-know-menu--below {
+  bottom: auto;
+  top: calc(100% + var(--size-8));
+}
+
+.dont-know-menu-caret--below {
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid var(--border-primary);
+  border-top: 1px solid var(--border-primary);
+  margin-top: 0;
+  margin-bottom: -8px;
+}
+
+/* Left - menu opens to the left of the button. Caret stays after the frame
+   in the markup so it renders at the right-hand end of the menu, pointing
+   right. */
+.dont-know-menu--left {
+  bottom: auto;
+  left: auto;
+  right: calc(100% + var(--size-8));
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: row;
+}
+
+.dont-know-menu-caret--left {
+  border-right: 1px solid var(--border-primary);
+  border-bottom: none;
+  border-top: 1px solid var(--border-primary);
+  margin-top: 0;
+  margin-left: -8px;
+}
+
+/* Right - menu opens to the right of the button. Caret goes before the frame
+   in the markup so it renders at the left-hand end of the menu, pointing
+   left. */
+.dont-know-menu--right {
+  bottom: auto;
+  left: calc(100% + var(--size-8));
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: row;
+}
+
+.dont-know-menu-caret--right {
+  border-right: none;
+  border-left: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+  margin-top: 0;
+  margin-right: -8px;
 }
 
 /* =====================================================
