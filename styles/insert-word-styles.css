@@ -16,14 +16,34 @@
                  └── .insert-word-menu__options
                      └── .insert-word-menu__option (one per word)
 
+   Menu variants (modifier on .insert-word-menu):
+     (none)                       - one row of words
+     .insert-word-menu--multi-row - words wrap onto rows, max 190px wide
+     .insert-word-menu--input     - a text input instead of words, so the
+                                    respondent types their own answer.
+                                    Holds .insert-word-menu__input in
+                                    place of .insert-word-menu__options
+
    States (modifier classes - the host app applies these):
      .insert-word__face--icon          - no word chosen yet; shows the add icon
      .insert-word--open                - menu visible, face darkens
      .insert-word-menu__option--selected - the word currently in the sentence
 
-   Everything is a <span> or <button> because the component lives
-   inside a <p>, which only allows phrasing content.
+   Everything is a <span>, <button> or <input> because the component
+   lives inside a <p>, which only allows phrasing content.
    ===================================================== */
+
+/* ---- Story Question ---- */
+
+/* The answer block of a Story Question: insert-word sentences stacked
+   with .label-aside / .label-aside-instruction notes between them,
+   20px apart. Sits on .box-A. */
+.story-question {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--size-20);
+}
 
 /* The sentence - plain body text. The trigger is inline-flex, so the
    line it sits on grows to the 40px hit area and the text either side
@@ -200,4 +220,76 @@
 .insert-word-menu__option:focus-visible {
   outline: 2px solid var(--border-highlighted-brand);
   outline-offset: -2px;
+}
+
+/* ---- Variant: multi-row ---- */
+
+/* For longer word lists. Words sit four to a row, every option the
+   same width, so each full row spans the menu edge to edge.
+
+   The frame width has to be set here - the menu is absolutely
+   positioned against the narrow trigger, so without it the frame would
+   shrink to one word per row. Override --insert-word-menu-width on the
+   menu if the words are too long for a quarter of 190px; a word wider
+   than its column pushes that option wider than the rest. */
+.insert-word-menu--multi-row {
+  --insert-word-menu-width: 190px;
+  --insert-word-menu-columns: 4;
+}
+
+.insert-word-menu--multi-row .insert-word-menu__frame {
+  width: var(--insert-word-menu-width);
+}
+
+/* Short last row is centred, the same as .grid-group--wrap */
+.insert-word-menu--multi-row .insert-word-menu__options {
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+/* One column: the row's width less the 2px gaps between columns, shared
+   equally. No grow, so a short last row keeps the same option width.
+   Text is centred in the column, so the inline padding drops to 4px to
+   leave more room for the word. */
+.insert-word-menu--multi-row .insert-word-menu__option {
+  flex: 0 0
+    calc(
+      (100% - (var(--insert-word-menu-columns) - 1) * 2px) /
+        var(--insert-word-menu-columns)
+    );
+  padding-inline: var(--size-4);
+}
+
+/* ---- Variant: input ---- */
+
+/* A text field in place of the words, for open answers such as a brand
+   name. Same frame and caret as the word menu.
+   The dark border is the field's resting look while the menu is open -
+   it takes focus as soon as the menu opens, so the border doubles as
+   the focus indicator.
+   position + z-index: 3 cover the lower half of the caret, the same job
+   .insert-word-menu__options does in the word menu. */
+.insert-word-menu__input {
+  position: relative;
+  z-index: 3;
+  width: 204px;
+  height: var(--size-40);
+  padding: 10px;
+  border: 1px solid var(--border-highlighted);
+  border-radius: 6px;
+  background-color: var(--surface-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.insert-word-menu__input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.insert-word-menu__input:focus {
+  outline: none;
 }

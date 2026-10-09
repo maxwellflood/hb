@@ -348,6 +348,7 @@ template {
   --text-tertiary-inverted: var(--grey-5);
   --text-brand-strong: var(--blu-50);
   --text-brand-muted: var(--blu-30);
+  --text-brand-muted-dark: var(--blu-70);
   --text-error-strong: var(--red-50);
   --text-error-muted: var(--red-10);
   --text-warning-strong: var(--yel-50);
@@ -505,6 +506,24 @@ p {
   font-style: italic;
   font-weight: 600;
   color: var(--grey-7);
+}
+
+/* Aside label - small italic note set between parts of a question,
+   e.g. "This is on a new topic" between two Story Question sentences */
+.label-aside,
+.label-aside-instruction {
+  font-size: var(--p-size-small);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-tertiary);
+}
+
+/* Aside instruction - the same italic note in dark brand blue, for
+   telling the respondent how to answer, e.g. "Type the name of the brand" */
+.label-aside-instruction {
+  color: var(--text-brand-muted-dark);
 }
 
 .text-underline {

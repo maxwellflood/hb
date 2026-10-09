@@ -40,7 +40,8 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `bingo-text_img-4-corners.html`        | Bingo board - text card, four image zones in the corners           |
 | `bingo-text_text.html`                 | Bingo board - text card, eight text drop zones                     |
 | `bingo-text_img.html`                  | Bingo board - text card, eight image drop zones                    |
-| `insert-word.html`                     | Insert Word - live demo of the inline word menu                    |
+| `story-question.html`                  | Story Question - Insert Word sentences, all three menu variants    |
+| `expand-image.html`                    | Expand Image - stimulus image with expand button and lightbox      |
 | `styles/styles.css`                    | Global styles, reset, typography, utility classes                  |
 | `styles/input-styles.css`              | Styles specific to input components                                |
 | `styles/love-button-styles.css`        | Styles specific to the love button component                       |
@@ -48,6 +49,7 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `styles/tinderland-styles.css`         | Styles for the Tinderland card and Tosser arena                    |
 | `styles/bingo-styles.css`              | Styles for the Bingo board, drop zones and card                    |
 | `styles/insert-word-styles.css`        | Styles for the Insert Word trigger and word menu                   |
+| `styles/expand-image-styles.css`       | Styles for the Expand Image thumbnail, button and lightbox         |
 | `scripts/grids-scripts.js`             | Scripts for grid demos                                             |
 | `scripts/grids-multiselect-scripts.js` | Scripts for multiselect grid demos                                 |
 | `scripts/inputs-scripts.js`            | Scripts for input demos                                            |

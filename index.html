@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="styles/dropper-styles.css" />
     <link rel="stylesheet" href="styles/ai-styles.css" />
     <link rel="stylesheet" href="styles/insert-word-styles.css" />
+    <link rel="stylesheet" href="styles/expand-image-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -44,6 +45,9 @@
           <p class="txt-secondary">Paragraph text large</p>
           <p class="txt-secondary">Paragraph text</p>
           <p class="txt-secondary">Paragraph text small</p>
+          <!-- Aside labels - small italic notes between parts of a question -->
+          <p class="label-aside">Aside label - .label-aside</p>
+          <p class="label-aside-instruction">Aside instruction label - .label-aside-instruction</p>
         </div>
       </div>
 
@@ -2009,7 +2013,10 @@
              .insert-word__trigger        - <button>, the 40px-tall hit area
              .insert-word__face           - the visible 32px pill; --icon when empty
              .insert-word-menu            - the word menu, opens below
+                                            --multi-row wraps the words onto rows
+                                            --input holds a text field instead of words
              .insert-word-menu__option    - one word; --selected marks the current one
+             .insert-word-menu__input     - the text field in the --input variant
 
            The trigger carries aria-haspopup="menu" and aria-expanded.
            The menu is role="menu"; each word is role="menuitemradio" with aria-checked.
@@ -2026,8 +2033,8 @@
           </p>
           <p class="txt-secondary">
             In situ:
-            <a class="doc-link" href="insert-word.html">insert-word.html</a>
-            (live demo of the open / choose / change behaviour)
+            <a class="doc-link" href="story-question.html">story-question.html</a>
+            (live demo of the open / choose / change behaviour, all three menu variants)
           </p>
         </div>
 
@@ -2189,6 +2196,84 @@
               socially conscious
             </p>
             <!-- END: Insert Word - Word chosen, menu open -->
+
+          </div>
+        </div>
+
+        <!-- Variant: Multi-row menu -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Variant - multi-row menu</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <div style="padding-bottom: 96px;">
+
+            <!-- START: Insert Word - Multi-row menu, open
+                 For longer word lists. .insert-word-menu--multi-row lets the words
+                 wrap onto rows, capping the menu at 190px wide. Markup is otherwise
+                 identical to the default word menu. -->
+            <p class="insert-word-sentence">
+              The colour I most link with the brand is
+              <span class="insert-word insert-word--open">
+                <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="true" aria-controls="ds-insert-word-menu-3">
+                  <span class="insert-word__face">gold</span>
+                </button>
+
+                <span class="insert-word-menu insert-word-menu--multi-row" id="ds-insert-word-menu-3" role="menu" aria-label="Choose a word">
+                  <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                  <span class="insert-word-menu__frame">
+                    <span class="insert-word-menu__options">
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">red</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">blue</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">teal</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">navy</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">lime</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">grey</button>
+                      <button class="insert-word-menu__option insert-word-menu__option--selected" type="button" role="menuitemradio" aria-checked="true">gold</button>
+                      <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">pink</button>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </p>
+            <!-- END: Insert Word - Multi-row menu, open -->
+
+          </div>
+        </div>
+
+        <!-- Variant: Input menu -->
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Variant - input menu</h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <div style="padding-bottom: 60px;">
+
+            <!-- START: Insert Word - Input menu, open
+                 For open answers. .insert-word-menu--input holds a text field
+                 (.insert-word-menu__input) in place of .insert-word-menu__options.
+                 The popup is role="dialog", so the trigger says aria-haspopup="dialog".
+                 The field takes focus on open; the typed word goes in the face, the
+                 same as a chosen word. -->
+            <p class="insert-word-sentence">
+              The ad I remember most is for
+              <span class="insert-word insert-word--open">
+                <button class="insert-word__trigger" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="ds-insert-word-menu-4" aria-label="Type a word">
+                  <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                      <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                    </svg>
+                  </span>
+                </button>
+
+                <span class="insert-word-menu insert-word-menu--input" id="ds-insert-word-menu-4" role="dialog" aria-label="Type a word">
+                  <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                  <span class="insert-word-menu__frame">
+                    <input class="insert-word-menu__input" type="text" placeholder="Text" aria-label="Type a word" />
+                  </span>
+                </span>
+              </span>
+            </p>
+            <!-- END: Insert Word - Input menu, open -->
 
           </div>
         </div>
@@ -2550,6 +2635,74 @@
 
       </div>
       <!-- SECTION END: Image Grid Buttons -->
+
+      <!-- ============================================================
+           SECTION: Expand Image
+           A stimulus image with an expand button pinned to its top right
+           corner. The button opens the image full size in a lightbox; the
+           lightbox itself is shown in situ on expand-image.html.
+
+             .expand-image        - thumbnail wrapper, position: relative
+             .expand-image__img   - the thumbnail picture
+             .expand-image__btn   - 36px frosted button, 6px from the top right
+
+           States:
+             :hover / :focus-visible - icon turns from grey to black
+
+           Requires styles/expand-image-styles.css.
+           ============================================================ -->
+      <div class="container u-mb-lg">
+
+        <div class="u-mb-rg">
+          <h2 class="txt-secondary">Expand Image</h2>
+          <p class="txt-secondary">
+            A stimulus image the respondent can open full size. The expand button sits
+            absolutely in the top right corner of the image. Hover the button to see its
+            hover state - the icon turns from grey to black.
+          </p>
+          <p class="txt-secondary">
+            In situ:
+            <a class="doc-link" href="expand-image.html">expand-image.html</a>
+          </p>
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Expand button - <code>.expand-image__btn</code></h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm u-mb-rg">
+          <!-- START: Expand button
+               Shown on its own here with position: static. In use it is always
+               inside .expand-image, absolutely positioned in the top right corner. -->
+          <button class="expand-image__btn" type="button" aria-label="Expand image" style="position: static;">
+            <!-- Icon Arrow Expand - 20px -->
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M9.33919 10.6608C9.01376 10.3354 8.48624 10.3354 8.16081 10.6608L3.33333 15.4883V12.5C3.33333 12.0398 2.96024 11.6667 2.5 11.6667C2.03976 11.6667 1.66667 12.0398 1.66667 12.5V17.5C1.66667 17.5469 1.67223 17.5927 1.67969 17.6375C1.68563 17.6731 1.69271 17.7086 1.70329 17.7433C1.71566 17.7839 1.73153 17.8228 1.74967 17.8605C1.75534 17.8723 1.76132 17.8839 1.76758 17.8955C1.8332 18.0168 1.92723 18.1202 2.04183 18.1958C2.07327 18.2166 2.10609 18.2343 2.13948 18.2503C2.17717 18.2685 2.2161 18.2843 2.25667 18.2967C2.27359 18.3019 2.29079 18.3057 2.30794 18.3097C2.31741 18.312 2.32684 18.3143 2.33642 18.3162C2.34506 18.318 2.3538 18.3189 2.36247 18.3203C2.4073 18.3278 2.45305 18.3333 2.5 18.3333H7.5C7.96024 18.3333 8.33333 17.9602 8.33333 17.5C8.33333 17.0398 7.96024 16.6667 7.5 16.6667H4.51172L9.33919 11.8392C9.66462 11.5138 9.66463 10.9862 9.33919 10.6608Z" fill="currentColor" />
+              <path d="M12.5 1.66667C12.0398 1.66667 11.6667 2.03976 11.6667 2.5C11.6667 2.96024 12.0398 3.33333 12.5 3.33333H15.4883L10.6608 8.16081C10.3354 8.48624 10.3354 9.01376 10.6608 9.33919C10.9862 9.66463 11.5138 9.66462 11.8392 9.33919L16.6667 4.51172V7.5C16.6667 7.96024 17.0398 8.33333 17.5 8.33333C17.9602 8.33333 18.3333 7.96024 18.3333 7.5V2.5C18.3333 2.43358 18.3252 2.36906 18.3105 2.30713C18.3065 2.29 18.3027 2.27275 18.2975 2.25586C18.2851 2.21524 18.2685 2.1764 18.2503 2.13867C18.2344 2.10551 18.2164 2.07307 18.1958 2.04183C18.1202 1.92732 18.0175 1.83238 17.8963 1.76676C17.8849 1.76057 17.873 1.7553 17.8613 1.74967C17.8236 1.73147 17.7848 1.71489 17.7441 1.70247C17.7272 1.69732 17.71 1.69351 17.6929 1.68945C17.6834 1.68721 17.674 1.68486 17.6644 1.68294L17.6595 1.68213L17.5854 1.67074C17.5574 1.66788 17.5288 1.66667 17.5 1.66667H12.5Z" fill="currentColor" />
+            </svg>
+          </button>
+          <!-- END: Expand button -->
+        </div>
+
+        <div class="u-mb-rg">
+          <h5 class="txt-secondary">Image with expand button - <code>.expand-image</code></h5>
+        </div>
+        <div class="flex-h-wrapper border-wrapper u-p-sm">
+          <!-- START: Expand Image - thumbnail -->
+          <div class="expand-image">
+            <img class="expand-image__img" src="images/4x3-image.png" alt="Brand image" />
+            <button class="expand-image__btn" type="button" aria-label="Expand image" aria-haspopup="dialog">
+              <!-- Icon Arrow Expand - 20px -->
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M9.33919 10.6608C9.01376 10.3354 8.48624 10.3354 8.16081 10.6608L3.33333 15.4883V12.5C3.33333 12.0398 2.96024 11.6667 2.5 11.6667C2.03976 11.6667 1.66667 12.0398 1.66667 12.5V17.5C1.66667 17.5469 1.67223 17.5927 1.67969 17.6375C1.68563 17.6731 1.69271 17.7086 1.70329 17.7433C1.71566 17.7839 1.73153 17.8228 1.74967 17.8605C1.75534 17.8723 1.76132 17.8839 1.76758 17.8955C1.8332 18.0168 1.92723 18.1202 2.04183 18.1958C2.07327 18.2166 2.10609 18.2343 2.13948 18.2503C2.17717 18.2685 2.2161 18.2843 2.25667 18.2967C2.27359 18.3019 2.29079 18.3057 2.30794 18.3097C2.31741 18.312 2.32684 18.3143 2.33642 18.3162C2.34506 18.318 2.3538 18.3189 2.36247 18.3203C2.4073 18.3278 2.45305 18.3333 2.5 18.3333H7.5C7.96024 18.3333 8.33333 17.9602 8.33333 17.5C8.33333 17.0398 7.96024 16.6667 7.5 16.6667H4.51172L9.33919 11.8392C9.66462 11.5138 9.66463 10.9862 9.33919 10.6608Z" fill="currentColor" />
+                <path d="M12.5 1.66667C12.0398 1.66667 11.6667 2.03976 11.6667 2.5C11.6667 2.96024 12.0398 3.33333 12.5 3.33333H15.4883L10.6608 8.16081C10.3354 8.48624 10.3354 9.01376 10.6608 9.33919C10.9862 9.66463 11.5138 9.66462 11.8392 9.33919L16.6667 4.51172V7.5C16.6667 7.96024 17.0398 8.33333 17.5 8.33333C17.9602 8.33333 18.3333 7.96024 18.3333 7.5V2.5C18.3333 2.43358 18.3252 2.36906 18.3105 2.30713C18.3065 2.29 18.3027 2.27275 18.2975 2.25586C18.2851 2.21524 18.2685 2.1764 18.2503 2.13867C18.2344 2.10551 18.2164 2.07307 18.1958 2.04183C18.1202 1.92732 18.0175 1.83238 17.8963 1.76676C17.8849 1.76057 17.873 1.7553 17.8613 1.74967C17.8236 1.73147 17.7848 1.71489 17.7441 1.70247C17.7272 1.69732 17.71 1.69351 17.6929 1.68945C17.6834 1.68721 17.674 1.68486 17.6644 1.68294L17.6595 1.68213L17.5854 1.67074C17.5574 1.66788 17.5288 1.66667 17.5 1.66667H12.5Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+          <!-- END: Expand Image - thumbnail -->
+        </div>
+
+      </div>
+      <!-- SECTION END: Expand Image -->
 
       <!-- ============================================================
            SECTION: Tinderland Card

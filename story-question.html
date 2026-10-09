@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honesty Box | Insert Word</title>
+    <title>Honesty Box | Story Question</title>
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/input-styles.css" />
     <link rel="stylesheet" href="styles/insert-word-styles.css" />
@@ -44,32 +44,39 @@
       <div class="main-surface">
         <section class="page">
 
+          <!-- Title content -->
+          <div class="content-wrapper">
+            <div class="content">
+              <h3>Story question</h3>
+              <p class="txt-secondary">This can have some text, the text can be quite long.</p>
+            </div>
+          </div>
+
           <!-- Question -->
           <div class="content-wrapper">
             <div class="content">
               <div class="box-Q">
-                <p class="question">How would you describe yourself?</p>
+                <p class="question">How socially conscious are you?</p>
               </div>
             </div>
           </div>
 
-          <!-- Answer - Insert Word
-               Live demo: scripts/insert-word.js toggles .insert-word--open, swaps the
-               chosen word into the face and moves .insert-word-menu__option--selected.
+          <!-- Answer - Story Question
+               A stack of Insert Word sentences, with .label-aside and
+               .label-aside-instruction notes between them. One sentence per menu variant.
+               Live demo: scripts/insert-word.js opens the menus, swaps the chosen or typed
+               word into the face and moves .insert-word-menu__option--selected.
                See the Insert Word section of index.html for every state as static markup. -->
           <div class="content-wrapper content-wrapper--answer">
             <div class="content">
-              <div class="box-A">
+              <div class="box-A story-question">
+
+                <!-- START: Insert Word - word menu (default), "very" already chosen -->
                 <p class="insert-word-sentence">
                   I'd say that I am
                   <span class="insert-word">
-                    <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="insert-word-menu-1" aria-label="Choose a word">
-                      <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
-                          <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
-                        </svg>
-                      </span>
+                    <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="insert-word-menu-1">
+                      <span class="insert-word__face">very</span>
                     </button>
 
                     <!-- Word menu - hidden until the wrapper takes .insert-word--open -->
@@ -80,13 +87,82 @@
                           <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not at all</button>
                           <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">not very</button>
                           <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">quite</button>
-                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">very</button>
+                          <button class="insert-word-menu__option insert-word-menu__option--selected" type="button" role="menuitemradio" aria-checked="true">very</button>
                         </span>
                       </span>
                     </span>
                   </span>
                   socially conscious
                 </p>
+                <!-- END: Insert Word - word menu (default) -->
+
+                <!-- Aside label -->
+                <p class="label-aside">This is on a new topic</p>
+
+                <!-- START: Insert Word - input variant, empty
+                     The menu holds a text field instead of words. It is a dialog, not a
+                     menu, so the trigger says aria-haspopup="dialog". -->
+                <p class="insert-word-sentence">
+                  The ad I remember most is for
+                  <span class="insert-word">
+                    <button class="insert-word__trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="insert-word-menu-2" aria-label="Type a word">
+                      <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                          <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+
+                    <!-- Input menu - hidden until the wrapper takes .insert-word--open.
+                         Enter puts the typed word in the face. -->
+                    <span class="insert-word-menu insert-word-menu--input" id="insert-word-menu-2" role="dialog" aria-label="Type a word">
+                      <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                      <span class="insert-word-menu__frame">
+                        <input class="insert-word-menu__input" type="text" placeholder="Text" aria-label="Type a word" />
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <!-- END: Insert Word - input variant -->
+
+                <!-- Aside instruction label -->
+                <p class="label-aside-instruction">Type the name of the brand in the box below each image from the commercial - type 'don't know' if you can't remember.</p>
+
+                <!-- START: Insert Word - multi-row variant, empty
+                     For longer word lists - the words wrap onto rows at 190px. -->
+                <p class="insert-word-sentence">
+                  The colour I most link with the brand is
+                  <span class="insert-word">
+                    <button class="insert-word__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="insert-word-menu-3" aria-label="Choose a word">
+                      <span class="insert-word__face insert-word__face--icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11.001 19.002V5C11.001 4.44772 11.4487 4 12.001 4C12.5533 4 13.001 4.44772 13.001 5V19.002L12.9961 19.1045C12.9448 19.6086 12.5187 20.002 12.001 20.002C11.4833 20.002 11.0572 19.6086 11.0059 19.1045L11.001 19.002Z" fill="currentColor" />
+                          <path d="M19.002 11.002C19.5542 11.002 20.002 11.4497 20.002 12.002C20.002 12.5543 19.5542 13.002 19.002 13.002H5C4.44772 13.002 4 12.5543 4 12.002C4 11.4497 4.44772 11.002 5 11.002H19.002Z" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+
+                    <!-- Multi-row word menu - hidden until the wrapper takes .insert-word--open -->
+                    <span class="insert-word-menu insert-word-menu--multi-row" id="insert-word-menu-3" role="menu" aria-label="Choose a word">
+                      <span class="insert-word-menu__caret" aria-hidden="true"></span>
+                      <span class="insert-word-menu__frame">
+                        <span class="insert-word-menu__options">
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">red</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">blue</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">teal</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">navy</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">lime</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">grey</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">gold</button>
+                          <button class="insert-word-menu__option" type="button" role="menuitemradio" aria-checked="false">pink</button>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <!-- END: Insert Word - multi-row variant -->
+
               </div>
             </div>
           </div>

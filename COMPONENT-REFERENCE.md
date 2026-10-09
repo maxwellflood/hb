@@ -15,6 +15,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/bingo-styles.css` | Bingo - 3 × 3 board, drop zones, draggable card |
 | `styles/ai-styles.css` | AI conversation - chat dock, input, message thread, platform avatar |
 | `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
+| `styles/expand-image-styles.css` | Expand Image - thumbnail, expand button, lightbox |
 
 ---
 
@@ -367,6 +368,8 @@ Single-select and multi-select question type. Defined in `input-styles.css`.
 
 **Visibility:** `.hidden`, `.hidden-mobile`, `.hidden-desktop`, `.hidden-splash`
 
+**Aside labels:** `.label-aside` (14px Inter italic, `--text-tertiary`) - a note between parts of a question. `.label-aside-instruction` - the same in `--text-brand-muted-dark` (`--blu-70`), for telling the respondent how to answer
+
 ---
 
 ## Established Files & Scripts
@@ -380,7 +383,8 @@ Single-select and multi-select question type. Defined in `input-styles.css`.
 | `scripts/love-button-mid.js` | `love-button-mid.html` |
 | `scripts/home.js` | `home.html` |
 | `scripts/ai-scripts.js` | `ai.html` |
-| `scripts/insert-word.js` | `insert-word.html` (demo only - index.html shows the states statically) |
+| `scripts/insert-word.js` | `story-question.html` (demo only - index.html shows the states statically) |
+| *(inline `<script>`)* | `expand-image.html` - `showModal()` / `hideModal()` toggle the lightbox |
 
 ---
 
@@ -696,6 +700,65 @@ Everything is a `<span>` or `<button>` because it lives inside a `<p>`.
 | `.insert-word-menu__option--selected` | The word currently in the sentence. Pair with `aria-checked="true"` |
 
 Hover on the face is `--blu-60`; pressed (`:active`) is `--blu-80`, the same as open.
+
+**Menu variants** (modifier on `.insert-word-menu`):
+
+| Modifier | Effect |
+|---|---|
+| *(none)* | One row of words |
+| `.insert-word-menu--multi-row` | Words four to a row in equal-width columns, menu 190px wide; a short last row is centred. Tune with `--insert-word-menu-width` / `--insert-word-menu-columns` |
+| `.insert-word-menu--input` | `<input class="insert-word-menu__input">` (204 × 40px, dark border) in place of `.insert-word-menu__options`. Popup is `role="dialog"`, trigger `aria-haspopup="dialog"`. The typed word goes in the face |
+
+**Story Question** (`story-question.html`) - `.story-question` on `.box-A` stacks Insert Word
+sentences 20px apart, with `.label-aside` / `.label-aside-instruction` notes between them.
+
+---
+
+## Expand Image
+
+A stimulus image shown with a question, with a button in its top right corner that
+opens it full size in a lightbox. Defined in `expand-image-styles.css`. The image is
+not an answer option, so it has no selected state.
+
+```html
+<div class="box-A expand-image-answer">
+  <div class="expand-image">
+    <img class="expand-image__img" src="…" alt="…" />
+    <button class="expand-image__btn" type="button" aria-label="Expand image"
+      aria-haspopup="dialog" aria-controls="image-lightbox" onclick="showModal()">
+      <!-- arrow-expand SVG, 20px -->
+    </button>
+  </div>
+  <div class="form-field">…</div>
+</div>
+
+<!-- Outside <main>, so it covers the fixed header and bottom nav -->
+<div class="image-lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <div class="image-lightbox__overlay" onclick="hideModal()"></div>
+  <div class="image-lightbox__frame">
+    <img class="image-lightbox__img" src="…" alt="…" />
+    <button class="image-lightbox__close" type="button" aria-label="Close image" onclick="hideModal()">
+      <!-- cancel SVG, 20px -->
+    </button>
+  </div>
+</div>
+```
+
+- `.expand-image-answer` - column on `.box-A`: thumbnail above the field, 24px gap
+- `.expand-image` - thumbnail wrapper, `position: relative`, 2px grey border, centred
+- `.expand-image__img` - capped at 280px wide and 40dvh tall; width follows height
+- `.expand-image__btn` - 36px frosted square (`--grey-1` at 80%, 2px blur), 6px from
+  the top right. Icon is `--text-tertiary` at rest, `--black` on hover / focus
+- `.image-lightbox` - fixed full-screen layer, `z-index: 50` (above the navs at 10,
+  below the loader at 100). Hidden until `.image-lightbox--open`
+- `.image-lightbox__overlay` - `rgba(0,0,0,0.6)` backdrop; clicking it closes
+- `.image-lightbox__img` - longest side capped at 80dvh, and width also capped to the
+  screen minus gutters so it never overflows on mobile
+- `.image-lightbox__close` - 36px solid grey square with border and drop shadow
+
+**Behaviour:** a short inline `<script>` on the page. `showModal()` adds
+`.image-lightbox--open` and focuses the close button; `hideModal()` removes it and
+returns focus to the expand button. Escape also closes.
 
 ---
 

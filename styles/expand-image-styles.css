@@ -1,0 +1,197 @@
+/* =====================================================
+   Expand Image
+   A stimulus image shown alongside a question, with a button in
+   its top right corner that opens the image full size in a
+   lightbox over the page. Clicking the close button or the dark
+   overlay closes it again.
+
+   Structure:
+     .expand-image-answer           - column: thumbnail above the answer field
+     .expand-image                  - thumbnail wrapper, anchors the button
+     ├── .expand-image__img         - the thumbnail picture
+     └── .expand-image__btn         - expand button, top right corner
+
+     .image-lightbox                - fixed full-screen layer, hidden by default
+     ├── .image-lightbox__overlay   - dark backdrop; clicking it closes
+     └── .image-lightbox__frame     - bordered card holding the full image
+         ├── .image-lightbox__img   - the full-size picture
+         └── .image-lightbox__close - close button, top right corner
+
+   States:
+     .image-lightbox--open          - lightbox visible
+
+   The image is a stimulus, not an answer option, so it has no
+   selected state. The only interactive parts are the two buttons.
+   ===================================================== */
+
+/* -----------------------------------------------------
+   Answer column
+   Stacks the thumbnail above the field that asks about it, 24px
+   apart. The field stretches to the full 640px column; the
+   thumbnail centres itself (align-self on .expand-image).
+   ----------------------------------------------------- */
+
+.expand-image-answer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-24);
+}
+
+/* -----------------------------------------------------
+   Thumbnail
+   ----------------------------------------------------- */
+
+/* Wrapper - sized by its image. position: relative anchors the
+   expand button to the image's top right corner. */
+.expand-image {
+  position: relative;
+  display: inline-flex;
+  align-self: center;
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  background-color: var(--surface-secondary);
+}
+
+/* Thumbnail picture - capped at 280px wide (Figma), and at 40dvh
+   tall so the question, image and answer field always fit the
+   viewport together. Width follows from height, never the reverse. */
+.expand-image__img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 280px;
+  max-height: 40dvh;
+}
+
+/* -----------------------------------------------------
+   Shared: icon button pinned to an image corner
+   Both the expand and close buttons are 36px squares sitting 6px
+   in from the top right corner of their image, with a 20px icon.
+   ----------------------------------------------------- */
+
+.expand-image__btn,
+.image-lightbox__close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: var(--size-36);
+  height: var(--size-36);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* -----------------------------------------------------
+   Expand button
+   Frosted grey square over the image. The icon is grey at rest and
+   turns black on hover, so the button stays quiet until it is used.
+   ----------------------------------------------------- */
+
+.expand-image__btn {
+  border: none;
+  background-color: rgba(247, 247, 247, 0.8); /* --grey-1 at 80% */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  color: var(--text-tertiary);
+}
+
+.expand-image__btn:hover,
+.expand-image__btn:focus-visible {
+  color: var(--black);
+}
+
+.expand-image__btn:active {
+  background-color: var(--surface-tertiary);
+  color: var(--black);
+}
+
+.expand-image__btn:focus-visible {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------
+   Lightbox
+   ----------------------------------------------------- */
+
+/* Full-screen layer - above the fixed header and bottom nav
+   (z-index 10), below the page loader (z-index 100). Hidden until
+   .image-lightbox--open is added. */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-inline-main);
+}
+
+.image-lightbox--open {
+  display: flex;
+}
+
+/* Dark backdrop - covers the whole screen behind the frame.
+   Clicking it closes the lightbox. */
+.image-lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+/* Frame - sized by its image, centred by the parent flex. Sits
+   above the overlay so clicks on the image do not close it. */
+.image-lightbox__frame {
+  position: relative;
+  display: flex;
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  background-color: var(--surface-secondary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Full-size picture - longest side capped at 80dvh, so portrait and
+   landscape images both fit. Width is also capped to the screen
+   minus the gutters, so it never overflows on a narrow phone. */
+.image-lightbox__img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 80dvh;
+  max-width: min(80dvh, calc(100vw - (var(--space-inline-main) * 2) - 4px));
+}
+
+/* -----------------------------------------------------
+   Close button
+   Solid grey square with a border and a soft drop shadow, so it
+   reads clearly over any image.
+   ----------------------------------------------------- */
+
+.image-lightbox__close {
+  border: 1px solid var(--border-primary);
+  background-color: var(--surface-secondary);
+  color: var(--black);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.image-lightbox__close:hover {
+  background-color: var(--surface-tertiary);
+}
+
+.image-lightbox__close:active {
+  background-color: var(--grey-3);
+}
+
+.image-lightbox__close:focus-visible {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: 2px;
+}
