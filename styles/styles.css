@@ -6,7 +6,6 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 html {
-  /* line-height: 1.15; */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -190,7 +189,7 @@ template {
 /* Typefaces */
 @font-face {
   font-family: "dorian";
-  src: url(./fonts/DorianVF.woff);
+  src: url(../fonts/DorianVF.woff);
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -296,13 +295,101 @@ template {
 
   --radius-wrap: var(--size-24);
 
+  /* --- Shadows ---
+     Offset, blur and colour only, so a token works in both
+     filter: drop-shadow(var(--…)) and box-shadow: var(--…).
+     Card: draggable cards at rest. Card lifted: hovered or grabbed.
+     Menu: pop-up menus with a caret (Don't Know, Insert Word). */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-card-lifted: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow-menu: 0 2px 4px rgba(0, 0, 0, 0.05);
+
   /* --- Spacing --- */
 
-  --nav-top-height: var(--size-80);
-  --nav-bottom-height: var(--size-96);
+  /* --- Site header ---
+     Vertical padding scales with the viewport height (dvh) between 900px
+     and 1100px tall, the same range as the bottom nav. */
 
-  --space-inline-main: var(--size-24);
-  --space-block-main: var(--size-24);
+  /* Header vertical padding. 8px at 900px tall and below, 16px at 1100px and above.
+     Fixed at 8px at 1024px wide and below (see the tablet media query) */
+  --site-header-padding-y: clamp(8px, calc(-28px + 4dvh), 16px);
+
+  /* Logo slot height. The logo is centred in it and never taller than it */
+  --site-header-logo-height: var(--size-32);
+
+  /* Fixed header height - 48px at its smallest, 64px at its largest.
+     <main> uses it to sit below the header */
+  --nav-top-height: calc(
+    2 * var(--site-header-padding-y) + var(--site-header-logo-height)
+  );
+
+  /* --- Bottom nav ---
+     Height-driven values scale with the viewport height (dvh) between
+     900px and 1100px tall. Width-driven values scale between 768px wide
+     and 960px, the stage max width (max-width of <main> and the nav). */
+
+  /* Nav vertical padding. 12px at 900px tall and below, 24px at 1100px and above */
+  --primary-nav-padding-y: clamp(12px, calc(-42px + 6dvh), 24px);
+
+  /* Help / Back / Next size. 36px (SM) on desktop, 40px (RG) on tablet,
+     mobile and touch - see the media query at the end of this file */
+  --primary-nav-btn-size: var(--size-36);
+
+  /* Back / Next arrow size. 16px in the 36px button, 20px in the 40px one */
+  --primary-nav-btn-icon-size: var(--size-16);
+
+  /* Gap between Help, Back and Next. 4px at 768px wide and below, 8px at 960px and above */
+  --primary-nav-btn-gap: clamp(4px, calc(-12px + 2.0833vw), 8px);
+
+  /* Progress bar vertical padding. 12px at 900px tall and below, 16px at 1100px and above */
+  --prog-bar-p-y: clamp(12px, calc(-6px + 2dvh), 16px);
+
+  /* Progress bar horizontal padding. 12px at 768px wide and below, 16px at 960px and above */
+  --prog-bar-p-x: clamp(12px, calc(-4px + 2.0833vw), 16px);
+
+  /* Gap between the bar and the % label. 8px at 768px wide and below, 12px at 960px and above */
+  --prog-bar-gap: clamp(8px, calc(-8px + 2.0833vw), 12px);
+
+  /* Space <main> reserves for the fixed bottom nav - follows the nav's
+     rendered height: top border + vertical padding + the taller of the
+     buttons and the progress bar. The 14px is the % label's untrimmed
+     line height, so where the label is trimmed (see .progress-indicator
+     .label) this reserves a few px more than needed, never less. */
+  --nav-bottom-height: calc(
+    1px + 2 * var(--primary-nav-padding-y) +
+      max(var(--primary-nav-btn-size), 2 * var(--prog-bar-p-y) + 14px)
+  );
+
+  /* Page gutters - follow the fluid padding scale below, so they shrink
+     smoothly on small screens instead of stepping down at a breakpoint.
+     Inline: 16px at 375px wide → 24px at 960px. Block: 16px at 700px
+     tall → 24px at 1100px */
+  --space-inline-main: var(--padding-inline-lg);
+  --space-block-main: var(--padding-block-lg);
+
+  /* --- Fluid inline padding ---
+     General-purpose horizontal spacing scale. Grows with the viewport width
+     between 375px (small phone) and 960px (the stage max width), and is
+     fixed at the min below 375px and at the max above 960px. Each step
+     starts where the one below it ends.
+     rem + vw so the values follow the browser's text size and zoom. */
+  --padding-inline-xxs: clamp(0.125rem, 0.0449rem + 0.3419vw, 0.25rem); /*  2px →  4px */
+  --padding-inline-xs: clamp(0.25rem, 0.0897rem + 0.6838vw, 0.5rem); /*  4px →  8px */
+  --padding-inline-sm: clamp(0.5rem, 0.3397rem + 0.6838vw, 0.75rem); /*  8px → 12px */
+  --padding-inline-rg: clamp(0.75rem, 0.5897rem + 0.6838vw, 1rem); /* 12px → 16px */
+  --padding-inline-lg: clamp(1rem, 0.6795rem + 1.3675vw, 1.5rem); /* 16px → 24px */
+  --padding-inline-xl: clamp(1.5rem, 1.1795rem + 1.3675vw, 2rem); /* 24px → 32px */
+
+  /* --- Fluid block padding ---
+     The vertical partner to the inline scale, same steps. Grows with the
+     viewport height (dvh) between 700px and 1100px tall, and is fixed at
+     the min below 700px and at the max above 1100px. */
+  --padding-block-xxs: clamp(0.125rem, -0.0938rem + 0.5dvh, 0.25rem); /*  2px →  4px */
+  --padding-block-xs: clamp(0.25rem, -0.1875rem + 1dvh, 0.5rem); /*  4px →  8px */
+  --padding-block-sm: clamp(0.5rem, 0.0625rem + 1dvh, 0.75rem); /*  8px → 12px */
+  --padding-block-rg: clamp(0.75rem, 0.3125rem + 1dvh, 1rem); /* 12px → 16px */
+  --padding-block-lg: clamp(1rem, 0.125rem + 2dvh, 1.5rem); /* 16px → 24px */
+  --padding-block-xl: clamp(1.5rem, 0.625rem + 2dvh, 2rem); /* 24px → 32px */
 
   /* --- Surface Colors --- */
 
@@ -356,52 +443,50 @@ template {
   --text-success-strong: var(--grn-50);
   --text-success-muted: var(--grn-10);
 
-  /* --- Font Sizes --- */
+  /* --- Font Sizes ---
+     Fluid on BOTH axes. Each size is worked out twice - once from the
+     viewport width (375px → 960px, same range as --padding-inline-*) and
+     once from the viewport height (700px → 1100px, same range as
+     --padding-block-*) - and min() takes the smaller, so text shrinks when
+     either axis is tight. clamp() holds it between its min and max.
+     rem + vw / dvh so it follows the browser's text size and zoom. */
 
   /* Display */
-  --display-size: clamp(2.75rem, 2.1rem + 2vw, 3.25rem);
-  /* 44px → 52px */
+  --display-size: clamp(2.25rem, min(1.609rem + 2.735vw, 0.5rem + 4dvh), 3.25rem); /* 36px → 52px */
 
   /* Headings */
-  --h1-size: clamp(2rem, 1.6rem + 1.4vw, 2.5rem);
-  /* 32px → 40px */
+  --h1-size: clamp(1.75rem, min(1.2692rem + 2.0513vw, 0.4375rem + 3dvh), 2.5rem); /* 28px → 40px */
+  --h2-size: clamp(1.375rem, min(0.9744rem + 1.7094vw, 0.2812rem + 2.5dvh), 2rem); /* 22px → 32px */
+  --h3-size: clamp(1.25rem, min(0.9295rem + 1.3675vw, 0.375rem + 2dvh), 1.75rem); /* 20px → 28px */
+  --h4-size: clamp(1.125rem, min(0.9647rem + 0.6838vw, 0.6875rem + 1dvh), 1.375rem); /* 18px → 22px */
 
-  --h2-size: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
-  /* 24px → 32px */
+  /* Body. Form inputs do NOT use these - they keep a fixed 16px, because an
+     input below 16px makes iOS Safari zoom the page on focus */
+  --p-size-small: clamp(0.75rem, min(0.6699rem + 0.3419vw, 0.5312rem + 0.5dvh), 0.875rem); /* 12px → 14px */
+  --p-size-regular: clamp(0.875rem, min(0.7949rem + 0.3419vw, 0.6562rem + 0.5dvh), 1rem); /* 14px → 16px */
+  --p-size-semi-bold: var(--p-size-regular);
 
-  --h3-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
-  /* 22px → 28px */
+  /* Large - .question and AI message text */
+  --p-size-large: clamp(1rem, min(0.9199rem + 0.3419vw, 0.7812rem + 0.5dvh), 1.125rem); /* 16px → 18px */
 
-  --h4-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
-  /* 18px → 22px */
+  /* --- Line Heights ---
+     Font size plus a fixed amount, rather than a ratio, so bigger text gets
+     proportionally tighter leading on its own as it scales.
+     e.g. snug: 1.38 at 16px, 1.3 at 20px, 1.21 at 28px */
+  --line-height-tight: calc(1em + 0.25rem); /* display, h1, h2 */
+  --line-height-snug: calc(1em + 0.375rem); /* h3, h4, .question */
+  /* p, .small. The added amount is fluid too (6px → 8px, same axes as the
+     font sizes), so small screens get tighter leading: 14px / 20px there,
+     16px / 24px at full size */
+  --line-height-body: calc(1em + clamp(0.375rem, min(0.2949rem + 0.3419vw, 0.1562rem + 0.5dvh), 0.5rem));
 
-  --p-size-small: 0.875rem;
-
-  --p-size-regular: 1rem;
-
-  --p-size-large: 1.125rem;
-
-  /* spacing */
-
-  /* XS: very tight (labels, compact UI) */
-  --heading-gap-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
-  /* 4 → 8 */
-
-  /* S: tight (cards, dense layouts) */
-  --heading-gap-s: clamp(0.375rem, 0.3rem + 0.35vw, 0.75rem);
-  /* 6 → 12 */
-
-  /* M (RG): default */
-  --heading-gap-m: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
-  /* 8 → 16 */
-
-  /* L: generous (sections, marketing) */
-  --heading-gap-l: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
-  /* 12 → 24 */
-
-  /* XL: very open (heroes, feature blocks) */
-  --heading-gap-xl: clamp(1rem, 0.8rem + 1vw, 2rem);
-  /* 16 → 32 */
+  /* --- Heading gaps ---
+     Space below headings. Vertical, so they follow the block padding scale */
+  --heading-gap-xs: var(--padding-block-xxs); /* 2 → 4 */
+  --heading-gap-s: var(--padding-block-xs); /* 4 → 8 */
+  --heading-gap-m: var(--padding-block-sm); /* 8 → 12 */
+  --heading-gap-l: var(--padding-block-rg); /* 12 → 16 */
+  --heading-gap-xl: var(--padding-block-lg); /* 16 → 24 */
 }
 
 /* Global Styles */
@@ -457,25 +542,32 @@ h6 {
 h1,
 .u-h1 {
   font-size: var(--h1-size);
-  line-height: 1.2;
+  line-height: var(--line-height-tight);
 }
 
 h2,
 .u-h2 {
   font-size: var(--h2-size);
-  line-height: 1.2;
+  line-height: var(--line-height-tight);
 }
 
 h3,
 .u-h3 {
   font-size: var(--h3-size);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 h4,
 .u-h4 {
   font-size: var(--h4-size);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
+}
+
+/* Display - the largest heading, used for the home page welcome.
+   Applied as a class on an h1 */
+.display {
+  font-size: var(--display-size);
+  line-height: var(--line-height-tight);
 }
 
 h5 {
@@ -489,7 +581,8 @@ p {
   margin: 0;
   padding: 0;
   color: var(--grey-9);
-  line-height: 1.5em;
+  font-size: var(--p-size-regular);
+  line-height: var(--line-height-body);
   max-width: 40rem;
 }
 
@@ -530,7 +623,6 @@ p {
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
-  /* text-decoration-color: var(--blu-30); */
 }
 
 a {
@@ -898,7 +990,7 @@ a {
   border-radius: var(--size-12);
   font-family: "inter", sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   cursor: pointer;
   text-decoration: none;
   height: fit-content;
@@ -918,11 +1010,11 @@ a {
 
 .btn-lg {
   padding: var(--size-8) var(--size-20);
-  font-size: 1.125rem;
+  font-size: var(--p-size-large);
 }
 .btn-sm {
   padding: var(--size-8) var(--size-12);
-  font-size: 0.875rem;
+  font-size: var(--p-size-small);
 }
 
 /* Secondary Buttons */
@@ -1002,11 +1094,25 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* max-width: 960px; */
   margin-inline: auto;
-  padding: var(--space-block-main) var(--space-inline-main);
+  padding: var(--site-header-padding-y) var(--space-inline-main);
   background-color: var(--blu-00);
   z-index: 10;
+}
+
+/* Logo slot - a fixed 32px tall box with the logo centred in it */
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  height: var(--site-header-logo-height);
+}
+
+/* The logo itself - capped at the slot height, width follows */
+.site-header .brand > svg,
+.site-header .brand > img {
+  display: block;
+  max-height: var(--site-header-logo-height);
+  width: auto;
 }
 
 main {
@@ -1031,16 +1137,34 @@ nav {
   width: 100%;
   max-width: 960px;
   margin-inline: auto;
-  padding: var(--space-block-main) var(--space-inline-main);
+  padding: var(--primary-nav-padding-y) var(--space-inline-main);
   border-top: var(--border-primary) 1px solid;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: var(--bottom-nav-height);
   margin-bottom: env(safe-area-inset-bottom);
   background-color: var(--surface-primary);
   z-index: 10;
+}
+
+/* Bottom nav buttons - sized by --primary-nav-btn-size (36px desktop, 40px
+   tablet / mobile / touch), so the size lives in one place */
+.bottom-nav .icon-btn {
+  width: var(--primary-nav-btn-size);
+  height: var(--primary-nav-btn-size);
+}
+
+/* Back / Next - pill width, 8px corners */
+.bottom-nav .btn-nav {
+  width: auto;
+  padding-inline: var(--size-20);
+  border-radius: var(--radius-s);
+}
+
+.bottom-nav .btn-nav .icon {
+  width: var(--primary-nav-btn-icon-size);
+  height: var(--primary-nav-btn-icon-size);
 }
 
 section {
@@ -1055,13 +1179,15 @@ section {
 }
 
 .page:first-child {
-  padding-top: 2rem;
+  padding-top: var(--padding-block-sm);
 }
 
-/* Full-width padded row - wraps .content to provide consistent page gutters */
+/* Full-width padded row - wraps .content to provide consistent page gutters.
+   Same fluid values as --space-inline-main / --space-block-main, so question
+   text lines up with the answer arena below it */
 .content-wrapper {
   width: 100%;
-  padding: 1.5rem;
+  padding: var(--padding-block-lg) var(--padding-inline-lg);
 }
 
 /* Centred column - max 640px, flex column for stacking form fields and questions */
@@ -1082,7 +1208,7 @@ section {
   font-family: "dorian", sans-serif;
   font-weight: 700;
   font-size: var(--p-size-large);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   letter-spacing: -0.02em;
   color: var(--text-brand-strong);
 }
@@ -1091,7 +1217,7 @@ section {
 
 .button-container {
   display: flex;
-  gap: var(--size-8);
+  gap: var(--primary-nav-btn-gap);
   flex-wrap: wrap;
 }
 
@@ -1104,7 +1230,6 @@ section {
 .tooltip {
   position: absolute;
   bottom: calc(100% + 4px);
-  /* left: 50%; */
   transform: translateY(-25%);
 
   padding: var(--size-4) var(--size-8);
@@ -1112,7 +1237,7 @@ section {
   color: var(--text-primary-inverted);
   border-radius: 8px;
 
-  font-size: 0.875rem;
+  font-size: var(--p-size-small);
   white-space: nowrap;
 
   opacity: 0;
@@ -1160,7 +1285,6 @@ section {
   transform: translate(-50%, -100%);
   width: 100px;
   height: 50px;
-  /* background: red; */
 }
 
 .underline-lottie {
@@ -1168,7 +1292,6 @@ section {
   transform: translate(-50%, -40%);
   width: 200px;
   height: 32px;
-  /* background: red; */
 }
 
 /* Splash Screen Navigation */
@@ -1190,8 +1313,20 @@ section {
   align-items: center;
   background-color: var(--surface-secondary);
   border-radius: 12px;
-  gap: var(--size-12);
-  padding: var(--size-12) var(--size-16);
+  gap: var(--prog-bar-gap);
+  padding: var(--prog-bar-p-y) var(--prog-bar-p-x);
+}
+
+/* % label - 14px Inter Medium, trimmed to the capital height so it adds
+   no space above or below the figures (matches Figma). Browsers without
+   text-box-trim fall back to the 14px line height. */
+.progress-indicator .label {
+  font-size: var(--p-size-small);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .progress-bar {
@@ -1366,7 +1501,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--surface-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1382,11 +1517,16 @@ section {
 .hidden {
   display: none !important;
 }
-.hidden-mobile {
-  display: none !important;
+/* Responsive visibility - same 767px / 768px split as the mobile breakpoint */
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
 }
-.hidden-desktop {
-  display: none !important;
+@media (min-width: 768px) {
+  .hidden-desktop {
+    display: none !important;
+  }
 }
 .hidden-splash {
   display: none !important;
@@ -1433,7 +1573,7 @@ section {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  padding: var(--size-20) var(--space-inline-main) var(--space-block-main);
+  padding: var(--padding-block-rg) var(--space-inline-main) var(--space-block-main);
 }
 
 /* Arena surface - grey panel, relative positioned to anchor all absolute children */
@@ -1555,7 +1695,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.05));
+  filter: drop-shadow(var(--shadow-menu));
   white-space: nowrap;
   z-index: 10;
 }
@@ -1590,7 +1730,7 @@ section {
   border: none;
   border-radius: var(--radius-xs);
   font-family: "Inter", sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--p-size-small);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -1767,12 +1907,14 @@ section {
 /* Responsive: screens smaller than tablet */
 @media (max-width: 767px) {
   :root {
-    /* --- Spacing --- */
-    --space-inline-main: var(--size-16);
-    --space-block-main: var(--size-16);
-
     /* Radius */
     --radius-wrap: var(--size-16);
+
+    /* Bottom nav - fixed at its smallest height, no longer fluid with the
+       viewport height. The width-driven values are already at their
+       minimum below 768px */
+    --primary-nav-padding-y: 12px;
+    --prog-bar-p-y: 12px;
   }
 
   /* Make nav / large icon buttons fit */
@@ -1781,19 +1923,40 @@ section {
     padding-inline: 0;
   }
 
+  /* Bottom nav Back / Next collapse to squares */
+  .bottom-nav .btn-nav {
+    width: var(--primary-nav-btn-size);
+    padding-inline: 0;
+  }
+
   /* Splash Screen */
 
   .crown-lottie {
     width: 80px;
     height: 30px;
-    /* background: red; */
   }
 
   .underline-lottie {
     width: 160px;
     height: 24px;
-    /* background: red; */
   }
 
   /* hidden */
+}
+
+/* Bottom nav - tablet, mobile and touch devices: buttons step up from
+   SM (36px) to RG (40px), arrows from 16px to 20px */
+@media (max-width: 1024px), (pointer: coarse) {
+  :root {
+    --primary-nav-btn-size: var(--size-40);
+    --primary-nav-btn-icon-size: var(--size-20);
+  }
+}
+
+/* Site header - tablet and mobile widths: always at its smallest (8px
+   padding, 48px tall) whatever the viewport height */
+@media (max-width: 1024px) {
+  :root {
+    --site-header-padding-y: 8px;
+  }
 }

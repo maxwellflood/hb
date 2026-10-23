@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Honesty Box | Dropper - Text Card, Text Zones</title>
+    <title>Honesty Box | Dragger - Text Card, Text Zones</title>
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/input-styles.css" />
     <link rel="stylesheet" href="styles/dropper-styles.css" />
@@ -47,7 +47,7 @@
         <div class="content">
           <!-- Question - title + supporting copy -->
           <div class="box-Q">
-            <h3>Dropper Text Card</h3>
+            <h3>Dragger Text Card</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
               mauris laoreet eget etiam risus. Nulla eget purus nulla ultrices
@@ -59,12 +59,13 @@
       </div>
       <!-- END: Question -->
 
-      <!-- START: Answer - Dropper
+      <!-- START: Answer - Dragger
            Uses the shared .answer-arena primitive (styles.css), the same grey
            arena the Tosser and Bingo question types sit in. Unlike those two,
-           the Dropper doesn't pin its furniture to the arena's own edges -
-           the progress counter and Don't Know button belong to the Dropper's
-           own header strip (.dropper-top) instead, left/right of the card.
+           the Dragger doesn't pin its furniture to the arena's own edges -
+           the progress counter and Don't Know button belong to its own
+           header strip (.dropper-top, shared with the Dropper) instead,
+           left/right of the card.
 
            This is a static reference. No JavaScript: the drag itself is for
            the host app to implement. The states it needs to apply are:
@@ -72,6 +73,9 @@
                                              (hover is CSS-only: shadow 10% → 20%)
              .vertical-answer-drop-area--drop-active    - card dragged over this zone
              .vertical-answer-drop-area--filled         - card placed, answer recorded
+
+           The value logged to the back end is the zone's data-zone index
+           (1–10, left to right).
       -->
       <div class="answer-arena-section box-A">
         <div class="answer-arena">
@@ -141,34 +145,34 @@
               role="radiogroup"
               aria-label="Where does this belong?"
             >
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1">
                 <span class="vertical-answer-drop-area__label">One</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2">
                 <span class="vertical-answer-drop-area__label">Two</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3">
                 <span class="vertical-answer-drop-area__label">Three</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4">
                 <span class="vertical-answer-drop-area__label">Four</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5">
                 <span class="vertical-answer-drop-area__label">Five</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6">
                 <span class="vertical-answer-drop-area__label">Six</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7">
                 <span class="vertical-answer-drop-area__label">Seven</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8">
                 <span class="vertical-answer-drop-area__label">Eight</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9">
                 <span class="vertical-answer-drop-area__label">Nine</span>
               </button>
-              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10">
                 <span class="vertical-answer-drop-area__label">Ten</span>
               </button>
             </div>
@@ -194,7 +198,7 @@
       <div class="button-container">
         <!-- Help -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
           href="#"
           aria-describedby="tip-help"
         >
@@ -225,7 +229,7 @@
 
         <!-- Back - disabled on the first card of the question -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-back"
           aria-disabled="true"
@@ -255,7 +259,7 @@
              Matches the design reference: on a fresh card there is no answer
              to advance with, so both Back and Next are disabled. -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-next"
           aria-disabled="true"

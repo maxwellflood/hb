@@ -36,7 +36,7 @@
 .form-label {
   font-family: "dorian", sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--p-size-regular);
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -45,7 +45,7 @@
 .form-label--sub {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: var(--p-size-small);
 }
 
 /* Text input */
@@ -96,8 +96,9 @@
 
 /* input message */
 
+/* Hidden by default - shown by .form-field--invalid below */
 .input-message {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 4px;
   color: var(--text-brand-strong);
@@ -110,14 +111,9 @@
 .input-message span {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--p-size-small);
   line-height: 1.4;
   letter-spacing: -0.02em;
-}
-
-/* Message hidden by default */
-.input-message {
-  display: none;
 }
 
 /* Invalid state - show message + highlight border */
@@ -188,7 +184,7 @@
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-m);
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -396,7 +392,7 @@
 .grid-message span {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--p-size-small);
   line-height: 1.4;
   letter-spacing: -0.02em;
 }

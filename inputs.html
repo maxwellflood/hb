@@ -12,10 +12,10 @@
     </style>
   </head>
   <body>
-    <!-- Optional: only render when enabled -->
+    <!-- Fixed top header - client logo -->
     <header class="site-header" role="banner">
       <a class="brand" href="/" aria-label="Home">
-        <!-- SVG or img -->
+        <!-- HB logo inline SVG -->
         <svg
           width="68"
           height="24"
@@ -38,10 +38,9 @@
       </a>
     </header>
 
-    <!-- Primary page content -->
+    <!-- Primary page content - white card -->
     <main id="main" class="site-main" role="main">
       <div class="main-surface">
-        <!-- Your page content goes here -->
         <section class="page">
           <!-- Title content -->
           <div class="content-wrapper">
@@ -59,41 +58,47 @@
           <!-- Question content -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the Glastonbury festival?
-              </p>
-
-              <!-- Form field -->
-              <div class="form-field">
-                <label class="form-label" for="my-input">The line up</label>
-                <input
-                  class="text-input"
-                  type="text"
-                  id="my-input"
-                  placeholder="This year's line up is..."
-                />
-
-                <!-- message -->
-                <div class="input-message">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <span>This field is required</span>
-                </div>
+              <!-- Question -->
+              <div class="box-Q">
+                <p class="question">
+                  How do you feel about these aspects of the Glastonbury festival?
+                </p>
               </div>
-              <!-- Form field END -->
+
+              <!-- Answer -->
+              <div class="box-A">
+                <!-- Form field -->
+                <div class="form-field">
+                  <label class="form-label" for="my-input">The line up</label>
+                  <input
+                    class="text-input"
+                    type="text"
+                    id="my-input"
+                    placeholder="This year's line up is..."
+                  />
+
+                  <!-- message -->
+                  <div class="input-message">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <span>This field is required</span>
+                  </div>
+                </div>
+                <!-- Form field END -->
+              </div>
             </div>
           </div>
           <!-- Question content END-->
@@ -101,79 +106,85 @@
           <!-- Question content multiple aspects-->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form field -->
-              <div class="form-group">
-                <p class="form-label">The line-up</p>
-
-                <div class="form-field" id="field-glastonbury">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-glastonbury"
-                    >Glastonbury</label
-                  >
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-glastonbury"
-                    placeholder="This year's line up is..."
-                  />
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-latitude">
-                  <label class="form-label form-label--sub" for="input-latitude"
-                    >Latitude</label
-                  >
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-latitude"
-                    placeholder="This year's line up is..."
-                  />
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
+              <!-- Question -->
+              <div class="box-Q">
+                <p class="question">
+                  How do you feel about these aspects of the following festivals?
+                </p>
               </div>
-              <!-- Form field END -->
+
+              <!-- Answer -->
+              <div class="box-A">
+                <!-- Form field -->
+                <div class="form-group">
+                  <p class="form-label">The line-up</p>
+
+                  <div class="form-field" id="field-glastonbury">
+                    <label
+                      class="form-label form-label--sub"
+                      for="input-glastonbury"
+                      >Glastonbury</label
+                    >
+                    <input
+                      class="text-input"
+                      type="text"
+                      id="input-glastonbury"
+                      placeholder="This year's line up is..."
+                    />
+                    <div class="input-message">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                        <circle cx="8" cy="11" r="0.75" fill="currentColor" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+
+                  <div class="form-field" id="field-latitude">
+                    <label class="form-label form-label--sub" for="input-latitude"
+                      >Latitude</label
+                    >
+                    <input
+                      class="text-input"
+                      type="text"
+                      id="input-latitude"
+                      placeholder="This year's line up is..."
+                    />
+                    <div class="input-message">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                        <circle cx="8" cy="11" r="0.75" fill="currentColor" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Form field END -->
+              </div>
             </div>
           </div>
           <!-- Question content END-->
@@ -181,53 +192,59 @@
           <!-- Question content -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the Glastonbury festival?
-              </p>
-
-              <!-- Form field - with don't know button -->
-              <div class="form-field" id="field-lineup">
-                <label class="form-label" for="input-lineup">The line up</label>
-
-                <!-- Input row -->
-                <div class="input-row">
-                  <input
-                    class="text-input"
-                    type="text"
-                    id="input-lineup"
-                    placeholder="This year's line up is..."
-                  />
-                  <button
-                    class="dont-know-btn"
-                    type="button"
-                    aria-label="Don't know"
-                  >
-                    🤷‍♂️
-                  </button>
-                </div>
-                <!-- Input row END -->
-
-                <!-- message -->
-                <div class="input-message">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <span>This field is required</span>
-                </div>
+              <!-- Question -->
+              <div class="box-Q">
+                <p class="question">
+                  How do you feel about these aspects of the Glastonbury festival?
+                </p>
               </div>
-              <!-- Form field END -->
+
+              <!-- Answer -->
+              <div class="box-A">
+                <!-- Form field - with don't know button -->
+                <div class="form-field" id="field-lineup">
+                  <label class="form-label" for="input-lineup">The line up</label>
+
+                  <!-- Input row -->
+                  <div class="input-row">
+                    <input
+                      class="text-input"
+                      type="text"
+                      id="input-lineup"
+                      placeholder="This year's line up is..."
+                    />
+                    <button
+                      class="dont-know-btn"
+                      type="button"
+                      aria-label="Don't know"
+                    >
+                      🤷‍♂️
+                    </button>
+                  </div>
+                  <!-- Input row END -->
+
+                  <!-- message -->
+                  <div class="input-message">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <span>This field is required</span>
+                  </div>
+                </div>
+                <!-- Form field END -->
+              </div>
             </div>
           </div>
           <!-- Question content END-->
@@ -235,107 +252,113 @@
           <!-- Question content multiple aspects - with don't know buttons -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form group -->
-              <div class="form-group">
-                <p class="form-label">The line-up</p>
-
-                <div class="form-field" id="field-glastonbury-dk">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-glastonbury-dk"
-                    >Glastonbury</label
-                  >
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input
-                      class="text-input"
-                      type="text"
-                      id="input-glastonbury-dk"
-                      placeholder="This year's line up is..."
-                    />
-                    <button
-                      class="dont-know-btn"
-                      type="button"
-                      aria-label="Don't know"
-                    >
-                      🤷‍♂️
-                    </button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-latitude-dk">
-                  <label
-                    class="form-label form-label--sub"
-                    for="input-latitude-dk"
-                    >Latitude</label
-                  >
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input
-                      class="text-input"
-                      type="text"
-                      id="input-latitude-dk"
-                      placeholder="This year's line up is..."
-                    />
-                    <button
-                      class="dont-know-btn"
-                      type="button"
-                      aria-label="Don't know"
-                    >
-                      🤷‍♂️
-                    </button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
+              <!-- Question -->
+              <div class="box-Q">
+                <p class="question">
+                  How do you feel about these aspects of the following festivals?
+                </p>
               </div>
-              <!-- Form group END -->
+
+              <!-- Answer -->
+              <div class="box-A">
+                <!-- Form group -->
+                <div class="form-group">
+                  <p class="form-label">The line-up</p>
+
+                  <div class="form-field" id="field-glastonbury-dk">
+                    <label
+                      class="form-label form-label--sub"
+                      for="input-glastonbury-dk"
+                      >Glastonbury</label
+                    >
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input
+                        class="text-input"
+                        type="text"
+                        id="input-glastonbury-dk"
+                        placeholder="This year's line up is..."
+                      />
+                      <button
+                        class="dont-know-btn"
+                        type="button"
+                        aria-label="Don't know"
+                      >
+                        🤷‍♂️
+                      </button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+
+                  <div class="form-field" id="field-latitude-dk">
+                    <label
+                      class="form-label form-label--sub"
+                      for="input-latitude-dk"
+                      >Latitude</label
+                    >
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input
+                        class="text-input"
+                        type="text"
+                        id="input-latitude-dk"
+                        placeholder="This year's line up is..."
+                      />
+                      <button
+                        class="dont-know-btn"
+                        type="button"
+                        aria-label="Don't know"
+                      >
+                        🤷‍♂️
+                      </button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Form group END -->
+              </div>
             </div>
           </div>
           <!-- Question content END-->
@@ -343,145 +366,150 @@
           <!-- Question content - multi aspect, multi subject -->
           <div class="content-wrapper">
             <div class="content">
-              <p class="question">
-                How do you feel about these aspects of the following festivals?
-              </p>
-
-              <!-- Form group - The line-up -->
-              <div class="form-group">
-                <p class="form-label">The line-up</h2>
-
-                <div class="form-field" id="field-lineup-glastonbury">
-                  <label class="form-label form-label--sub" for="input-lineup-glastonbury">Glastonbury</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-lineup-glastonbury" placeholder="The Glastonbury line-up was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-lineup-latitude">
-                  <label class="form-label form-label--sub" for="input-lineup-latitude">Latitude</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-lineup-latitude" placeholder="The Latitude line-up was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
+              <!-- Question -->
+              <div class="box-Q">
+                <p class="question">
+                  How do you feel about these aspects of the following festivals?
+                </p>
               </div>
-              <!-- Form group END -->
 
-              <!-- Form group - The toilets -->
-              <div class="form-group">
-                <p class="form-label">The toilets</h2>
+              <!-- Answer -->
+              <div class="box-A">
+                <!-- Form group - The line-up -->
+                <div class="form-group">
+                  <p class="form-label">The line-up</p>
 
-                <div class="form-field" id="field-toilets-glastonbury">
-                  <label class="form-label form-label--sub" for="input-toilets-glastonbury">Glastonbury</label>
+                  <div class="form-field" id="field-lineup-glastonbury">
+                    <label class="form-label form-label--sub" for="input-lineup-glastonbury">Glastonbury</label>
 
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-toilets-glastonbury" placeholder="The Glastonbury toilets were..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-lineup-glastonbury" placeholder="The Glastonbury line-up was..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
                   </div>
-                  <!-- Input row END -->
 
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
+                  <div class="form-field" id="field-lineup-latitude">
+                    <label class="form-label form-label--sub" for="input-lineup-latitude">Latitude</label>
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-lineup-latitude" placeholder="The Latitude line-up was..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
                   </div>
+
                 </div>
+                <!-- Form group END -->
 
-                <div class="form-field" id="field-toilets-latitude">
-                  <label class="form-label form-label--sub" for="input-toilets-latitude">Latitude</label>
+                <!-- Form group - The toilets -->
+                <div class="form-group">
+                  <p class="form-label">The toilets</p>
 
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-toilets-latitude" placeholder="The Latitude toilets were..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                  <div class="form-field" id="field-toilets-glastonbury">
+                    <label class="form-label form-label--sub" for="input-toilets-glastonbury">Glastonbury</label>
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-toilets-glastonbury" placeholder="The Glastonbury toilets were..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
                   </div>
-                  <!-- Input row END -->
 
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
+                  <div class="form-field" id="field-toilets-latitude">
+                    <label class="form-label form-label--sub" for="input-toilets-latitude">Latitude</label>
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-toilets-latitude" placeholder="The Latitude toilets were..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
                   </div>
+
                 </div>
+                <!-- Form group END -->
 
+                <!-- Form group - Site access -->
+                <div class="form-group">
+                  <p class="form-label">Site access</p>
+
+                  <div class="form-field" id="field-access-glastonbury">
+                    <label class="form-label form-label--sub" for="input-access-glastonbury">Glastonbury</label>
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-access-glastonbury" placeholder="Site access at Glastonbury was..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+
+                  <div class="form-field" id="field-access-latitude">
+                    <label class="form-label form-label--sub" for="input-access-latitude">Latitude</label>
+
+                    <!-- Input row -->
+                    <div class="input-row">
+                      <input class="text-input" type="text" id="input-access-latitude" placeholder="Site access at Latitude was..." />
+                      <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
+                    </div>
+                    <!-- Input row END -->
+
+                    <!-- message -->
+                    <div class="input-message">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <span>This field is required</span>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- Form group END -->
               </div>
-              <!-- Form group END -->
-
-              <!-- Form group - Site access -->
-              <div class="form-group">
-                <p class="form-label">Site access</p>
-
-                <div class="form-field" id="field-access-glastonbury">
-                  <label class="form-label form-label--sub" for="input-access-glastonbury">Glastonbury</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-access-glastonbury" placeholder="Site access at Glastonbury was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-                <div class="form-field" id="field-access-latitude">
-                  <label class="form-label form-label--sub" for="input-access-latitude">Latitude</label>
-
-                  <!-- Input row -->
-                  <div class="input-row">
-                    <input class="text-input" type="text" id="input-access-latitude" placeholder="Site access at Latitude was..." />
-                    <button class="dont-know-btn" type="button" aria-label="Don't know">🤷‍♂️</button>
-                  </div>
-                  <!-- Input row END -->
-
-                  <!-- message -->
-                  <div class="input-message">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    <span>This field is required</span>
-                  </div>
-                </div>
-
-              </div>
-              <!-- Form group END -->
-
             </div>
           </div>
           <!-- Question content END-->
@@ -489,63 +517,57 @@
       </div>
     </main>
 
-    <!-- Persistent bottom navigation -->
+    <!-- Fixed bottom navigation -->
     <nav class="bottom-nav" aria-label="Primary">
       <!-- Progress indicator -->
       <div class="progress-indicator">
         <div class="progress-bar">
-          <span class="progress"></span>
+          <span class="progress" style="width: 75%"></span>
         </div>
         <p class="label">75%</p>
       </div>
 
-      <!-- Button container -->
+      <!-- Nav buttons -->
       <div class="button-container">
-        <!-- icon button lg -->
+        <!-- Help -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
           href="#"
           aria-describedby="tip-help"
         >
           <div class="icon icon-lg" aria-hidden="true">
-            <!-- inline SVG -->
-            <!-- Icon Help -->
-            <div class="icon" aria-hidden="true">
-              <!-- inline SVG -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-              >
-                <path
-                  d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z"
-                  fill="currentColor"
-                />
-              </svg>
-              <span class="tooltip" role="tooltip" id="tip-help"> Help </span>
-            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+            >
+              <path
+                d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z"
+                fill="currentColor"
+              />
+              <path
+                d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z"
+                fill="currentColor"
+              />
+              <path
+                d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z"
+                fill="currentColor"
+              />
+            </svg>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-help">Help</span>
         </a>
 
-        <!-- icon button lg - Backwards -->
+        <!-- Back - disabled on the first question -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-back"
+          aria-disabled="true"
         >
-          <!-- Icon Arrow Left -->
           <div class="icon" aria-hidden="true">
-            <!-- inline SVG -->
             <svg
               width="24"
               height="24"
@@ -562,19 +584,17 @@
                 fill="currentColor"
               />
             </svg>
-            <span class="tooltip" role="tooltip" id="tip-next"> Back </span>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-back">Back</span>
         </a>
 
-        <!-- icon button lg - Forwards -->
+        <!-- Next -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip"
           href="#"
           aria-describedby="tip-next"
         >
-          <!-- Icon Arrow Right -->
           <div class="icon" aria-hidden="true">
-            <!-- inline SVG -->
             <svg
               width="24"
               height="24"
@@ -591,8 +611,8 @@
                 fill="currentColor"
               />
             </svg>
-            <span class="tooltip" role="tooltip" id="tip-next"> Next </span>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-next">Next</span>
         </a>
       </div>
     </nav>

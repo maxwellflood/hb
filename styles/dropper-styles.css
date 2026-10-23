@@ -45,31 +45,38 @@
 /* =====================================================
    Dropper Top
    Header strip housing the draggable card. position: relative anchors
-   the progress counter and Don't Know button to its own left/right
-   edges, vertically centred - independent of the card's height, and
-   independent of the arena's own top/bottom furniture positions used
-   by Tosser and Bingo (this question type doesn't use those slots).
+   the progress counter to its top left corner and the Don't Know button
+   to its top right, both pinned at the same inset as the strip's own
+   padding - so they line up with the top of the card, whatever its
+   height. Independent of the arena's own top/bottom furniture positions
+   used by Tosser and Bingo (this question type doesn't use those slots).
+
+   The inset lives in two variables so the padding and the two pinned
+   positions can never drift apart. Fluid: 12px → 16px top and bottom,
+   12px → 16px left and right (see --padding-block-rg / --padding-inline-rg).
    ===================================================== */
 
 .dropper-top {
+  --dropper-top-inset-block: var(--padding-block-rg);
+  --dropper-top-inset-inline: var(--padding-inline-rg);
   position: relative;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--size-24);
+  padding: var(--dropper-top-inset-block) var(--dropper-top-inset-inline);
 }
 
 .dropper-top__progress {
   position: absolute;
-  top: var(--size-24);
-  left: var(--size-24);
+  top: var(--dropper-top-inset-block);
+  left: var(--dropper-top-inset-inline);
 }
 
 .dropper-top__dont-know {
   position: absolute;
-  top: var(--size-24);
-  right: var(--size-24);
+  top: var(--dropper-top-inset-block);
+  right: var(--dropper-top-inset-inline);
 }
 
 /* =====================================================
@@ -97,7 +104,7 @@
   background-color: var(--surface-primary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-s);
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(var(--shadow-card));
   cursor: grab;
   transition:
     transform 0.12s ease,
@@ -107,7 +114,7 @@
 
 .dropper-card:hover,
 .dropper-card--pressed {
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(var(--shadow-card-lifted));
 }
 
 .dropper-card:active,
@@ -125,7 +132,7 @@
 
 .dropper-card__label {
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -214,42 +221,8 @@
   border-bottom-right-radius: var(--radius-m);
 }
 
-/* State: Hover / keyboard focus - brand border, muted blue fill. Matches
-   .bingo-target's hover treatment. Only border-color changes here - the
-   border itself is already 1px solid on every edge at rest, just
-   transparent on three of them, so nothing about the box's size moves. */
-.horizontal-answer-drop-area:hover,
-.horizontal-answer-drop-area:focus-visible {
-  border-color: var(--border-highlighted-brand);
-  background-color: var(--surface-brand-muted);
-  outline: none;
-}
-
-/* State: Drop-active - the card is currently over this zone. Same look as
-   :hover, but as a class: a touch drag never fires :hover on the zone
-   being dragged onto, so the host app applies this while a drag is in
-   progress. */
-.horizontal-answer-drop-area--drop-active {
-  border-color: var(--border-highlighted-brand);
-  background-color: var(--surface-brand-muted);
-}
-
-/* State: Filled - a card has been dropped here and the answer recorded */
-.horizontal-answer-drop-area--filled {
-  border-color: var(--surface-brand-strong);
-  background-color: var(--surface-brand-subtle);
-}
-
-.horizontal-answer-drop-area__label {
-  font-family: "Inter", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  pointer-events: none;
-  user-select: none;
-}
+/* Zone states and labels are shared by both orientations - see
+   "Zone States + Labels" at the end of this file. */
 
 /* =====================================================
    Dragger Zones (vertical orientation)
@@ -279,6 +252,9 @@
   flex-direction: row;
 }
 
+/* Padding: ten columns share the arena width, so on a phone each one is
+   only ~34px wide - the side padding is kept to the smallest step
+   (2px → 4px) so the label still fits. Top: 12px → 16px. */
 .vertical-answer-drop-area {
   flex: 1;
   min-width: 0;
@@ -286,7 +262,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: var(--size-24);
+  padding: var(--padding-block-rg) var(--padding-inline-xxs);
   background-color: var(--surface-secondary);
   border: 1px solid transparent;
   border-top-color: var(--border-primary);
@@ -312,6 +288,17 @@
   border-right-color: transparent;
 }
 
+/* =====================================================
+   Zone States + Labels (both orientations)
+   Identical for horizontal and vertical zones, so each rule lists both.
+   ===================================================== */
+
+/* State: Hover / keyboard focus - brand border, muted blue fill. Matches
+   .bingo-target's hover treatment. Only border-color changes here - the
+   border itself is already 1px solid on every edge at rest, just
+   transparent on some of them, so nothing about the box's size moves. */
+.horizontal-answer-drop-area:hover,
+.horizontal-answer-drop-area:focus-visible,
 .vertical-answer-drop-area:hover,
 .vertical-answer-drop-area:focus-visible {
   border-color: var(--border-highlighted-brand);
@@ -319,24 +306,37 @@
   outline: none;
 }
 
+/* State: Drop-active - the card is currently over this zone. Same look as
+   :hover, but as a class: a touch drag never fires :hover on the zone
+   being dragged onto, so the host app applies this while a drag is in
+   progress. */
+.horizontal-answer-drop-area--drop-active,
 .vertical-answer-drop-area--drop-active {
   border-color: var(--border-highlighted-brand);
   background-color: var(--surface-brand-muted);
 }
 
+/* State: Filled - a card has been dropped here and the answer recorded */
+.horizontal-answer-drop-area--filled,
 .vertical-answer-drop-area--filled {
   border-color: var(--surface-brand-strong);
   background-color: var(--surface-brand-subtle);
 }
 
+/* Zone label. Centred in the vertical columns; the horizontal rows are
+   left-aligned by the zone's own flex layout */
+.horizontal-answer-drop-area__label,
 .vertical-answer-drop-area__label {
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  text-align: center;
   pointer-events: none;
   user-select: none;
+}
+
+.vertical-answer-drop-area__label {
+  text-align: center;
 }

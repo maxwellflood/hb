@@ -216,7 +216,7 @@
 /* Zone label - Inter regular, matches .tinderland-card__label */
 .bingo-target__label {
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -257,7 +257,7 @@
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-s);
   overflow: hidden;
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(var(--shadow-card));
   cursor: grab;
   transition:
     transform 0.12s ease,
@@ -271,7 +271,7 @@
    fires :hover, so a grabbed card must not drop back to the resting shadow. */
 .bingo-card:hover,
 .bingo-card--pressed {
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(var(--shadow-card-lifted));
 }
 
 /* State: Pressed - grabbed. Grey surface, shrinks 5% and tilts 6°, so the
@@ -305,7 +305,7 @@
    a centred flex column, so a lone label sits in the middle on both axes. */
 .bingo-card__label {
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: var(--p-size-regular);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;

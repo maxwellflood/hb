@@ -24,10 +24,10 @@
       <div class="lottie" id="loader-lottie"></div>
     </div>
 
-    <!-- Optional: only render when enabled -->
+    <!-- Fixed top header - client logo -->
     <header class="site-header" role="banner">
       <a class="brand" href="/" aria-label="Home">
-        <!-- SVG or img -->
+        <!-- HB logo inline SVG -->
         <svg
           width="68"
           height="24"
@@ -50,9 +50,8 @@
       </a>
     </header>
 
-    <!-- Primary page content -->
+    <!-- Primary page content - white card -->
     <main id="main" class="site-main" role="main">
-      <!-- Your page content goes here -->
 
       <section class="page splash-screen">
         <div>
@@ -69,159 +68,142 @@
       </section>
     </main>
 
-    <!-- Persistent bottom navigation -->
+    <!-- Fixed bottom navigation - splash variant
+         The home page swaps the progress indicator for the Honesty Box mark
+         and a Cookies / About menu, and hides the Help button. -->
     <nav class="bottom-nav" aria-label="Primary">
-      <!-- Progress indicator -->
-      <!-- <div class="progress-indicator">
-        <div class="progress-bar">
-          <span class="progress"></span>
-        </div>
-        <p class="label">0%</p>
-      </div> -->
-
+      <!-- Splash menu - Honesty Box mark + secondary links -->
       <div class="splash-menu-container">
-        <!-- icon button lg -->
+        <!-- Honesty Box mark -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
           href="#"
-          aria-describedby="tip-help"
+          aria-describedby="tip-honesty-box"
         >
           <div class="icon icon-lg" aria-hidden="true">
-            <!-- inline SVG -->
-            <!-- Icon Logo -->
-            <div class="icon" aria-hidden="true">
-              <!-- inline SVG -->
-              <svg
-                width="80"
-                height="80"
-                viewBox="0 0 80 80"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M35.925 69.9241C35.4844 71.6415 34.1328 76.5549 30.5187 78.8175C27.3601 80.7963 22.275 80.7216 18.183 75.2258C8.32629 61.9939 0.69484 32.3866 5.04073 5.83335C5.0706 5.65413 5.12287 5.36292 5.12287 5.36292C5.4589 3.638 6.46696 2.05496 8.06494 1.03942C11.1563 -0.916976 15.3156 -0.0433168 17.1973 3.08543C18.1008 4.58633 18.3696 6.28138 18.1008 7.84948C18.0784 7.99136 18.0336 8.19297 18.0261 8.23031C17.5632 10.2614 16.697 13.9128 16.8613 23.6799C17.0405 33.9696 20.9981 51.4578 24.2388 59.0967C37.5901 54.4073 35.925 69.9166 35.925 69.9166V69.9241Z"
-                  fill="url(#paint0_linear_1_1789)"
-                />
-                <path
-                  d="M41.8838 16.8699C37.523 17.4 32.5498 20.7155 29.563 28.6829C26.5761 36.6504 24.8138 50.614 24.2389 59.1042C23.41 65.6454 18.1158 74.1207 18.1158 74.1207C18.1158 74.1207 21.1549 80.3035 27.1809 79.8256C33.7371 79.3029 35.925 69.9241 35.925 69.9241C37.6499 63.1813 38.083 49.8972 39.3823 43.2215C40.6293 36.8221 41.5403 32.4539 42.4961 31.401L41.8838 16.8699Z"
-                  fill="url(#paint1_linear_1_1789)"
-                />
-                <path
-                  d="M53.3085 57.1851C49.7541 50.9948 44.6317 33.0661 42.5035 31.4009C40.3754 29.7358 36.8882 27.3985 29.7645 29.5416C32.8783 18.4155 41.8912 16.8698 41.8912 16.8698C46.0952 16.3546 49.9707 17.9302 53.6893 24.2623C57.408 30.5945 62.3811 45.3496 62.3811 45.3496C66.1595 55.9231 53.3085 57.1851 53.3085 57.1851Z"
-                  fill="url(#paint2_linear_1_1789)"
-                />
-                <path
-                  d="M53.3085 57.1851C57.1317 63.8533 61.8809 64.6597 67.3692 61.7998C71.9765 59.3954 75.1948 53.6457 76.1208 44.2968C76.1656 43.8711 76.1805 43.3484 76.1805 43.3484C76.3074 41.9521 75.9938 40.5034 75.1874 39.2266C73.231 36.1426 69.1464 35.2242 66.055 37.1806C64.3898 38.2334 63.2324 39.8986 63.0756 41.9745L62.7247 45.4168C61.6867 53.8473 53.3011 57.1926 53.3011 57.1926L53.3085 57.1851Z"
-                  fill="url(#paint3_linear_1_1789)"
-                />
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_1_1789"
-                    x1="17.4288"
-                    y1="30.9156"
-                    x2="23.7012"
-                    y2="75.2482"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#0F77FF" />
-                    <stop offset="1" stop-color="#2091D1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint1_linear_1_1789"
-                    x1="27.5095"
-                    y1="69.7449"
-                    x2="36.037"
-                    y2="28.7651"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#2091D1" />
-                    <stop offset="1" stop-color="#2EA6AD" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint2_linear_1_1789"
-                    x1="40.1439"
-                    y1="23.8292"
-                    x2="57.5051"
-                    y2="57.1776"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#2EA6AD" />
-                    <stop offset="1" stop-color="#3BBA8B" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint3_linear_1_1789"
-                    x1="54.9663"
-                    y1="58.9698"
-                    x2="66.7569"
-                    y2="49.5611"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#3BBA8B" />
-                    <stop offset="0.05" stop-color="#3BBB89" />
-                    <stop offset="1" stop-color="#47CD69" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span class="tooltip" role="tooltip" id="tip-help"
-                >Honesty Box</span
-              >
-            </div>
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M35.925 69.9241C35.4844 71.6415 34.1328 76.5549 30.5187 78.8175C27.3601 80.7963 22.275 80.7216 18.183 75.2258C8.32629 61.9939 0.69484 32.3866 5.04073 5.83335C5.0706 5.65413 5.12287 5.36292 5.12287 5.36292C5.4589 3.638 6.46696 2.05496 8.06494 1.03942C11.1563 -0.916976 15.3156 -0.0433168 17.1973 3.08543C18.1008 4.58633 18.3696 6.28138 18.1008 7.84948C18.0784 7.99136 18.0336 8.19297 18.0261 8.23031C17.5632 10.2614 16.697 13.9128 16.8613 23.6799C17.0405 33.9696 20.9981 51.4578 24.2388 59.0967C37.5901 54.4073 35.925 69.9166 35.925 69.9166V69.9241Z"
+                fill="url(#paint0_linear_1_1789)"
+              />
+              <path
+                d="M41.8838 16.8699C37.523 17.4 32.5498 20.7155 29.563 28.6829C26.5761 36.6504 24.8138 50.614 24.2389 59.1042C23.41 65.6454 18.1158 74.1207 18.1158 74.1207C18.1158 74.1207 21.1549 80.3035 27.1809 79.8256C33.7371 79.3029 35.925 69.9241 35.925 69.9241C37.6499 63.1813 38.083 49.8972 39.3823 43.2215C40.6293 36.8221 41.5403 32.4539 42.4961 31.401L41.8838 16.8699Z"
+                fill="url(#paint1_linear_1_1789)"
+              />
+              <path
+                d="M53.3085 57.1851C49.7541 50.9948 44.6317 33.0661 42.5035 31.4009C40.3754 29.7358 36.8882 27.3985 29.7645 29.5416C32.8783 18.4155 41.8912 16.8698 41.8912 16.8698C46.0952 16.3546 49.9707 17.9302 53.6893 24.2623C57.408 30.5945 62.3811 45.3496 62.3811 45.3496C66.1595 55.9231 53.3085 57.1851 53.3085 57.1851Z"
+                fill="url(#paint2_linear_1_1789)"
+              />
+              <path
+                d="M53.3085 57.1851C57.1317 63.8533 61.8809 64.6597 67.3692 61.7998C71.9765 59.3954 75.1948 53.6457 76.1208 44.2968C76.1656 43.8711 76.1805 43.3484 76.1805 43.3484C76.3074 41.9521 75.9938 40.5034 75.1874 39.2266C73.231 36.1426 69.1464 35.2242 66.055 37.1806C64.3898 38.2334 63.2324 39.8986 63.0756 41.9745L62.7247 45.4168C61.6867 53.8473 53.3011 57.1926 53.3011 57.1926L53.3085 57.1851Z"
+                fill="url(#paint3_linear_1_1789)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_1_1789"
+                  x1="17.4288"
+                  y1="30.9156"
+                  x2="23.7012"
+                  y2="75.2482"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#0F77FF" />
+                  <stop offset="1" stop-color="#2091D1" />
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_1_1789"
+                  x1="27.5095"
+                  y1="69.7449"
+                  x2="36.037"
+                  y2="28.7651"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#2091D1" />
+                  <stop offset="1" stop-color="#2EA6AD" />
+                </linearGradient>
+                <linearGradient
+                  id="paint2_linear_1_1789"
+                  x1="40.1439"
+                  y1="23.8292"
+                  x2="57.5051"
+                  y2="57.1776"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#2EA6AD" />
+                  <stop offset="1" stop-color="#3BBA8B" />
+                </linearGradient>
+                <linearGradient
+                  id="paint3_linear_1_1789"
+                  x1="54.9663"
+                  y1="58.9698"
+                  x2="66.7569"
+                  y2="49.5611"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#3BBA8B" />
+                  <stop offset="0.05" stop-color="#3BBB89" />
+                  <stop offset="1" stop-color="#47CD69" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-honesty-box">Honesty Box</span>
         </a>
 
+        <!-- Secondary links -->
         <div class="splash-menu">
           <a href="#" class="splash-menu-item"><p class="small">Cookies</p></a>
           <a href="#" class="splash-menu-item"><p class="small">About</p></a>
         </div>
       </div>
 
-      <!-- Button container -->
+      <!-- Nav buttons -->
       <div class="button-container">
-        <!-- icon button lg -->
+        <!-- Help - hidden on the splash screen (.hidden-splash) -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip hidden-splash"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip hidden-splash"
           href="#"
           aria-describedby="tip-help"
         >
           <div class="icon icon-lg" aria-hidden="true">
-            <!-- inline SVG -->
-            <!-- Icon Help -->
-            <div class="icon" aria-hidden="true">
-              <!-- inline SVG -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-              >
-                <path
-                  d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z"
-                  fill="currentColor"
-                />
-              </svg>
-              <span class="tooltip" role="tooltip" id="tip-help"> Help </span>
-            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+            >
+              <path
+                d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z"
+                fill="currentColor"
+              />
+              <path
+                d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z"
+                fill="currentColor"
+              />
+              <path
+                d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z"
+                fill="currentColor"
+              />
+            </svg>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-help">Help</span>
         </a>
 
-        <!-- icon button lg - Backwards -->
+        <!-- Back - disabled, nothing to go back to -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-back"
+          aria-disabled="true"
         >
-          <!-- Icon Arrow Left -->
           <div class="icon" aria-hidden="true">
-            <!-- inline SVG -->
             <svg
               width="24"
               height="24"
@@ -238,19 +220,17 @@
                 fill="currentColor"
               />
             </svg>
-            <span class="tooltip" role="tooltip" id="tip-next"> Back </span>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-back">Back</span>
         </a>
 
-        <!-- icon button lg - Forwards -->
+        <!-- Next -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip"
           href="#"
           aria-describedby="tip-next"
         >
-          <!-- Icon Arrow Right -->
           <div class="icon" aria-hidden="true">
-            <!-- inline SVG -->
             <svg
               width="24"
               height="24"
@@ -267,8 +247,8 @@
                 fill="currentColor"
               />
             </svg>
-            <span class="tooltip" role="tooltip" id="tip-next"> Next </span>
           </div>
+          <span class="tooltip" role="tooltip" id="tip-next">Next</span>
         </a>
       </div>
     </nav>

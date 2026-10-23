@@ -60,7 +60,8 @@
 
       <!-- START: Tosser - Swipe Arena
            Grey surface that fills all remaining vertical space.
-           Contains: direction labels, step progress dots, Don't Know button, swipe card.
+           Contains: direction labels, step progress dots, card stack.
+           No Don't Know button on the favourites variant.
 
            Idle state shown here. Swipe states are applied by adding modifier classes to .tinderland-card:
              .tinderland-card--pressed   - card held down
@@ -108,22 +109,6 @@
               </div>
             </div>
             <!-- END: Step Progress Dots -->
-          </div>
-
-          <!-- Don't Know button - centred at 16px from bottom edge -->
-          <div class="answer-arena__dont-know">
-            <!-- START: Don't Know Button - Idle (XS, 32px) -->
-            <!-- <div class="dont-know-btn-wrapper">
-              <button
-                class="dont-know-btn"
-                type="button"
-                aria-pressed="false"
-                aria-label="Don't know"
-              >
-                🤷
-              </button>
-            </div> -->
-            <!-- END: Don't Know Button -->
           </div>
 
           <!-- START: Tinderland Card Stack - Favourites variant
@@ -199,7 +184,7 @@
       <div class="button-container">
         <!-- Help -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
           href="#"
           aria-describedby="tip-help"
         >
@@ -230,7 +215,7 @@
 
         <!-- Back - disabled on first card -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-back"
           aria-disabled="true"
@@ -258,7 +243,7 @@
 
         <!-- Next -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip"
           href="#"
           aria-describedby="tip-next"
         >

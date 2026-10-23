@@ -13,6 +13,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/love-button-styles.css` | Love button component - page layout overrides, circle, rings, fill, adjustment buttons |
 | `styles/tinderland-styles.css` | Tinderland card (variants + swipe states) and the swipe-specific Tosser furniture |
 | `styles/bingo-styles.css` | Bingo - 3 × 3 board, drop zones, draggable card |
+| `styles/dropper-styles.css` | Dropper and Dragger - header strip, card, horizontal and vertical drop zones |
 | `styles/ai-styles.css` | AI conversation - chat dock, input, message thread, platform avatar |
 | `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
 | `styles/expand-image-styles.css` | Expand Image - thumbnail, expand button, lightbox |
@@ -80,6 +81,18 @@ All tokens live in `:root` in `styles.css`.
 --size-96  6rem
 ```
 
+### Shadows
+
+```
+--shadow-card          0 4px 12px rgba(0,0,0,0.1)   draggable card at rest
+--shadow-card-lifted   0 4px 12px rgba(0,0,0,0.2)   hovered or grabbed
+--shadow-menu          0 2px 4px rgba(0,0,0,0.05)   pop-up menus with a caret
+```
+
+Offset, blur and colour only, so a token works in `filter: drop-shadow(var(--…))`
+and `box-shadow: var(--…)`. Cards: Tinderland, Bingo, Dropper. Menu: Don't Know,
+Insert Word.
+
 ### Radius Scale
 
 ```
@@ -91,10 +104,43 @@ All tokens live in `:root` in `styles.css`.
 ### Layout Spacing
 
 ```
---nav-top-height        --size-80  (fixed header height)
---nav-bottom-height     --size-96  (fixed bottom nav height)
---space-inline-main     --size-24  (→ --size-16 on mobile)
---space-block-main      --size-24  (→ --size-16 on mobile)
+--site-header-padding-y    8px at ≤900px tall → 16px at ≥1100px (dvh, same range as the bottom nav); fixed 8px at ≤1024px wide
+--site-header-logo-height  --size-32  (logo slot; the logo is capped at this height)
+--nav-top-height        calculated - 2 × header padding + logo slot (48px → 64px)
+--nav-bottom-height     calculated - follows the bottom nav's rendered height
+--space-inline-main     --padding-inline-lg  (16px at 375px wide → 24px at 960px)
+--space-block-main      --padding-block-lg   (16px at 700px tall → 24px at 1100px)
+```
+
+### Fluid Inline Padding
+
+General-purpose horizontal spacing. Each value grows with the viewport width between
+375px and 960px (the stage max width) and is fixed outside that range. Written in
+`rem` + `vw` so it follows the browser's text size and zoom. Drives
+`--space-inline-main` and `.content-wrapper`.
+
+```
+--padding-inline-xxs   2px → 4px
+--padding-inline-xs    4px → 8px
+--padding-inline-sm    8px → 12px
+--padding-inline-rg   12px → 16px
+--padding-inline-lg   16px → 24px
+--padding-inline-xl   24px → 32px
+```
+
+### Fluid Block Padding
+
+The vertical partner to the inline scale, same steps. Each value grows with the
+viewport height (`dvh`) between 700px and 1100px tall and is fixed outside that range.
+Drives `--space-block-main`, `.content-wrapper` and the heading gaps.
+
+```
+--padding-block-xxs    2px → 4px
+--padding-block-xs     4px → 8px
+--padding-block-sm     8px → 12px
+--padding-block-rg    12px → 16px
+--padding-block-lg    16px → 24px
+--padding-block-xl    24px → 32px
 ```
 
 ### Input Tokens (input-styles.css)
@@ -108,14 +154,39 @@ All tokens live in `:root` in `styles.css`.
 
 ## Typography
 
-| Element | Font | Weight | Size token |
-|---|---|---|---|
-| `h1`–`h6` | Dorian (variable) | 700 | `--h1-size` … `--h4-size` (clamp) |
-| `.question` | Dorian | 700 | `--p-size-large` (1.125rem), `letter-spacing: -0.02em` |
-| `.form-label` | Dorian | 700 | 16px |
-| `p`, inputs, buttons | Inter | 400/500 | 1rem |
-| `.form-label--sub` | Inter | 500 | 0.875rem |
-| `.small` | Inter | 400 | `--p-size-small` (0.875rem) |
+| Element | Font | Weight | Size token | Line height |
+|---|---|---|---|---|
+| `.display` | Dorian (variable) | 700 | `--display-size` (36px → 52px) | `--line-height-tight` (via `h1`) |
+| `h1` / `h2` | Dorian (variable) | 700 | `--h1-size` (28 → 40px), `--h2-size` (22 → 32px) | `--line-height-tight` |
+| `h3` / `h4` | Dorian (variable) | 700 | `--h3-size` (20 → 28px), `--h4-size` (18 → 22px) | `--line-height-snug` |
+| `.question` | Dorian | 700 | `--p-size-large` (16 → 18px), `letter-spacing: -0.02em` | `--line-height-snug` |
+| `.form-label` | Dorian | 700 | `--p-size-regular` (14 → 16px) | 1.4 |
+| `p` | Inter | 400 | `--p-size-regular` (14 → 16px) | `--line-height-body` |
+| inputs | Inter | 400 | 16px, **fixed** - below 16px iOS Safari zooms the page on focus | 1.4 |
+| `.form-label--sub` | Inter | 500 | `--p-size-small` (12 → 14px) | |
+| `.small` | Inter | 400 | `--p-size-small` (12 → 14px) | `--line-height-body` (on a `p`) |
+
+**Fluid on both axes.** Every scaling size is worked out from the viewport width
+(375px → 960px) and from the viewport height (700px → 1100px), and `min()` takes the
+smaller - text shrinks when either axis is tight. Same ranges as the fluid padding
+scales. Form inputs are the exception: they stay at 16px, because an input below 16px
+makes iOS Safari zoom the page on focus.
+
+**Line heights** are font size plus a fixed amount rather than a ratio, so larger text
+gets proportionally tighter leading as it scales:
+
+```
+--line-height-tight   calc(1em + 0.25rem)    display, h1, h2
+--line-height-snug    calc(1em + 0.375rem)   h3, h4, .question
+--line-height-body    calc(1em + 6px → 8px)  p, .small (14px / 20px small → 16px / 24px full size)
+```
+
+`--heading-gap-*` (space below headings) points at the `--padding-block-*` scale.
+
+**Component text** follows the same tokens: card, zone and grid-button labels, Story
+Question sentences and `.btn` use `--p-size-regular`; validation messages, tooltips,
+`.btn-sm`, the Insert Word pill and menu use `--p-size-small`; `.btn-lg` and the love
+button counter use `--p-size-large`. Text inputs stay at a fixed 16px.
 
 Headings default colour: `--blu-50`. Body text: `--grey-9`.
 
@@ -195,7 +266,7 @@ Questions and answers live in separate `.content-wrapper` divs. The answer wrapp
 </div>
 ```
 
-- `.content-wrapper` - full-width, `padding: 1.5rem`
+- `.content-wrapper` - full-width, `--padding-block-lg` / `--padding-inline-lg` (16px → 24px), the same as the page gutters
 - `.content-wrapper--answer` - removes top padding
 - `.content` - `max-width: 640px`, centered, `flex-direction: column`, `gap: --input-gap`
 - `.box-Q` / `.box-A` - semantic labels for the handoff reader, no styles of their own
@@ -311,17 +382,17 @@ Single-select and multi-select question type. Defined in `input-styles.css`.
   <!-- Nav buttons -->
   <div class="button-container">
     <!-- Help -->
-    <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-help">
+    <a class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip" href="#" aria-describedby="tip-help">
       <div class="icon icon-lg" aria-hidden="true"><!-- help SVG --></div>
       <span class="tooltip" role="tooltip" id="tip-help">Help</span>
     </a>
     <!-- Back (disabled on first question) -->
-    <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-back">
+    <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-back">
       <div class="icon" aria-hidden="true"><!-- arrow-left SVG --></div>
       <span class="tooltip" role="tooltip" id="tip-back">Back</span>
     </a>
     <!-- Next -->
-    <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-next">
+    <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip" href="#" aria-describedby="tip-next">
       <div class="icon" aria-hidden="true"><!-- arrow-right SVG --></div>
       <span class="tooltip" role="tooltip" id="tip-next">Next</span>
     </a>
@@ -329,7 +400,22 @@ Single-select and multi-select question type. Defined in `input-styles.css`.
 </nav>
 ```
 
-`btn-nav` widens the button to `width: auto` with `padding-inline: --size-20`. On mobile it collapses back to 48px square.
+`btn-nav` widens the button to `width: auto` with `padding-inline: --size-20` and `--radius-s` (8px) corners. Below 768px it collapses to a square.
+
+**Sizing and spacing** - all tokens in `:root` in `styles.css`. Height-driven values scale with `dvh` between 900px and 1100px tall; width-driven values scale between 768px and 960px wide (the stage max width).
+
+| Token | Controls | Range |
+|---|---|---|
+| `--primary-nav-padding-y` | nav vertical padding | 12px at ≤900px tall → 24px at ≥1100px; fixed 12px at ≤767px wide |
+| `--prog-bar-p-y` | progress bar vertical padding | 12px → 16px, same heights; fixed 12px at ≤767px wide |
+| `--prog-bar-p-x` | progress bar horizontal padding | 12px at ≤768px wide → 16px at ≥960px |
+| `--prog-bar-gap` | gap between bar and % label | 8px → 12px, same widths |
+| `--primary-nav-btn-gap` | gap between Help, Back and Next | 4px → 8px, same widths |
+| `--primary-nav-btn-size` | Help / Back / Next height | 36px; 40px at ≤1024px wide or on touch |
+| `--primary-nav-btn-icon-size` | Back / Next arrow | 16px; 20px at ≤1024px wide or on touch |
+| `--nav-bottom-height` | space `<main>` reserves for the nav | calculated from the tokens above, so it follows the nav's rendered height |
+
+The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap height with `text-box-trim`.
 
 ---
 
@@ -416,7 +502,7 @@ Swipe card for the Tinderland / Tosser question type. Defined in `tinderland-sty
 
 Shared layout primitive (`styles.css`) for any question type that needs a bounded
 play area rather than a stacked form. Fills the space below the question and anchors
-its furniture to its own edges. Used by the Tosser and Bingo question types.
+its furniture to its own edges. Used by the Tosser, Bingo, Dropper and Dragger question types.
 
 ```html
 <div class="answer-arena-section box-A">
@@ -613,6 +699,106 @@ it is not the default eight. All Bingo imagery comes from `images/bingo_images/`
 those four twice, since it is a layout reference and only four exist. `data-cell` is the zone index within that variant, so it
 runs 1–9 on the eight-zone board (5 being the card) and 1–4 on the four-zone board,
 where the card and the empty cells carry no `data-cell` at all.
+
+---
+
+## Dropper and Dragger
+
+Drag-and-drop question type: a card in a header strip is dragged onto one of a list
+of zones below it. Two client-facing names for the same component in two
+orientations, both defined in `dropper-styles.css`:
+
+- **Dropper** - horizontal zones, stacked top to bottom (`dropper-*.html`)
+- **Dragger** - vertical zones, side by side left to right (`dragger-*.html`)
+
+The class names use `dropper` for the shared parts in both. Sits inside an
+`.answer-arena`, like Bingo and Tosser, but does not use the arena's own
+`__progress` / `__dont-know` slots: the step counter and Don't Know button belong to
+the header strip instead.
+
+```html
+<div class="answer-arena-section box-A">
+  <div class="answer-arena">
+    <div class="dropper">
+
+      <!-- Header strip: counter left, card centred, Don't Know right -->
+      <div class="dropper-top">
+        <div class="dropper-top__progress">
+          <div class="step-counter" role="progressbar" aria-label="Card 1 of 8"
+            aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">1 / 8</div>
+        </div>
+        <div class="dropper-card">
+          <span class="dropper-card__label">Text</span>
+        </div>
+        <div class="dropper-top__dont-know"><!-- dont-know-btn-wrapper --></div>
+      </div>
+
+      <!-- Zones - Dropper -->
+      <div class="answer-dropper-area" role="radiogroup" aria-label="[Question text]">
+        <button class="horizontal-answer-drop-area" type="button" role="radio"
+          aria-checked="false" data-zone="1">
+          <span class="horizontal-answer-drop-area__label">One</span>
+        </button>
+        <!-- one per zone -->
+      </div>
+
+      <!-- Zones - Dragger: add --vertical, swap the zone classes -->
+      <div class="answer-dropper-area answer-dropper-area--vertical" role="radiogroup" aria-label="[Question text]">
+        <button class="vertical-answer-drop-area" type="button" role="radio"
+          aria-checked="false" data-zone="1">
+          <span class="vertical-answer-drop-area__label">One</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+```
+
+- `.dropper` - fills the arena (`align-self: stretch`), column of header strip + zones
+- `.dropper-top` - header strip. Its padding and the pinned positions of the counter
+  and Don't Know button share two local variables, `--dropper-top-inset-block` /
+  `--dropper-top-inset-inline` (`--padding-block-rg` / `--padding-inline-rg`, 12 → 16px),
+  so they always line up with the top of the card
+- `.dropper-card` - the draggable card. Shrinks to fit its copy and wraps if long.
+  `.dropper-card--image` swaps the chip padding for a 4px inset around
+  `<img class="dropper-card__img">` (`max-height: 106px` - placeholder until a final
+  spec). Same shadow and press treatment as `.bingo-card`
+- `.answer-dropper-area` - the zone list; `flex: 1` divides the remaining height (or
+  width, with `--vertical`) evenly. No scrolling - the zones compress to fit
+- `.horizontal-answer-drop-area` - a Dropper zone: full-width row, label left-aligned,
+  hairline border on top
+- `.vertical-answer-drop-area` - a Dragger zone: full-height column, label centred at the
+  top. Side padding is the smallest step (`--padding-inline-xxs`) so ten columns still
+  fit on a phone
+- `data-zone` - the zone index, 1 to n, top to bottom (Dropper) or left to right
+  (Dragger). The value logged to the back end. Zones are `<button role="radio">` so
+  the question can be answered by tap or keyboard without a drag
+
+Every zone carries a full 1px border at all times, transparent on the edges that
+are not showing, so a state change only ever changes `border-color` and the label
+never shifts. The end zones take the arena's bottom corner radius so a highlighted
+border follows the curve.
+
+**States** (no JavaScript - the host app applies these during a drag):
+
+| Modifier | Meaning |
+|---|---|
+| `.dropper-card:hover` | Pointer over the card - shadow from `--shadow-card` to `--shadow-card-lifted` |
+| `.dropper-card--pressed` | Card grabbed - grey surface, `scale(0.95) rotate(6deg)` (also `:active`) |
+| `.horizontal-answer-drop-area--drop-active` / `.vertical-…--drop-active` | Card is being dragged over this zone - brand border, muted blue fill |
+| `.horizontal-answer-drop-area--filled` / `.vertical-…--filled` | Card placed here, answer recorded - brand border, subtle blue fill |
+
+Zones also have `:hover` / `:focus-visible`, the same look as `--drop-active`.
+
+**Variants:**
+
+| Page | Card | Zones |
+|---|---|---|
+| `dropper-text_text.html` | text | ten, horizontal |
+| `dropper-image_text.html` | image | ten, horizontal |
+| `dragger-text_text.html` | text | ten, vertical |
+| `dragger-image_text.html` | image | ten, vertical |
 
 ---
 

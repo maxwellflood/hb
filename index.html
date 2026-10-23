@@ -990,7 +990,7 @@
 
             <div class="flex-h-wrapper">
               <!-- icon button lg -->
-              <a class="icon-btn icon-btn-disabled icon-btn-lg" href="#">
+              <a class="icon-btn icon-btn-disabled icon-btn-lg" href="#" aria-disabled="true">
                 <div class="icon icon-lg" aria-hidden="true">
                   <!-- inline SVG -->
                   <svg
@@ -1012,7 +1012,7 @@
                 </div>
               </a>
               <!-- icon button rg -->
-              <a class="icon-btn icon-btn-disabled icon-btn-rg" href="#">
+              <a class="icon-btn icon-btn-disabled icon-btn-rg" href="#" aria-disabled="true">
                 <div class="icon" aria-hidden="true">
                   <!-- inline SVG -->
                   <svg
@@ -1034,7 +1034,7 @@
                 </div>
               </a>
               <!-- icon button sm -->
-              <a class="icon-btn icon-btn-disabled icon-btn-sm" href="#">
+              <a class="icon-btn icon-btn-disabled icon-btn-sm" href="#" aria-disabled="true">
                 <div class="icon icon-sm" aria-hidden="true">
                   <!-- inline SVG -->
                   <svg
@@ -2911,8 +2911,12 @@
              .progress-indicator  - survey progress (see Progress Bar section)
              .button-container    - Help / Back / Next row
              .btn-nav             - widens Back and Next to width:auto with
-                                    wider inline padding; collapses back to a
-                                    48px square on mobile
+                                    wider inline padding and 8px corners;
+                                    collapses to a square on mobile
+
+           Buttons are 36px (icon-btn-sm) on desktop and 40px at 1024px wide
+           and below, or on any touch device. Vertical padding scales with
+           screen height; see the Bottom nav tokens in :root in styles.css.
 
            Back is disabled on the first question by adding .icon-btn-disabled.
            ============================================================ -->
@@ -2951,19 +2955,19 @@
             <div class="button-container">
 
               <!-- Help - secondary icon button -->
-              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-1">
+              <a class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip" href="#" aria-describedby="tip-nav-help-1">
                 <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-help-1">Help</span>
               </a>
 
               <!-- Back - disabled on the first question -->
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-nav-back-1">
+              <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip" href="#" aria-describedby="tip-nav-back-1" aria-disabled="true">
                 <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-back-1">Back</span>
               </a>
 
               <!-- Next -->
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-1">
+              <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-1">
                 <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-next-1">Next</span>
               </a>
@@ -2991,17 +2995,17 @@
 
             <div class="button-container">
 
-              <a class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip" href="#" aria-describedby="tip-nav-help-2">
+              <a class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip" href="#" aria-describedby="tip-nav-help-2">
                 <div class="icon icon-lg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M24.4998 13.9998C24.4998 8.20085 19.7988 3.49984 13.9998 3.49984C8.20085 3.49984 3.49984 8.20085 3.49984 13.9998C3.49984 19.7988 8.20085 24.4998 13.9998 24.4998C19.7988 24.4998 24.4998 19.7988 24.4998 13.9998ZM26.8332 13.9998C26.8332 21.0875 21.0875 26.8332 13.9998 26.8332C6.91218 26.8332 1.1665 21.0875 1.1665 13.9998C1.1665 6.91218 6.91218 1.1665 13.9998 1.1665C21.0875 1.1665 26.8332 6.91218 26.8332 13.9998Z" fill="currentColor"/><path d="M12.8332 15.7498C12.8332 14.9045 13.2088 14.221 13.6273 13.7173C13.9377 13.3436 14.3042 13.0274 14.6504 12.7682L14.9876 12.5278C15.4503 12.2104 15.7498 11.6817 15.7498 11.0832C15.7498 10.1167 14.9663 9.33317 13.9998 9.33317C13.0334 9.33317 12.2498 10.1167 12.2498 11.0832C12.2498 11.7275 11.7275 12.2498 11.0832 12.2498C10.4388 12.2498 9.9165 11.7275 9.9165 11.0832C9.9165 8.82801 11.7447 6.99984 13.9998 6.99984C16.255 6.99984 18.0832 8.82801 18.0832 11.0832C18.0832 12.4837 17.3773 13.7195 16.307 14.4533C15.9414 14.7038 15.6318 14.9557 15.4217 15.2087C15.2162 15.4561 15.1665 15.6288 15.1665 15.7498C15.1665 16.3942 14.6442 16.9165 13.9998 16.9165C13.3555 16.9165 12.8332 16.3942 12.8332 15.7498Z" fill="currentColor"/><path d="M14.0102 18.6665C14.6545 18.6665 15.1769 19.1888 15.1769 19.8332C15.1769 20.4775 14.6545 20.9998 14.0102 20.9998H14C13.3556 20.9998 12.8333 20.4775 12.8333 19.8332C12.8333 19.1888 13.3556 18.6665 14 18.6665H14.0102Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-help-2">Help</span>
               </a>
 
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-back-2">
+              <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip" href="#" aria-describedby="tip-nav-back-2">
                 <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-back-2">Back</span>
               </a>
 
-              <a class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-2">
+              <a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip" href="#" aria-describedby="tip-nav-next-2">
                 <div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M19 11.002C19.5523 11.002 20 11.4497 20 12.002C20 12.5543 19.5523 13.002 19 13.002H5.5C4.94772 13.002 4.5 12.5543 4.5 12.002C4.5 11.4497 4.94772 11.002 5.5 11.002H19Z" fill="currentColor"/><path d="M10.4072 5.19628C10.8519 4.86909 11.4782 4.96459 11.8057 5.40917C12.1329 5.85385 12.0374 6.48019 11.5928 6.80761C11.5873 6.81142 11.5834 6.81443 11.5781 6.81835C11.4879 6.88506 11.1843 7.11436 10.6777 7.50585C10.1236 7.93828 9.38772 8.52813 8.65527 9.16406C7.91783 9.80434 7.20598 10.4717 6.68652 11.0596C6.42585 11.3546 6.23487 11.6066 6.11426 11.8066C6.05683 11.9019 6.02741 11.9658 6.0127 12.0019C6.02742 12.0381 6.05684 12.102 6.11426 12.1973C6.23488 12.3973 6.42584 12.6493 6.68652 12.9443C7.20598 13.5322 7.91783 14.1995 8.65527 14.8398C9.38772 15.4758 10.1236 16.0656 10.6777 16.498C11.1843 16.8895 11.4879 17.1188 11.5781 17.1855C11.5834 17.1895 11.5873 17.1925 11.5928 17.1963C12.0374 17.5238 12.1322 18.1501 11.8047 18.5947C11.4773 19.0393 10.8519 19.1348 10.4072 18.8076C10.3982 18.8004 10.3935 18.7973 10.3877 18.793C10.2895 18.72 9.97202 18.4808 9.44727 18.0752C8.87641 17.6297 8.11217 17.0159 7.34473 16.3496C6.5823 15.6876 5.79395 14.9538 5.18848 14.2685C4.88674 13.927 4.60885 13.5737 4.40137 13.2295C4.23441 12.9525 4.05271 12.585 4.00977 12.1787L4 12.0019L4.00977 11.8252C4.05271 11.4187 4.23434 11.0505 4.40137 10.7734C4.60883 10.4294 4.88682 10.0767 5.18848 9.73535C5.79397 9.0501 6.58227 8.31628 7.34473 7.65429C8.1122 6.98795 8.87639 6.37421 9.44727 5.92871C9.73323 5.70554 9.972 5.5231 10.1396 5.39648C10.2895 5.2839 10.3756 5.2199 10.3877 5.21093C10.4029 5.20006 10.4044 5.19889 10.4053 5.19824L10.4072 5.19628Z" fill="currentColor"/></svg></div>
                 <span class="tooltip" role="tooltip" id="tip-nav-next-2">Next</span>
               </a>
@@ -3504,6 +3508,9 @@
                    └── .answer-dropper-area              - the list of zones
                          └── .horizontal-answer-drop-area (x n)  - one zone
 
+           Each zone carries data-zone (1–n, top to bottom) - the value logged
+           to the back end.
+
            Requires styles/dropper-styles.css.
            ============================================================ -->
       <div class="container u-mb-lg">
@@ -3546,16 +3553,16 @@
                   </div>
                 </div>
                 <div class="answer-dropper-area" role="radiogroup" aria-label="Where does this belong?">
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">One</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Two</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Three</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Four</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Five</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Six</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Seven</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Eight</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Nine</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Ten</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1"><span class="horizontal-answer-drop-area__label">One</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2"><span class="horizontal-answer-drop-area__label">Two</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3"><span class="horizontal-answer-drop-area__label">Three</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4"><span class="horizontal-answer-drop-area__label">Four</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5"><span class="horizontal-answer-drop-area__label">Five</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6"><span class="horizontal-answer-drop-area__label">Six</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7"><span class="horizontal-answer-drop-area__label">Seven</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8"><span class="horizontal-answer-drop-area__label">Eight</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9"><span class="horizontal-answer-drop-area__label">Nine</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10"><span class="horizontal-answer-drop-area__label">Ten</span></button>
                 </div>
               </div>
             </div>
@@ -3585,16 +3592,16 @@
                   </div>
                 </div>
                 <div class="answer-dropper-area" role="radiogroup" aria-label="Where does this belong?">
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">One</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Two</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Three</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Four</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Five</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Six</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Seven</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Eight</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Nine</span></button>
-                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="horizontal-answer-drop-area__label">Ten</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1"><span class="horizontal-answer-drop-area__label">One</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2"><span class="horizontal-answer-drop-area__label">Two</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3"><span class="horizontal-answer-drop-area__label">Three</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4"><span class="horizontal-answer-drop-area__label">Four</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5"><span class="horizontal-answer-drop-area__label">Five</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6"><span class="horizontal-answer-drop-area__label">Six</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7"><span class="horizontal-answer-drop-area__label">Seven</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8"><span class="horizontal-answer-drop-area__label">Eight</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9"><span class="horizontal-answer-drop-area__label">Nine</span></button>
+                  <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10"><span class="horizontal-answer-drop-area__label">Ten</span></button>
                 </div>
               </div>
             </div>
@@ -3614,6 +3621,9 @@
 
              .answer-dropper-area.answer-dropper-area--vertical  - row instead of column
                    └── .vertical-answer-drop-area (x n)            - one vertical zone
+
+           Each zone carries data-zone (1–n, left to right) - the value logged
+           to the back end.
 
            Requires styles/dropper-styles.css.
            ============================================================ -->
@@ -3656,16 +3666,16 @@
                   </div>
                 </div>
                 <div class="answer-dropper-area answer-dropper-area--vertical" role="radiogroup" aria-label="Where does this belong?">
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">One</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Two</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Three</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Four</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Five</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Six</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Seven</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Eight</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Nine</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Ten</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1"><span class="vertical-answer-drop-area__label">One</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2"><span class="vertical-answer-drop-area__label">Two</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3"><span class="vertical-answer-drop-area__label">Three</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4"><span class="vertical-answer-drop-area__label">Four</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5"><span class="vertical-answer-drop-area__label">Five</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6"><span class="vertical-answer-drop-area__label">Six</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7"><span class="vertical-answer-drop-area__label">Seven</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8"><span class="vertical-answer-drop-area__label">Eight</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9"><span class="vertical-answer-drop-area__label">Nine</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10"><span class="vertical-answer-drop-area__label">Ten</span></button>
                 </div>
               </div>
             </div>
@@ -3695,16 +3705,16 @@
                   </div>
                 </div>
                 <div class="answer-dropper-area answer-dropper-area--vertical" role="radiogroup" aria-label="Where does this belong?">
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">One</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Two</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Three</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Four</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Five</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Six</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Seven</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Eight</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Nine</span></button>
-                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false"><span class="vertical-answer-drop-area__label">Ten</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1"><span class="vertical-answer-drop-area__label">One</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2"><span class="vertical-answer-drop-area__label">Two</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3"><span class="vertical-answer-drop-area__label">Three</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4"><span class="vertical-answer-drop-area__label">Four</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5"><span class="vertical-answer-drop-area__label">Five</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6"><span class="vertical-answer-drop-area__label">Six</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7"><span class="vertical-answer-drop-area__label">Seven</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8"><span class="vertical-answer-drop-area__label">Eight</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9"><span class="vertical-answer-drop-area__label">Nine</span></button>
+                  <button class="vertical-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10"><span class="vertical-answer-drop-area__label">Ten</span></button>
                 </div>
               </div>
             </div>

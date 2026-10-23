@@ -72,6 +72,9 @@
                                              (hover is CSS-only: shadow 10% → 20%)
              .horizontal-answer-drop-area--drop-active    - card dragged over this zone
              .horizontal-answer-drop-area--filled         - card placed, answer recorded
+
+           The value logged to the back end is the zone's data-zone index
+           (1–10, top to bottom).
       -->
       <div class="answer-arena-section box-A">
         <div class="answer-arena">
@@ -152,34 +155,34 @@
               role="radiogroup"
               aria-label="Where does this belong?"
             >
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="1">
                 <span class="horizontal-answer-drop-area__label">One</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="2">
                 <span class="horizontal-answer-drop-area__label">Two</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="3">
                 <span class="horizontal-answer-drop-area__label">Three</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="4">
                 <span class="horizontal-answer-drop-area__label">Four</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="5">
                 <span class="horizontal-answer-drop-area__label">Five</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="6">
                 <span class="horizontal-answer-drop-area__label">Six</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="7">
                 <span class="horizontal-answer-drop-area__label">Seven</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="8">
                 <span class="horizontal-answer-drop-area__label">Eight</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="9">
                 <span class="horizontal-answer-drop-area__label">Nine</span>
               </button>
-              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false">
+              <button class="horizontal-answer-drop-area" type="button" role="radio" aria-checked="false" data-zone="10">
                 <span class="horizontal-answer-drop-area__label">Ten</span>
               </button>
             </div>
@@ -205,7 +208,7 @@
       <div class="button-container">
         <!-- Help -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-lg has-tooltip"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
           href="#"
           aria-describedby="tip-help"
         >
@@ -236,7 +239,7 @@
 
         <!-- Back - disabled on the first card of the question -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-back"
           aria-disabled="true"
@@ -266,7 +269,7 @@
              Matches the design reference: on a fresh card there is no answer
              to advance with, so both Back and Next are disabled. -->
         <a
-          class="icon-btn icon-btn-brand-primary icon-btn-lg btn-nav icon-btn-disabled has-tooltip"
+          class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav icon-btn-disabled has-tooltip"
           href="#"
           aria-describedby="tip-next"
           aria-disabled="true"

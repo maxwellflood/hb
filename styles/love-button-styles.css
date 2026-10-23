@@ -101,7 +101,7 @@
   z-index: 1;
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: var(--p-size-large);
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -154,7 +154,7 @@
 .love-message span {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--p-size-small);
   line-height: 1.4;
   letter-spacing: -0.02em;
 }
