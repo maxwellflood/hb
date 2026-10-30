@@ -1007,9 +1007,16 @@ respondent drags the dividers between slices up or down to resize them. Defined 
   percentage chip, both global `.chip`s (see Chip). The label chip sits at the left of
   the details column and keys its swatch to the slice by setting `--chip-swatch-colour`.
   The percentage chip is inside the bar in the markup (one copy of the number), and on
-  desktop is positioned out to the right-hand end of the details column. `z-index: 2`,
-  above the dividers (`1`), so when a slice is thin the chip covers the line rather than
+  desktop is positioned out to the right-hand end of the details column. Their columns sit at
+  `z-index: 2`, above the dividers (`1`), so when a slice is thin the chip covers the line rather than
   the line cutting through the text
+- The arena around a Pie doesn't clip (`.answer-arena:has(> .pie)`), so a chip centred
+  on a thin first or last slice shows in full, half over the arena border. When it
+  does, a container query (`height < 2rem` on the chip's column) gives it a 1px
+  `--border-primary` outline, the arena's own border colour. The pie clips itself instead, with a
+  `clip-path` polygon: the arena's rounded rectangle plus a 32px strip above and below,
+  between the corners, so a divider near the top or bottom stops at the curve of the
+  corners while the chips can still overhang
 - `.pie-divider` - the 1px line between two slices. n slices have n - 1 dividers,
   none at the top or bottom edge. Its controls sit on a zero-height row centred on
   the line, so they never change the slices' proportions

@@ -58,6 +58,16 @@
    .expand-image__img and the Insert Word input popup
    (.insert-word-menu--input / .insert-word-menu__input).
 
+   UPDATE - 30/10/26. Added since the audit (search "30/10/26"):
+     - .icon-btn-lock / .icon-btn-grab - bordered 40px icon buttons:
+       a lock toggle and a drag handle. After the icon button states.
+     - .chip / .chip__swatch - small grey label with an optional
+       colour dot. After the Step Counter.
+     - The Pie question type - the whole module, at the end of the
+       file. Uses the two buttons and the chip above.
+     - One NOTE: the reference gap between a question and an answer
+       arena is smaller. Above .content_e.
+
    Some existing comments show garbled characters where an arrow or
    dash used to be: the file was saved as UTF-8 and read back as
    Latin-1 somewhere along the way. Comments only, so harmless, and
@@ -1087,6 +1097,81 @@ a {
   background-color: var(--surface-disabled);
 }
 
+/* GROTESK ADD (30/10/26) - lock and grab icon buttons, from the
+   reference. New: first used by the Pie question type (end of file). */
+/* Icon Button Lock
+   A toggle that pins something in place - first used by the Pie question
+   type, where it stops a divider between two slices from moving. 40px
+   square with a 1px border and 8px corners; padding: 0 because the border
+   already eats into the 40px and the 24px icon is centred by flex.
+
+   The icon is drawn in currentColor, so the state only ever changes colour:
+     (default)              - unlocked: grey surface, grey icon
+     :hover                 - white surface, darker border
+     .icon-btn-lock--locked - locked: icon turns black. Pair with aria-pressed="true" */
+
+.icon-btn-lock {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+  padding: 0;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  color: var(--text-tertiary);
+}
+/* :active repeats :hover - there is no pressed look in the design, and it
+   overrides the dark background the base .icon-btn:active would apply */
+.icon-btn-lock:hover,
+.icon-btn-lock:active {
+  background-color: var(--surface-primary);
+  border-color: var(--border-secondary);
+}
+.icon-btn-lock--locked {
+  color: var(--black);
+}
+
+/* Icon Button Grab
+   A drag handle - press and drag to move whatever it is attached to. First
+   used by the Pie question type, where dragging it up or down resizes the
+   two slices either side of a divider. Same 40px / 1px border / 8px corner
+   frame as .icon-btn-lock, on a white surface.
+
+   States:
+     (default)                - white surface, light border, dark grey icon
+     :hover                   - darker border, black icon
+     :active / --dragging     - being dragged: near-black border, black icon.
+                                The modifier holds the look for the length of
+                                the drag, since the pointer can leave the
+                                button while it is still held (Figma: State=Active) */
+
+.icon-btn-grab {
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
+  padding: 0;
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  color: var(--grey-8);
+  cursor: grab;
+  touch-action: none; /* stop a touch drag from scrolling the page instead */
+}
+.icon-btn-grab:hover {
+  background-color: var(--surface-primary);
+  border-color: var(--border-secondary);
+  color: var(--black);
+}
+.icon-btn-grab:active,
+.icon-btn-grab--dragging,
+.icon-btn-grab--dragging:hover {
+  background-color: var(--surface-primary);
+  border-color: var(--border-highlighted);
+  color: var(--black);
+  cursor: grabbing;
+}
+
 /* --- Button Classes --- */
 
 /* Base Button */
@@ -1803,6 +1888,13 @@ main.has-header .stage {
   padding: var(--size-48);
 }
 
+/* GROTESK NOTE (30/10/26) - the reference has closed up the gap between
+   a question and an answer arena (Tosser, Bingo, Dropper, Dragger, Pie).
+   The arena section no longer has top padding, so the gap is only the
+   question wrapper's bottom padding: --padding-block-lg, 16px to 24px
+   with the viewport height. Here the gap is .content_e's --input-gap.
+   Not changed, as the structures differ; worth checking the arena pages
+   against the reference. */
 /* ----------------------------------------------------*/
 /*	content-e  - equivalent to Grotesk content
 /*  controls vertical spacing between question and answer
@@ -2196,6 +2288,44 @@ header {
   letter-spacing: -0.02em;
   color: var(--text-disabled);
   white-space: nowrap;
+}
+
+/* GROTESK ADD (30/10/26) - chip, from the reference. New: first used by
+   the Pie question type (end of file) for option names and percentages. */
+/* =====================================================
+   Chip
+   A small grey label: 4px padding, 4px corners, regular body text,
+   sized to its content and kept to one line. Sits on top of a busy or
+   coloured surface - a Pie slice, a divider line - so the text stays
+   readable over it. First used by the Pie question type, for the option
+   names and their percentages.
+
+   Optional colour key:
+     .chip__swatch - 12px dot before the text. Its colour comes from
+                     --chip-swatch-colour, set by whatever the chip is
+                     keyed to (the Pie sets it to the slice colour)
+   ===================================================== */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--padding-inline-xs); /* 4px at 375px wide to 8px from 960px */
+  padding: var(--size-4);
+  border-radius: var(--radius-xs);
+  background-color: var(--surface-secondary);
+  font-size: var(--p-size-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* flex-shrink: 0 keeps the dot round when a chip's text wraps */
+.chip__swatch {
+  flex-shrink: 0;
+  width: var(--size-12);
+  height: var(--size-12);
+  border-radius: 50%;
+  background-color: var(--chip-swatch-colour, currentColor);
 }
 
 /* ******************************************************/
@@ -7468,3 +7598,374 @@ textarea, .text-input {
 }
 
 /* ===== End of STO element styles ===== */
+
+/* *******************************************************/
+/* ===== PIE (share of 100%) element styles =====        */
+/* GROTESK ADD (30/10/26) - new question type, copied    */
+/* from the reference (styles/pie-styles.css) unchanged. */
+/* Sits inside an arena surface that is a flex container */
+/* (as .answer-arena / .tosser): .pie fills it with      */
+/* align-self: stretch. Reference pages: pie.html        */
+/* (static) and pie-demo.html (working drag).            */
+/* *******************************************************/
+
+/* =====================================================
+   Pie - Specific Styles
+   Styles for the Pie question type: the respondent shares 100% between a
+   set of options by dragging the dividers between them up or down. Drawn
+   as a single stacked bar - one coloured slice per option - with the
+   option's name and its share on the left, and the divider controls on
+   the right.
+
+   Everything shared with other question types is reused, not
+   redefined here:
+     .answer-arena-section / .answer-arena  - the grey arena (styles.css)
+     .icon-btn .icon-btn-grab               - drag handle (styles.css)
+     .icon-btn .icon-btn-lock               - lock toggle (styles.css)
+     .chip / .chip__swatch                  - label and percentage chips (styles.css)
+     .content-wrapper / .content            - page gutters + column (styles.css)
+
+   Structure:
+     .pie                          - fills the arena, edge to edge
+       .pie-slice (x n)            - one option; height is its share of 100%
+         .pie-slice__details       - left column
+           .pie-slice__label       - label chip: colour key + option name
+         .pie-slice__bar           - the coloured slice, centre column
+           .pie-slice__percentage  - percentage chip: the option's share.
+                                     Shown at the right of the left
+                                     column; centred on the bar on mobile
+         .pie-slice__control-column - right column, empty: room for the
+                                     divider controls
+       .pie-divider (x n - 1)      - the line between two slices, the thing
+                                     that is dragged. One between each pair,
+                                     none above the first or below the last
+         .pie-divider__controls    - sits over the right column
+           .pie-divider__lock      - lock toggle, centred in the column
+           .pie-divider__grab      - drag handle, at the right edge
+
+   Below 768px the content insets tighten, the percentage chip moves
+   onto the bar, and the lock moves beside the grab handle - see Mobile
+   at the foot.
+   ===================================================== */
+
+/* The arena normally clips its content (overflow: hidden). Not around
+   a Pie: a chip is centred on its slice, so on a thin first or last
+   slice half of it sits outside the arena, over its border, in the page
+   padding above or below. The same goes for a grab handle on a divider
+   pushed right to the top or bottom. The pie clips itself to the
+   arena's rounded corners instead (see the clip-path below). */
+.answer-arena:has(> .pie) {
+  overflow: visible;
+}
+
+/* .answer-arena centres a single child by default (see styles.css) -
+   align-self: stretch fills it instead, the same way .dropper does.
+
+   The pie fills the arena edge to edge, so the dividers run right to
+   the arena's border and the border is the pie's top and bottom edge -
+   no rules of its own, which would double up against it.
+
+   --pie-column-gap is shared by the slice rows and the divider controls,
+   so the controls always line up with the right-hand column. It is
+   fluid: 16px at 375px wide, 24px from 960px.
+
+   --pie-details-inset and --pie-controls-inset pad the content in from
+   the arena's sides, left and right; the dividers ignore them. The two
+   are equal on desktop, so the details and control columns stay the
+   same width and the bar stays centred. Fluid, so the inset gives way
+   as the window gets narrower: 40px at 768px wide to 80px from 960px.
+   The mobile block retunes both. */
+.pie {
+  --pie-column-gap: var(--padding-inline-lg);
+  --pie-details-inset: clamp(2.5rem, -7.5rem + 20.8333vw, 5rem); /* 40px to 80px */
+  --pie-controls-inset: var(--pie-details-inset);
+  flex: 1;
+  align-self: stretch;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Clip the pie to the arena's rounded corners, but not above or below.
+   With the arena no longer clipping (see above), a divider dragged
+   close to the top or bottom would run past the curve of the corners.
+   This polygon is the arena's rounded rectangle (each corner drawn as
+   four straight segments, close enough at 12px), plus a strip
+   --pie-overhang tall above and below, between the corners, so the
+   chips can still hang over the border.
+
+   --pie-corner is the arena's inner corner radius: --radius-m less its
+   1px border. The factors are 1 - cos of 22.5, 45 and 67.5 degrees. */
+.pie {
+  --pie-corner: calc(var(--radius-m) - 1px);
+  --pie-overhang: var(--size-32);
+  clip-path: polygon(
+    /* top strip, left to right */
+    var(--pie-corner) calc(0% - var(--pie-overhang)),
+    calc(100% - var(--pie-corner)) calc(0% - var(--pie-overhang)),
+    calc(100% - var(--pie-corner)) 0%,
+    /* top-right corner */
+    calc(100% - var(--pie-corner) * 0.6173) calc(var(--pie-corner) * 0.0761),
+    calc(100% - var(--pie-corner) * 0.2929) calc(var(--pie-corner) * 0.2929),
+    calc(100% - var(--pie-corner) * 0.0761) calc(var(--pie-corner) * 0.6173),
+    100% var(--pie-corner),
+    /* bottom-right corner */
+    100% calc(100% - var(--pie-corner)),
+    calc(100% - var(--pie-corner) * 0.0761) calc(100% - var(--pie-corner) * 0.6173),
+    calc(100% - var(--pie-corner) * 0.2929) calc(100% - var(--pie-corner) * 0.2929),
+    calc(100% - var(--pie-corner) * 0.6173) calc(100% - var(--pie-corner) * 0.0761),
+    calc(100% - var(--pie-corner)) 100%,
+    /* bottom strip, right to left */
+    calc(100% - var(--pie-corner)) calc(100% + var(--pie-overhang)),
+    var(--pie-corner) calc(100% + var(--pie-overhang)),
+    var(--pie-corner) 100%,
+    /* bottom-left corner */
+    calc(var(--pie-corner) * 0.6173) calc(100% - var(--pie-corner) * 0.0761),
+    calc(var(--pie-corner) * 0.2929) calc(100% - var(--pie-corner) * 0.2929),
+    calc(var(--pie-corner) * 0.0761) calc(100% - var(--pie-corner) * 0.6173),
+    0% calc(100% - var(--pie-corner)),
+    /* top-left corner */
+    0% var(--pie-corner),
+    calc(var(--pie-corner) * 0.0761) calc(var(--pie-corner) * 0.6173),
+    calc(var(--pie-corner) * 0.2929) calc(var(--pie-corner) * 0.2929),
+    calc(var(--pie-corner) * 0.6173) calc(var(--pie-corner) * 0.0761),
+    var(--pie-corner) 0%
+  );
+}
+
+/* =====================================================
+   Pie Slice
+   One option. Its height is its share: --pie-share (0-100, set inline)
+   is the flex-grow factor on a zero basis, so the slices divide the
+   pie's height in exactly the ratio of their shares. The host app
+   updates --pie-share and the percentage text together as a divider
+   is dragged.
+
+   Three equal columns: details, bar, control column. The colour comes
+   from a --colour-n modifier, which sets --pie-slice-colour for the bar
+   and the label chip's colour key at once.
+   ===================================================== */
+
+.pie-slice {
+  flex: var(--pie-share, 1) 1 0;
+  min-height: 0;
+  display: flex;
+  gap: var(--pie-column-gap);
+}
+
+/* Slice colours, in order. Four for now - add a modifier per extra
+   option as the palette for longer lists is decided. */
+.pie-slice--colour-1 {
+  --pie-slice-colour: var(--blu-50);
+}
+.pie-slice--colour-2 {
+  --pie-slice-colour: var(--yel-50);
+}
+.pie-slice--colour-3 {
+  --pie-slice-colour: var(--red-50);
+}
+.pie-slice--colour-4 {
+  --pie-slice-colour: var(--grn-50);
+}
+
+/* The two columns that hold a chip. Each is a size container, so the
+   chip can ask how tall its slice is (see Edge Chips below), and sits
+   at z-index 2, above .pie-divider (z-index 1): when a slice is thin
+   the chips cover the line rather than the line cutting through the
+   text. A container is its own stacking context, which is why the
+   z-index is set here and not on the chips. Neither the slice nor the
+   pie sets a z-index, so the columns and dividers compare in the same
+   stacking context. */
+.pie-slice__details,
+.pie-slice__bar {
+  container-type: size;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left column - the label chip at the left edge, centred in the
+   slice's height */
+.pie-slice__details {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding-left: var(--pie-details-inset);
+}
+
+/* Centre column - the coloured slice. It holds the percentage chip
+   (see below), centred in the slice's height. */
+.pie-slice__bar {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  background-color: var(--pie-slice-colour);
+}
+
+/* Right column - no content of its own. It holds the column's width so
+   the bar stays centred; the divider controls sit over it. */
+.pie-slice__control-column {
+  flex: 1 1 0;
+  padding-right: var(--pie-controls-inset);
+}
+
+/* =====================================================
+   Label Chip and Percentage Chip
+   The option name (with its colour key) and its share, each on a global
+   .chip (styles.css). The chip is the same grey as the arena, so when a
+   slice is thin enough for its chips to reach a divider, the chip hides
+   the line behind the text instead of the line striking through it. On
+   mobile the same chip keeps the share readable against any slice
+   colour. Only the Pie's own placement lives here.
+   ===================================================== */
+
+/* Keys the chip's swatch to the slice */
+.pie-slice__label {
+  --chip-swatch-colour: var(--pie-slice-colour);
+}
+
+/* The percentage chip lives in the bar in the markup, so there is only
+   one copy of the number to update. It sits at the bar's left edge,
+   and on desktop is shifted left by its own width plus one column gap,
+   so its right edge lands at the right-hand end of the details column.
+   It stays in the flow, so it is centred in the slice's height the same
+   way as the label chip. The mobile block drops the shift and centres
+   it on the bar. */
+.pie-slice__percentage {
+  transform: translateX(calc(-100% - var(--pie-column-gap)));
+}
+
+/* Edge chips - on the first or last slice, a slice shorter than its
+   chip leaves the chip overhanging the arena's top or bottom border,
+   half on the white page. There it gets a 1px border in the arena's
+   border colour, so it reads as part of the arena.
+
+   The query is on the chip's column (a size container), whose height
+   is the slice's. 2rem is the chip's height at full size (16px text on
+   a 24px line, plus 4px padding top and bottom); on smaller screens the
+   chip is down to 28px, so the border can show a few px early.
+
+   An inset shadow rather than a border, so the chip doesn't grow by
+   2px when it appears. */
+@container (height < 2rem) {
+  .pie-slice:first-child .chip,
+  .pie-slice:last-child .chip {
+    box-shadow: inset 0 0 0 1px var(--border-primary);
+  }
+}
+
+/* =====================================================
+   Pie Divider
+   The 1px line between two slices, and the control for resizing them:
+   dragging the grab handle moves the line, growing one slice and
+   shrinking the other by the same amount. The lock fixes the line in
+   place.
+
+   The divider takes 1px of height and nothing else - its controls are
+   40px tall but sit on a zero-height row, centred on the line and
+   overhanging the slices either side, so they never change the slices'
+   proportions. position + z-index keeps them above the slice that
+   follows in the markup.
+
+   States (applied by the host app):
+     .pie-divider--locked     - lock on: the line can't be dragged. Pair
+                                with aria-pressed="true" and
+                                .icon-btn-lock--locked on the lock, and
+                                aria-disabled="true" on the grab handle
+     .icon-btn-grab--dragging - on the grab handle for the length of a drag
+   ===================================================== */
+
+.pie-divider {
+  position: relative;
+  z-index: 1;
+  height: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: var(--border-primary);
+}
+
+/* Spans the right-hand column's content exactly: one third of the row
+   after the two insets and the two column gaps, held in from the right
+   by the controls inset */
+.pie-divider__controls {
+  position: relative;
+  width: calc(
+    (100% - var(--pie-details-inset) - var(--pie-controls-inset) - 2 * var(--pie-column-gap)) / 3
+  );
+  margin-right: var(--pie-controls-inset);
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Lock - centred in the right-hand column, on the line */
+.pie-divider__lock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Locked divider - the handle stays visible but can't be grabbed.
+   No design for this state yet beyond the lock icon itself, so the only
+   change is the cursor. */
+.pie-divider--locked .pie-divider__grab {
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   Mobile
+   The spacing is retuned by overriding its variables, not the rules
+   that use them, the same way the Bingo board does. Three changes:
+
+   - The content insets tighten. The desktop inset would leave three
+     columns of under 50px on a phone, so --pie-details-inset drops to
+     12px to 16px on the left and --pie-controls-inset to 8px to 24px on
+     the right, both fluid over 375px to 960px wide like the
+     --padding-inline-* scale.
+   - The percentage chip moves from the left column to the centre of
+     the bar, and a long name wraps inside its label chip rather than
+     running into the bar, since the left column is narrow on a phone.
+   - The lock leaves the centre of the right column and sits beside the
+     grab handle, 4px apart, both flush with the right inset.
+
+   The column gap carries on down its fluid range (16px at 375px), and
+   chip text follows --p-size-regular (14px at 375px).
+   ===================================================== */
+
+@media (max-width: 767px) {
+  .pie {
+    --pie-details-inset: var(--padding-inline-rg); /* 12px to 16px */
+    --pie-controls-inset: clamp(0.5rem, -0.141rem + 2.735vw, 1.5rem); /* 8px to 24px */
+  }
+
+  .pie-slice__label {
+    white-space: normal;
+  }
+
+  /* Onto the bar, centred */
+  .pie-slice__bar {
+    justify-content: center;
+  }
+
+  .pie-slice__percentage {
+    transform: none;
+  }
+
+  /* Controls shrink to the two buttons, still at the right inset,
+     instead of spanning the right column */
+  .pie-divider__controls {
+    width: auto;
+    gap: var(--size-4);
+  }
+
+  .pie-divider__lock {
+    position: static;
+    transform: none;
+  }
+}
+
+/* ===== End of PIE element styles ===== */

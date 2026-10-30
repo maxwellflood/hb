@@ -37,6 +37,16 @@
    at the foot.
    ===================================================== */
 
+/* The arena normally clips its content (overflow: hidden). Not around
+   a Pie: a chip is centred on its slice, so on a thin first or last
+   slice half of it sits outside the arena, over its border, in the page
+   padding above or below. The same goes for a grab handle on a divider
+   pushed right to the top or bottom. The pie clips itself to the
+   arena's rounded corners instead (see the clip-path below). */
+.answer-arena:has(> .pie) {
+  overflow: visible;
+}
+
 /* .answer-arena centres a single child by default (see styles.css) -
    align-self: stretch fills it instead, the same way .dropper does.
 
@@ -63,6 +73,53 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* Clip the pie to the arena's rounded corners, but not above or below.
+   With the arena no longer clipping (see above), a divider dragged
+   close to the top or bottom would run past the curve of the corners.
+   This polygon is the arena's rounded rectangle (each corner drawn as
+   four straight segments, close enough at 12px), plus a strip
+   --pie-overhang tall above and below, between the corners, so the
+   chips can still hang over the border.
+
+   --pie-corner is the arena's inner corner radius: --radius-m less its
+   1px border. The factors are 1 - cos of 22.5, 45 and 67.5 degrees. */
+.pie {
+  --pie-corner: calc(var(--radius-m) - 1px);
+  --pie-overhang: var(--size-32);
+  clip-path: polygon(
+    /* top strip, left to right */
+    var(--pie-corner) calc(0% - var(--pie-overhang)),
+    calc(100% - var(--pie-corner)) calc(0% - var(--pie-overhang)),
+    calc(100% - var(--pie-corner)) 0%,
+    /* top-right corner */
+    calc(100% - var(--pie-corner) * 0.6173) calc(var(--pie-corner) * 0.0761),
+    calc(100% - var(--pie-corner) * 0.2929) calc(var(--pie-corner) * 0.2929),
+    calc(100% - var(--pie-corner) * 0.0761) calc(var(--pie-corner) * 0.6173),
+    100% var(--pie-corner),
+    /* bottom-right corner */
+    100% calc(100% - var(--pie-corner)),
+    calc(100% - var(--pie-corner) * 0.0761) calc(100% - var(--pie-corner) * 0.6173),
+    calc(100% - var(--pie-corner) * 0.2929) calc(100% - var(--pie-corner) * 0.2929),
+    calc(100% - var(--pie-corner) * 0.6173) calc(100% - var(--pie-corner) * 0.0761),
+    calc(100% - var(--pie-corner)) 100%,
+    /* bottom strip, right to left */
+    calc(100% - var(--pie-corner)) calc(100% + var(--pie-overhang)),
+    var(--pie-corner) calc(100% + var(--pie-overhang)),
+    var(--pie-corner) 100%,
+    /* bottom-left corner */
+    calc(var(--pie-corner) * 0.6173) calc(100% - var(--pie-corner) * 0.0761),
+    calc(var(--pie-corner) * 0.2929) calc(100% - var(--pie-corner) * 0.2929),
+    calc(var(--pie-corner) * 0.0761) calc(100% - var(--pie-corner) * 0.6173),
+    0% calc(100% - var(--pie-corner)),
+    /* top-left corner */
+    0% var(--pie-corner),
+    calc(var(--pie-corner) * 0.0761) calc(var(--pie-corner) * 0.6173),
+    calc(var(--pie-corner) * 0.2929) calc(var(--pie-corner) * 0.2929),
+    calc(var(--pie-corner) * 0.6173) calc(var(--pie-corner) * 0.0761),
+    var(--pie-corner) 0%
+  );
 }
 
 /* =====================================================
@@ -100,6 +157,21 @@
   --pie-slice-colour: var(--grn-50);
 }
 
+/* The two columns that hold a chip. Each is a size container, so the
+   chip can ask how tall its slice is (see Edge Chips below), and sits
+   at z-index 2, above .pie-divider (z-index 1): when a slice is thin
+   the chips cover the line rather than the line cutting through the
+   text. A container is its own stacking context, which is why the
+   z-index is set here and not on the chips. Neither the slice nor the
+   pie sets a z-index, so the columns and dividers compare in the same
+   stacking context. */
+.pie-slice__details,
+.pie-slice__bar {
+  container-type: size;
+  position: relative;
+  z-index: 2;
+}
+
 /* Left column - the label chip at the left edge, centred in the
    slice's height */
 .pie-slice__details {
@@ -111,14 +183,12 @@
 }
 
 /* Centre column - the coloured slice. It holds the percentage chip
-   (see below) and is its positioning parent. */
+   (see below), centred in the slice's height. */
 .pie-slice__bar {
-  position: relative;
   flex: 1 1 0;
   min-width: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
   background-color: var(--pie-slice-colour);
 }
 
@@ -137,18 +207,7 @@
    the line behind the text instead of the line striking through it. On
    mobile the same chip keeps the share readable against any slice
    colour. Only the Pie's own placement lives here.
-
-   z-index: 2 puts the chips above .pie-divider (z-index: 1). Neither the
-   slice nor the pie sets a z-index, so both compare in the same stacking
-   context. Raise this if the divider's ever goes up. .pie-slice__bar is
-   position: relative with no z-index, so it doesn't make one either.
    ===================================================== */
-
-.pie-slice__label,
-.pie-slice__percentage {
-  position: relative;
-  z-index: 2;
-}
 
 /* Keys the chip's swatch to the slice */
 .pie-slice__label {
@@ -156,15 +215,33 @@
 }
 
 /* The percentage chip lives in the bar in the markup, so there is only
-   one copy of the number to update. On desktop it is lifted out to the
-   left of the bar, its right edge one column gap away - the right-hand
-   end of the details column. The mobile block puts it back in the flow,
-   centred on the bar. */
+   one copy of the number to update. It sits at the bar's left edge,
+   and on desktop is shifted left by its own width plus one column gap,
+   so its right edge lands at the right-hand end of the details column.
+   It stays in the flow, so it is centred in the slice's height the same
+   way as the label chip. The mobile block drops the shift and centres
+   it on the bar. */
 .pie-slice__percentage {
-  position: absolute;
-  top: 50%;
-  right: calc(100% + var(--pie-column-gap));
-  transform: translateY(-50%);
+  transform: translateX(calc(-100% - var(--pie-column-gap)));
+}
+
+/* Edge chips - on the first or last slice, a slice shorter than its
+   chip leaves the chip overhanging the arena's top or bottom border,
+   half on the white page. There it gets a 1px border in the arena's
+   border colour, so it reads as part of the arena.
+
+   The query is on the chip's column (a size container), whose height
+   is the slice's. 2rem is the chip's height at full size (16px text on
+   a 24px line, plus 4px padding top and bottom); on smaller screens the
+   chip is down to 28px, so the border can show a few px early.
+
+   An inset shadow rather than a border, so the chip doesn't grow by
+   2px when it appears. */
+@container (height < 2rem) {
+  .pie-slice:first-child .chip,
+  .pie-slice:last-child .chip {
+    box-shadow: inset 0 0 0 1px var(--border-primary);
+  }
 }
 
 /* =====================================================
@@ -258,11 +335,12 @@
     white-space: normal;
   }
 
-  /* Back in the flow - the bar centres it */
+  /* Onto the bar, centred */
+  .pie-slice__bar {
+    justify-content: center;
+  }
+
   .pie-slice__percentage {
-    position: relative;
-    top: auto;
-    right: auto;
     transform: none;
   }
 
