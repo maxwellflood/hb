@@ -8,7 +8,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 
 | File | Owns |
 |---|---|
-| `styles/styles.css` | Reset, tokens (variables), typography, buttons, icons, utility classes, layout primitives (`header`, `main`, `nav`, `.answer-arena`) |
+| `styles/styles.css` | Reset, tokens (variables), typography, buttons, icons, chips, utility classes, layout primitives (`header`, `main`, `nav`, `.answer-arena`) |
 | `styles/input-styles.css` | Page layout (`.page`, `.content-wrapper`, `.content`), question styles, form inputs, grid buttons, validation messages |
 | `styles/love-button-styles.css` | Love button component - page layout overrides, circle, rings, fill, adjustment buttons |
 | `styles/tinderland-styles.css` | Tinderland card (variants + swipe states) and the swipe-specific Tosser furniture |
@@ -17,6 +17,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/ai-styles.css` | AI conversation - chat dock, input, message thread, platform avatar |
 | `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
 | `styles/expand-image-styles.css` | Expand Image - thumbnail, expand button, lightbox |
+| `styles/pie-styles.css` | Pie - slices, dividers |
 
 ---
 
@@ -437,6 +438,8 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 | `.icon-btn-brand-secondary` | Light blue variant |
 | `.icon-btn-disabled` | Disabled variant |
 | `.btn-nav` | Nav-specific: `width: auto`, wider padding |
+| `.icon-btn-lock` | Lock toggle: 40px, 1px border, 8px corners, grey icon. `.icon-btn-lock--locked` turns the icon black (pair with `aria-pressed="true"`) |
+| `.icon-btn-grab` | Drag handle: 40px, 1px border, 8px corners, white, `cursor: grab`. `.icon-btn-grab--dragging` holds the pressed look for a whole drag |
 
 ---
 
@@ -471,6 +474,7 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 | `scripts/ai-scripts.js` | `ai.html` |
 | `scripts/insert-word.js` | `story-question.html` (demo only - index.html shows the states statically) |
 | *(inline `<script>`)* | `expand-image.html` - `showModal()` / `hideModal()` toggle the lightbox |
+| *(inline `<script>`)* | `pie-demo.html` - throwaway drag demo; `pie.html` has no script |
 
 ---
 
@@ -502,7 +506,7 @@ Swipe card for the Tinderland / Tosser question type. Defined in `tinderland-sty
 
 Shared layout primitive (`styles.css`) for any question type that needs a bounded
 play area rather than a stacked form. Fills the space below the question and anchors
-its furniture to its own edges. Used by the Tosser, Bingo, Dropper and Dragger question types.
+its furniture to its own edges. Used by the Tosser, Bingo, Dropper, Dragger and Pie question types.
 
 ```html
 <div class="answer-arena-section box-A">
@@ -515,6 +519,7 @@ its furniture to its own edges. Used by the Tosser, Bingo, Dropper and Dragger q
 ```
 
 - `.answer-arena-section` - `flex: 1` wrapper, direct child of `<main>`; provides the page gutters
+  at the sides and bottom. No top padding - the question's `.content-wrapper` above supplies the gap
 - `.answer-arena` - grey surface, `position: relative`, centres its content
 - `.answer-arena--board` - opt-in modifier making the arena a `container-type: size`
   query container, so its contents can size themselves against the arena in `cqw` /
@@ -945,6 +950,124 @@ not an answer option, so it has no selected state.
 **Behaviour:** a short inline `<script>` on the page. `showModal()` adds
 `.image-lightbox--open` and focuses the close button; `hideModal()` removes it and
 returns focus to the expand button. Escape also closes.
+
+## Pie
+
+Share-of-100% question type. The options are slices of one stacked bar; the
+respondent drags the dividers between slices up or down to resize them. Defined in
+`pie-styles.css`, inside an `.answer-arena`.
+
+```html
+<div class="answer-arena-section box-A">
+  <div class="answer-arena">
+    <div class="pie" role="group" aria-label="[Question text]">
+
+      <div class="pie-slice pie-slice--colour-1" data-option="1" style="--pie-share: 25">
+        <div class="pie-slice__details">
+          <div class="chip pie-slice__label">
+            <span class="chip__swatch" aria-hidden="true"></span>
+            <span class="pie-slice__name">BBC</span>
+          </div>
+        </div>
+        <div class="pie-slice__bar">
+          <span class="chip pie-slice__percentage">25%</span>
+        </div>
+        <div class="pie-slice__control-column"></div>
+      </div>
+
+      <!-- one divider between each pair of slices -->
+      <div class="pie-divider">
+        <div class="pie-divider__controls">
+          <button class="icon-btn icon-btn-lock pie-divider__lock" type="button"
+            aria-pressed="false" aria-label="Lock the divider between BBC and ITV">…</button>
+          <div class="icon-btn icon-btn-grab pie-divider__grab" role="slider" tabindex="0"
+            aria-orientation="vertical" aria-label="Divider between BBC and ITV"
+            aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"
+            aria-valuetext="BBC 25%, ITV 25%">…</div>
+        </div>
+      </div>
+
+      <!-- next slice … -->
+    </div>
+  </div>
+</div>
+```
+
+- `.pie` - fills the arena edge to edge, so the dividers run to the arena's border. The
+  content is held in from the sides by `--pie-details-inset` / `--pie-controls-inset`
+  (fluid, see below). No rules of its own: the arena's border is its top and bottom edge
+- `.pie-slice` - one option. `--pie-share` (0-100, inline) is its `flex-grow` on a
+  zero basis, so slice heights are exactly proportional to their shares
+- `.pie-slice--colour-1` … `--colour-4` - blue, yellow, red, green. Each sets
+  `--pie-slice-colour` for the bar and the swatch. Add one per extra option
+- `.pie-slice__details` / `__bar` / `__control-column` - three equal columns,
+  `--pie-column-gap` apart (16px at 375px wide → 24px at 960px). The control column is empty; it keeps the bar centred
+  and the divider controls sit over it
+- `.pie-slice__label` / `.pie-slice__percentage` - the label chip (swatch + name) and
+  percentage chip, both global `.chip`s (see Chip). The label chip sits at the left of
+  the details column and keys its swatch to the slice by setting `--chip-swatch-colour`.
+  The percentage chip is inside the bar in the markup (one copy of the number), and on
+  desktop is positioned out to the right-hand end of the details column. `z-index: 2`,
+  above the dividers (`1`), so when a slice is thin the chip covers the line rather than
+  the line cutting through the text
+- `.pie-divider` - the 1px line between two slices. n slices have n - 1 dividers,
+  none at the top or bottom edge. Its controls sit on a zero-height row centred on
+  the line, so they never change the slices' proportions
+- `.pie-divider__controls` - spans the right-hand column exactly; the lock is centred
+  in it, the grab handle is flush right
+- `data-option` - the option index, 1 to n, top to bottom. Each option's share is the
+  value logged to the back end; the shares always total 100
+
+**States** (no JavaScript - the host app applies these):
+
+| Modifier | Meaning |
+|---|---|
+| `.icon-btn-grab--dragging` | On the grab handle for the length of a drag |
+| `.pie-divider--locked` | Divider locked: it can't be dragged. Pair with `.icon-btn-lock--locked` + `aria-pressed="true"` on the lock and `aria-disabled="true"` on the grab handle |
+
+As a divider moves, the host app updates `--pie-share` and the percentage text on the
+two slices either side, and `aria-valuenow` / `aria-valuetext` on the grab handle.
+
+**Mobile** (below 768px) - same markup, retuned through the Pie's spacing variables
+in the same way as the Bingo board:
+
+| Variable | Desktop | Mobile |
+|---|---|---|
+| `--pie-details-inset` | 40px at 768px wide → 80px at 960px, left of the label chip | `--padding-inline-rg` (12 → 16px) |
+| `--pie-controls-inset` | the same as `--pie-details-inset`, right of the controls | 8px at 375px wide → 24px at 960px (about 19px at 767px) |
+| `--pie-column-gap` | `--padding-inline-lg` (24px from 960px wide) | the same token, 16px at 375px |
+
+The percentage chip drops back into the bar and is centred on
+it. A long name wraps inside its label chip.
+The lock leaves the centre of the right column and sits beside the grab handle, 4px
+apart.
+
+**Demo:** `pie-demo.html` is a throwaway copy of `pie.html` with an inline script at
+the foot of the page, so the drag can be tried. `pie.html` itself has no script.
+
+---
+
+## Chip
+
+Small grey label for text that sits on a busy or coloured surface. Defined in
+`styles.css`. First used by the Pie question type.
+
+```html
+<span class="chip">25%</span>
+
+<!-- With a colour key -->
+<span class="chip" style="--chip-swatch-colour: var(--blu-50)">
+  <span class="chip__swatch" aria-hidden="true"></span>
+  BBC
+</span>
+```
+
+- `.chip` - `--surface-secondary`, 4px padding, 4px corners, `--p-size-regular` text,
+  sized to its content and kept to one line (`white-space: nowrap`; override where a
+  long label should wrap, as the Pie does on mobile)
+- `.chip__swatch` - optional 12px dot before the text, `--padding-inline-xs` (4px at
+  375px wide → 8px at 960px) from it. Colour from `--chip-swatch-colour`, set on the
+  chip or any ancestor; falls back to the text colour
 
 ---
 

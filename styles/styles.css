@@ -977,6 +977,79 @@ a {
   background-color: var(--surface-disabled);
 }
 
+/* Icon Button Lock
+   A toggle that pins something in place - first used by the Pie question
+   type, where it stops a divider between two slices from moving. 40px
+   square with a 1px border and 8px corners; padding: 0 because the border
+   already eats into the 40px and the 24px icon is centred by flex.
+
+   The icon is drawn in currentColor, so the state only ever changes colour:
+     (default)              - unlocked: grey surface, grey icon
+     :hover                 - white surface, darker border
+     .icon-btn-lock--locked - locked: icon turns black. Pair with aria-pressed="true" */
+
+.icon-btn-lock {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+  padding: 0;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  color: var(--text-tertiary);
+}
+/* :active repeats :hover - there is no pressed look in the design, and it
+   overrides the dark background the base .icon-btn:active would apply */
+.icon-btn-lock:hover,
+.icon-btn-lock:active {
+  background-color: var(--surface-primary);
+  border-color: var(--border-secondary);
+}
+.icon-btn-lock--locked {
+  color: var(--black);
+}
+
+/* Icon Button Grab
+   A drag handle - press and drag to move whatever it is attached to. First
+   used by the Pie question type, where dragging it up or down resizes the
+   two slices either side of a divider. Same 40px / 1px border / 8px corner
+   frame as .icon-btn-lock, on a white surface.
+
+   States:
+     (default)                - white surface, light border, dark grey icon
+     :hover                   - darker border, black icon
+     :active / --dragging     - being dragged: near-black border, black icon.
+                                The modifier holds the look for the length of
+                                the drag, since the pointer can leave the
+                                button while it is still held (Figma: State=Active) */
+
+.icon-btn-grab {
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
+  padding: 0;
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  color: var(--grey-8);
+  cursor: grab;
+  touch-action: none; /* stop a touch drag from scrolling the page instead */
+}
+.icon-btn-grab:hover {
+  background-color: var(--surface-primary);
+  border-color: var(--border-secondary);
+  color: var(--black);
+}
+.icon-btn-grab:active,
+.icon-btn-grab--dragging,
+.icon-btn-grab--dragging:hover {
+  background-color: var(--surface-primary);
+  border-color: var(--border-highlighted);
+  color: var(--black);
+  cursor: grabbing;
+}
+
 /* --- Button Classes --- */
 
 /* Base Button */
@@ -1552,7 +1625,9 @@ section {
    ===================================================== */
 
 /* Section wrapper - fills remaining flex space in <main> below the Q section.
-   Provides the page gutters around the arena itself. */
+   Provides the page gutters around the arena itself. No top padding: the
+   question's .content-wrapper above already supplies the gap, the same way
+   .content-wrapper--answer drops its top padding. */
 /* Fit-to-viewport <main>.
 
    The default <main> is min-height: it fills the viewport and then grows past
@@ -1573,7 +1648,7 @@ section {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  padding: var(--padding-block-rg) var(--space-inline-main) var(--space-block-main);
+  padding: 0 var(--space-inline-main) var(--space-block-main);
 }
 
 /* Arena surface - grey panel, relative positioned to anchor all absolute children */
@@ -1902,6 +1977,42 @@ section {
   letter-spacing: -0.02em;
   color: var(--text-disabled);
   white-space: nowrap;
+}
+
+/* =====================================================
+   Chip
+   A small grey label: 4px padding, 4px corners, regular body text,
+   sized to its content and kept to one line. Sits on top of a busy or
+   coloured surface - a Pie slice, a divider line - so the text stays
+   readable over it. First used by the Pie question type, for the option
+   names and their percentages.
+
+   Optional colour key:
+     .chip__swatch - 12px dot before the text. Its colour comes from
+                     --chip-swatch-colour, set by whatever the chip is
+                     keyed to (the Pie sets it to the slice colour)
+   ===================================================== */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--padding-inline-xs); /* 4px at 375px wide → 8px from 960px */
+  padding: var(--size-4);
+  border-radius: var(--radius-xs);
+  background-color: var(--surface-secondary);
+  font-size: var(--p-size-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* flex-shrink: 0 keeps the dot round when a chip's text wraps */
+.chip__swatch {
+  flex-shrink: 0;
+  width: var(--size-12);
+  height: var(--size-12);
+  border-radius: 50%;
+  background-color: var(--chip-swatch-colour, currentColor);
 }
 
 /* Responsive: screens smaller than tablet */
