@@ -63,6 +63,8 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `expand-image.html`                    | Expand Image - stimulus image with expand button and lightbox      |
 | `pie.html`                             | Pie - share 100% between options by dragging dividers (static)     |
 | `pie-demo.html`                        | Pie - throwaway copy of pie.html with a working drag (inline JS)   |
+| `bubble.html`                          | Bubble - words float up a blue arena, tap to choose (static)       |
+| `bubble-demo.html`                     | Bubble - throwaway copy of bubble.html with the rise and selection |
 | `styles/styles.css`                    | Global styles, reset, typography, utility classes                  |
 | `styles/input-styles.css`              | Styles specific to input components                                |
 | `styles/love-button-styles.css`        | Styles specific to the love button component                       |
@@ -73,6 +75,7 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `styles/insert-word-styles.css`        | Styles for the Insert Word trigger and word menu                   |
 | `styles/expand-image-styles.css`       | Styles for the Expand Image thumbnail, button and lightbox         |
 | `styles/pie-styles.css`                | Styles for the Pie slices and dividers                             |
+| `styles/bubble-styles.css`             | Styles for the Bubble field and bubble buttons                     |
 | `styles/switch-nav-styles.css`         | Styles for the Switch Nav track and switch buttons                 |
 | `styles/hb-styles-audited.css`         | Developers' stylesheet, annotated against ours (not linked by pages) |
 | `scripts/grids-scripts.js`             | Scripts for grid demos                                             |

@@ -1,0 +1,116 @@
+/* =====================================================
+   Bubble - Specific Styles
+   Styles for the Bubble question type: answer words float up the arena
+   from bottom to top, and the respondent taps or clicks the ones they
+   want. Any number can be chosen. Each word rises once. A chosen word
+   is hidden as soon as it is tapped, so a choice can't be undone.
+
+   Everything shared with other question types is reused, not
+   redefined here:
+     .answer-arena-section / .answer-arena  - the arena (styles.css)
+     .answer-arena--brand                   - its light blue surface (styles.css)
+     .content-wrapper / .content            - page gutters + column (styles.css)
+
+   Structure:
+     .bubble-field             - fills the arena; positions the bubbles
+       .bubble-btn (x n)       - one answer word, a toggle button
+
+   Position:
+     Each bubble is placed by two unitless custom properties, set inline:
+       --bubble-x  0-100  across the arena, left to right
+       --bubble-y  0-100  down the arena, top to bottom
+     The bubble is offset by the same percentage of its own size, so 0
+     puts it flush with the left (or top) edge and 100 flush with the
+     right (or bottom) edge. However long the word, a bubble between 0 and
+     100 can never hang off the side of the arena. A value outside that
+     range puts it part-way out, as with a bubble leaving the top.
+
+     The static positions are a snapshot of the motion. In the live
+     question the host app animates each bubble from below the bottom edge
+     to above the top edge; --bubble-x is its lane on the way up.
+     bubble-demo.html has a throwaway version of the motion.
+
+   States:
+     :hover                 - light blue fill
+     :focus-visible         - brand outline
+     :active                - pressed: the blue hit look, while held
+     .bubble-btn--selected  - chosen: the blue hit look (brand blue fill,
+                              light text). Pair with aria-checked="true"
+     .bubble-btn--popped    - hidden once chosen. Add with --selected on
+                              tap; the bubble disappears immediately
+   ===================================================== */
+
+/* Bubble field - the layer the bubbles are positioned in. Covers the
+   whole arena, so --bubble-x / --bubble-y are percentages of the arena.
+   The arena clips its overflow, so bubbles outside it are hidden. */
+.bubble-field {
+  position: absolute;
+  inset: 0;
+}
+
+/* Bubble - one answer word.
+   48px pill with a light brand border, set in the answer text style
+   (--answer-text-*, Dorian SemiBold), the same as the word on a Bingo or
+   Tosser card. Sized to its word and kept to one line. */
+.bubble-btn {
+  --bubble-x: 50;
+  --bubble-y: 50;
+
+  position: absolute;
+  left: calc(var(--bubble-x) * 1%);
+  top: calc(var(--bubble-y) * 1%);
+  transform: translate(
+    calc(var(--bubble-x) * -1%),
+    calc(var(--bubble-y) * -1%)
+  );
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-48);
+  padding: 0 var(--size-20);
+  background-color: var(--surface-primary);
+  /* --blu-30: Figma's "border-secondary-brand", not yet a semantic token */
+  border: 1px solid var(--blu-30);
+  border-radius: var(--radius-xl);
+
+  font-family: var(--answer-text-family);
+  font-size: var(--answer-text-size);
+  font-weight: var(--answer-text-weight);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Hover - light blue fill, the same tint as the arena */
+.bubble-btn:hover {
+  background-color: var(--surface-brand-muted);
+}
+
+/* Keyboard focus - brand outline, clear of the border */
+.bubble-btn:focus-visible {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: 2px;
+}
+
+/* Hit look - pressed (:active) or chosen (--selected). Brand blue fill,
+   light text; the border stays the same light blue. Hover does not
+   change a chosen bubble. */
+.bubble-btn:active,
+.bubble-btn--selected,
+.bubble-btn--selected:hover {
+  background-color: var(--surface-brand-strong);
+  color: var(--text-primary-inverted);
+}
+
+/* Popped - the chosen bubble is hidden straight away, no transition.
+   visibility rather than display, so it also leaves the tab order and the
+   accessibility tree without disturbing a rise animation in progress. */
+.bubble-btn--popped {
+  visibility: hidden;
+}

@@ -157,7 +157,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--size-8);
-  background-color: var(--surface-primary);
+  background-color: var(--surface-secondary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-s);
   cursor: pointer;
@@ -213,17 +213,27 @@
   user-select: none;
 }
 
-/* Zone label - Inter regular, matches .tinderland-card__label */
+/* Zone label - Inter regular in --text-secondary, so it reads as quieter
+   than the answer on the card (see .bingo-card__label) */
 .bingo-target__label {
   font-family: "Inter", sans-serif;
   font-size: var(--p-size-regular);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   text-align: center;
   pointer-events: none;
   user-select: none;
+  transition: color 0.15s ease;
+}
+
+/* Zone label on hover / keyboard focus / drop-active - darkens to
+   --text-primary along with the zone's brand border and fill */
+.bingo-target:hover .bingo-target__label,
+.bingo-target:focus-visible .bingo-target__label,
+.bingo-target--drop-active .bingo-target__label {
+  color: var(--text-primary);
 }
 
 /* =====================================================
@@ -300,13 +310,15 @@
 }
 
 /* Text variant label - the card's content is a word rather than a picture.
-   Identical to .tinderland-card__label, so a text card reads the same here as
-   it does on a Tosser card. No centring rule of its own: .bingo-card is already
-   a centred flex column, so a lone label sits in the middle on both axes. */
+   Set in the answer text style (--answer-text-*, Dorian SemiBold) so the
+   answer stands apart from the zone labels. Identical to
+   .tinderland-card__label, so a text card reads the same here as it does on
+   a Tosser card. No centring rule of its own: .bingo-card is already a
+   centred flex column, so a lone label sits in the middle on both axes. */
 .bingo-card__label {
-  font-family: "Inter", sans-serif;
-  font-size: var(--p-size-regular);
-  font-weight: 400;
+  font-family: var(--answer-text-family);
+  font-size: var(--answer-text-size);
+  font-weight: var(--answer-text-weight);
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -332,8 +344,9 @@
     --bingo-cell-inset: clamp(var(--size-4), 3cqmin, var(--size-12));
   }
 
-  .bingo-target__label,
-  .bingo-card__label {
+  /* Zone labels only - the card keeps the answer text size, which is
+     already at its 16px floor at phone width */
+  .bingo-target__label {
     font-size: var(--p-size-small);
   }
 }

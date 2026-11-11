@@ -130,10 +130,12 @@
   padding: var(--size-4);
 }
 
+/* Text variant label - set in the answer text style (--answer-text-*,
+   Dorian SemiBold) so the answer stands apart from the zone labels */
 .dropper-card__label {
-  font-family: "Inter", sans-serif;
-  font-size: var(--p-size-regular);
-  font-weight: 400;
+  font-family: var(--answer-text-family);
+  font-size: var(--answer-text-size);
+  font-weight: var(--answer-text-weight);
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -323,8 +325,9 @@
   background-color: var(--surface-brand-subtle);
 }
 
-/* Zone label. Centred in the vertical columns; the horizontal rows are
-   left-aligned by the zone's own flex layout */
+/* Zone label - Inter regular in --text-secondary, so it reads as quieter
+   than the answer on the card. Centred in the vertical columns; the
+   horizontal rows are left-aligned by the zone's own flex layout */
 .horizontal-answer-drop-area__label,
 .vertical-answer-drop-area__label {
   font-family: "Inter", sans-serif;
@@ -332,11 +335,23 @@
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   pointer-events: none;
   user-select: none;
+  transition: color 0.15s ease;
 }
 
 .vertical-answer-drop-area__label {
   text-align: center;
+}
+
+/* Zone label on hover / keyboard focus / drop-active - darkens to
+   --text-primary along with the zone's brand border and fill */
+.horizontal-answer-drop-area:hover .horizontal-answer-drop-area__label,
+.horizontal-answer-drop-area:focus-visible .horizontal-answer-drop-area__label,
+.horizontal-answer-drop-area--drop-active .horizontal-answer-drop-area__label,
+.vertical-answer-drop-area:hover .vertical-answer-drop-area__label,
+.vertical-answer-drop-area:focus-visible .vertical-answer-drop-area__label,
+.vertical-answer-drop-area--drop-active .vertical-answer-drop-area__label {
+  color: var(--text-primary);
 }

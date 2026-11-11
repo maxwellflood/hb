@@ -18,6 +18,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
 | `styles/expand-image-styles.css` | Expand Image - thumbnail, expand button, lightbox |
 | `styles/pie-styles.css` | Pie - slices, dividers |
+| `styles/bubble-styles.css` | Bubble - bubble field, bubble buttons |
 | `styles/switch-nav-styles.css` | Switch Nav - grey track, switch buttons (icon + text, icon only) |
 
 ---
@@ -179,8 +180,9 @@ for converting gaps that should flex with the screen.
 |---|---|---|---|---|
 | `.display` | Dorian (variable) | 700 | `--display-size` (36px → 52px) | `--line-height-tight` (via `h1`) |
 | `h1` / `h2` | Dorian (variable) | 700 | `--h1-size` (28 → 40px), `--h2-size` (22 → 32px) | `--line-height-tight` |
-| `h3` / `h4` | Dorian (variable) | 700 | `--h3-size` (20 → 28px), `--h4-size` (18 → 22px) | `--line-height-snug` |
+| `h3` / `h4` | Dorian (variable) | 700 | `--h3-size` (22 → 24px), `--h4-size` (18 → 20px) | `--line-height-snug` |
 | `.question` | Dorian | 700 | `--p-size-large` (16 → 18px), `letter-spacing: -0.02em` | `--line-height-snug` |
+| answer text | Dorian | 600 | `--answer-text-size` (16 → 18px), `letter-spacing: -0.02em` | 1.4 |
 | `.form-label` | Dorian | 700 | `--p-size-regular` (14 → 16px) | 1.4 |
 | `p` | Inter | 400 | `--p-size-regular` (14 → 16px) | `--line-height-body` |
 | inputs | Inter | 400 | 16px, **fixed** - below 16px iOS Safari zooms the page on focus | 1.4 |
@@ -204,7 +206,15 @@ gets proportionally tighter leading as it scales:
 
 `--heading-gap-*` (space below headings) points at the `--padding-block-*` scale.
 
-**Component text** follows the same tokens: card, zone and grid-button labels, Story
+**Answer text** is the answer on a draggable or swipe card - `.bingo-card__label`,
+`.dropper-card__label`, `.tinderland-card__label`. Figma text style "Text/Lg Semi Bold
+Dorian", as three tokens in `:root`: `--answer-text-family`, `--answer-text-size`
+(aliases `--p-size-large`) and `--answer-text-weight` (600). The zone labels around
+the card stay Inter Regular, `--p-size-regular`, in `--text-secondary`, so the answer
+reads as the stronger of the two. A zone label darkens to `--text-primary` on hover,
+keyboard focus and `--drop-active`.
+
+**Component text** follows the same tokens: zone and grid-button labels, Story
 Question sentences and `.btn` use `--p-size-regular`; validation messages, tooltips,
 `.btn-sm`, the Insert Word pill and menu use `--p-size-small`; `.btn-lg` and the love
 button counter use `--p-size-large`. Text inputs stay at a fixed 16px.
@@ -498,6 +508,7 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 | `scripts/insert-word.js` | `story-question.html` (demo only - index.html shows the states statically) |
 | *(inline `<script>`)* | `expand-image.html` - `showModal()` / `hideModal()` toggle the lightbox |
 | *(inline `<script>`)* | `pie-demo.html` - throwaway drag demo; `pie.html` has no script |
+| *(inline `<style>` + `<script>`)* | `bubble-demo.html` - throwaway rise and selection demo; `bubble.html` has neither |
 
 ---
 
@@ -529,7 +540,7 @@ Swipe card for the Tinderland / Tosser question type. Defined in `tinderland-sty
 
 Shared layout primitive (`styles.css`) for any question type that needs a bounded
 play area rather than a stacked form. Fills the space below the question and anchors
-its furniture to its own edges. Used by the Tosser, Bingo, Dropper, Dragger and Pie question types.
+its furniture to its own edges. Used by the Tosser, Bingo, Dropper, Dragger, Pie and Bubble question types.
 
 ```html
 <div class="answer-arena-section box-A">
@@ -549,6 +560,8 @@ its furniture to its own edges. Used by the Tosser, Bingo, Dropper, Dragger and 
   `cqh` / `cqmin` instead of against the viewport. Used by the Bingo board, which has
   to fit whatever height is left with no scrolling. Not applied to `.answer-arena`
   itself so the Tosser arena is unaffected
+- `.answer-arena--brand` - light blue surface (`--surface-brand-muted`) in place of the
+  grey. Same border, corners and layout. Used by the Bubble question type
 - `.answer-arena__progress` - step dots, centred 16px from the top edge
 - `.answer-arena__dont-know` - Don't Know button, centred 16px from the bottom edge
 
@@ -669,8 +682,8 @@ change up.
   The `alt` text is the zone's accessible name
 - `.bingo-card` - the draggable card; drop shadow, `cursor: grab`. A centred flex
   column, so whichever content it holds sits in the middle on both axes
-- `.bingo-card__label` - text-card content, in place of `.bingo-card__img`. Identical
-  to `.tinderland-card__label`, so a text card reads the same on a Bingo board as it
+- `.bingo-card__label` - text-card content, in place of `.bingo-card__img`. Answer
+  text style (see Typography). Identical to `.tinderland-card__label`, so a text card reads the same on a Bingo board as it
   does on a Tosser card. No variant class on `.bingo-card` itself - swapping the child
   is the whole difference
 - `.bingo-card__img` - `object-fit: cover`, so any aspect ratio the client supplies
@@ -1074,6 +1087,65 @@ apart.
 
 **Demo:** `pie-demo.html` is a throwaway copy of `pie.html` with an inline script at
 the foot of the page, so the drag can be tried. `pie.html` itself has no script.
+
+---
+
+## Bubble
+
+Multi-select question type. Answer words float up a light blue arena from bottom to
+top, each rising once, and the respondent taps or clicks the ones they want. Any
+number can be chosen. A chosen word is hidden as soon as it is tapped, so a choice can't be
+undone. Defined in `bubble-styles.css`, inside an
+`.answer-arena.answer-arena--brand`.
+
+```html
+<div class="answer-arena-section box-A">
+  <div class="answer-arena answer-arena--brand">
+    <div class="bubble-field" role="group" aria-label="[Question text]">
+      <button class="bubble-btn" type="button" role="checkbox" aria-checked="false"
+        data-option="1" style="--bubble-x: 33.8; --bubble-y: -2.3">Honest</button>
+      <!-- one per word -->
+    </div>
+  </div>
+</div>
+```
+
+- `.bubble-field` - absolutely fills the arena; the layer the bubbles are positioned in
+- `.bubble-btn` - one word. 48px pill, white, 1px `--blu-30` border (Figma's
+  "border-secondary-brand", not yet a semantic token), `--radius-xl` corners, 20px side
+  padding. Answer text style (see Typography), one line, sized to its word.
+  `role="checkbox"`, as on the multi-select grid
+- `--bubble-x` / `--bubble-y` (inline, unitless 0-100) - position across and down the
+  arena. The bubble is also offset by the same percentage of its own size, so 0 is flush
+  with the left / top edge and 100 flush with the right / bottom, and a long word between
+  0 and 100 never hangs off the side. Outside that range it sits part-way out, as with a
+  bubble leaving the top
+- `data-option` - the word's index, 1 to n, in arrival order. The chosen set is the value
+  logged to the back end
+
+The page is a static snapshot of the bubbles part-way up, at the positions in the Figma
+frame. In the live question the host app moves each bubble once from below the bottom
+edge to above the top edge, using `--bubble-x` as its lane.
+
+**States** (no JavaScript - the host app applies these):
+
+| Modifier | Meaning |
+|---|---|
+| `:hover` | Light blue fill (`--surface-brand-muted`) |
+| `:focus-visible` | 2px `--border-highlighted-brand` outline, 2px offset |
+| `:active` | Pressed - the blue hit look while held (CSS only, so the static page responds) |
+| `.bubble-btn--selected` | Chosen - the hit look: `--surface-brand-strong` fill, `--text-primary-inverted` text, border unchanged. Pair with `aria-checked="true"` |
+| `.bubble-btn--popped` | Hidden once chosen - `visibility: hidden`, no transition. Added with `--selected` on tap |
+
+Two classes rather than one so the static page can show the hit look (`--selected` alone,
+on "Innovative") without hiding it.
+
+**Demo:** `bubble-demo.html` is a throwaway copy of `bubble.html`. An inline `<style>`
+adds `.bubble-field--rising`: each bubble starts at `top: 100%` and animates
+`translateY(calc(-100cqh - 100%))` once, linear over 12s, after its inline
+`--bubble-delay` (1.5s apart). The arena takes `.answer-arena--board` so `cqh` measures
+it. Reduced motion keeps the static snapshot. An inline script adds `.bubble-btn--selected`,
+`.bubble-btn--popped` and `aria-checked="true"` on click. Refresh to run it again.
 
 ---
 

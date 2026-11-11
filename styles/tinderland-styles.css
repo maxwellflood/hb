@@ -55,12 +55,13 @@
   user-select: none;
 }
 
-/* Card label - shared by both variants.
+/* Card label - shared by both variants. Set in the answer text style
+   (--answer-text-*, Dorian SemiBold).
    pointer-events: none prevents text selection on drag/swipe. */
 .tinderland-card__label {
-  font-family: "Inter", sans-serif;
-  font-size: var(--p-size-regular);
-  font-weight: 400;
+  font-family: var(--answer-text-family);
+  font-size: var(--answer-text-size);
+  font-weight: var(--answer-text-weight);
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: var(--text-primary);
