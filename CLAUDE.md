@@ -73,6 +73,7 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `styles/insert-word-styles.css`        | Styles for the Insert Word trigger and word menu                   |
 | `styles/expand-image-styles.css`       | Styles for the Expand Image thumbnail, button and lightbox         |
 | `styles/pie-styles.css`                | Styles for the Pie slices and dividers                             |
+| `styles/switch-nav-styles.css`         | Styles for the Switch Nav track and switch buttons                 |
 | `styles/hb-styles-audited.css`         | Developers' stylesheet, annotated against ours (not linked by pages) |
 | `scripts/grids-scripts.js`             | Scripts for grid demos                                             |
 | `scripts/grids-multiselect-scripts.js` | Scripts for multiselect grid demos                                 |

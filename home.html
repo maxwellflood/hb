@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Honesty Box | Home</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <!-- Grid buttons for the first question panel -->
+    <link rel="stylesheet" href="styles/input-styles.css" />
+    <link rel="stylesheet" href="styles/switch-nav-styles.css" />
     <link rel="shortcut icon" href="favicon_blue.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
@@ -18,6 +21,8 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     ></script>
     <script defer src="scripts/home.js"></script>
+    <!-- Picture grid selection on the first question panel -->
+    <script defer src="scripts/grids-scripts.js"></script>
   </head>
   <body>
     <div class="loader-overlay">
@@ -52,122 +57,207 @@
 
     <!-- Primary page content - white card -->
     <main id="main" class="site-main" role="main">
+      <!-- Home panels - one per switch nav tab (Start / Cookies / Honesty Box),
+           plus the first question, shown when the survey starts.
+           All four sit in the same place; only the panel with
+           .home-panel--active shows. Moving that class fades the current
+           panel out and down, then the new one in and up (CSS transitions,
+           .home-panel in styles.css). scripts/home.js moves the class when a
+           tab is chosen. -->
+      <div class="home-panels">
 
-      <section class="page splash-screen">
-        <div>
-          <span class="crown-lottie" id="crown-lottie"></span>
-          <h1 class="display">Welcome</h1>
-          <span class="underline-lottie" id="underline-lottie"></span>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-          labore hic cupiditate distinctio accusantium dolores eveniet molestias
-          placeat, laboriosam, nostrum eius odit voluptates inventore. Voluptate
-          nisi et voluptates repellat repudiandae!
-        </p>
-      </section>
+        <!-- Start panel - welcome splash -->
+        <section class="page splash-screen home-panel home-panel--active" id="home-panel-start" role="tabpanel" aria-labelledby="home-tab-start">
+          <div>
+            <span class="crown-lottie" id="crown-lottie"></span>
+            <h1 class="display">Welcome</h1>
+            <span class="underline-lottie" id="underline-lottie"></span>
+          </div>
+          <!-- Intro text + Get started, --gap-block-lg apart (.splash-screen__intro) -->
+          <div class="splash-screen__intro">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
+              labore hic cupiditate distinctio accusantium dolores eveniet molestias
+              placeat, laboriosam, nostrum eius odit voluptates inventore. Voluptate
+              nisi et voluptates repellat repudiandae!
+            </p>
+            <!-- Get started - begins the survey, same as the Next arrow in the
+                 bottom nav: shows the first question panel (data-home-begin,
+                 scripts/home.js). -->
+            <button class="btn btn-primary-brand btn-with-icon" type="button" data-home-begin>
+              Get started
+              <span class="icon icon-sm" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.5 11C19.0523 11 19.5 11.4477 19.5 12C19.5 12.5523 19.0523 13 18.5 13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H18.5Z" fill="currentColor" />
+                  <path d="M12.1943 5.40721C12.5217 4.96264 13.1481 4.86714 13.5928 5.19432V5.1953H13.5937L13.5947 5.19628C13.5956 5.19693 13.5971 5.19809 13.5986 5.1992C13.6018 5.20157 13.6065 5.20469 13.6123 5.20897C13.6244 5.21794 13.6423 5.23106 13.665 5.24803C13.7105 5.28194 13.7766 5.3313 13.8603 5.39452C14.028 5.52114 14.2668 5.70358 14.5527 5.92674C15.1236 6.37225 15.8878 6.98599 16.6553 7.65233C17.4177 8.31432 18.206 9.04813 18.8115 9.73338C19.1132 10.0748 19.3912 10.4274 19.5986 10.7715C19.7896 11.0882 20 11.5239 20 12C20 12.4761 19.7896 12.9118 19.5986 13.2285C19.3912 13.5726 19.1132 13.9252 18.8115 14.2666C18.206 14.9518 17.4177 15.6857 16.6553 16.3476C15.8878 17.014 15.1236 17.6277 14.5527 18.0732C14.2668 18.2964 14.028 18.4788 13.8603 18.6055C13.7766 18.6687 13.7105 18.718 13.665 18.7519C13.6423 18.7689 13.6244 18.782 13.6123 18.791C13.6065 18.7953 13.6018 18.7984 13.5986 18.8008C13.5971 18.8019 13.5956 18.803 13.5947 18.8037L13.5937 18.8047H13.5928V18.8056C13.1481 19.1328 12.5217 19.0373 12.1943 18.5928C11.8671 18.1481 11.9626 17.5217 12.4072 17.1943L12.4101 17.1924C12.4127 17.1905 12.4166 17.1875 12.4219 17.1836C12.4324 17.1758 12.4486 17.1641 12.4697 17.1484C12.5121 17.1169 12.575 17.0694 12.6553 17.0088C12.8157 16.8876 13.0459 16.7118 13.3223 16.4961C13.8764 16.0637 14.6123 15.4738 15.3447 14.8379C16.0822 14.1976 16.794 13.5303 17.3135 12.9424C17.5741 12.6473 17.7651 12.3954 17.8857 12.1953C17.943 12.1003 17.9715 12.0362 17.9863 12C17.9716 11.9638 17.943 11.8996 17.8857 11.8047C17.7651 11.6046 17.5741 11.3526 17.3135 11.0576C16.794 10.4697 16.0822 9.80237 15.3447 9.1621C14.6123 8.52616 13.8764 7.93631 13.3223 7.50389C13.0459 7.2882 12.8157 7.1124 12.6553 6.9912C12.575 6.93061 12.5121 6.8831 12.4697 6.85155C12.4486 6.83584 12.4324 6.82422 12.4219 6.81639C12.4166 6.81248 12.4127 6.80946 12.4101 6.8076L12.4072 6.80565C11.9626 6.47823 11.8671 5.85189 12.1943 5.40721Z" fill="currentColor" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Cookies panel - text page, same layout as intro.html -->
+        <section class="page home-panel" id="home-panel-cookies" role="tabpanel" aria-labelledby="home-tab-cookies">
+          <div class="content-wrapper">
+            <div class="content content--text">
+              <h2>Cookie Usage</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
+                mauris laoreet eget etiam risus. Nulla eget purus nulla ultrices
+                faucibus vel vel libero pellentesque. Tellus ultrices arcu ut
+                accumsan lacus vulputate non ut.
+              </p>
+              <p>
+                Faucibus vel vel libero pellentesque. Tellus ultrices arcu ut
+                accumsan lacus vulputate non ut. Augue eget mi neque nunc mauris
+                laoreet eget etiam risus.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Honesty Box panel - text page, same layout as intro.html -->
+        <section class="page home-panel" id="home-panel-honesty-box" role="tabpanel" aria-labelledby="home-tab-honesty-box">
+          <div class="content-wrapper">
+            <div class="content content--text">
+              <h2>Honesty Box</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur. Augue eget mi neque nunc
+                mauris laoreet eget etiam risus. Nulla eget purus nulla ultrices
+                faucibus vel vel libero pellentesque. Tellus ultrices arcu ut
+                accumsan lacus vulputate non ut.
+              </p>
+              <p>
+                Faucibus vel vel libero pellentesque. Tellus ultrices arcu ut
+                accumsan lacus vulputate non ut. Augue eget mi neque nunc mauris
+                laoreet eget etiam risus.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- First question panel - shown by Get started or the Next arrow
+             (.survey-started on <body>, scripts/home.js). Same markup as
+             grids-image-full-width.html. Not a tab, so no tabpanel role -->
+        <section class="page home-panel" id="home-panel-question">
+          <!-- START: 1. Picture Grid - Full Width, 4 Columns, 16:9 -->
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="box-Q">
+                <p class="question">How would you describe yourself?</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper content-wrapper--answer content-wrapper--full">
+            <div class="box-A">
+              <div class="grid-field">
+                <div
+                  class="grid-group grid-group--img grid-group--img-fw"
+                  role="radiogroup"
+                  aria-label="How would you describe yourself?"
+                >
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 1" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 2" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 3" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 4" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 5" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 6" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 7" />
+                  </button>
+                  <button class="grid-btn grid-btn--img" type="button" role="radio" aria-checked="false">
+                    <span class="img-selected-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.83268 15C3.87464 15 0.666016 11.7914 0.666016 7.83334C0.666016 3.8753 3.87464 0.666672 7.83268 0.666672C11.7907 0.666672 14.9993 3.8753 14.9993 7.83334C14.9993 11.7914 11.7907 15 7.83268 15ZM11.0115 6.26013C11.2472 5.97727 11.209 5.5569 10.9261 5.32119C10.6433 5.08548 10.2229 5.12369 9.98722 5.40655L7.12122 8.84574L5.63742 7.36194C5.37707 7.10161 4.95496 7.10161 4.69461 7.36194C4.43426 7.62227 4.43426 8.04441 4.69461 8.30474L6.69462 10.3047C6.82708 10.4372 7.00908 10.5078 7.19622 10.4993C7.38335 10.4908 7.55828 10.404 7.67815 10.2601L11.0115 6.26013Z" fill="#0F77FF"/></svg></span>
+                    <img src="images/placeholder-16-9.png" alt="Option 8" />
+                  </button>
+                </div>
+                <div class="grid-message" aria-live="polite">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M8 1.5V14.5M2.37 4.75L13.63 11.25M13.63 4.75L2.37 11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                  <span>This question is required</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: 1. Picture Grid - Full Width, 4 Columns, 16:9 -->
+        </section>
+      </div>
     </main>
 
     <!-- Fixed bottom navigation - splash variant
-         The home page swaps the progress indicator for the Honesty Box mark
-         and a Cookies / About menu, and hides the Help button. -->
+         The home screens show the switch nav (Start / Cookies / Honesty Box)
+         in place of the progress indicator, and hide the Help button. Once
+         the survey starts (.survey-started on <body>) the switch nav fades
+         out and the progress indicator and Help fade in. -->
     <nav class="bottom-nav" aria-label="Primary">
-      <!-- Splash menu - Honesty Box mark + secondary links -->
-      <div class="splash-menu-container">
-        <!-- Honesty Box mark -->
-        <a
-          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip"
-          href="#"
-          aria-describedby="tip-honesty-box"
-        >
-          <div class="icon icon-lg" aria-hidden="true">
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M35.925 69.9241C35.4844 71.6415 34.1328 76.5549 30.5187 78.8175C27.3601 80.7963 22.275 80.7216 18.183 75.2258C8.32629 61.9939 0.69484 32.3866 5.04073 5.83335C5.0706 5.65413 5.12287 5.36292 5.12287 5.36292C5.4589 3.638 6.46696 2.05496 8.06494 1.03942C11.1563 -0.916976 15.3156 -0.0433168 17.1973 3.08543C18.1008 4.58633 18.3696 6.28138 18.1008 7.84948C18.0784 7.99136 18.0336 8.19297 18.0261 8.23031C17.5632 10.2614 16.697 13.9128 16.8613 23.6799C17.0405 33.9696 20.9981 51.4578 24.2388 59.0967C37.5901 54.4073 35.925 69.9166 35.925 69.9166V69.9241Z"
-                fill="url(#paint0_linear_1_1789)"
-              />
-              <path
-                d="M41.8838 16.8699C37.523 17.4 32.5498 20.7155 29.563 28.6829C26.5761 36.6504 24.8138 50.614 24.2389 59.1042C23.41 65.6454 18.1158 74.1207 18.1158 74.1207C18.1158 74.1207 21.1549 80.3035 27.1809 79.8256C33.7371 79.3029 35.925 69.9241 35.925 69.9241C37.6499 63.1813 38.083 49.8972 39.3823 43.2215C40.6293 36.8221 41.5403 32.4539 42.4961 31.401L41.8838 16.8699Z"
-                fill="url(#paint1_linear_1_1789)"
-              />
-              <path
-                d="M53.3085 57.1851C49.7541 50.9948 44.6317 33.0661 42.5035 31.4009C40.3754 29.7358 36.8882 27.3985 29.7645 29.5416C32.8783 18.4155 41.8912 16.8698 41.8912 16.8698C46.0952 16.3546 49.9707 17.9302 53.6893 24.2623C57.408 30.5945 62.3811 45.3496 62.3811 45.3496C66.1595 55.9231 53.3085 57.1851 53.3085 57.1851Z"
-                fill="url(#paint2_linear_1_1789)"
-              />
-              <path
-                d="M53.3085 57.1851C57.1317 63.8533 61.8809 64.6597 67.3692 61.7998C71.9765 59.3954 75.1948 53.6457 76.1208 44.2968C76.1656 43.8711 76.1805 43.3484 76.1805 43.3484C76.3074 41.9521 75.9938 40.5034 75.1874 39.2266C73.231 36.1426 69.1464 35.2242 66.055 37.1806C64.3898 38.2334 63.2324 39.8986 63.0756 41.9745L62.7247 45.4168C61.6867 53.8473 53.3011 57.1926 53.3011 57.1926L53.3085 57.1851Z"
-                fill="url(#paint3_linear_1_1789)"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1_1789"
-                  x1="17.4288"
-                  y1="30.9156"
-                  x2="23.7012"
-                  y2="75.2482"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#0F77FF" />
-                  <stop offset="1" stop-color="#2091D1" />
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_1_1789"
-                  x1="27.5095"
-                  y1="69.7449"
-                  x2="36.037"
-                  y2="28.7651"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#2091D1" />
-                  <stop offset="1" stop-color="#2EA6AD" />
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_1_1789"
-                  x1="40.1439"
-                  y1="23.8292"
-                  x2="57.5051"
-                  y2="57.1776"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#2EA6AD" />
-                  <stop offset="1" stop-color="#3BBA8B" />
-                </linearGradient>
-                <linearGradient
-                  id="paint3_linear_1_1789"
-                  x1="54.9663"
-                  y1="58.9698"
-                  x2="66.7569"
-                  y2="49.5611"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#3BBA8B" />
-                  <stop offset="0.05" stop-color="#3BBB89" />
-                  <stop offset="1" stop-color="#47CD69" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <span class="tooltip" role="tooltip" id="tip-honesty-box">Honesty Box</span>
-        </a>
-
-        <!-- Secondary links -->
-        <div class="splash-menu">
-          <a href="#" class="splash-menu-item"><p class="small">Cookies</p></a>
-          <a href="#" class="splash-menu-item"><p class="small">About</p></a>
+      <!-- Progress indicator - .hidden-until-started: shown once the survey
+           starts -->
+      <div class="progress-indicator hidden-until-started">
+        <div class="progress-bar">
+          <span class="progress" style="width: 10%"></span>
         </div>
+        <p class="label">10%</p>
+      </div>
+
+      <!-- Switch nav - Start / Cookies / Honesty Box. Start is active on
+           load. Each tab's aria-controls names the .home-panel it shows.
+           Styles: styles/switch-nav-styles.css -->
+      <div class="switch-nav" role="tablist" aria-label="Honesty Box information">
+        <button class="switch-btn switch-btn--active" type="button" role="tab" aria-selected="true" id="home-tab-start" aria-controls="home-panel-start">
+          <span class="switch-btn__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.0003 0.833333C15.0627 0.833509 19.1663 4.93782 19.1663 10.0003C19.1662 15.0626 15.0626 19.1662 10.0003 19.1663C4.93782 19.1663 0.833509 15.0627 0.833333 10.0003C0.833333 4.93771 4.93771 0.833333 10.0003 0.833333ZM10.0003 2.50033C5.85819 2.50033 2.50033 5.85819 2.50033 10.0003C2.5005 14.1423 5.8583 17.5003 10.0003 17.5003C14.1422 17.5002 17.5002 14.1422 17.5003 10.0003C17.5003 5.8583 14.1423 2.5005 10.0003 2.50033ZM11.4085 5.85579C11.8221 5.8235 12.2311 5.8222 12.5921 5.87435C12.8823 5.91629 13.2511 6.00712 13.5521 6.24056L13.6771 6.34993L13.7806 6.46712C14.0013 6.75131 14.0794 7.10383 14.1165 7.34408C14.166 7.66457 14.1753 8.03479 14.1605 8.41536C14.1306 9.18162 13.9977 10.1007 13.8011 10.9837C13.6051 11.8638 13.3356 12.7532 13.015 13.4476C12.8561 13.7915 12.6672 14.1248 12.4437 14.39C12.2367 14.6354 11.8911 14.9519 11.4007 14.9945C10.8101 15.0455 10.3517 14.7737 10.0423 14.4476C9.75079 14.1403 9.5528 13.7502 9.41341 13.4095C9.26995 13.0587 9.16133 12.6921 9.07845 12.39C8.987 12.0566 8.93879 11.8524 8.89193 11.7132C8.79723 11.4321 8.73021 11.3469 8.69173 11.3089C8.66209 11.2797 8.6059 11.2357 8.46029 11.1761L8.28255 11.1107C7.45919 10.8383 6.78183 10.6148 6.29525 10.4007C6.04953 10.2926 5.8092 10.1693 5.60677 10.0169C5.40172 9.86256 5.19036 9.64548 5.07454 9.33919C4.85778 8.76553 5.14851 8.28323 5.37044 8.02962C5.60269 7.76436 5.92514 7.54145 6.24642 7.35872C6.90351 6.98515 7.79564 6.64394 8.69857 6.38216C9.60582 6.11916 10.5776 5.92074 11.4085 5.85579ZM12.3538 7.52376C12.1597 7.49572 11.8853 7.49092 11.5394 7.5179C10.8509 7.57167 9.99344 7.74281 9.16243 7.98372C8.32732 8.22585 7.57096 8.52381 7.06966 8.80892C7.03069 8.83109 6.99476 8.85283 6.96126 8.87337C6.96292 8.8741 6.96448 8.87557 6.96615 8.8763C7.36213 9.05053 7.94674 9.24475 8.80501 9.52865C9.18333 9.65383 9.55424 9.81849 9.86165 10.1214C10.1701 10.4254 10.3411 10.7952 10.471 11.181C10.538 11.3797 10.6164 11.6954 10.6859 11.9486C10.7641 12.2338 10.8518 12.5231 10.9564 12.7786C11.049 13.0051 11.1395 13.1599 11.2152 13.2552C11.2961 13.145 11.3948 12.9789 11.5013 12.7484C11.7546 12.1999 11.9929 11.4355 12.1742 10.6214C12.3547 9.8106 12.4703 8.99303 12.4954 8.34993C12.508 8.02641 12.4961 7.77284 12.4691 7.59798C12.4659 7.5776 12.4595 7.56015 12.4564 7.54427C12.4295 7.53815 12.3957 7.52983 12.3538 7.52376Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="switch-btn__label">Start</span>
+        </button>
+        <button class="switch-btn" type="button" role="tab" aria-selected="false" id="home-tab-cookies" aria-controls="home-panel-cookies">
+          <span class="switch-btn__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.2409 12.8434C10.7561 11.8489 11.9831 11.3663 13.0282 11.862C14.0973 12.3694 14.4497 13.6452 13.9258 14.6566C13.4105 15.6512 12.1829 16.1341 11.1377 15.638C10.0688 15.1305 9.71705 13.8547 10.2409 12.8434ZM12.3136 13.3683C12.1407 13.2863 11.8544 13.3513 11.7204 13.61C11.5951 13.8521 11.704 14.0609 11.853 14.1317C12.026 14.2137 12.3122 14.1487 12.4463 13.89C12.5716 13.6479 12.4627 13.4391 12.3136 13.3683Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+              <path d="M6.66667 12.2917C7.2419 12.2917 7.70833 12.7579 7.70833 13.3333C7.70833 13.9087 7.2419 14.375 6.66667 14.375C6.09144 14.375 5.625 13.9087 5.625 13.3333C5.625 12.7579 6.09144 12.2917 6.66667 12.2917Z" fill="currentColor"/>
+              <path d="M5.58919 6.09294C6.05882 5.82694 6.66251 5.72178 7.23145 5.98551L7.34456 6.04329L7.44954 6.10677C7.95805 6.43913 8.21186 6.98962 8.29671 7.50407C8.38893 8.0633 8.30577 8.68232 8.05501 9.25049C7.80505 9.81682 7.40555 10.2935 6.91081 10.5737C6.40992 10.8575 5.75662 10.9581 5.15544 10.6234C4.57672 10.301 4.29377 9.71121 4.20329 9.1626C4.11107 8.60336 4.19424 7.98436 4.44499 7.41618C4.69495 6.84984 5.09444 6.37319 5.58919 6.09294ZM6.52913 7.5C6.51522 7.50083 6.47467 7.50721 6.41113 7.54313C6.27909 7.61792 6.10076 7.79305 5.97005 8.08919C5.84016 8.3835 5.81233 8.67543 5.84798 8.8916C5.86548 8.99754 5.89544 9.07054 5.92204 9.11458C5.94449 9.15168 5.96106 9.1641 5.96517 9.16667C5.96631 9.16672 5.96819 9.16682 5.97087 9.16667C5.98479 9.16583 6.02532 9.15948 6.08887 9.12354C6.22093 9.04873 6.39924 8.87361 6.52995 8.57747C6.65984 8.28318 6.68766 7.99123 6.65202 7.77507C6.63452 7.66912 6.60456 7.59612 6.57796 7.55208C6.55417 7.51277 6.53676 7.5016 6.53402 7.5H6.52913Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+              <path d="M11.6667 8.125C12.242 8.125 12.7083 8.59135 12.7083 9.16667C12.7083 9.74199 12.242 10.2083 11.6667 10.2083C11.0913 10.2083 10.625 9.74199 10.625 9.16667C10.625 8.59135 11.0913 8.125 11.6667 8.125Z" fill="currentColor"/>
+              <path d="M10 0.833333C10.9101 0.833333 11.2726 1.76601 11.0181 2.38851C10.8994 2.67902 10.8333 2.99745 10.8333 3.33333C10.8333 4.71404 11.9526 5.83333 13.3333 5.83333C13.6771 5.83333 14.0027 5.76444 14.2985 5.64046C14.6959 5.47403 15.0885 5.57874 15.3451 5.75439C15.6008 5.9296 15.8333 6.24995 15.8333 6.66667C15.8333 7.58715 16.5795 8.33333 17.5 8.33333C17.564 8.33333 17.6264 8.32957 17.6872 8.32275C18.2386 8.26125 19.004 8.58262 19.1357 9.34896L19.1536 9.50846L19.1634 9.75342C19.1656 9.83534 19.1667 9.91754 19.1667 10C19.1667 15.0626 15.0626 19.1667 10 19.1667C4.93738 19.1667 0.833333 15.0626 0.833333 10C0.833333 4.93739 4.93739 0.833333 10 0.833333ZM9.24235 2.53825C5.45605 2.9181 2.5 6.11362 2.5 10C2.5 14.1421 5.85787 17.5 10 17.5C14.1421 17.5 17.5 14.1421 17.5 10C15.9101 10 14.5813 8.88677 14.248 7.39746C13.9531 7.46361 13.6471 7.5 13.3333 7.5C11.0322 7.5 9.16667 5.63453 9.16667 3.33333C9.16667 3.06186 9.1925 2.79595 9.24235 2.53825Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="switch-btn__label">Cookies</span>
+        </button>
+        <button class="switch-btn" type="button" role="tab" aria-selected="false" id="home-tab-honesty-box" aria-controls="home-panel-honesty-box">
+          <span class="switch-btn__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.1587 9.86359C15.8163 9.32387 15.1015 9.16314 14.5605 9.50552C14.2691 9.68978 14.0665 9.9812 14.0391 10.3445L13.9777 10.9469C13.9724 10.9888 13.9659 11.0293 13.9594 11.0685C13.9463 11.0253 13.9332 10.9822 13.9175 10.9365C13.9175 10.9365 13.0472 8.35291 12.3964 7.24604C11.7443 6.13786 11.0661 5.86343 10.3316 5.95229C9.56846 6.04508 8.69813 6.6253 8.1754 8.01967C7.65267 9.41404 7.34427 11.8578 7.24364 13.3436C6.67648 12.0068 5.98387 8.9449 5.95251 7.14542C5.92245 5.4361 6.07404 4.79576 6.15637 4.44162C6.15768 4.43508 6.16421 4.3998 6.16944 4.37497C6.21649 4.10054 6.16944 3.8052 6.01132 3.54122C5.68069 2.99236 4.9528 2.83946 4.41177 3.18185C4.13212 3.35957 3.9557 3.63662 3.89689 3.93849C3.89689 3.93849 3.88774 3.98815 3.88251 4.02082C3.12195 8.66916 4.45751 13.8507 6.1812 16.165C6.89734 17.1269 7.78728 17.1386 8.34006 16.7936C8.93858 16.4186 9.18295 15.6293 9.27312 15.2908C9.28227 15.2568 9.2875 15.2372 9.2875 15.2372C9.58937 14.0572 9.66517 11.7323 9.89255 10.564C10.1108 9.4441 10.2702 8.67961 10.4375 8.49535C10.8099 8.78677 11.7077 11.9244 12.3285 13.0078C12.9975 14.1748 13.8287 14.3159 14.7892 13.8154C15.5955 13.3946 16.1587 12.3884 16.3208 10.7522C16.3286 10.6777 16.3312 10.5863 16.3312 10.5863C16.3534 10.3419 16.2986 10.0884 16.1574 9.8649L16.1587 9.86359Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="switch-btn__label">Honesty Box</span>
+        </button>
       </div>
 
       <!-- Nav buttons -->
       <div class="button-container">
-        <!-- Help - hidden on the splash screen (.hidden-splash) -->
+        <!-- Help - hidden on the home screens, shown once the survey starts
+             (.hidden-until-started) -->
         <a
-          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip hidden-splash"
+          class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip hidden-until-started"
           href="#"
           aria-describedby="tip-help"
         >
@@ -224,10 +314,12 @@
           <span class="tooltip" role="tooltip" id="tip-back">Back</span>
         </a>
 
-        <!-- Next -->
+        <!-- Next - begins the survey, same as Get started: shows the first
+             question panel (data-home-begin, scripts/home.js) -->
         <a
           class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip"
           href="#"
+          data-home-begin
           aria-describedby="tip-next"
         >
           <div class="icon" aria-hidden="true">

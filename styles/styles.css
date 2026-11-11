@@ -391,6 +391,29 @@ template {
   --padding-block-lg: clamp(1rem, 0.125rem + 2dvh, 1.5rem); /* 16px → 24px */
   --padding-block-xl: clamp(1.5rem, 0.625rem + 2dvh, 2rem); /* 24px → 32px */
 
+  /* --- Fluid inline gaps ---
+     Flexbox gap between items laid out in a row (flex-direction: row).
+     Same steps and range as the inline padding scale: grows with the
+     viewport width between 375px and 960px */
+  --gap-inline-xxs: var(--padding-inline-xxs); /*  2px →  4px */
+  --gap-inline-xs: var(--padding-inline-xs); /*  4px →  8px */
+  --gap-inline-sm: var(--padding-inline-sm); /*  8px → 12px */
+  --gap-inline-rg: var(--padding-inline-rg); /* 12px → 16px */
+  --gap-inline-lg: var(--padding-inline-lg); /* 16px → 24px */
+  --gap-inline-xl: var(--padding-inline-xl); /* 24px → 32px */
+
+  /* --- Fluid block gaps ---
+     Flexbox gap between items stacked in a column (flex-direction: column).
+     Same steps and range as the block padding scale: grows with the
+     viewport height between 700px and 1100px tall, so vertical spacing
+     tightens on short screens along with the padding */
+  --gap-block-xxs: var(--padding-block-xxs); /*  2px →  4px */
+  --gap-block-xs: var(--padding-block-xs); /*  4px →  8px */
+  --gap-block-sm: var(--padding-block-sm); /*  8px → 12px */
+  --gap-block-rg: var(--padding-block-rg); /* 12px → 16px */
+  --gap-block-lg: var(--padding-block-lg); /* 16px → 24px */
+  --gap-block-xl: var(--padding-block-xl); /* 24px → 32px */
+
   /* --- Surface Colors --- */
 
   --surface-primary: var(--white);
@@ -1090,6 +1113,16 @@ a {
   font-size: var(--p-size-small);
 }
 
+/* Button with an icon - text and a 20px icon in a row, 8px apart. The icon
+   is a .icon.icon-sm span with an inline SVG on currentColor, so it takes
+   the button's text colour. Put it after the text for a suffix, before for
+   a prefix. Combine with any colour and size class */
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-8);
+}
+
 /* Secondary Buttons */
 
 .btn-secondary {
@@ -1271,6 +1304,14 @@ section {
   margin: 0 auto;
 }
 
+/* Text page - a column of headings and paragraphs (intro.html, the home
+   page Cookies and Honesty Box panels). Opt-in modifier, so question pages
+   using .content are unaffected. 12px → 16px between each block; a heading
+   keeps its own margin on top of this */
+.content--text {
+  gap: var(--gap-block-rg);
+}
+
 /* Remove top padding on answer wrappers so Q and A sit tight together */
 .content-wrapper--answer {
   padding-top: 0;
@@ -1353,6 +1394,134 @@ section {
   gap: var(--size-48);
 }
 
+/* Intro text and Get started button, held closer together than the
+   48px between the heading and this group */
+.splash-screen__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-block-lg);
+}
+
+/* Page Transitions
+   One look for every change of page on the home page: the old content
+   fades out and moves down, then the new content fades in and rises up
+   into place. Used by the home panels (switching tabs and starting the
+   survey) and by the bottom nav swap below. */
+
+:root {
+  --page-transition-shift: var(--size-16); /* how far content moves in and out */
+  --page-transition-out: 0.2s; /* fade out + move down */
+  --page-transition-in: 0.35s; /* fade in + rise up */
+}
+
+/* Survey Started
+   .survey-started goes on <body> when the respondent presses Get started
+   or the Next arrow on the home page (scripts/home.js adds it, and moves
+   .home-panel--active to the first question panel). It swaps the home
+   furniture for the question furniture:
+
+     out - the switch nav fades out
+     in  - anything marked .hidden-until-started (the progress bar and the
+           Help button) appears and fades in, after the out duration
+
+   .hidden-until-started - not shown on the home screens; shown once the
+                           survey has started */
+
+body:not(.survey-started) .hidden-until-started {
+  display: none;
+}
+
+.survey-started .hidden-until-started {
+  animation: survey-started-in var(--page-transition-in) ease-out
+    var(--page-transition-out) both;
+}
+
+@keyframes survey-started-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The switch nav leaves the flow, so the progress bar can take its place,
+   pinned where it was (the nav's left padding, centred) while it fades */
+.survey-started .bottom-nav .switch-nav {
+  position: absolute;
+  top: 50%;
+  left: var(--space-inline-main);
+  translate: 0 -50%;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--page-transition-out) ease-in,
+    visibility 0s linear var(--page-transition-out);
+}
+
+/* Home Panels
+   The home page "pages" - Start (the welcome splash), Cookies and Honesty
+   Box - one per switch nav tab, all in the same place. Exactly one carries
+   .home-panel--active. Moving that class runs the change in CSS:
+
+     1. the current panel fades out and moves down (--out)
+     2. then the new panel fades in and rises up into place (--in, after
+        a delay of the --out duration, so the two never overlap)
+
+   Markup:
+     .home-panels                      - fills <main>, positions the panels
+     └── .home-panel                   - one page, role="tabpanel"
+         .home-panel--active           - the page on show. Pair with
+                                         aria-selected="true" on its tab
+
+   Hidden panels are visibility: hidden, so they can't be clicked, focused
+   or read out. scripts/home.js moves the class; nothing else is scripted. */
+
+/* Timing comes from the --page-transition-* variables above */
+.home-panels {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hidden: out of the flow, laid over the active panel, faded out and
+   sitting --page-transition-shift below its place. Visibility switches off
+   only once the fade has finished */
+.home-panel {
+  position: absolute;
+  inset: 0;
+  /* Same top padding as .page:first-child, so every panel starts at the
+     same height as a page whose .page is the first thing in <main> */
+  padding-top: var(--padding-block-sm);
+  opacity: 0;
+  transform: translateY(var(--page-transition-shift));
+  visibility: hidden;
+  transition:
+    opacity var(--page-transition-out) ease-in,
+    transform var(--page-transition-out) ease-in,
+    visibility 0s linear var(--page-transition-out);
+}
+
+/* Active: back in the flow (so <main> grows with a long page), fully
+   shown and in place. Waits for the outgoing panel before coming in */
+.home-panel--active {
+  position: relative;
+  flex: 1;
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity var(--page-transition-in) ease-out var(--page-transition-out),
+    transform var(--page-transition-in) ease-out var(--page-transition-out),
+    visibility 0s linear var(--page-transition-out);
+}
+
+/* Reduced motion: fade only, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .home-panel {
+    transform: none;
+  }
+}
+
 .crown-lottie {
   position: absolute;
   transform: translate(-50%, -100%);
@@ -1365,6 +1534,70 @@ section {
   transform: translate(-50%, -40%);
   width: 200px;
   height: 32px;
+}
+
+/* Background Texture
+   A large decorative swoosh (Figma: home, 1440 x 1024 frame) behind every
+   page. Pure CSS - no markup - so any page linking styles.css has it.
+
+   Drawn twice, lined up exactly:
+     body::before        - fixed layer behind the whole page. z-index: -1
+                           puts it above the page background and below all
+                           content, so the white card and every component
+                           paint over it
+     .site-header::before - the same layer inside the header, clipped to the
+                           header by its overflow: hidden. The header keeps
+                           its solid fill, so page content scrolling under
+                           it stays hidden, but the swoosh still runs
+                           through behind the logo
+
+   Both are viewport-sized from the top left, so the same mask settings
+   land in the same place. The shape is a mask filled with --blu-10 at 30%,
+   so its colour stays a token. The SVG in the mask is the Figma path,
+   already rotated -45deg.
+
+   Sizing (custom properties below): the Figma size up to 1900px wide;
+   above that the shape and its offsets grow with the viewport (each Figma
+   value / 1900 in vw), staying the same proportion wider than the screen.
+   max() / min() hold the Figma value below that width. */
+
+:root {
+  --bg-texture-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-459.75 -360.75 2801.5 2801.5'%3E%3Cpath transform='rotate(-45 941 1040)' d='M1855.67 1019.73C1804.82 939.547 1698.66 915.666 1618.31 966.535C1575.03 993.911 1544.94 1037.21 1540.87 1091.18L1531.75 1180.69C1530.97 1186.9 1530 1192.92 1529.03 1198.74C1527.09 1192.34 1525.15 1185.93 1522.82 1179.13C1522.82 1179.13 1393.56 795.29 1296.91 630.84C1200.06 466.197 1099.33 425.424 990.254 438.626C876.909 452.411 747.65 538.616 670.016 745.78C592.383 952.944 546.579 1316.01 531.635 1536.77C447.402 1338.15 344.538 883.242 339.88 615.89C335.416 361.935 357.93 266.799 370.157 214.183C370.351 213.212 371.322 207.97 372.098 204.281C379.085 163.508 372.098 119.629 348.614 80.41C299.511 -1.13524 191.406 -23.8514 111.056 27.0173C69.5218 53.4224 43.3206 94.5833 34.5868 139.433C34.5868 139.433 33.2282 146.811 32.4519 151.665C-80.5047 842.275 117.849 1612.1 373.845 1955.95C480.202 2098.85 612.373 2100.6 694.471 2049.34C783.361 1993.62 819.654 1876.35 833.046 1826.06C834.405 1821.01 835.181 1818.1 835.181 1818.1C880.014 1642.78 891.271 1297.38 925.042 1123.8C957.454 957.409 981.132 843.829 1005.97 816.453C1061.29 859.749 1194.62 1325.92 1286.81 1486.87C1386.18 1660.25 1509.62 1681.22 1652.27 1606.86C1772.02 1544.34 1855.67 1394.84 1879.74 1151.76C1880.9 1140.69 1881.29 1127.1 1881.29 1127.1C1884.59 1090.79 1876.44 1053.13 1855.48 1019.93L1855.67 1019.73Z'/%3E%3C/svg%3E");
+  /* The rotated shape's square bounding box: 2801.5px at the Figma size */
+  --bg-texture-size: max(2801.5px, 147.4474vw); /* 2801.5 / 1900 */
+  --bg-texture-offset-x: max(245.78px, 12.9358vw); /* right of the screen centre, 245.78 / 1900 */
+  --bg-texture-offset-y: min(-200.22px, -10.5379vw); /* above the screen centre, 200.22 / 1900 */
+}
+
+body::before,
+.site-header::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--blu-10);
+  opacity: 0.3;
+  mask-image: var(--bg-texture-image);
+  mask-repeat: no-repeat;
+  mask-size: var(--bg-texture-size) var(--bg-texture-size);
+  mask-position:
+    calc(50% + var(--bg-texture-offset-x))
+    calc(50% + var(--bg-texture-offset-y));
+}
+
+body::before {
+  position: fixed;
+}
+
+.site-header {
+  overflow: hidden;
+}
+
+.site-header::before {
+  position: absolute;
 }
 
 /* Splash Screen Navigation */

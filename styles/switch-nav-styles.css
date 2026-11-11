@@ -1,0 +1,182 @@
+/* =====================================================
+   Switch Nav
+   A row of switch buttons on a grey track. Exactly one button
+   is active at a time: it sits on a white pill, the others are
+   bare icon + label on the track. Selecting a button switches
+   the content below it, like a tab bar.
+
+   Structure:
+     .switch-nav                    - grey track, role="tablist"
+     └── .switch-btn                - one switch button, role="tab"
+         ├── .switch-btn__icon      - 20px icon slot (inline SVG, currentColor)
+         └── .switch-btn__label     - button text
+
+   Variants:
+     .switch-btn                    - icon + text (default)
+     .switch-btn--icon              - icon only, 34px square. Give it an
+                                      aria-label, since there is no text
+     .switch-nav--icon              - track for icon-only buttons (wider
+                                      spacing, so each button sits in a 40px slot)
+
+   States:
+     .switch-btn--active            - the selected button. Pair with
+                                      aria-selected="true"; every other
+                                      button takes aria-selected="false"
+
+   Mobile (below 768px):
+     Icon + text buttons that are not active collapse to the icon-only
+     size, so only the active button shows its label. Same markup -
+     the hidden labels stay readable to screen readers.
+
+   No JavaScript here. The host app moves .switch-btn--active and
+   aria-selected when a button is chosen.
+   ===================================================== */
+
+:root {
+  /* Track fill. #f0f0f0 sits between --grey-1 (#f7f7f7) and --grey-2
+     (#dbdbdb) and is not in the colour scale yet, so it lives here
+     until it gets a primitive of its own */
+  --switch-nav-surface: #f0f0f0;
+}
+
+/* -----------------------------------------------------
+   Track
+   40px tall including its 1px border. The 34px buttons are
+   centred in the 38px inside, which leaves 2px above and below;
+   the inline padding matches it, so a button 2px in from either
+   end sits evenly in the track.
+   ----------------------------------------------------- */
+
+.switch-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-4);
+  height: var(--size-40);
+  padding-inline: 2px;
+  background-color: var(--switch-nav-surface);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+}
+
+/* Icon-only track: each 34px button sits centred in a 40px slot,
+   so 3px at the ends and 6px between buttons */
+.switch-nav--icon {
+  gap: 6px;
+  padding-inline: 3px;
+}
+
+/* -----------------------------------------------------
+   Switch button - icon + text
+   A transparent 1px border is always present, so turning on the
+   active border never shifts the icon or label.
+   ----------------------------------------------------- */
+
+.switch-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-4);
+  flex-shrink: 0;
+  height: 34px;
+  padding-inline: var(--size-8);
+  background-color: transparent;
+  border: 1px solid transparent;
+  /* 10px: concentric with the track's 12px corners at a 2px inset */
+  border-radius: 10px;
+  color: var(--grey-8);
+  font-family: inherit;
+  font-size: var(--p-size-regular);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.switch-btn__icon {
+  display: flex;
+  flex-shrink: 0;
+  width: var(--size-20);
+  height: var(--size-20);
+}
+
+.switch-btn__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* -----------------------------------------------------
+   Switch button - icon only
+   34px square, icon 22px.
+   ----------------------------------------------------- */
+
+.switch-btn--icon {
+  width: 34px;
+  padding: 0;
+}
+
+.switch-btn--icon .switch-btn__icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* -----------------------------------------------------
+   States
+   ----------------------------------------------------- */
+
+/* Hover and pressed: icon and label darken to the active colour.
+   Pressed is the same look as hover; the button then turns active */
+.switch-btn:hover,
+.switch-btn:active {
+  color: var(--black);
+}
+
+.switch-btn:focus-visible {
+  outline: 2px solid var(--border-highlighted-brand);
+  outline-offset: 2px;
+}
+
+/* Active - the selected button: white pill, grey border, black
+   icon and label */
+.switch-btn--active {
+  background-color: var(--surface-primary);
+  border-color: var(--border-primary);
+  color: var(--black);
+}
+
+/* -----------------------------------------------------
+   Mobile - only the active button keeps its label
+   Every icon + text button that is not active takes the icon-only
+   size: 34px square, 22px icon. The 1px side margins, on top of
+   the track's 4px gap, space it the same as in the icon-only nav:
+   6px between icons, 3px from the end of the track.
+   ----------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .switch-btn:not(.switch-btn--icon):not(.switch-btn--active) {
+    width: 34px;
+    padding: 0;
+    margin-inline: 1px;
+  }
+
+  .switch-btn:not(.switch-btn--icon):not(.switch-btn--active) .switch-btn__icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Label hidden visually, still read out as the button's name.
+     Positioned out of the flex row, so it adds no gap */
+  .switch-btn:not(.switch-btn--icon):not(.switch-btn--active) .switch-btn__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}

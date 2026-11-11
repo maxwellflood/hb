@@ -18,6 +18,7 @@ This file supplements CLAUDE.md with implementation detail so Claude doesn't nee
 | `styles/insert-word-styles.css` | Insert Word - inline trigger, word menu |
 | `styles/expand-image-styles.css` | Expand Image - thumbnail, expand button, lightbox |
 | `styles/pie-styles.css` | Pie - slices, dividers |
+| `styles/switch-nav-styles.css` | Switch Nav - grey track, switch buttons (icon + text, icon only) |
 
 ---
 
@@ -143,6 +144,25 @@ Drives `--space-block-main`, `.content-wrapper` and the heading gaps.
 --padding-block-lg    16px → 24px
 --padding-block-xl    24px → 32px
 ```
+
+### Fluid Gaps
+
+Flexbox `gap` values on the same steps as the padding scales, which they alias.
+Pick the axis by the flex direction: `--gap-inline-*` for items in a row (grows with
+width, 375px → 960px), `--gap-block-*` for items stacked in a column (grows with
+height, 700px → 1100px tall), so vertical gaps tighten on short screens with the padding.
+
+```
+--gap-inline-xxs / --gap-block-xxs    2px → 4px
+--gap-inline-xs  / --gap-block-xs     4px → 8px
+--gap-inline-sm  / --gap-block-sm     8px → 12px
+--gap-inline-rg  / --gap-block-rg    12px → 16px
+--gap-inline-lg  / --gap-block-lg    16px → 24px
+--gap-inline-xl  / --gap-block-xl    24px → 32px
+```
+
+Existing components still use fixed `--size-*` gaps; these are for new work and
+for converting gaps that should flex with the screen.
 
 ### Input Tokens (input-styles.css)
 
@@ -270,6 +290,8 @@ Questions and answers live in separate `.content-wrapper` divs. The answer wrapp
 - `.content-wrapper` - full-width, `--padding-block-lg` / `--padding-inline-lg` (16px → 24px), the same as the page gutters
 - `.content-wrapper--answer` - removes top padding
 - `.content` - `max-width: 640px`, centered, `flex-direction: column`, `gap: --input-gap`
+- `.content--text` - text page (headings and paragraphs, e.g. `intro.html`): adds
+  `gap: --gap-block-rg` (12px → 16px) between blocks. Opt-in, so question pages are unaffected
 - `.box-Q` / `.box-A` - semantic labels for the handoff reader, no styles of their own
 
 ---
@@ -431,6 +453,7 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 | `.btn-primary-brand` | Blue bg (`--blu-50`) |
 | `.btn-secondary-brand` | Light blue bg (`--blu-00`), blue text |
 | `.btn-disabled` | Grey, `cursor: not-allowed` |
+| `.btn-with-icon` | Text + 20px icon in a row, 8px apart. Icon is `<span class="icon icon-sm">` with an SVG on `currentColor`; after the text for a suffix (e.g. home "Get started") |
 | `.icon-btn` | Square icon-only button, 40×40 |
 | `.icon-btn-lg` / `.icon-btn-sm` | 48px / 36px |
 | `.icon-btn-secondary` | Grey variant |
@@ -455,7 +478,7 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 
 **Borders:** `.u-border-bottom-primary`, `.u-border-top-primary`
 
-**Visibility:** `.hidden`, `.hidden-mobile`, `.hidden-desktop`, `.hidden-splash`
+**Visibility:** `.hidden`, `.hidden-mobile`, `.hidden-desktop`, `.hidden-splash`, `.hidden-until-started` (home page, see Survey Started)
 
 **Aside labels:** `.label-aside` (14px Inter italic, `--text-tertiary`) - a note between parts of a question. `.label-aside-instruction` - the same in `--text-brand-muted-dark` (`--blu-70`), for telling the respondent how to answer
 
@@ -465,7 +488,7 @@ The % label (`.progress-indicator .label`) is 14px Inter Medium, trimmed to cap 
 
 | Script | Used by |
 |---|---|
-| `scripts/grids-scripts.js` | `grids-basic.html`, `grids-image.html`, `grids-image-full-width.html` |
+| `scripts/grids-scripts.js` | `grids-basic.html`, `grids-image.html`, `grids-image-full-width.html`, `home.html` (first question panel) |
 | `scripts/grids-multiselect-scripts.js` | `grids-basic-multiselect.html` |
 | `scripts/inputs-scripts.js` | `inputs.html`, `intro.html` |
 | `scripts/love-button.js` | `love-button.html` |
@@ -1075,6 +1098,174 @@ Small grey label for text that sits on a busy or coloured surface. Defined in
 - `.chip__swatch` - optional 12px dot before the text, `--padding-inline-xs` (4px at
   375px wide → 8px at 960px) from it. Colour from `--chip-swatch-colour`, set on the
   chip or any ancestor; falls back to the text colour
+
+---
+
+## Switch Nav
+
+A tab bar: a row of switch buttons on a grey track, exactly one active. Selecting a
+button switches the content below it. Defined in `switch-nav-styles.css`.
+
+```html
+<div class="switch-nav" role="tablist" aria-label="[What the tabs switch]">
+  <button class="switch-btn switch-btn--active" type="button" role="tab" aria-selected="true">
+    <span class="switch-btn__icon" aria-hidden="true"><!-- 20px SVG, fill="currentColor" --></span>
+    <span class="switch-btn__label">Start</span>
+  </button>
+  <button class="switch-btn" type="button" role="tab" aria-selected="false">…</button>
+</div>
+
+<!-- Icon only: --icon on the track and on each button, aria-label for the name -->
+<div class="switch-nav switch-nav--icon" role="tablist" aria-label="[…]">
+  <button class="switch-btn switch-btn--icon switch-btn--active" type="button"
+    role="tab" aria-selected="true" aria-label="Start">
+    <span class="switch-btn__icon" aria-hidden="true">…</span>
+  </button>
+</div>
+```
+
+- `.switch-nav` - 40px track, `--switch-nav-surface` (`#f0f0f0`, not in the colour
+  scale yet) with a `--border-primary` border and `--radius-m` corners. 2px inset, 4px
+  between buttons
+- `.switch-nav--icon` - 3px inset, 6px between buttons, so each 34px button sits in a 40px slot
+- `.switch-btn` - 34px tall, 8px side padding, 4px icon-to-label gap, 10px corners
+  (concentric with the track). Inter Medium, `--p-size-regular`, `-0.02em`. Icon and
+  label are `--grey-8`; the icon is an inline SVG on `currentColor`, so it follows
+- `.switch-btn--icon` - 34px square, 22px icon, no label
+- A transparent 1px border is always present, so the active border never shifts the content
+
+**States:**
+
+| Modifier | Meaning |
+|---|---|
+| *(none)* | Not selected - bare on the track, `--grey-8` |
+| `:hover` / `:active` | Icon and label darken to `--black` |
+| `:focus-visible` | 2px `--border-highlighted-brand` outline, 2px offset |
+| `.switch-btn--active` | Selected - white pill, `--border-primary` border, `--black`. Pair with `aria-selected="true"` |
+
+No JavaScript - the host app moves `--active` and `aria-selected` when a button is chosen.
+
+**Mobile** (below 768px) - same markup. Icon + text buttons that are not active collapse
+to the icon-only size (34px square, 22px icon), so only the active button shows its
+label. The hidden labels are clipped, not removed, so they still name the buttons for
+screen readers. A 1px side margin on each collapsed button spaces them as in the
+icon-only nav: 6px between icons, 3px from the track ends.
+
+---
+
+## Background Texture
+
+A large decorative swoosh behind every page, from the home page Figma frame
+(1440 × 1024). Pure CSS in `styles.css` - there is no markup, so every page that links
+`styles.css` has it.
+
+- `body::before` - fixed, viewport-sized layer. `z-index: -1` puts it above the page
+  background and below all content, so the white card and every component paint over it
+- `.site-header::before` - the same layer inside the header, clipped to it
+  (`.site-header` has `overflow: hidden`). The header keeps its solid `--blu-00` fill, so
+  content scrolling under it stays hidden, while the swoosh still runs behind the logo.
+  Both layers are sized from the top left of the viewport, so they line up exactly
+- The shape is a CSS mask (`--bg-texture-image`, the Figma path pre-rotated -45°) over a
+  `--blu-10` fill at 30% opacity, so the colour stays a token
+- Position: centred on the screen and moved by `--bg-texture-offset-x` (245.78px) /
+  `--bg-texture-offset-y` (-200.22px), from the Figma frame
+- **Scaling** - fixed at the Figma size up to 1900px wide. Above that,
+  `--bg-texture-size` and both offsets grow with the viewport (each Figma value ÷ 1900,
+  in `vw`), so the shape stays the same proportion wider than the screen
+
+---
+
+## Home Panels
+
+The home page's "pages" - Start (welcome splash), Cookies and Honesty Box, one per
+switch nav tab, plus the first question - stacked in the same place inside `<main>`.
+Everything happens in `home.html`; nothing navigates. Defined in `styles.css`.
+
+```html
+<main id="main" class="site-main" role="main">
+  <div class="home-panels">
+    <section class="page splash-screen home-panel home-panel--active" id="home-panel-start"
+      role="tabpanel" aria-labelledby="home-tab-start">…</section>
+    <section class="page home-panel" id="home-panel-cookies"
+      role="tabpanel" aria-labelledby="home-tab-cookies">
+      <div class="content-wrapper">
+        <div class="content content--text">
+          <h2>Cookie Usage</h2>
+          <p>…</p>
+        </div>
+      </div>
+    </section>
+    <!-- First question - not a tab, shown when the survey starts -->
+    <section class="page home-panel" id="home-panel-question">…</section>
+  </div>
+</main>
+
+<!-- In the bottom nav: each tab names its panel -->
+<button class="switch-btn switch-btn--active" type="button" role="tab"
+  aria-selected="true" id="home-tab-start" aria-controls="home-panel-start">…</button>
+```
+
+- `.home-panels` - fills `<main>` and positions the panels. Timing comes from the
+  `--page-transition-*` variables (see Page Transitions)
+- `.home-panel` - hidden: laid over the active panel, faded out, 16px below its place,
+  `visibility: hidden` once the fade ends (so it can't be clicked, focused or read out)
+- `.home-panel--active` - the page on show, back in the flow so `<main>` grows with a
+  long page. Pair with `aria-selected="true"` on its tab
+
+**Behaviour:** moving `--active` does the whole change in CSS. The current panel fades
+out and moves down, then the new one fades in and rises up, delayed by the out duration
+so they never overlap. With reduced motion it fades only. `scripts/home.js` moves
+`.home-panel--active`, `.switch-btn--active` and `aria-selected` when a tab is clicked.
+The welcome Lotties play once on first load, not on returning to Start.
+
+---
+
+## Page Transitions
+
+One look for every change of page on the home page, defined in `styles.css`: old
+content fades out and moves down, then new content fades in and rises up. Used when
+switching tabs and when the survey starts.
+
+| Variable | Value | Controls |
+|---|---|---|
+| `--page-transition-shift` | 16px | how far content moves in and out |
+| `--page-transition-out` | 0.2s | fade out + move down |
+| `--page-transition-in` | 0.35s | fade in + rise up |
+
+Reduced motion: fades only, no movement.
+
+---
+
+## Survey Started
+
+Starting the survey from the home page: Get started (under the welcome text) or the
+Next arrow shows the first question panel and swaps the home furniture for the question
+furniture, all within `home.html`.
+
+```html
+<!-- Start controls - data-home-begin is the script hook -->
+<button class="btn btn-primary-brand btn-with-icon" type="button" data-home-begin>
+  Get started <span class="icon icon-sm" aria-hidden="true">…</span>
+</button>
+<a class="icon-btn icon-btn-brand-primary icon-btn-sm btn-nav has-tooltip"
+  href="#" data-home-begin aria-describedby="tip-next">…</a>
+
+<!-- In the bottom nav, alongside the switch nav -->
+<div class="progress-indicator hidden-until-started">…</div>
+<a class="icon-btn icon-btn-secondary icon-btn-sm has-tooltip hidden-until-started" …>Help</a>
+```
+
+- `.survey-started` - on `<body>` once the survey has started. `scripts/home.js` adds it
+  and moves `.home-panel--active` to `#home-panel-question`. It fades out the switch nav
+  (lifted out of the flow and pinned in place while it fades)
+- `.hidden-until-started` - not shown on the home screens. Under `.survey-started` it
+  appears and fades in after `--page-transition-out`, so it arrives as the switch nav
+  leaves. On the progress indicator and the Help button
+- `data-home-begin` - marks a control that starts the survey. Behaviour hook only, no styles
+
+The question panel is the same markup as `grids-image-full-width.html`, so `home.html`
+also loads `input-styles.css` and `scripts/grids-scripts.js`. Back stays disabled; there
+is no way back to the home screens once started.
 
 ---
 
