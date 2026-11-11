@@ -36,6 +36,9 @@ This is a **front-end component reference library** for the Honesty Box survey p
 | `grids-image.html`                     | Image grid component reference                                     |
 | `grids-image-full-width.html`          | Full-width image grid component reference                          |
 | `home.html`                            | Home page                                                          |
+| `home-switch-nav-home.html`            | Home page option - switch nav Home / Cookies / Honesty Box         |
+| `home-switch-nav-about.html`           | Home page option - switch nav Home / Cookies / About               |
+| `home-switch-nav-icons.html`           | Home page option - icon-only switch nav, four tabs incl. About     |
 | `intro.html`                           | Intro page                                                         |
 | `navigation.html`                      | Navigation component                                               |
 | `love-button.html`                     | Love button question type (0–100, press and hold)                  |
